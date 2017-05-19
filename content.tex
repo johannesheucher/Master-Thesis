@@ -16,6 +16,388 @@ Some short information how to get started:
 \end{itemize}
 
 
+
+%*****************************************
+\chapter{State of the Art}\label{ch:stateOfTheArt}
+%*****************************************
+\section{Overview}
+In this chapter, the history and the state of the art of pervasive games in general and exergames in special will be presented. Popular representatives like <em>Ingress</em> [33] by <em>Google</em> or <em>Pokémon GO</em> [34], published by <em>Nintendo</em> (TODO really? Not Niantic both?) will be looked at.
+
+Additionally, some interesting approaches about vehicle recognition and number plate region detection will be discussed as the concept presented in this thesis also includes automatic vision-based vehicle recognition.
+
+\section{Pervasive Games}
+\subsection{Definition}
+Although the term pervasive gaming is becoming more and more popular within the last years, its definition is still vague [39]. One is calling them a new type of digital games that combine game reality and physical reality within the gameplay [46].
+
+Another definition says, that it is a game, in which the game world exists beside the everyday environment and that never stops but surrounds the player 24 hours a day [47].
+E. Nieuwdorp (TODO name) defined pervasive games as special type of game that emphasizes the relation between reality and game [39].
+
+There is some consensus in those definitions, such as the importance of the relation between the reality and the game world.
+
+But instead of bringing up another definition to compete with the other ones, this thesis compiles definitions of some works to define the boundary of pervasive games, as fitted for this thesis’ scope.
+
+A definition that tries to comprise the bottom line of many other definitions was made by Hock (TODO name): <em>”A pervasive game is an overlay of the real world where it (the overlay) is persistently present. It takes place in physical environments and its gameplay interacts with or is in some way related to parts of the real world. It thereby blurs the boundaries between reality and virtuality. It ideally integrates smoothly into its user’s everyday life where it ideally is omnipresent which means that the user should be able to play it at any time in any place”</em> [26].
+
+
+\subsection{Beyond Traditional Games}
+Montola (TODO name) tried to approach the definition problem by investigating all kinds of games that have been classified as pervasive games for different and not unique reasons. He found out, that there is no single common denominator of those reasons.
+
+But regarding the magic circle of play (see next section TODO), each of these games broke out of this circle in a distinct manner [14].
+
+\subsubsection{The Magic Circle of Play}
+Huizinga (TODO name) defines a play as <em>some activities</em> in <em>some places</em> that are considered playfully by the players to belong to the game and not to reality [45].
+
+Traditionally, a game takes place at <em>“certain spaces, at certain times, by certain players”</em> [14]. This is referred to as the magic circle of play.
+
+For a pervasive game, this circle does not have a rigid border but a “permeable membrane where conventional meanings, psychological artefacts and environments, and players alike can slip through” [39].
+
+In relation to the magic circle of play, another definition for a pervasive game is <em>”a game that has one or more salient features that expand the contractual magic circle of play socially, spatially or temporally.”</em> [14]
+
+In the following, each of the named dimensions, in which pervasive games expand the magic circle of play, are described.
+
+\subsubsection{Spatial Expansion}
+This means, that the location, where the game can be played at, is unclear or unlimited [14]. Thinking of the example from the beginning of this thesis, that game may have started at a factory site, but the actual spread of the zombies is unclear and could be unlimited.
+
+Montola notes that there are challenges with this kind of expansion, causing people to play the game on unwanted places like hospitals or creating hazardous situations in traffic [14].
+
+\subsubsection{Temporal Expansion}
+In classic games, a play session has a well defined start and end time. Pervasive games can break these limits. Not only does the temporal expansion obfuscate the start and end time of a game, it also blurs the border between everyday life and gaming by leaving the player in the dark about if he is playing at the moment or not [14].
+
+<em>”Boring moments of life can be enchanced by any mobile game, but temporal expansion reaches even the moments of not-playing”<em>, because <em>”any action could be a game action”</em> [14].
+
+\subsubsection{Social Expansion}
+The social expansion obfuscates the boundary of playership [14]. Thinking back to the example of <em>The Running Dead</em> in the beginning of this thesis, it wasn’t clear who is a participant and who isn’t. A noninvolved person could have watched a persecuted player and could have tried to help him. So the noninvolved person would become a participant without even knowing about it himself.
+
+TODO: Add exergames definition illustration
+
+\subsubsection{Subcategories of Pervasive Games}
+There are many subcategories of pervasive games, such as immersive games, serious games or exergames, to name a few. Immersive games combine spatial, temporal and social expansion. In this genre, it’s hard to differentiate games from non-games, because everything can be seen as an immersive game [42].
+
+Serious games are, simply said, more than fun [44]. They blend education and entertainment together in one game experience [40]. The term education is not limited to a specific domain but can be all kinds of added value other than pure entertainment and fun. Göbel et al. (TODO name of source 41) call it a broad spectrum of application domains ranging from training, simulation and education to sports and health [41].
+
+The last two domains form the subcategory of exergames. Because exergames are a subject of this thesis, the next section dedicates to that genre in more detail.
+
+
+\subsection{Exergames}
+A subcategory of serious games then again are exergames [41] [15]. As shown in figure (TODO), exergames are serious games with healthcare exercises as added value. The term <em>exergame</em> is constructed from the words <em>exercise</em> and <em>videogame</em> [43].
+
+The target of an exergame is to combine physical activity with fun of play. During the gameplay, the health aspect is not primarily focused but only a side-effect of playing the game. <em>“The training effect is secondary and nevertheless achieved”</em> [15]. An example for an exergame is <em>Dance Dance Revolution</em> (TODO reference). TODO: Describe Dance Dance Revolution. Bogost (TODO name) says about this game, that it produces exercise as an emergent outcome of play itself [43].
+
+A user of the Nintendo Wii (TODO: cite Wii) wrote: “Video games can [be] and are a great way to have exercise and not even know you are burning calories” [16]. Debra Lieberman found out that there is growing evidence of exergames helping people to stay fit and to manage their weight if they frequently play them [17].
+
+So the challenge of an exergame is to keep the player motivated to do sports. As in the example at the beginning of this thesis (<em>The Running Dead</em>), we all ran away when the mob of zombies came running towards us. We did not think of doing sports in that moment. Maybe some even did not think of playing a game. Our only thought was to escape.
+
+\subsubsection{Mobile Exergames}
+Digital games are mostly completely experienced through a fixed screen. This is an obstacle to immerse into a game [38], because the player is bound to his chair and his perception is usually only stimulated by the computer screen and a sound system. In pervasive games, the interface is no longer bound to a fixed screen and to common computer periphery like a mouse and a keyboard. The player rather interacts with real world objects and real persons [39], whereas the interface of the game isn’t well defined. Any real world object could be a game object, and any real person could be a participant [14].
+
+There is a special type of exergames, the mobile exergames, in which the player is not bound to a desktop or to a classical game board to play the game. Mobile exergames are played with a mobile device (such as a smartphone or a portable video game console). They are usually played outside and often use the location of the player to track the progress of the exercise. In most cases, the player has to move to succeed in the game, such as in TODO examples: Zombies RUN, Pokémon GO, StreetConqAR, more!!!
+
+These games do not take place at special locations like in a gym, a laboratory or at home, separated from the real world. They are played everywhere such as on the way to school or work, at work itself, after the lunch time, after work with your kids or whenever and wherever the player (or the game, as said above for pervasive games with temporal expansion) wants to. The aim is a transformation of the player’s everyday environment into a world in play [39].
+
+
+\subsection{Evolution of Location-based Games}
+In the previous chapters, different types of pervasive games have been presented. Many of them depend on the current location of the player, e. g. Ingress (see section TODO) or Pokémon GO (see section TODO). This kind of games uses the current location as a basic part of the gameplay. Without the exact location, a player of Ingress could not conquer a portal and a hunter on the prowl for Pokémons would not find one nor would he find a Pokéstop to retrieve useful items. Concluded, these games would be absolutely unplayable without being able to track the location of the player with a reasonable accuracy.
+
+Using GPS, this is only possible since May 2, 2000, when the <em>Selective Availability</em> was turned off. Selective Availability was a service to prevent civilians to perceive a better GPS accuracy than a 100 meters radius, reserving better accuracy for the military only. Since it was disabled, the GPS location is accurate to a few meters for anybody [48].
+
+Suddenly, many location based games came up. For example, the term <em>Geocaching</em> [49] was formed during that time to describe a hunt for treasures (the <em>geocaches</em>) in the real world [50]. To find these geocaches, their locations are marked on a virtual map via GPS.
+
+A few years later, the popular 80s game <em>Pacman</em> (TODO: link to original game?) was transferred into a real-life version named <em>Pac-Manhattan</em> [51], using GPS sensors to track the position of the players.
+
+With the launch of the iPhone in 2007, an era began where people always have a device at hand that is not only capable of tracking the GPS location but that is also powerful enough to run useful apps on it. This caused another hype of location-based applications.
+
+One of it, heavily relying on GPS-based location, is Foursquare [52]. The service makes personalized recommendations of places to a user. These recommendations depend on the user’s current location and his profile. The service exists as a mobile app and as a website. Providing an iPhone app in 2009, Foursquare was one of the pioneers that combined a serious mobile application with a location-based service.
+
+At that time, the app had a check-in feature to virtually check into specific locations. This game-like feature motivated users to visit different places to check-in and leave a Tip.
+
+Another location-based game, that became very popular, is <em>Ingress</em> (see chapter TODO). Ingress also uses the smartphones of the players to track their location and let them conquer virtual entities (named portals), that have been spread over the world.
+
+A new member of location-based games is <em>Pokémon GO</em> (see chapter TODO). Like in Ingress, players have to move in the real world, using their smartphone to discover virtual objects (like Pokémons or Pokéstops), that have been placed on real-world locations.
+
+The real-world locations, where entities are placed in the virtual world, play an important role for these games. They have to be well-chosen to fit the purpose of the game and the respective gameplay. These special locations are called <em>anchors</em>.
+
+\subsubsection{Anchors}
+For location-based games, the real world is overlain by the virtual game world. Anchors are well defined positions, where these two worlds are blurred [26]. The word <em>anchor</em> has been introduced by Hock (TODO name) [26]. In literature, there is no fixed term for this. Other works also refer to this as <em>artifacts</em> [54] or as <em>markers</em> [53]. This thesis uses the term anchor [26], because its semantic meaning describes very well what an anchor does: It anchors the virtual world into the real world.
+
+The placement of anchors is very important for a game and is directly associated with the user experience. Because anchors are those positions, where the gameplay usually takes place, players may easily be disappointed if an anchor is either too far away to reach it or if it is at a location not (without further ado) accessible for civilians (such as military areas, airports or the ocean). So anchors have to be placed in a way that they are accessible for all players.
+Another thing is the content, that is linked to an anchor. For example, the game <em>Escape From the Tower</em> [55] lets its players reenact the escapes of some popular prisoners from the London Tower. Therefore, anchors are placed all over the tower and its surroundings with associated media. At a prison cell, this media tells the player something about the prisoner. On the staircase, the media is related to a fled, that occurred. If the content does not fit to the respective location, players will soon quit the game.
+
+Reid (TODO name) [54] classifies the way, anchors are placed, into three categories, that will be explained in the following.
+
+\paragraph{User-placed at Runtime}
+With this method, the user places his own anchors. For this, the game has to provide some kind of editor, with which the user creates the content he needs to play the game.
+
+The advantages of this method are, that the game can be played everywhere, because it does not depend on predefined anchors. Another advantage is, that users can create the anchors such that they fit their individual needs. In Twostone [TODO source] for example, the player plays a stone-eating caterpillar that moves on a maze-like virtual track while the player moves in the real world. To win the game, the caterpillar named “Twostone” has to eat all stones, that are spread all over the track while escaping from some monsters, that try to catch it. The game includes an editor, wherewith the user can design a track by walking along the paths, where the track should be created and placing anchors at corners. The game can thus be played anywhere. Also, highly motivated and sporty players can build their own large tracks covering the whole city, whereas beginners are able to design a small one for a short sport unit during the lunch time.
+
+Drawbacks of this method are, that a user is not a designer and may not have the required artistic skills and knowledge to produce qualitative anchors. And much less in a small amount of time [56].
+
+Additionally, if the player desires for a quick sporting activity, he might rather go jogging in the park than starting to build a track.
+
+\paragraph{Seamful Design}
+With this method, the placement of anchors depends on features of the physical infrastructure. In <em>Feeding Yoshi</em> [TODO cite], anchors are placed on the seams of wireless access points. In the area of a secure wireless access point, the player can find a hungry creature, a “Yoshi”, whereas at unsecure wireless access points, there are plantations to plant each Yoshi’s favorite fruit.
+
+Usually, developers try to hide the limitations caused by infrastructural seams. With this method, these limitations are embedded into the gameplay [57].
+
+Games using a seamful design to place anchors can be played at all locations, where the respective infrastructure exists. Therefore, the accessibility depends on the choice of the kind of the infrastructure. Nowadays, unsecure wireless access points are rather seldom, hence the gameplay of Feeding Yoshi suffers from this choice.
+
+\paragraph{Designer-placed}
+With this approach, all anchors are placed by the game designer. Due to the designer’s skills and insight to the respective game, the anchors are usually well-placed and harmonize with the gameplay.
+
+As a drawback, this method is the most static and expensive one, consuming time and money until all needed anchors are placed. As a result, most games with designer placed anchors are tailored for a specific scenario, such as <em>Escape from the Tower</em> [55], which was mentioned above. The anchors in such games are often strongly related to their location. Adapting this game for another location would involve much effort.
+
+Additional to those categories introduced by Reid (TODO name, not source), this thesis names two further categories.
+
+\paragraph{Crowd-based Placement}
+Crowd-based placement of anchors is akin to user placement, with the difference that content created by the crowd is made public for everyone. This way, the game thrives on a lively crowd of users, frequently creating new content.
+
+Twostone, that has been mentioned before, is actually relying on crowd-based anchors, because after creating a new track, a player can opt to make the track public to be used by other players. But as mentioned in the beginning, this does only work if there is a crowd creating that content. During the release of a game, it might get challenging to build up a crowd despite the fact that there is no content yet.
+
+Another problem is, that with a crowd, there is no control of the content. After some time, the game might contain anchors at hazardous locations such as airports or highways or it might contain pictures of morally questionable content, such as swastikas or of adult kind.
+
+Ingress uses a crowd-based placement, combined with a designer to check the content for its propriety. Nevertheless, Ingress is only playable in highly populated areas while portals (the anchors) only exist in these regions (see Ingress map below TODO). That’s because users are allowed to create anchors, indeed, by taking a photo of the desired new location, marking it on a map and sending this along with a short description to the development team of Ingress. So most requests are made for regions with a lot of citizens. But it takes several weeks, until a new portal gets accepted by the designers.
+
+\paragraph{Automatically-placed}
+This scheme describes content, that is generated automatically, obeying some creation-rules. Automatic placement of anchors helps to spread them all over the world in a fraction of time and money, a designer would need.
+
+Actually, the seamful design is a sub-scheme of automatic placement, whereas the creation-rule is to place anchors at infrastructural seams (e. g. of wireless access points).
+The rule can be well-defined, such as with a procedural content generation rule, including the use of generative grammars, spatial algorithms or pseudo-random number generators [56].
+The rule can also be more complex like <em>place an anchor at each gas station marked by Google Maps</em>, which already includes some locational context.
+
+Automatic placement also includes <em>random</em> placement. But simply placing anchors at random locations will seldomly have the result of well-placed anchors semantically fitting to their content and being accessible for everyone (e. g. oceans and deserts).
+
+Hock (TODO name) proposed an automatic placement based on real-world objects, namely street name signs [26]. In his game <em>StreetConqAR</em>, the players have to conquer streets, identified by the name on their street name sign. Because StreetConqAR is similar to the game RacecAR GO, which is presented in this thesis, there’s an extra section for this (see TODO).
+
+The definition of an anchor says, that it is a “well-defined position”. In the following, the term anchor is not only the position but also refers to the real-world object itself to describe the kind of blurring of reality and virtuality and the strong relationship between the anchor and its position. This blurring takes place via an object at a well defined position.
+
+Later on, this thesis will define the term of a <em>natural anchor</em> to solve this ambiguity (see TODO concept chapter).
+
+The advantage of Hock’s (TODO name) approach is, that it not only saves the expanses of the a priori design of the anchors, because street name signs are already there. Also the spreading of these signs is very useful for a location-based exergame. There are very few populated regions with no street name signs.
+
+TODO: Mehr? Vllt. was über seine Suche nach passenden Anchor-Objekten und deren Eigenschaften schreiben. Hat er da irgendwas kategorisiert? Oder erst in Concept auf der Suche nach eigenen Anchors?
+
+\subsection{Augmented Reality Games}
+I still remember my astonishment when I first saw the virtual shark, rising behind Marty McFly and then snapping at him in <em>Back to the Future Part II</em> (see TODO add a photo). The movie was released in 1989, wherein Marty watches the shark during his visit of the future year of 2015.
+
+Although the year 2015 has passed, today’s technology is not able to produce such a holographic shark as it has been predicted by the movie (nor has the movie <em>Jaws 19</em> been released, the shark was advertising for).
+Nevertheless, if Marty would wear some smartglasses today, he could see the shark indeed, with the help of augmented reality.
+
+Augmented reality (AR) means augmenting perceived real-world elements with virtual media in realtime. This virtual media can be text, images, but also 3D objects or sound.
+
+The term <em>augmented reality</em> exists for many years now. There have been moments in the past, the technology seemed likely to experience the hype, many people are waiting for. But a big hype never happened (at least until the time of writing this thesis, May 2017).
+
+Today, there are some popular apps that use AR, such as Snapchat (TODO reference) (which tracks the user’s face and augments it with some fancy extras like a dog’s snout with matching ears and tongue) or Pokémon GO (see separate section TODO).
+
+Also Apple and Facebook start to invest into this technology. Apple CEO Tim Cook even denotes augmented reality and virtual reality as potential cornerstones of the company's future. Also the coming iPhone 8 is said to be equipped with technology customized for AR [59]. Facebook CEO Mark Zuckerberg teased an upcoming games platform for AR [60]. TODO: Automotive?
+
+Maybe, this technology is finally on the verge of experiencing a big hype.
+
+\subsubsection{Variants}
+There are different variants, all called AR. This starts with simply overlaying a video with information, that is located at specific GPS coordinates or at a tracked marker (see Technical Basics for definition of a marker TODO) and ends with exactly overlaying real-world objects with virtual objects, considering 3D position and pose.
+
+The used variant depends on the use case and on the available hardware. The higher the grade of accuracy, with which the reality shall be augmented, the higher the requirements on the hardware, since AR is usually done in realtime. Whereas overlaying the camera picture with a virtual object while the player is located at specific GPS coordinates is a rather simple job for current hardware, tracking real-world objects from the camera picture and retrieving their position and orientation to blend the virtual object over it needs a powerful CPU that is capable of sophisticated computer vision algorithms. In the following, some common approaches of integrating virtual content into the real world are presented.
+
+\paragraph{Square Markers}
+Square markers are, as the name says, square pictures containing a binary pattern. Square markers are easy and fast to detect in a camera image and the position as well as the pose of the marker can be deduced from its binary pattern in a very efficient way. Most of the AR APIs as ARToolKit (TODO reference) or TODO MetaIO? No! Something more common provide an implementation for this kind of markers. Even current smartphones are able to track multiple square markers in realtime.
+
+A drawback is, that the markers have to be placed in the real world beforehand. This is a disqualifier for many application fields, where the AR content has to smoothly integrate into an unprepared scene. TODO: Add picture of a hiro marker.
+
+\paragraph{Natural Feature Tracking}
+Natural Feature Tracking (NFT) refers to a technique that searches predefined features in an image. From the locations of the tracked features, the pose and location of the camera is retrieved [69]. TODO: Bild dazu, z. B. figure 2.6 von Hock.
+
+\paragraph{Model-based Tracking}
+Similar to NFT, the captured image is searched for features while these features have to match with those of a reference model. Whereas for the NFT the reference model is an image, for model-based tracking it’s a 3D CAD model. The advantage is, that with a 3D model, multiple perspectives to match the reference model to the real image are supported.
+Because there’s much literature on this subject (e. g. [70]) and since this thesis’ scope only touches this kind of tracking, it won’t be described any further.
+
+\subsubsection{Usage of AR in Games}
+Nowadays, mobile devices used for AR are usually handheld devices (such as smartphones or tablets) or head-mounted displays (such as smartglasses). Head-mounted displays have an advantage over handheld devices, which are embarrassing, annoying, tedious to keep up and watch through and that are socially not accepted [58]. Additionally, a smartphone’s hardware is limited and its camera is hardly able to capture 3D structures of the real world.
+
+On the other hand, smartphones are common and nearly everyone will always have one at hand in the near future, whereas head-mounted displays are still a rarity.
+
+To be smoothly integrated into everyday life, pervasive games want the player to quickly immerse into the game. Augmented reality is a technology that supports the immersion effect [61], if used in the right way. Wetzel et al. (TODO name, not source) warn developers in their <em>Guidelines for Designing Augmented Reality Games</em> [62] to not only focus on a fancy technology like AR to impress the players but to rather invest in a good user experience by a lasting gameplay.
+
+An early example for a mobile game that uses AR is <em>ARQuake</em> [63], which is an augmented reality version of the video game <em>Quake</em>. It is played outside and uses AR markers.
+
+More recent examples are the popular games <em>Ingress</em> and <em>Pokémon GO</em>, that are described in detail in sections TODO and TODO, respectively.
+
+Although this is a subchapter of <em>Pervasive Games</em>, not each augmented reality game is a pervasive game. A game can include augmented reality technology without expanding the magic circle.
+
+\subsection{Examples}
+In this section, representatives of one or more of the above mentioned game types (such as location-based games, exergames and augmented reality games) are presented.
+
+The presented games have been chosen because of their close relation to the game <em>RacecAR GO</em>, which is developed within this thesis.
+
+TODO: Add pictures (also for StreetConqAR)
+
+\subsubsection{Ingress}
+Ingress is a location-based mobile exergame, developed for smartphones. It was developed by Niantic (TODO source) and was released in 2012. Players, called <em>agents</em>, have to decide to either belong to the fraction of the Enlightened or to the Resistance.
+
+The anchors are designer placed and are called <em>portals</em>, which have to be “hacked” by the players to gain points for their fraction (see figure TODO image of Portal with players around).
+
+The portals are usually located at points of social or artistic interest, such as monuments or landmarks. In contrast to StreetConqAR (see TODO), these objects are of no further relevance for the gameplay.
+
+Ingress is no augmented reality game, although it is sometimes classified as such. It mixes reality and virtuality by the use of anchors, but is does not augment the view of the physical environment.
+
+Ingress is considered an exergame because players have to physically move to portals to succeed in the game. The game developers, however, did not seem interested in exploiting its full potential as an exergame. Players aren’t motivated by the game to walk faster or farther. It is even possible to elude the health aspect completely by moving via car or bus to visit the portals, because the app does not check the speed of the player. It seems that Ingress became an exergame just by chance, since the developers figured out that it is entertaining to embed the virtual game world into the real world around the player [15].
+
+Ingress is based on location data from Google Maps. Its enriched location data was used later to populate <em>Pokémon GO</em> (see section TODO) [64].
+
+As said above, the anchors are placed by a designer. Although there exists a process for users to propose locations for new ones, which takes a few weeks to be accepted, there are many (rural) regions, where no anchors exist so far (TODO see map below). In these regions, Ingress cannot be played.
+
+TODO: add reference to map (a screenshot taken with my Ingress account)
+
+\subsubsection{Pokémon GO}
+Pokémon GO is a location-based augmented reality mobile exergame, developed for smartphones. It was developed by Niantic (TODO source) and was released in 2016. Pokémon are fantastical creatures and first appeared in the 1990s in video and card games.
+
+A player of Pokémon GO becomes a Pokémon trainer with the task to hunt up and to catch Pokémon. Catched Pokémon are stored in the player’s Pokédex and can be trained. In Pokémon gyms, Pokémon can fight against each other. There also exist PokéStops, where some useful items can be found.
+
+Data gathered with Ingress was used to place gyms and PokéStops [64]. These are also marked on a map that is visible when playing the game. Pokémon, however, are only visible through the smartphone display, if the player is physically near them. In this case, the Pokémon is blended above the camera video in an AR manner (see figure TODO).
+To actually catch a Pokémon, the player has to throw a virtual Pokéball onto the creature. Only a well-thrown ball captures the Pokémon. Pokéballs can be retrieved from PokéStops.
+
+In contrast to Ingress, the developers emphasize the health aspect in Pokémon GO. Though it’s still possible to visit gyms and PokéStops by car or bus, there’s a feature in the game that can only be used by walking: Brooding eggs. To brood Pokémon eggs, the player has to walk a certain distance until the Pokémon emerges. This distance can only be walked by feet since the app checks the movement speed of the player.
+
+Another good thing is, that it does not really make sense to play this game inside. To succeed in the game, one has to go outside and walk around (e. g. to gather Pokéballs, to find new Pokémon or to brood eggs).
+
+The virtual map that displays PokéStops and gyms also motivates the players to move. At least it motivated myself. Seeing these locations in the near environment, I though “I’m tired from work, but there are two PokéStops over there. I just visit them, maybe I find some rare Pokémon on my way”.
+
+TODO: Add picture of Pokémon GO
+
+\paragraph{Hazards}
+Although Pokémon GO contributes to its players’ health, there are some hazards related to playing the game. There have been incidents of players walking onto rails or into restricted areas of hospitals while hunting for these little monsters [65].
+
+There is even a website called <em>Pokémon GO Death Tracker</em> [66] that lists all deaths and injuries caused by Pokémon GO (14 deaths and 54 injuries, effective in April 2017).
+
+\subsubsection{StreetConqAR}
+StreetConqAR [26] is a location-based augmented reality mobile exergame developed as an Android app. In the game, players have to conquer streets. The player that conquered most streets wins the game. To conquer a street, one has to walk to its street name sign and watch it through the smartphone. The app recognizes the sign and displays an augmented reality version of it with virtual colored letters blended above the original letters. To acquire the street, a riddle according to these letters has to be solved.
+
+As mentioned above, StreetConqAR presents a new way of creating anchors. Anchors are placed automatically based on real-world objects, the street name signs. The advantage of this approach is, that street name signs can be found all over the world, which means that StreetConqAR can be played all over the world, as well.
+
+TODO: Picture
+
+\subsubsection{Maguss}
+TODO
+
+\subsubsection{Harry Potter GO}
+TODO
+
+
+\section{Vehicle Recognition}
+
+\subsection{General}
+Nowadays, vision-based recognition is a hot topic. Not possible to imagine automated manufacturing without it since many years, vision-based recognition became accessible for normal users with devices like the Microsoft Kinect (TODO: reference), which is able to perform gesture recognition, for example. Another visual recognition which arrested attention (mainly because of privacy issues TODO: source) in early 2015 was Facebook’s (TODO: source) face recognition system named DeepFace [24], which searches photos, taken by Facebook users, for people of other Facebook users.
+
+Another field that is not so famous yet is the vehicle recognition. It is used in different systems like traffic monitoring and control or security and surveillance applications. Instead of a human observer sitting in front of some screens, an automated vehicle recognition system could do the task. Human constraints like multitasking and distinguishing among all the makes and models would be overcome by such a system.
+
+Usually, the steps of a vehicle recognition algorithm are: (1) Feature Extraction, (2) Global Representation, and (3) Classification. Most of the systems do a preceding step and define a region of interest (RoI), which separates the vehicle from the background (see figure TODO: Either use [3]’s figure 1.4 or create a similar one in my own style - see Google Doc for State of the Art for scribble).
+
+Feature extraction in the vehicle recognition domain denotes identifying those parts of the image that are relevant (descriptive) for this class (type, make and/or model).
+
+The Global Representation of (Global Descriptor) can be seen as the compound of all the relevant extracted features of one image. In simple phrase, the Global Representation describes a vehicle image of a specific class such that a classifier can understand it. The key task of building a Global Representation is making it informative and discriminating. There are many different ways to construct Global Representations, some of them are illustrated below.
+Finally, the classification is the process of assigning a class (type, make and/or model) to a Global Representation of an unknown class.
+
+There are different kinds of vehicle recognition, each for a different purpose and with its own challenges.
+
+\subsection{Vehicle Type Recognition}
+For an electronic toll collection system or for the analysis of traffic jams, the actual make or model of a vehicle is not relevant. Whereas the type of a vehicle helps to deduce the properties (like shape or weight) needed for such studies. So the Vehicle Type Recognition classifies vehicles into broad categories such as sedans, SUVs, trucks, vans, motorbikes, buses, etc. [3]
+
+As [3] mentions, most of these approaches use feature extraction and classification of different kinds. Examples are TODO.
+
+\subsection{Vehicle Make Recognition}
+Another way of classifying a vehicle is the Vehicle Make Recognition (or Vehicle Logo Recognition), which recognizes the make of a vehicle (like Mercedes, BMW, Porsche, etc.). This can either be done by solely using the vehicle’s logo or by using its whole front or back.
+
+To classify by the logo, an image matching with logo templates can be done [19] [20]. For this, a set of vehicle logos is used as templates. Once the image snippet containing the logo has been detected, it is compared to each template using a template matching algorithm. The template with the highest match classifies the vehicle.
+
+However, a more widely used technique is using feature detection with classification on the logo. Apostolos P. Psyllos et al. [21] (TODO name) use a database of logo images. During classification, each feature found inside the logo area of the queried image votes for each logo in the database, that contains a similar feature (evaluated by a Nearest Neighbor algorithm). The database logo with the most votes classifies the queried logo. There is one special thing about this approach, called <em>Geometric Validation</em>. It means “that the coordinates of the keypoints (features) in the query and the matched database image are checked for geometrical consistency”.
+
+TODO: Describe approach from [22] and especially explain the bag-of-words idea (refer to chapter Technical Basics, where it is explained).
+
+Nacer Farajzadeh and Negin S. Rezaei (TODO: name) compared these two approaches with the result, that the image matching approach performed more accurate while a feature detection method was about 80\% faster [18]. While the logo detection alone as a preprocessing step of the recognition can be very time consuming [3] and while this approach is very sensitive to occlusion due to the relatively small snippet of a vehicle image, using the whole front or back of a vehicle gives more robust classification results.
+
+Examples for Vehicle Make Recognition are TODO.
+
+\subsection{Vehicle Make and Model Recognition}
+The most comprehensive kind of vehicle recognition and also one focus of this work is Vehicle Make and Model Recognition (VMMR), the identification of its make as well as its model (like Mercedes SL, BMW 3 Series, Porsche 911, etc.). For surveillance purposes, this recognition type extends the conventional number plate recognition. It can be used to double-check a recognized number with the corresponding make and model to fight the problem of false number plates. There are plenty of works referring to this topic and also some ready-to-use systems like Car-Rec [6] or the <em>VisualSearch</em> feature [12] (TODO: add photo) of the AutoScout24 app [13] that do VMMR. TODO: Also name [28] and [29] and shortly tell sth about them.
+
+Most of the approaches use the front or the back side of the vehicle because it’s the most descriptive part, usually containing the make’s logo and, for the back side, even the lettering of the make and the model.
+
+While most of the systems require strictly frontal or rear view images of vehicles, Shinozuka et al. [23] proposed a solution to transform vehicle pictures taken from an angle of up to 60-degrees into pseudo frontal views.
+
+TODO: Describe an approach based on 3D models ([2, 6, 11] from Petrovic)
+
+The main differences among the various VMMR approaches are the construction of the Global Representations. Differences with minor importance are the choices of the local feature descriptor or the classifier, which does not mean that the local feature descriptor or the classifier have a minor effect to the classification performance, though.
+
+<em>“The quality of a global features representation technique is assessed by its processing speed, computational complexity in forming the holistic representations, and the VMMR accuracy which reflects its discriminative capacity in representing the different makes and models while generalizing over the multiplicity issues within a make-model class.”</em> [3]
+
+\subsubsection{VMMR Using Local Features Concatenation}
+One classification approach is done by V.S.Petrovic et al. [1], achieving recognition rates of over 93\%, tested on over 1000 images containing 77 different classes (make-models). The recognition is based on a relatively simple set of features extracted from frontal car images. A feature vector of predefined length (the <em>Global Representation</em> as shown in figure TODO reference figure from above with VMMR steps) represents one make-model. The Global Representation is just a pixel-wise concatenation of the vehicle’s image. To determine the class of a queried vehicle, simple nearest neighbor classification is used among these feature vectors. The special thing about this approach is, that it uses only one vehicle image per make-model as training data. What is trained then, is the transformation of the training image into the Global Representation.
+
+The features are not extracted from the whole vehicle image but from a RoI, a section inside of the image. This RoI is defined as an area around the car’s number plate. Thus, relative to the number plate, the RoI is independent from the vehicle’s actual location and scale inside the source image. The recognition system is shown in figure TODO (image showing (similar to Petrovic fig 2, but more detailed): input -> find number plate -> define RoI -> extract features -> Feature Vector -> Find class with nearest neighbor classification)
+
+Starting with a straightforward representation by just concatenating the raw image values into the feature vector, Petrovic et al. ended up with square mapped gradients (TODO: definition) performing best for this purpose. TODO: Reprint [1]’s figure 5 (Feature extraction examples) as examples of different techniques with description: The structure of the original image is still recognizable (more or less clearly) because of the concatenation of image pixels
+They also investigated in transforming the feature space via Principal Component Analysis (PCA) into a lower dimensional subspace to gain expressiveness and computation time. Finally though, tests including PCA performed slightly worse in most cases.
+
+Another conclusion they made is, that a representation independent from color and contrast of the original vehicle image increases performance.
+
+Pros of the approach of Petrovic et al. are, that the recognition process is rather easy, which means, that it includes few steps and components for both, building the classifier and recognizing a new vehicle. Thus, it’s easy to implement. It means also, that this process is easy to understand, because finding the nearest neighbor of a vehicle image in any kind of representation-space seems plausible to work properly.
+
+There are also cons of their approach that will occur, when testing the system in real-life conditions. While the vehicle’s Global Representation (its feature vector) is based on all of the pixels contained in its RoI, the recognition will not be robust to occlusion of some part of this area. For the same reason, slight changes in the camera’s roll-angle or a displaced (or badly captured) number plate will also decrease the recognition performance. Hence, such an approach is not applicable in real-life scenarios.
+
+\subsubsection{VMMR Using a Bag-of-Words Model}
+Another approach that tries to eliminate all the cons of the system proposed by Petrovic et al. [1] (TODO name) is made by A. J. Siddiqui [3] (TODO name). Since that system is similar to the system proposed in this thesis, it will be discussed in more detail, here.
+
+The challenges, [3] attends to, are <em>multiplicity</em> and <em>inter-make and intra-make ambiguity</em>. <em>Multiplicity</em> describes the problem of vehicles with different shapes or appearances all share the same name (make and model). An example for this is shown in figure TODO reprint [3] figure 1.5 “reprinted from [3]”.
+
+While <em>inter-make ambiguity</em> describes the issue of models from different companies being akin to each other, <em>intra-make ambiguity</em> refers to different models from the same company that share similar features. Examples for this are shown in figures (TODO reprint [3] figures 1.6 and 1.7 “reprinted from [3]” Inside State of the Art, reprint figures of vehicles from sources, because I talk about it in their context. Inside Concept chapter, I use MY vehicle images)
+
+So the task is to build a Global Representation, “that accounts for intra-class differences and inter-class similarities, thereby solving the multiplicity and ambiguity issues in VMMR” [3] and that is robust to occlusions and small changes in the camera angle.
+
+In contrast to the approach of Petrovic et al., the Global Representations of this system are constructed using a bag-of-words model (TODO: See chapter Technical Basics for explanation) instead of concatenating the pixel values of the RoI. This means, similar to the Vehicle Make Recognition system proposed by [22], mentioned above, the Global Representation is a histogram. Each bin of this histogram represents one distinct feature-codeword while the height of the bin indicates the occurrence-frequency of this specific feature-codeword in the source image.
+
+The set of all feature-codewords, the <em>visual words</em>, build the dictionary or <em>bag</em>. A feature-codeword in this context is not a feature but a representative of several similar features. This way, the size of the dictionary does not only control the size of the Global Representation (number of bins in the histogram) but also the threshold, at which several features are clustered into one single dictionary feature-codeword. So the dictionary represents the essence of the key features (in this case SURF [31]) of all the training images.
+
+\paragraph{Dictionary Generation}
+Two different schemes of dictionary generation are proposed. One called <em>Single Dictionary</em>, the other called <em>Modular Dictionary</em>. For the Single Dictionary, all the local features of all training images are clustered. Each cluster center then represents one codeword of the Single Dictionary. The number of clusters defines the size of the dictionary, therefore. An advantage of this scheme is, that considering the combined set of features over all the training images (across multiplicity and ambiguity) strengthens the discriminability of this dictionary. A disadvantage is, though, that one cluster could contain features that are similar but originate from different make-model classes. To cope with this, a dictionary is only built out of the training images for one specific make-model class (in the same way as described above), resulting in one dictionary per make-model class. The set of all the codewords of those dictionaries form the Modular Dictionary. An advantage, besides the one noted above, is the flexibility when adding new training data. Only the dictionary of the specific class has to be rebuilt, which saves processing time. A disadvantage is the increased size of the Modular Dictionary compared to the Single Dictionary. Although the size of one of its per-class dictionaries can be smaller than that of the Single Dictionary, multiplying this with the number of make-model classes will boost the number of overall codewords. For an illustration of the two schemes, see figure TODO: reprint figure 3.15 from [3] and explain the variables in the footer.
+
+\paragraph{Results}
+For the classification (step 3 of vehicle recognition process TODO: Reference image from above), a multi-class SVM (TODO reference SVM in Technical Basics)-based classifier is used. The classifier is trained to learn both similarities among different generations of the same make-model class and differences among inter-class models.
+
+Experiments showed that the Single Dictionary, contrary to the expectations, slightly outperforms the Modular Dictionary. On the other hand, the dictionary training time is much less for the Modular Dictionary. However, for an application, where the dictionary is built offline and does not need to be updated (or only seldomly) during runtime, the Single Dictionary is the better choice.
+
+Additionally, the bag-of-words model implicates some advantages in contrast to the local features concatenation approach by Petrovic et al. [1] (TODO name). Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified (see figure TODO show classification of test image with occlusion). Another advantage is the robustness to slight changes in the camera roll-angle or in the perspective. Due to the local descriptors, in this case SURF, that is rotation invariant, rotated local features would still result in the same bag-of-words histogram.
+
+A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. TODO: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms).
+
+To solve this problem, a <em>Geometric Validation</em> as seen in the Vehicle Make recognition system proposed by TODO [21] could be applied. Another way to retain the spatial information of a local feature to some extent is to use a grid-based Global Representation (TODO: describe how this would look like, look at [3] 3.2.1, and see scribble in State of the Art Google Doc)
+TODO: IMPORTANT: A proposal to solve this should NOT be made inside State of the Art!!! And only do this, if there's enough time at the end.
+
+
+\section{Number Plate Region Detection}
+
+\subsection{Definition}
+In contrast to “Number Plate Detection” or automatic license plate recognition (ALPR), where (also) the content of the number plate is desired.
+
+TODO: Reference already working Systems. I heard that automatic recognition is used in Österreich to recognize the Vignette.
+
+TODO: Explain Hough Transform in detail with image and formula and such (as Hock did in Technical Basics)
+
+
+
+
+
+
+
+
+
+%*****************************************
+\chapter{Concept}\label{ch:concept}
+%*****************************************
+TODO
+Reference to State of the Art in chapter \ref{ch:stateOfTheArt}.
+
+
+
+
+
+
 %*****************************************
 \chapter{Examples}\label{ch:examples}
 %*****************************************
@@ -208,180 +590,6 @@ alternative definition
   t[u_1,\dots,u_n] = t\bigl[t[u_1,u_2],\dots,t[u_{n-1},u_n]\bigr]
 \]
 gives the same result.
-
-
-
-%*****************************************
-\chapter{State of the Art}\label{ch:stateOfTheArt}
-%*****************************************
-\section{Overview}
-In this chapter, the history and the state of the art of pervasive games in general and exergames in special will be presented. Popular representatives like <em>Ingress</em> [33] by <em>Google</em> or <em>Pokémon GO</em> [34], published by <em>Nintendo</em> (TODO really? Not Niantic both?) will be looked at.
-
-Additionally, some interesting approaches about vehicle recognition and number plate region detection will be discussed as the concept presented in this thesis also includes automatic vision-based vehicle recognition.
-
-\section{Pervasive Games}
-\subsection{Definition}
-Although the term pervasive gaming is becoming more and more popular within the last years, its definition is still vague [39]. One is calling them a new type of digital games that combine game reality and physical reality within the gameplay [46].
-
-Another definition says, that it is a game, in which the game world exists beside the everyday environment and that never stops but surrounds the player 24 hours a day [47].
-E. Nieuwdorp (TODO name) defined pervasive games as special type of game that emphasizes the relation between reality and game [39].
-
-There is some consensus in those definitions, such as the importance of the relation between the reality and the game world.
-
-But instead of bringing up another definition to compete with the other ones, this thesis compiles definitions of some works to define the boundary of pervasive games, as fitted for this thesis’ scope.
-
-A definition that tries to comprise the bottom line of many other definitions was made by Hock (TODO name): <em>”A pervasive game is an overlay of the real world where it (the overlay) is persistently present. It takes place in physical environments and its gameplay interacts with or is in some way related to parts of the real world. It thereby blurs the boundaries between reality and virtuality. It ideally integrates smoothly into its user’s everyday life where it ideally is omnipresent which means that the user should be able to play it at any time in any place”</em> [26].
-
-
-\subsection{Beyond Traditional Games}
-Montola (TODO name) tried to approach the definition problem by investigating all kinds of games that have been classified as pervasive games for different and not unique reasons. He found out, that there is no single common denominator of those reasons.
-
-But regarding the magic circle of play (see next section TODO), each of these games broke out of this circle in a distinct manner [14].
-
-\subsubsection{The Magic Circle of Play}
-Huizinga (TODO name) defines a play as <em>some activities</em> in <em>some places</em> that are considered playfully by the players to belong to the game and not to reality [45].
-
-Traditionally, a game takes place at <em>“certain spaces, at certain times, by certain players”</em> [14]. This is referred to as the magic circle of play.
-
-For a pervasive game, this circle does not have a rigid border but a “permeable membrane where conventional meanings, psychological artefacts and environments, and players alike can slip through” [39].
-
-In relation to the magic circle of play, another definition for a pervasive game is <em>”a game that has one or more salient features that expand the contractual magic circle of play socially, spatially or temporally.”</em> [14]
-
-In the following, each of the named dimensions, in which pervasive games expand the magic circle of play, are described.
-
-\subsubsection{Spatial Expansion}
-This means, that the location, where the game can be played at, is unclear or unlimited [14]. Thinking of the example from the beginning of this thesis, that game may have started at a factory site, but the actual spread of the zombies is unclear and could be unlimited.
-
-Montola notes that there are challenges with this kind of expansion, causing people to play the game on unwanted places like hospitals or creating hazardous situations in traffic [14].
-
-\subsubsection{Temporal Expansion}
-In classic games, a play session has a well defined start and end time. Pervasive games can break these limits. Not only does the temporal expansion obfuscate the start and end time of a game, it also blurs the border between everyday life and gaming by leaving the player in the dark about if he is playing at the moment or not [14].
-
-<em>”Boring moments of life can be enchanced by any mobile game, but temporal expansion reaches even the moments of not-playing”<em>, because <em>”any action could be a game action”</em> [14].
-
-\subsubsection{Social Expansion}
-The social expansion obfuscates the boundary of playership [14]. Thinking back to the example of <em>The Running Dead</em> in the beginning of this thesis, it wasn’t clear who is a participant and who isn’t. A noninvolved person could have watched a persecuted player and could have tried to help him. So the noninvolved person would become a participant without even knowing about it himself.
-
-TODO: Add exergames definition illustration
-
-\subsubsection{Subcategories of Pervasive Games}
-There are many subcategories of pervasive games, such as immersive games, serious games or exergames, to name a few. Immersive games combine spatial, temporal and social expansion. In this genre, it’s hard to differentiate games from non-games, because everything can be seen as an immersive game [42].
-
-Serious games are, simply said, more than fun [44]. They blend education and entertainment together in one game experience [40]. The term education is not limited to a specific domain but can be all kinds of added value other than pure entertainment and fun. Göbel et al. (TODO name of source 41) call it a broad spectrum of application domains ranging from training, simulation and education to sports and health [41].
-
-The last two domains form the subcategory of exergames. Because exergames are a subject of this thesis, the next section dedicates to that genre in more detail.
-
-
-\subsection{Exergames}
-A subcategory of serious games then again are exergames [41] [15]. As shown in figure (TODO), exergames are serious games with healthcare exercises as added value. The term <em>exergame</em> is constructed from the words <em>exercise</em> and <em>videogame</em> [43].
-
-The target of an exergame is to combine physical activity with fun of play. During the gameplay, the health aspect is not primarily focused but only a side-effect of playing the game. <em>“The training effect is secondary and nevertheless achieved”</em> [15]. An example for an exergame is <em>Dance Dance Revolution</em> (TODO reference). TODO: Describe Dance Dance Revolution. Bogost (TODO name) says about this game, that it produces exercise as an emergent outcome of play itself [43].
-
-A user of the Nintendo Wii (TODO: cite Wii) wrote: “Video games can [be] and are a great way to have exercise and not even know you are burning calories” [16]. Debra Lieberman found out that there is growing evidence of exergames helping people to stay fit and to manage their weight if they frequently play them [17].
-
-So the challenge of an exergame is to keep the player motivated to do sports. As in the example at the beginning of this thesis (<em>The Running Dead</em>), we all ran away when the mob of zombies came running towards us. We did not think of doing sports in that moment. Maybe some even did not think of playing a game. Our only thought was to escape.
-
-\subsubsection{Mobile Exergames}
-Digital games are mostly completely experienced through a fixed screen. This is an obstacle to immerse into a game [38], because the player is bound to his chair and his perception is usually only stimulated by the computer screen and a sound system. In pervasive games, the interface is no longer bound to a fixed screen and to common computer periphery like a mouse and a keyboard. The player rather interacts with real world objects and real persons [39], whereas the interface of the game isn’t well defined. Any real world object could be a game object, and any real person could be a participant [14].
-
-There is a special type of exergames, the mobile exergames, in which the player is not bound to a desktop or to a classical game board to play the game. Mobile exergames are played with a mobile device (such as a smartphone or a portable video game console). They are usually played outside and often use the location of the player to track the progress of the exercise. In most cases, the player has to move to succeed in the game, such as in TODO examples: Zombies RUN, Pokémon GO, StreetConqAR, more!!!
-
-These games do not take place at special locations like in a gym, a laboratory or at home, separated from the real world. They are played everywhere such as on the way to school or work, at work itself, after the lunch time, after work with your kids or whenever and wherever the player (or the game, as said above for pervasive games with temporal expansion) wants to. The aim is a transformation of the player’s everyday environment into a world in play [39].
-
-
-\section{Evolution of Location-based Games}
-In the previous chapters, different types of pervasive games have been presented. Many of them depend on the current location of the player, e. g. Ingress (see section TODO) or Pokémon GO (see section TODO). This kind of games uses the current location as a basic part of the gameplay. Without the exact location, a player of Ingress could not conquer a portal and a hunter on the prowl for Pokémons would not find one nor would he find a Pokéstop to retrieve useful items. Concluded, these games would be absolutely unplayable without being able to track the location of the player with a reasonable accuracy.
-
-Using GPS, this is only possible since May 2, 2000, when the <em>Selective Availability</em> was turned off. Selective Availability was a service to prevent civilians to perceive a better GPS accuracy than a 100 meters radius, reserving better accuracy for the military only. Since it was disabled, the GPS location is accurate to a few meters for anybody [48].
-
-Suddenly, many location based games came up. For example, the term <em>Geocaching</em> [49] was formed during that time to describe a hunt for treasures (the <em>geocaches</em>) in the real world [50]. To find these geocaches, their locations are marked on a virtual map via GPS.
-
-A few years later, the popular 80s game <em>Pacman</em> (TODO: link to original game?) was transferred into a real-life version named <em>Pac-Manhattan</em> [51], using GPS sensors to track the position of the players.
-
-With the launch of the iPhone in 2007, an era began where people always have a device at hand that is not only capable of tracking the GPS location but that is also powerful enough to run useful apps on it. This caused another hype of location-based applications.
-
-One of it, heavily relying on GPS-based location, is Foursquare [52]. The service makes personalized recommendations of places to a user. These recommendations depend on the user’s current location and his profile. The service exists as a mobile app and as a website. Providing an iPhone app in 2009, Foursquare was one of the pioneers that combined a serious mobile application with a location-based service.
-
-At that time, the app had a check-in feature to virtually check into specific locations. This game-like feature motivated users to visit different places to check-in and leave a Tip.
-
-Another location-based game, that became very popular, is <em>Ingress</em> (see chapter TODO). Ingress also uses the smartphones of the players to track their location and let them conquer virtual entities (named portals), that have been spread over the world.
-
-A new member of location-based games is <em>Pokémon GO</em> (see chapter TODO). Like in Ingress, players have to move in the real world, using their smartphone to discover virtual objects (like Pokémons or Pokéstops), that have been placed on real-world locations.
-
-The real-world locations, where entities are placed in the virtual world, play an important role for these games. They have to be well-chosen to fit the purpose of the game and the respective gameplay. These special locations are called <em>anchors</em>.
-
-\subsubsection{Anchors}
-For location-based games, the real world is overlain by the virtual game world. Anchors are well defined positions, where these two worlds are blurred [26]. The word <em>anchor</em> has been introduced by Hock (TODO name) [26]. In literature, there is no fixed term for this. Other works also refer to this as <em>artifacts</em> [54] or as <em>markers</em> [53]. This thesis uses the term anchor [26], because its semantic meaning describes very well what an anchor does: It anchors the virtual world into the real world.
-
-The placement of anchors is very important for a game and is directly associated with the user experience. Because anchors are those positions, where the gameplay usually takes place, players may easily be disappointed if an anchor is either too far away to reach it or if it is at a location not (without further ado) accessible for civilians (such as military areas, airports or the ocean). So anchors have to be placed in a way that they are accessible for all players.
-Another thing is the content, that is linked to an anchor. For example, the game <em>Escape From the Tower</em> [55] lets its players reenact the escapes of some popular prisoners from the London Tower. Therefore, anchors are placed all over the tower and its surroundings with associated media. At a prison cell, this media tells the player something about the prisoner. On the staircase, the media is related to a fled, that occurred. If the content does not fit to the respective location, players will soon quit the game.
-
-Reid (TODO name) [54] classifies the way, anchors are placed, into three categories, that will be explained in the following.
-
-\paragraph{User-placed at Runtime}
-With this method, the user places his own anchors. For this, the game has to provide some kind of editor, with which the user creates the content he needs to play the game.
-
-The advantages of this method are, that the game can be played everywhere, because it does not depend on predefined anchors. Another advantage is, that users can create the anchors such that they fit their individual needs. In Twostone [TODO source] for example, the player plays a stone-eating caterpillar that moves on a maze-like virtual track while the player moves in the real world. To win the game, the caterpillar named “Twostone” has to eat all stones, that are spread all over the track while escaping from some monsters, that try to catch it. The game includes an editor, wherewith the user can design a track by walking along the paths, where the track should be created and placing anchors at corners. The game can thus be played anywhere. Also, highly motivated and sporty players can build their own large tracks covering the whole city, whereas beginners are able to design a small one for a short sport unit during the lunch time.
-
-Drawbacks of this method are, that a user is not a designer and may not have the required artistic skills and knowledge to produce qualitative anchors. And much less in a small amount of time [56].
-
-Additionally, if the player desires for a quick sporting activity, he might rather go jogging in the park than starting to build a track.
-
-\paragraph{Seamful Design}
-With this method, the placement of anchors depends on features of the physical infrastructure. In <em>Feeding Yoshi</em> [TODO cite], anchors are placed on the seams of wireless access points. In the area of a secure wireless access point, the player can find a hungry creature, a “Yoshi”, whereas at unsecure wireless access points, there are plantations to plant each Yoshi’s favorite fruit.
-
-Usually, developers try to hide the limitations caused by infrastructural seams. With this method, these limitations are embedded into the gameplay [57].
-
-Games using a seamful design to place anchors can be played at all locations, where the respective infrastructure exists. Therefore, the accessibility depends on the choice of the kind of the infrastructure. Nowadays, unsecure wireless access points are rather seldom, hence the gameplay of Feeding Yoshi suffers from this choice.
-
-\paragraph{Designer-placed}
-With this approach, all anchors are placed by the game designer. Due to the designer’s skills and insight to the respective game, the anchors are usually well-placed and harmonize with the gameplay.
-
-As a drawback, this method is the most static and expensive one, consuming time and money until all needed anchors are placed. As a result, most games with designer placed anchors are tailored for a specific scenario, such as <em>Escape from the Tower</em> [55], which was mentioned above. The anchors in such games are often strongly related to their location. Adapting this game for another location would involve much effort.
-
-Additional to those categories introduced by Reid (TODO name, not source), this thesis names two further categories.
-
-\paragraph{Crowd-based Placement}
-Crowd-based placement of anchors is akin to user placement, with the difference that content created by the crowd is made public for everyone. This way, the game thrives on a lively crowd of users, frequently creating new content.
-
-Twostone, that has been mentioned before, is actually relying on crowd-based anchors, because after creating a new track, a player can opt to make the track public to be used by other players. But as mentioned in the beginning, this does only work if there is a crowd creating that content. During the release of a game, it might get challenging to build up a crowd despite the fact that there is no content yet.
-
-Another problem is, that with a crowd, there is no control of the content. After some time, the game might contain anchors at hazardous locations such as airports or highways or it might contain pictures of morally questionable content, such as swastikas or of adult kind.
-
-Ingress uses a crowd-based placement, combined with a designer to check the content for its propriety. Nevertheless, Ingress is only playable in highly populated areas while portals (the anchors) only exist in these regions (see Ingress map below TODO). That’s because users are allowed to create anchors, indeed, by taking a photo of the desired new location, marking it on a map and sending this along with a short description to the development team of Ingress. So most requests are made for regions with a lot of citizens. But it takes several weeks, until a new portal gets accepted by the designers.
-
-\paragraph{Automatically-placed}
-This scheme describes content, that is generated automatically, obeying some creation-rules. Automatic placement of anchors helps to spread them all over the world in a fraction of time and money, a designer would need.
-
-Actually, the seamful design is a sub-scheme of automatic placement, whereas the creation-rule is to place anchors at infrastructural seams (e. g. of wireless access points).
-The rule can be well-defined, such as with a procedural content generation rule, including the use of generative grammars, spatial algorithms or pseudo-random number generators [56].
-The rule can also be more complex like <em>place an anchor at each gas station marked by Google Maps</em>, which already includes some locational context.
-
-Automatic placement also includes <em>random</em> placement. But simply placing anchors at random locations will seldomly have the result of well-placed anchors semantically fitting to their content and being accessible for everyone (e. g. oceans and deserts).
-
-Hock (TODO name) proposed an automatic placement based on real-world objects, namely street name signs [26]. In his game <em>StreetConqAR</em>, the players have to conquer streets, identified by the name on their street name sign. Because StreetConqAR is similar to the game RacecAR GO, which is presented in this thesis, there’s an extra section for this (see TODO).
-
-The definition of an anchor says, that it is a “well-defined position”. In the following, the term anchor is not only the position but also refers to the real-world object itself to describe the kind of blurring of reality and virtuality and the strong relationship between the anchor and its position. This blurring takes place via an object at a well defined position.
-
-Later on, this thesis will define the term of a <em>natural anchor</em> to solve this ambiguity (see TODO concept chapter).
-
-The advantage of Hock’s (TODO name) approach is, that it not only saves the expanses of the a priori design of the anchors, because street name signs are already there. Also the spreading of these signs is very useful for a location-based exergame. There are very few populated regions with no street name signs.
-
-TODO: Mehr? Vllt. was über seine Suche nach passenden Anchor-Objekten und deren Eigenschaften schreiben. Hat er da irgendwas kategorisiert? Oder erst in Concept auf der Suche nach eigenen Anchors?
-
-
-
-
-
-
-
-
-
-%*****************************************
-\chapter{Concept}\label{ch:concept}
-%*****************************************
-TODO
-Reference to State of the Art in chapter \ref{ch:stateOfTheArt}.
 
 
 %*****************************************
