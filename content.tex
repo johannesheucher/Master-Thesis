@@ -328,7 +328,7 @@ The main differences among the various VMMR approaches are the construction of t
 
 <em>“The quality of a global features representation technique is assessed by its processing speed, computational complexity in forming the holistic representations, and the VMMR accuracy which reflects its discriminative capacity in representing the different makes and models while generalizing over the multiplicity issues within a make-model class.”</em> [3]
 
-\subsubsection{VMMR Using Local Features Concatenation}
+\subsubsection{VMMR using Local Features Concatenation}
 One classification approach is done by \citeauthor{petrovic2004analysis} \cite{petrovic2004analysis}, achieving recognition rates of over 93\%, tested on over 1000 images containing 77 different classes (make-models). The recognition is based on a relatively simple set of features extracted from frontal car images. A feature vector of predefined length (the <em>Global Representation</em> as shown in figure TODO reference figure from above with VMMR steps) represents one make-model. The Global Representation is just a pixel-wise concatenation of the vehicle’s image. To determine the class of a queried vehicle, simple nearest neighbor classification is used among these feature vectors. The special thing about this approach is, that it uses only one vehicle image per make-model as training data. What is trained then, is the transformation of the training image into the Global Representation.
 
 The features are not extracted from the whole vehicle image but from a RoI, a section inside of the image. This RoI is defined as an area around the car’s number plate. Thus, relative to the number plate, the RoI is independent from the vehicle’s actual location and scale inside the source image. The recognition system is shown in figure TODO (image showing (similar to Petrovic fig 2, but more detailed): input -> find number plate -> define RoI -> extract features -> Feature Vector -> Find class with nearest neighbor classification)
@@ -342,7 +342,7 @@ Pros of the approach of Petrovic et al. are, that the recognition process is rat
 
 There are also cons of their approach that will occur, when testing the system in real-life conditions. While the vehicle’s Global Representation (its feature vector) is based on all of the pixels contained in its RoI, the recognition will not be robust to occlusion of some part of this area. For the same reason, slight changes in the camera’s roll-angle or a displaced (or badly captured) number plate will also decrease the recognition performance. Hence, such an approach is not applicable in real-life scenarios.
 
-\subsubsection{VMMR Using a Bag-of-Words Model}
+\subsubsection{VMMR using a Bag-of-Words Model}
 Another approach that tries to eliminate all the cons of the system proposed by \citeauthor{petrovic2004analysis} is made by A. J. Siddiqui [3] (TODO name). Since that system is similar to the system proposed in this thesis, it will be discussed in more detail, here.
 
 The challenges, [3] attends to, are <em>multiplicity</em> and <em>inter-make and intra-make ambiguity</em>. <em>Multiplicity</em> describes the problem of vehicles with different shapes or appearances all share the same name (make and model). An example for this is shown in figure TODO reprint [3] figure 1.5 “reprinted from [3]”.
@@ -393,8 +393,67 @@ TODO: Explain Hough Transform in detail with image and formula and such (as Hock
 %*****************************************
 \chapter{Concept}\label{ch:concept}
 %*****************************************
-TODO
-Reference to State of the Art in chapter \ref{ch:stateOfTheArt}.
+This chapter is about a new way of automatic content generation for exergames. It presents an approach to use real-world vehicles as anchors. Using vehicles as anchors means recognizing their make and model and integrating its virtual counterpart via AR into the game play.
+
+In the first section, the basic concepts needed for a location-based exergame and what makes such a game popular are discussed. Later on, the design of <em>RacecAR GO</em>, a location-based exergame that implements this concept, is presented. In the subsequent section, the prototype of RacecAR GO, that will be implemented along with this thesis, is described.
+
+As VMMR is an important part of this game, an approach for this is proposed in the final section of this chapter.
+
+
+\section{Location-based Exergame using AR}
+This section is about the preparation and evaluation of the basic concepts to build a location-based exergame. It first discusses the type and how to integrate anchors, then it generally evaluates the properties of such games that motivate people to play and to move. Later, the usage of augmented reality as a technology to improve the user experience is discussed. A list of requests for a location-based exergame as a result of this evaluation is presented in the final section.
+
+\subsubsection{Anchors}
+As a reminder, <em>“anchors in pervasive [...] games are well defined positions, where reality and virtuality are blurred”</em> [26]. An exergame that shall be playable all over the world also requires anchors placed all over the world.
+
+In the State of the Art chapter (see TODO), many approaches for creating anchors have been proposed with pros and cons. It turned out that designer placed anchors are usually well-placed and well-fitted to the game’s purpose, but include an expensive design process. As a result, games with designer placed anchors mostly provide content for only a few limited regions.
+
+On the other hand, placement of anchors by the users takes the work out of the designer’s hands and provides the possibility to create content all over the world. As a drawback, the quality of such anchors usually suffers and depends on the goodness of the editor and on the user’s design-skills. Another disadvantage is, that the user must pass the design-phase before he is able to play the game. Such an approach is not suited for a game that smoothly integrates into the player’s everyday life and shall every time be playable without any pre-setup.
+
+The automatic anchor generation offers a good middle course for this request, as it doesn’t include an expensive design process but nevertheless produces well-placed anchors depending on the creation rule.
+
+\subsubsection{Natural Anchors}
+\citeauthor{hock2014augmented} proved in his thesis, that placing anchors at street name signs creates a game that provides content for many regions (urban and rural ones) all over the world \cite{hock2014augmented}. Additionally, he not only used the positions of the street name signs but also included the object itself as an anchor into the game. This comes with some ambiguity issues, because the term anchor is used for both, the location and the related object.
+
+As a solution, this thesis introduces a new term, the <em>natural anchor</em>, which is an object, that exists in both, the real world and the game world. At its position, the reality intersects with the virtuality.
+
+This means, that the real object and the virtual object are semantically the same. In Hock’s (TODO name) game <em>StreetConqAR</em>, a street name sign in reality is also a street name sign in the virtual game world. In contrast to that, anchors in Ingress or Pokémon GO are often placed at distinct objects like monuments or landmarks, though, but in the game world, the semantic meaning of these objects is different. They turn into portals for Ingress and into PokéStops or gyms for Pokémon GO.
+
+This thesis proposes to use real-world vehicles as natural anchors for an exergame. The way these are integrated into the gameplay and a discussion about the characteristics of this special type of anchor can be found in chapter TODO RacecAR GO and TODO RacecAR GO->Anchors, respectively.
+
+\subsection{The Art of Motivating People to do Something for their Health}
+In the previous chapter, many different examples of exergames have been listed, each having its own approach to motivate its players to do something positive for their health. The key seems to be to encourage the players by something that is fun. This something’s main intention is not doing sports. The health aspect is just a side-effect of playing the game.
+
+In the following, the concepts used by various exergames to motivate their players to move are compared and discussed.
+
+An often used motivation is to achieve (virtual) property. It seems that players keep on playing a game as long as there are achievements of some kind to accumulate their (virtual) property. This concept is used by Pokémon GO, for example, where the property is the personal Pokédex with the captured Pokémon. It is also used by Ingress where the property are the hacked portals. Additionally, the player could form an emotional relation to its property, which also keeps him on playing.
+
+Another concept, akin to achieving property, is the achievement of reputation. The more and the harder a player trains, the more reputation he can get inside the game. This is used in StreetConqAR by giving the players titles as "King of ..." or "Lord of ...", in Ingress by gaining experience points or in Pokémon GO by becoming a Pokémon master.
+
+In the exergame <em>The Running Dead</em>, proposed in the beginning of this thesis, a simple but strong motivation to run is used: Fear. Fear of what will happen if a zombie catches me.
+
+A motivation that is deeply anchored into the human’s roots is based on the hunter-gatherer principle.
+
+\subsubsection{Hunter-Gatherer Principle}
+Long time ago, when our civilization was young, most of the people were hunter-gatherers. This means, people spent a big part of their lives with hunting for animals or gathering fruits to eat or items to construct tools of. For such a civilization, these things were necessary to survive. After some time, people became farmers and the number of hunter-gatherers decreased.
+
+Today, most people aren’t hunter-gatherers (nor are they farmers). But although our everyday life differentiates so much from that of a hunter-gatherer, a desire for this kind of life still seems to be lurking in many of us. Why else would there be millions of people playing Pokémon GO, in which the main task is to hunt and to gather little monsters?
+
+\subsection{Augmented Reality}
+As discussed in the State of the Art chapter, augmented reality is an up-and-coming technology used in many application fields. Utilized in a pervasive game, it can help the player to immerse into the game. But using AR as a fancy technology for its own sake isn’t the right way to design a good game. It’s better to focus on a lasting and catching gameplay and using AR to support this instead of trying to impress the player with stunning technology [62].
+
+\subsection{Requirements}
+To create a successful exergame that motivates its players to do something for their health, following requirements (GR for game request) can be deduced from the previously said:
+\begin{description}
+  \item[GR1:] The game has to be playable everywhere at anytime
+  \item[GR2:] The players must be able to start a game session without needing any previous setup
+  \item[GR3:] The game uses a principle to motivate players to move
+  \item[GR4:] The game integrates augmented reality in a reasonable and supporting manner
+\end{description}
+\emph{GR1} contains two aspects of the game. The first one relates to the game’s platform and the needed hardware. To be playable everywhere, the game should run on a mobile device. The second aspect is the game content (the anchors), that has to be available everywhere a player could have the idea to go for a quick session.
+
+
+
 
 
 
