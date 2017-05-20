@@ -1,7 +1,7 @@
-pdflatex tudkom_students__200910_v1.0.tex
-bibtex tudkom_students__200910_v1.0 >> students.txt
-pdflatex tudkom_students__200910_v1.0.tex
-pdflatex tudkom_students__200910_v1.0.tex
-pdflatex tudkom_students__200910_v1.0.tex
+pdflatex thesis.tex
+bibtex thesis >> thesis.txt
+pdflatex thesis.tex
+pdflatex thesis.tex
+pdflatex thesis.tex
 
 clear.bat
