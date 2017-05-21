@@ -4,9 +4,11 @@
 
 
 
-%*****************************************
+%*****************************************************************************
+%*****************************************************************************
 \chapter{Introduction}
-%*****************************************
+%*****************************************************************************
+%*****************************************************************************
 Some short information how to get started:
 \begin{itemize}
 	\item Download the \texttt{tuddesign} files from \url{http://exp1.fkp.physik.tu-darmstadt.de/tuddesign/}, these are required to run any of the KOM templates!
@@ -17,11 +19,13 @@ Some short information how to get started:
 
 
 
-%*****************************************
+%*****************************************************************************
+%*****************************************************************************
 \chapter{State of the Art}\label{ch:stateOfTheArt}
-%*****************************************
+%*****************************************************************************
+%*****************************************************************************
 \section{Overview}
-In this chapter, the history and the state of the art of pervasive games in general and exergames in special will be presented. Popular representatives like <em>Ingress</em> [33] by <em>Google</em> or <em>Pokémon GO</em> [34], published by <em>Nintendo</em> (TODO really? Not Niantic both?) will be looked at.
+In this chapter, the history and the state of the art of pervasive games in general and exergames in special will be presented. Popular representatives like <em>Ingress</em> [33] or <em>Pokémon GO</em> [34], published by Niantic \footnote{\url{https://www.nianticlabs.com/}}, will be looked at.
 
 Additionally, some interesting approaches about vehicle recognition and number plate region detection will be discussed as the concept presented in this thesis also includes automatic vision-based vehicle recognition.
 
@@ -68,8 +72,6 @@ In classic games, a play session has a well defined start and end time. Pervasiv
 \subsubsection{Social Expansion}
 The social expansion obfuscates the boundary of playership [14]. Thinking back to the example of <em>The Running Dead</em> in the beginning of this thesis, it wasn’t clear who is a participant and who isn’t. A noninvolved person could have watched a persecuted player and could have tried to help him. So the noninvolved person would become a participant without even knowing about it himself.
 
-TODO: Add exergames definition illustration
-
 \subsubsection{Subcategories of Pervasive Games}
 There are many subcategories of pervasive games, such as immersive games, serious games or exergames, to name a few. Immersive games combine spatial, temporal and social expansion. In this genre, it’s hard to differentiate games from non-games, because everything can be seen as an immersive game [42].
 
@@ -77,9 +79,15 @@ Serious games are, simply said, more than fun [44]. They blend education and ent
 
 The last two domains form the subcategory of exergames. Because exergames are a subject of this thesis, the next section dedicates to that genre in more detail.
 
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.55\linewidth]{gfx/exergame_context}
+        \caption{Context of Exergames}
+        \label{fig:exergameContext}
+\end{figure}
 
 \subsection{Exergames}
-A subcategory of serious games then again are exergames [41] [15]. As shown in figure (TODO), exergames are serious games with healthcare exercises as added value. The term <em>exergame</em> is constructed from the words <em>exercise</em> and <em>videogame</em> [43].
+A subcategory of serious games then again are exergames [41] [15]. As shown in figure \ref{fig:exergameContext}, exergames are games with healthcare exercises as added value. The term <em>exergame</em> is constructed from the words <em>exercise</em> and <em>videogame</em> [43].
 
 The target of an exergame is to combine physical activity with fun of play. During the gameplay, the health aspect is not primarily focused but only a side-effect of playing the game. <em>“The training effect is secondary and nevertheless achieved”</em> [15]. An example for an exergame is <em>Dance Dance Revolution</em> (TODO reference). TODO: Describe Dance Dance Revolution. Bogost (TODO name) says about this game, that it produces exercise as an emergent outcome of play itself [43].
 
@@ -90,19 +98,19 @@ So the challenge of an exergame is to keep the player motivated to do sports. As
 \subsubsection{Mobile Exergames}
 Digital games are mostly completely experienced through a fixed screen. This is an obstacle to immerse into a game [38], because the player is bound to his chair and his perception is usually only stimulated by the computer screen and a sound system. In pervasive games, the interface is no longer bound to a fixed screen and to common computer periphery like a mouse and a keyboard. The player rather interacts with real world objects and real persons [39], whereas the interface of the game isn’t well defined. Any real world object could be a game object, and any real person could be a participant [14].
 
-There is a special type of exergames, the mobile exergames, in which the player is not bound to a desktop or to a classical game board to play the game. Mobile exergames are played with a mobile device (such as a smartphone or a portable video game console). They are usually played outside and often use the location of the player to track the progress of the exercise. In most cases, the player has to move to succeed in the game, such as in TODO examples: Zombies RUN, Pokémon GO, StreetConqAR, more!!!
+There is a special type of exergames, the mobile exergames, in which the player is not bound to a desktop or to a classical game board to play the game. Mobile exergames are played with a mobile device (such as a smartphone or a portable video game console). They are usually played outside and often use the location of the player to track the progress of the exercise. In most cases, the player has to move to succeed in the game, such as in Pokémon GO or StreetConqAR (which are described in more detail in chapter \ref{sec:examples}).
 
 These games do not take place at special locations like in a gym, a laboratory or at home, separated from the real world. They are played everywhere such as on the way to school or work, at work itself, after the lunch time, after work with your kids or whenever and wherever the player (or the game, as said above for pervasive games with temporal expansion) wants to. The aim is a transformation of the player’s everyday environment into a world in play [39].
 
 
 \subsection{Evolution of Location-based Games}
-In the previous chapters, different types of pervasive games have been presented. Many of them depend on the current location of the player, e. g. Ingress (see section TODO) or Pokémon GO (see section TODO). This kind of games uses the current location as a basic part of the gameplay. Without the exact location, a player of Ingress could not conquer a portal and a hunter on the prowl for Pokémons would not find one nor would he find a Pokéstop to retrieve useful items. Concluded, these games would be absolutely unplayable without being able to track the location of the player with a reasonable accuracy.
+In the previous chapters, different types of pervasive games have been presented. Many of them depend on the current location of the player, e. g. Ingress or Pokémon GO (see section \ref{sec:examples}). This kind of games uses the current location as a basic part of the gameplay. Without the exact location, a player of Ingress could not conquer a portal and a hunter on the prowl for Pokémons would not find one nor would he find a Pokéstop to retrieve useful items. Concluded, these games would be absolutely unplayable without being able to track the location of the player with a reasonable accuracy.
 
 Using GPS, this is only possible since May 2, 2000, when the <em>Selective Availability</em> was turned off. Selective Availability was a service to prevent civilians to perceive a better GPS accuracy than a 100 meters radius, reserving better accuracy for the military only. Since it was disabled, the GPS location is accurate to a few meters for anybody [48].
 
 Suddenly, many location based games came up. For example, the term <em>Geocaching</em> [49] was formed during that time to describe a hunt for treasures (the <em>geocaches</em>) in the real world [50]. To find these geocaches, their locations are marked on a virtual map via GPS.
 
-A few years later, the popular 80s game <em>Pacman</em> (TODO: link to original game?) was transferred into a real-life version named <em>Pac-Manhattan</em> [51], using GPS sensors to track the position of the players.
+A few years later, the popular 80s game <em>Pacman</em> \footnote{\url{https://en.wikipedia.org/wiki/Pac-Man}} was transferred into a real-life version named <em>Pac-Manhattan</em> [51], using GPS sensors to track the position of the players.
 
 With the launch of the iPhone in 2007, an era began where people always have a device at hand that is not only capable of tracking the GPS location but that is also powerful enough to run useful apps on it. This caused another hype of location-based applications.
 
@@ -110,14 +118,14 @@ One of it, heavily relying on GPS-based location, is Foursquare [52]. The servic
 
 At that time, the app had a check-in feature to virtually check into specific locations. This game-like feature motivated users to visit different places to check-in and leave a Tip.
 
-Another location-based game, that became very popular, is <em>Ingress</em> (see chapter TODO). Ingress also uses the smartphones of the players to track their location and let them conquer virtual entities (named portals), that have been spread over the world.
+Another location-based game, that became very popular, is <em>Ingress</em> (see chapter \ref{sec:examples}). Ingress also uses the smartphones of the players to track their location and let them conquer virtual entities (named portals), that have been spread over the world.
 
-A new member of location-based games is <em>Pokémon GO</em> (see chapter TODO). Like in Ingress, players have to move in the real world, using their smartphone to discover virtual objects (like Pokémons or Pokéstops), that have been placed on real-world locations.
+A new member of location-based games is <em>Pokémon GO</em> (see chapter \ref{sec:examples}). Like in Ingress, players have to move in the real world, using their smartphone to discover virtual objects (like Pokémons or Pokéstops), that have been placed on real-world locations.
 
 The real-world locations, where entities are placed in the virtual world, play an important role for these games. They have to be well-chosen to fit the purpose of the game and the respective gameplay. These special locations are called <em>anchors</em>.
 
 \subsubsection{Anchors}
-For location-based games, the real world is overlain by the virtual game world. Anchors are well defined positions, where these two worlds are blurred [26]. The word <em>anchor</em> has been introduced by Hock (TODO name) [26]. In literature, there is no fixed term for this. Other works also refer to this as <em>artifacts</em> [54] or as <em>markers</em> [53]. This thesis uses the term anchor [26], because its semantic meaning describes very well what an anchor does: It anchors the virtual world into the real world.
+For location-based games, the real world is overlain by the virtual game world. Anchors are well defined positions, where these two worlds are blurred [26]. The word <em>anchor</em> has been introduced by Hock (TODO name) [26]. In literature, there is no fixed term for this. Other works also refer to this as <em>artifacts</em> [54] or as <em>(generic) markers</em> [53], as named in the title. This thesis uses the term anchor [26], because its semantic meaning describes very well what an anchor does: It anchors the virtual world into the real world. Another reason is, that the term \emph{marker} is already established in the context of augmented reality, which this thesis also relates to.
 
 The placement of anchors is very important for a game and is directly associated with the user experience. Because anchors are those positions, where the gameplay usually takes place, players may easily be disappointed if an anchor is either too far away to reach it or if it is at a location not (without further ado) accessible for civilians (such as military areas, airports or the ocean). So anchors have to be placed in a way that they are accessible for all players.
 Another thing is the content, that is linked to an anchor. For example, the game <em>Escape From the Tower</em> [55] lets its players reenact the escapes of some popular prisoners from the London Tower. Therefore, anchors are placed all over the tower and its surroundings with associated media. At a prison cell, this media tells the player something about the prisoner. On the staircase, the media is related to a fled, that occurred. If the content does not fit to the respective location, players will soon quit the game.
@@ -127,14 +135,14 @@ Reid (TODO name) [54] classifies the way, anchors are placed, into three categor
 \paragraph{User-placed at Runtime}
 With this method, the user places his own anchors. For this, the game has to provide some kind of editor, with which the user creates the content he needs to play the game.
 
-The advantages of this method are, that the game can be played everywhere, because it does not depend on predefined anchors. Another advantage is, that users can create the anchors such that they fit their individual needs. In Twostone [TODO source] for example, the player plays a stone-eating caterpillar that moves on a maze-like virtual track while the player moves in the real world. To win the game, the caterpillar named “Twostone” has to eat all stones, that are spread all over the track while escaping from some monsters, that try to catch it. The game includes an editor, wherewith the user can design a track by walking along the paths, where the track should be created and placing anchors at corners. The game can thus be played anywhere. Also, highly motivated and sporty players can build their own large tracks covering the whole city, whereas beginners are able to design a small one for a short sport unit during the lunch time.
+The advantages of this method are, that the game can be played everywhere, because it does not depend on predefined anchors. Another advantage is, that users can create the anchors such that they fit their individual needs. In Twostone \footnote{\url{https://play.google.com/store/apps/details?id=de.tu.darmstadt.uhg}} for example, the player plays a stone-eating caterpillar that moves on a maze-like virtual track while the player moves in the real world. To win the game, the caterpillar named “Twostone” has to eat all stones, that are spread all over the track while escaping from some monsters, that try to catch it. The game includes an editor, wherewith the user can design a track by walking along the paths, where the track should be created and placing anchors at corners. The game can thus be played anywhere. Also, highly motivated and sporty players can build their own large tracks covering the whole city, whereas beginners are able to design a small one for a short sport unit during the lunch time.
 
 Drawbacks of this method are, that a user is not a designer and may not have the required artistic skills and knowledge to produce qualitative anchors. And much less in a small amount of time [56].
 
 Additionally, if the player desires for a quick sporting activity, he might rather go jogging in the park than starting to build a track.
 
 \paragraph{Seamful Design}
-With this method, the placement of anchors depends on features of the physical infrastructure. In <em>Feeding Yoshi</em> [TODO cite], anchors are placed on the seams of wireless access points. In the area of a secure wireless access point, the player can find a hungry creature, a “Yoshi”, whereas at unsecure wireless access points, there are plantations to plant each Yoshi’s favorite fruit.
+With this method, the placement of anchors depends on features of the physical infrastructure. In <em>Feeding Yoshi</em> [54], anchors are placed on the seams of wireless access points. In the area of a secure wireless access point, the player can find a hungry creature, a "Yoshi", whereas at unsecure wireless access points, there are plantations to plant each Yoshi’s favorite fruit.
 
 Usually, developers try to hide the limitations caused by infrastructural seams. With this method, these limitations are embedded into the gameplay [57].
 
@@ -154,7 +162,7 @@ Twostone, that has been mentioned before, is actually relying on crowd-based anc
 
 Another problem is, that with a crowd, there is no control of the content. After some time, the game might contain anchors at hazardous locations such as airports or highways or it might contain pictures of morally questionable content, such as swastikas or of adult kind.
 
-Ingress uses a crowd-based placement, combined with a designer to check the content for its propriety. Nevertheless, Ingress is only playable in highly populated areas while portals (the anchors) only exist in these regions (see Ingress map below TODO). That’s because users are allowed to create anchors, indeed, by taking a photo of the desired new location, marking it on a map and sending this along with a short description to the development team of Ingress. So most requests are made for regions with a lot of citizens. But it takes several weeks, until a new portal gets accepted by the designers.
+Ingress uses a crowd-based placement, combined with a designer to check the content for its propriety. Nevertheless, Ingress is only playable in highly populated areas while portals (the anchors) only exist in these regions (see Ingress map in figure \ref{fig:ingressMap}). That's because users are allowed to create anchors, indeed, by taking a photo of the desired new location, marking it on a map and sending this along with a short description to the development team of Ingress. So most requests are made for regions with a lot of citizens. But it takes several weeks, until a new portal gets accepted by the designers.
 
 \paragraph{Automatically-placed}
 This scheme describes content, that is generated automatically, obeying some creation-rules. Automatic placement of anchors helps to spread them all over the world in a fraction of time and money, a designer would need.
@@ -165,15 +173,13 @@ The rule can also be more complex like <em>place an anchor at each gas station m
 
 Automatic placement also includes <em>random</em> placement. But simply placing anchors at random locations will seldomly have the result of well-placed anchors semantically fitting to their content and being accessible for everyone (e. g. oceans and deserts).
 
-Hock (TODO name) proposed an automatic placement based on real-world objects, namely street name signs [26]. In his game <em>StreetConqAR</em>, the players have to conquer streets, identified by the name on their street name sign. Because StreetConqAR is similar to the game RacecAR GO, which is presented in this thesis, there’s an extra section for this (see TODO).
+Hock (TODO name) proposed an automatic placement based on real-world objects, namely street name signs [26]. In his game <em>StreetConqAR</em>, the players have to conquer streets, identified by the name on their street name sign. Because StreetConqAR is similar to the game RacecAR GO, which is presented in this thesis, there's an extra section for this in the Examples \ref{sec:examples}.
 
-The definition of an anchor says, that it is a “well-defined position”. In the following, the term anchor is not only the position but also refers to the real-world object itself to describe the kind of blurring of reality and virtuality and the strong relationship between the anchor and its position. This blurring takes place via an object at a well defined position.
+The definition of an anchor says, that it is a "well-defined position". In the following, the term anchor is not only the position but also refers to the real-world object itself to describe the kind of blurring of reality and virtuality and the strong relationship between the anchor and its position. This blurring takes place via an object at a well defined position.
 
-Later on, this thesis will define the term of a <em>natural anchor</em> to solve this ambiguity (see TODO concept chapter).
+Later on, this thesis will define the term of a <em>natural anchor</em> to solve this ambiguity (see chapter \ref{sec:conceptAnchors}).
 
-The advantage of Hock’s (TODO name) approach is, that it not only saves the expanses of the a priori design of the anchors, because street name signs are already there. Also the spreading of these signs is very useful for a location-based exergame. There are very few populated regions with no street name signs.
-
-TODO: Mehr? Vllt. was über seine Suche nach passenden Anchor-Objekten und deren Eigenschaften schreiben. Hat er da irgendwas kategorisiert? Oder erst in Concept auf der Suche nach eigenen Anchors?
+The advantage of Hock's (TODO name) approach is, that it not only saves the expanses of the a priori design of the anchors, because street name signs are already there. Also the spreading of these signs is very useful for a location-based exergame. There are very few populated regions with no street name signs.
 
 \subsection{Augmented Reality Games}
 I still remember my astonishment when I first saw the virtual shark, rising behind Marty McFly and then snapping at him in <em>Back to the Future Part II</em> (see TODO add a photo). The movie was released in 1989, wherein Marty watches the shark during his visit of the future year of 2015.
@@ -185,9 +191,9 @@ Augmented reality (AR) means augmenting perceived real-world elements with virtu
 
 The term <em>augmented reality</em> exists for many years now. There have been moments in the past, the technology seemed likely to experience the hype, many people are waiting for. But a big hype never happened (at least until the time of writing this thesis, May 2017).
 
-Today, there are some popular apps that use AR, such as Snapchat (TODO reference) (which tracks the user’s face and augments it with some fancy extras like a dog’s snout with matching ears and tongue) or Pokémon GO (see separate section TODO).
+Today, there are some popular apps that use AR, such as Snapchat \footnote{\url{https://www.snapchat.com/}} (which tracks the user's face and augments it with some fancy extras like a dog's snout with matching ears and tongue) or Pokémon GO (described as one of the examples in chapter \ref{sec:examples}).
 
-Also Apple and Facebook start to invest into this technology. Apple CEO Tim Cook even denotes augmented reality and virtual reality as potential cornerstones of the company's future. Also the coming iPhone 8 is said to be equipped with technology customized for AR [59]. Facebook CEO Mark Zuckerberg teased an upcoming games platform for AR [60]. TODO: Automotive?
+Also Apple and Facebook start to invest into this technology. Apple CEO Tim Cook even denotes augmented reality and virtual reality as potential cornerstones of the company's future. Also the coming iPhone 8 is said to be equipped with technology customized for AR [59]. Facebook CEO Mark Zuckerberg teased an upcoming games platform for AR [60]. TODO (low prio): Automotive?
 
 Maybe, this technology is finally on the verge of experiencing a big hype.
 
@@ -197,7 +203,7 @@ There are different variants, all called AR. This starts with simply overlaying 
 The used variant depends on the use case and on the available hardware. The higher the grade of accuracy, with which the reality shall be augmented, the higher the requirements on the hardware, since AR is usually done in realtime. Whereas overlaying the camera picture with a virtual object while the player is located at specific GPS coordinates is a rather simple job for current hardware, tracking real-world objects from the camera picture and retrieving their position and orientation to blend the virtual object over it needs a powerful CPU that is capable of sophisticated computer vision algorithms. In the following, some common approaches of integrating virtual content into the real world are presented.
 
 \paragraph{Square Markers}
-Square markers are, as the name says, square pictures containing a binary pattern. Square markers are easy and fast to detect in a camera image and the position as well as the pose of the marker can be deduced from its binary pattern in a very efficient way. Most of the AR APIs as ARToolKit (TODO reference) or TODO MetaIO? No! Something more common provide an implementation for this kind of markers. Even current smartphones are able to track multiple square markers in realtime.
+Square markers are, as the name says, square pictures containing a binary pattern. Square markers are easy and fast to detect in a camera image and the position as well as the pose of the marker can be deduced from its binary pattern in a very efficient way. Most of the AR APIs as ARToolKit \footnote{\url{https://artoolkit.org/}} or MetaIO \footnote{\url{http://www.metaio.eu/}} provide an implementation for this kind of markers. Even current smartphones are able to track multiple square markers in realtime.
 
 A drawback is, that the markers have to be placed in the real world beforehand. This is a disqualifier for many application fields, where the AR content has to smoothly integrate into an unprepared scene. TODO: Add picture of a hiro marker.
 
@@ -221,7 +227,7 @@ More recent examples are the popular games <em>Ingress</em> and <em>Pokémon GO<
 
 Although this is a subchapter of <em>Pervasive Games</em>, not each augmented reality game is a pervasive game. A game can include augmented reality technology without expanding the magic circle.
 
-\subsection{Examples}
+\subsection{Examples}\label{sec:examples}
 In this section, representatives of one or more of the above mentioned game types (such as location-based games, exergames and augmented reality games) are presented.
 
 The presented games have been chosen because of their close relation to the game <em>RacecAR GO</em>, which is developed within this thesis.
@@ -241,9 +247,14 @@ Ingress is considered an exergame because players have to physically move to por
 
 Ingress is based on location data from Google Maps. Its enriched location data was used later to populate <em>Pokémon GO</em> (see section TODO) [64].
 
-As said above, the anchors are placed by a designer. Although there exists a process for users to propose locations for new ones, which takes a few weeks to be accepted, there are many (rural) regions, where no anchors exist so far (TODO see map below). In these regions, Ingress cannot be played.
+As said above, the anchors are placed by a designer. Although there exists a process for users to propose locations for new ones, which takes a few weeks to be accepted, there are many (rural) regions, where no anchors exist so far (see map in figure \ref{fig:ingressMap}). In these regions, Ingress cannot be played.
 
-TODO: add reference to map (a screenshot taken with my Ingress account)
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.95\linewidth]{gfx/ingress_map}
+        \caption{Screenshot of world map with Ingress portals taken with my Ingress account}
+        \label{fig:ingressMap}
+\end{figure}
 
 \subsubsection{Pokémon GO}
 Pokémon GO is a location-based augmented reality mobile exergame, developed for smartphones. It was developed by Niantic (TODO source) and was released in 2016. Pokémon are fantastical creatures and first appeared in the 1990s in video and card games.
@@ -388,11 +399,11 @@ TODO: Explain Hough Transform in detail with image and formula and such (as Hock
 
 
 
-
-
-%*****************************************
+%*****************************************************************************
+%*****************************************************************************
 \chapter{Concept}\label{ch:concept}
-%*****************************************
+%*****************************************************************************
+%*****************************************************************************
 This chapter is about a new way of automatic content generation for exergames. It presents an approach to use real-world vehicles as anchors. Using vehicles as anchors means recognizing their make and model and integrating its virtual counterpart via AR into the game play.
 
 In the first section, the basic concepts needed for a location-based exergame and what makes such a game popular are discussed. Later on, the design of <em>RacecAR GO</em>, a location-based exergame that implements this concept, is presented. In the subsequent section, the prototype of RacecAR GO, that will be implemented along with this thesis, is described.
@@ -403,7 +414,7 @@ As VMMR is an important part of this game, an approach for this is proposed in t
 \section{Location-based Exergame using AR}
 This section is about the preparation and evaluation of the basic concepts to build a location-based exergame. It first discusses the type and how to integrate anchors, then it generally evaluates the properties of such games that motivate people to play and to move. Later, the usage of augmented reality as a technology to improve the user experience is discussed. A list of requests for a location-based exergame as a result of this evaluation is presented in the final section.
 
-\subsubsection{Anchors}
+\subsection{Anchors}\label{sec:conceptAnchors}
 As a reminder, <em>“anchors in pervasive [...] games are well defined positions, where reality and virtuality are blurred”</em> [26]. An exergame that shall be playable all over the world also requires anchors placed all over the world.
 
 In the State of the Art chapter (see TODO), many approaches for creating anchors have been proposed with pros and cons. It turned out that designer placed anchors are usually well-placed and well-fitted to the game’s purpose, but include an expensive design process. As a result, games with designer placed anchors mostly provide content for only a few limited regions.
@@ -657,7 +668,7 @@ TODO (low prio):
 No user-management on the server-side. User-data is holistically stored on the client (name, gathered vehicles).
 
 \subsection{Vehicles}
-The type of vehicles that shall be capturable in RacecAR GO can be of an arbitrary kind, from motorbikes over racecars to trucks. A limitation for the prototype is, that only passenger cars are covered by the app. This is due to the fact, that the VMMR machine, that will be implemented along with this thesis, recognizes vehicles solely based on their front. More precisely, a specific region around the vehicle’s number plate is chosen to classify the vehicle with. As motorbikes don’t have a wide front and in most cases don’t even have a number plate, they are not covered by the prototype. The problem with trucks (or buses) is, that the region around the number plate of a truck is not descriptive enough to differentiate it from other trucks of a different make and model (for more information on this, refer to TODO: State of the art: VMMR using a Bag-of-Words Model).
+The type of vehicles that shall be capturable in RacecAR GO can be of an arbitrary kind, from motorbikes over racecars to trucks. A limitation for the prototype is, that only passenger cars are covered by the app. This is due to the fact, that the VMMR machine, that will be implemented along with this thesis, recognizes vehicles solely based on their front. More precisely, a specific region around the vehicle's number plate is chosen to classify the vehicle with. As motorbikes don't have a wide front and in most cases don't even have a number plate, they are not covered by the prototype. The problem with trucks (or buses) is, that the region around the number plate of a truck is not descriptive enough to differentiate it from other trucks of a different make and model (for further reading see the drawbacks in chapter \ref{sec:regionAroundNumberPlate} or refer to the ambiguity issues in TODO: State of the art: VMMR using a Bag-of-Words Model).
 
 As described above, the app comes with a starter-set of vehicles, that can be recognized and captured. For the prototype, this set is limited to 10 TODO different vehicles. See (TODO respective impl chapter) to see, which make-models have been chosen and why. Unlike to the full version of the app, there is no possibility to add further make-models but for the game designer to add them manually.
 
@@ -693,6 +704,133 @@ Both, the second and the third approach are applicable to the task. Because of t
 
 
 \section{Concept of Vehicle Make and Model Recognition}
+In this chapter, the VMMR system that is used in <em>RacecAR GO</em> will be presented. Until now, the work on vehicle recognition has mainly been dedicated to the subject of security observation of parking spaces, toll stops, country borders, etc. In this thesis, the domain of application is something different, using it in a mobile game and capturing the vehicle images with a mobile phone's camera.
+TODO one more sentence to lead to Ambiguity and Multiplicity section.
+
+\subsection{Excursion to the Ambiguity and Multiplicity Challenge}
+As stated by [3], the assembled recognition model should cope with ambiguity and multiplicity issues. Multiplicity means the problem of cars with different appearances but with the same make and model, whereas the ambiguity describes the challenge to differentiate between similar vehicles that do not have the same make (inter-class ambiguity) and/or model (intra-class ambiguity), though.
+
+Assuming a player of RacecAR GO walks along the street and suddenly, he spots a Porsche 911 parked beside him. Fortunately, in front of the Porsche, there's enough clearance to take a photo of its front. Already imagining himself watching this beautiful and seldom car in his virtual garage, wouldn't it be annoying if the app would classify this Porsche 911 as a rather ordinary Mini One, just because of the similarity between the shape of their headlights (see figure TODO: Picture with both cars. Mark both features in the image and also show two histograms, where the same bin would increase because the same codeword would be found. Describe this part of the image later, when the histogram is explained)? Such a failure could kill all the motivation of a player to continue playing, and thus losing the healthy benefits of this game. As a result, the game would miss its purpose to motivate people to move.
+
+Due to the small number of realized makes and models for the RacecAR GO prototype, these can be well-chosen to minimize ambiguity and multiplicity problems (see TODO chapter with Choice of Vehicle Classes).
+
+TODO: Unterschiedliche Modelle nicht unterscheidbar:
+A Klasse und cla, Golf und Variant
+
+Re-brandings of the same car: Opel vs. Vauxhall, Toyota Hilux vs. VW Taro, Lotus Elan vs. Kia Elan (Lizenzbau) -> TODO: Illustrate with pictures, talk about problem (either train as different classes (possible because different make at the front) → classification will often fail, or train as same class → problem that Kia Elan will be classified wrongly as a Lotus Elan)
+
+(Model of same make has different appearances (Mercedes C with Star inside grill or above); Simply next generation with same name (include year with model?); BMW 3 Series differentiate in their front depending on sport or comfort) Also see concept chapter for ideas to the figure
+
+TODO (Inter- and intra-make.
+1. VW Sharan, Seat Alhambra; Lotus Elan, Kia Elan; Citroën C1, Peugeot 107 2. VW Golf V, VW Jetta; VW Polo I, VW Derby; Generally: Combi or limousine)
+
+\subsection{Overview}
+From the use cases of this game, some requirements for the VMMR system (\emph{VR} for VMMR request) can be deduced:
+\begin{description}
+  \item[VR1:] Robustness to partial occlusion: In reality, there is rarely enough clearance around a parked car to take a photo of it without another object occluding a part of it. The other object might be a bush, a tree, a street light, another car, etc (TODO: show picture of occluded vehicles). So if the recognition system cannot cope with a photo of a partially occluded vehicle, the player might be irritated while looking for vehicles with enough clearance around them and might lose fun to continue playing.
+  \item[VR2:] Robustness to different camera roll-angles: As the input image does not come from a fixed camera but from a smartphone’s camera held by a person, it cannot be ensured that the smartphone is always horizontally aligned with the photographed car’s horizontal axis.
+  \item[VR3:] Robustness to different lighting conditions: There's the legend of a project of the US army trying to recognize partially hidden tanks in the woods. So they trained a neural net with pictures of woods with tanks behind trees and pictures of the same woods without tanks. The result was impressive as the net recognized images that hadn't been used for training. After that, the researchers took more pictures of the same woods, but the net failed to discriminate between the two classes. Finally, it turned out, that the pictures with tanks in it were taken on a cloudy day, while those without tanks were taken on a sunny day. <em>“The net had learned to recognize and generalize the difference between a woods with and without shadows!”</em> [35]. To be able to play the game in the daytime as well as at night-time, the recognition system has to be independent from the lighting conditions of the photographed vehicles.
+  \item[VR4:] Ability to cope with ambiguity and multiplicity issues: Mentioned above, the proposed system must be able to differentiate between similar vehicles of different make or model (ambiguity) and not to differentiate between vehicles of the same make and model but with a different appearance (e. g. due to different generations of the model) (multiplicity).
+\end{description}
+
+As proved by [3], a bag-of-words based recognition model is very powerful, coming with robustness to occlusion and with robustness to slight changes in the camera’s roll-angle (along with local descriptors that are rotation independent, like SURF). Hence, the recognition system in RacecAR GO will take advantage of this, meeting requirements VR1 and VR2. For details of the usage of the bag-of-words model, see TODO reference chapter below that explains usage of BoW and reference chapter with decision for the local descriptor ORB.
+
+To gain independence from lighting conditions (VR3) - and thus to avoid training a classifier that can solely tell the difference between pictures taken in the morning and pictures taken at noon - three things are done. The first thing is populating the training set with multiple images per make-model class, whereas the per-class-images are taken at different times of day by different kinds of weather (see TODO reference chapter with dataset construction - Implementation?). The second thing is the preprocessing of each vehicle image. Lighting information will be subtracted out of an image before it enters the recognition system (see TODO reference chapter “Region of Interest -> Preprocessing” just below). Third thing is the usage of local feature descriptors, each of which is invariant to illumination changes.
+
+To fight the multiplicity issues, as demanded by requirement VR4, models of different generations are trained into different classes (see TODO Implementation - Fighting Multiplicity Issues). To handle the ambiguity challenges, the classification process will be optimized (see TODO classification chapter).
+
+\subsection{VMMR Workflow}
+TODO: Vom Groben ins Feine erklären. Erst den groben workflow beschreiben. Wie die Local Descriptors entstehen, wie das Dict aufgebaut oder für den Global Descriptor benutzt wird, ist hier egal. Der grobe Prozess der Recognition aus Input Image → Global Descriptor → Classifier wurde vorher ausreichend erklärt, dass man ab diesem Punkt folgen kann, wenn die einzelnen Bestandteile noch Black-Boxen sind.
+
+At this point, after the requirements for the system are defined, its components and their interaction will be described as the <em>VMMR workflow</em>. An illustration for this is shown in figure TODO Image of VMMR system (like [3] 3.14). Vllt. besser aufteilen in zwei Workflows und über zwei Seiten verteilen, falls es zu viel ist. Schön anschaulich mit Fotos, die das Ergebnis von jedem Prozessschritt zeigen. Auch für Preprocessing.
+
+TODO: figure with VMMR workflow - see google doc
+
+TODO: Mark “preprocessing” area in the figure.
+
+Actually, there are two workflows. One to train the system (the <em>training</em>-workflow), the other one to use the system to classify an image of unknown make and model (<em>query</em>-workflow).
+
+The query-workflow basically consists of the same steps listed for a vehicle recognition (see figure TODO reprint figure from State of the Art here again to prevent reader from scrolling back to the beginning), with the preceding step of a RoI-extraction. Both workflows start with extracting the RoI from the input image. The RoI contains the vehicle illustrated in the image (see TODO reference following chapter Region of Interest).
+
+After that, the RoI is used to search for local features. In the training-workflow, the local features from all RoIs of all makes and models from the training data are used to build the bag-of-words dictionary. With this dictionary, the local features of a specific make-model RoI are converted into a histogram, the Global Descriptor of this make-model-instance. In the training-workflow, the make-model of the Global Descriptor is known. In the query-workflow, it’s not.
+During training, a classifier is trained with all these Global Descriptors. Whereas in the query-workflow, the trained classifier will be used to get a make-model for this Global Descriptor.
+
+The single steps of the workflow will be explained in more detail in the subsequent sections and are oriented by the approach presented by [3].
+
+\subsection{RoI Extraction}
+As mentioned as the optional preceding basic step for a general vehicle recognition (see figure TODO reference figure that was reprinted above), detecting and extracting a region of interest (RoI) is part of most vehicle recognition algorithms. The input of this step is the raw image of a vehicle, e. g. taken with a smartphone camera.
+Let <em>I</em> represent an image with width <em>w</em> and height <em>h</em>, a <em>RoI</em> is a smaller sub-matrix with width <em>w’</em> and height <em>h’</em>, as shown in equation TODO: add equation (see scribble in google docs).
+
+The task of the RoI-extraction is to separate the foreground from the background. So the output of this step is just the vehicle, where, in the optimal case, all information not belonging to that vehicle has been erased.
+
+The advantage of using a RoI instead of the whole input image in the following workflow steps are, that for one thing, the Global Representation of the vehicle is solely built out of information exclusively containing descriptive vehicle data. Simultaneously, all the classification-noise caused by the background will disappear. All this increases the expressiveness of the Global Representation. For another thing, the processing speed increases due to the lesser amount of pixels compared to the original image.
+
+\subsubsection{Preprocessing}
+There is usually some preprocessing done on the RoI. The target is to transfer the different RoIs into a state of reasonable comparability. This is often called the <em>normalization</em> of the RoI. So one preprocessing step is the normalization of its size. The term <em>size</em> of the RoI is ambigue here. It can either describe the number of pixels in each dimension, the RoI is made of. Or it means the size of the cutting out of the original image. Only before normalizing the size (former one), these two are equal. To avoid misunderstandings, the latter will be referred to as the <em>extent</em> of the RoI.
+
+Both, the size and the extent of the RoI, need to be adjusted for each single vehicle image. The extent, because the original vehicle photos all have different dimensions and have been taken with different distances from the vehicle. So the extents vary from image to image to cover always the same amount of vehicle information. Hence the sizes of the resulting RoIs are also different. For the recognition, especially for the search of local features, it is necessary that all the RoIs are equal in size. So they are all scaled to a constant size (for concrete used sizes and extents, see TODO: implementation chapter). If not, a local feature found in a RoI of small size would not be found in a larger RoI, although a vehicle of the same make and model is depicted.
+
+Another preprocessing step is the normalization of color and contrast. In VR3, the urge for independence from the lighting conditions of the photographed vehicles is explained. Petrovic et al. [1] investigated how color and contrast influences the classification accuracy with the result, that the performance is best for a classification process that runs independently of these two quantities. To gain color independence, the RoI image is converted into a grayscale image. To gain independence from contrast, a histogram equalization is performed. For actually used values and algorithms, see TODO: reference respective implementation section.
+
+\subsubsection{Region around the Number Plate}\label{sec:regionAroundNumberPlate}
+Like most of the VMMR systems (see [1], [2], [3], TODO: also reference the complete VMMR systems), this one chooses the vehicle’s front to be depicted inside of the RoI. This means, that the classification will be trained with vehicle’s front faces. Hence, only vehicles images showing the front of the vehicle can be recognized.
+
+There are applications that additionally trained backsides of vehicles (TODO [3] ??, [6] ??), whereas TODO [12] only uses the vehicles’ back sides to do the recognition.
+
+To find the position and extent of the RoI, the location of the vehicle inside of the source image has to be located first. This is done by locating the vehicle’s number plate (cf. [1], [3], TODO: more). Having found the number plate, there are different options to evaluate the location and the dimensions of the RoI. One option is to use the number plate again, deducing the location and dimension of the RoI from the location and dimension of the number plate. Another option is to detect the hood and use the hood boundary (boundary between hood and windshield) as an indicator for the RoI’s properties. Using the number plate as fixed point for the RoI has following advantages:
+
+\begin{itemize}
+  \item A number plate is relatively easy to find in an image. There are many free libraries like TODO that do the task.
+  \item Most of the cars all over the world have a number plate mounted at their front (TODO: Some examples from all over the world?? Japan, India, Saudi Arabia, SAFR, Germany, Russia, Iceland, USA, Australia, Chile - just one row with pictures, not to kill space).
+  \item Depending on the country or state the game is played in, the appearance (shape, aspect ratio, color, font, etc.) of the number plate is known. TODO: Examples of different number plates in different countries
+  \item Defining the RoI relatively to the number plate, the RoI is independent from the actual location and scale of the vehicle inside of the source image.
+  \item The location of the number plate on the car is very suitable, because the region around the number plate contains highly descriptive information for the respective make and model (like the headlights, the radiator grill, the bumper or the brand logo itself).
+\end{itemize}
+
+Nevertheless, there also exist some drawbacks of using the number plate and the front of a vehicle:
+
+\begin{itemize}
+  \item As described in \emph{VR1}, there is often too little clearance around a vehicle to take a photo without occlusion. Although it is helpful in most scenarios to back into a parking space instead of pulling into it (e. g. noticing pedestrians and cyclists more early when exiting the parking space), most drivers don't do it. So while the vehicle sticks out its back side towards the street or a parking area, its front is located besides a wall or a bush etc., not leaving enough space to take a photo of it (at least none without any occlusion). While this problem is acceptable for vehicle photos taken during the game, it is not acceptable for photos taken to train the classifier. Each object not belonging to the vehicle itself decreases the performance of the recognition system.
+  \item There are countries where cars don't have number plates mounted at their front (as in many states of the USA, e. g. Florida, see fig. TODO: add florida-no-front-number-plates.jpg). Additionally, there are some vehicles of specific make and models, where the front number plate has been mounted at the side instead of the middle (e. g. the Alfa Romeo 159 has the front number plate mounted besides the radiator grill for design purpose, see fig. TODO: add number-plate-front-side.jpg).
+  \item Using the number plate's size and dimension to deduce the location and extent of the RoI will result in a RoI-mask that is independent of the car's characteristics but is nevertheless applied to all makes and models. A RoI-mask with a location, extent and aspect ratio suitable for a Porsche 911 (containing informative parts as the brand logo and headlights) might not be suitable for a VW T6, whose number plate is mounted rather low, such that its informative parts will be outside of the RoI (see fig. TODO: Show picture of Porsche-RoI and T6-RoI).
+\end{itemize}
+
+Using the hood boundary to deduce the RoI’s properties would fix the last mentioned problem, because the size of the hood boundary depends on the size of the car. Since the detection of the hood boundary is failure prone and since classifiers trained with RoIs including the hood region performed inferior to those trained without the hood region [4], the number plate-approach is chosen for this thesis.
+
+Starting from the front number plate, a RoI can be defined around it that automatically contains descriptive vehicle information. An example for this is illustrated in figure TODO: Image with RoI around number plate (like [1] fig. 3) (with an image describing the factors around the number plate → left = L * number-plate-width, a.s.o. - without concrete values, these come in implementation).
+
+\subsubsection{Variations}
+There are different possibilities to define the RoI around a number plate, depending on the choice of the values TODO: list values from the figure denoted in figure TODO: reference fig above.
+
+\begin{itemize}
+  \item Including or not-including the hood region: As shown by [4], RoIs including the hood region perform inferior. This might be due to little discriminative information in there. Additionally, the hood might reflect its environment, which puts <em>negative</em> information in the resulting descriptor.
+  \item Considering only the left (or right) half of the vehicle’s front: In general, vehicles are symmetrical. Knowing one half, the other half can be estimated. For a Global Descriptor built up by concatenating the RoI’s pixels, this might help to reduce training and classification time, because the descriptor’s length would halve itself without losing information (only losing redundant mirrored half). Since the approach used in this thesis is based on a bag-of-words model, the length of the Global Descriptor does not depend on the size of the RoI but on the size of the dictionary. Halving the RoI would in contrast to that reduce the ability of the system to cope with partial occlusions (see VR1) [3]. If the selected half is occluded, there is no chance to recognize the vehicle anyway. TODO: Reprint images from [4] (found in [3] fig. 3.7ff) ?? Only if I need the pages
+\end{itemize}
+
+\citeauthor{petrovic2004analysis} \citep{petrovic2004analysis} shrinked the RoI in horizontal direction to compensate that the vehicle's structure is a little more redundant in that direction. This also only makes sense if the Global Descriptor's size depends on the size of the RoI, which is not the case in this thesis' approach.
+
+To sum up, the RoI should exclude the hood region while including all of the informative parts over all makes and models. In addition to that, the full and unshrinked width of the RoI should be used. For concrete values and tests see TODO: reference implementation chapter.
+
+\subsection{Local Feature Extraction}
+The next step in the workflow is to extract local features. The local features will be extracted from the preprocessed RoI, which is the output of the previous step.
+
+A local feature is a point in the RoI, that is significant, like a corner. Such features are located via a feature detector (see fig. TODO: show figure with car and detected features). After a feature has been detected, it will be encoded by a feature descriptor. A feature descriptor embeds the feature into its surrounding context. As the name says, the feature descriptor’s purpose is to describe the found feature such that the same feature can be recovered in another image (see fig. TODO: Show figure where feature descriptors match in different images, e. g. two Porsche 911 with same feature).
+
+There are many different feature detectors and feature descriptors with different purposes and properties. Generally, a feature descriptor is a vector, as shown in equation TODO: Add equation with feature descriptor definition (see photo below). The extraction of descriptors can be seen as a projection of the RoI onto a set of feature vectors (TODO: add equation with feature extraction, see photo below). See TODO: reference Technical Basics for more details and examples of feature extractors and feature descriptors.
+
+It turned out that SIFT [30] and SURF [31] are very suitable to describe vehicle features, so many works of the domain VMMR use it (c. f. [3] TODO more). SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by VR2 above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies VR3 to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented ([36], [37]). An alternative for this is proposed with ORB [32]. TODO: Short explanation. For more details, see TODO: reference section in Technical Basics. For a comparison among these detectors and descriptors, see TODO: reference implementation chapter for comparison
+
+\subsection{Dictionary}
+Having a collection of local features per RoI, they must be transferred into a Global Descriptor in some way. This is where the dictionary comes in.
+
+As said above, this VMMR approach is based on a bag-of-words model, where the dictionary is the <em>bag</em> and the local features form the (code-)<em>words</em>. Similar local features will be clustered into one single codeword. \citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary of local features from various vehicle classes (see TODO: reference section in the State of the Art chapter). One scheme was to build a dictionary out of the local features of all vehicle classes, called the <em>Single Dictionary</em>. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the <em>Modular Dictionary</em>. Although the Single Dictionary has the disadvantage of clustering similar local features but from different vehicle classes into one single codeword (inter-class ambiguity TODO is it? see figure TODO reference image with two different cars where the same feature is found), it performs superior to the Modular Dictionary (according to [3]). So this VMMR is based on a Single Dictionary.
+
+\subsubsection{Dictionary Generation}
+This section concentrates on the construction of the dictionary. It describes the data-structures and algorithms used. For concrete values that are needed for this VMMR, see the implementation chapter TODO: Ref. impl chapter for dict values.
+
+The dictionary is built offline. An update is possible, but would require a complete rebuild of the dictionary, which is another disadvantage of the Single Dictionary. For the Modular Dictionary, only the partial sub-dictionary of the respective make-model class would have to be built again. Generating the dictionary and training the classifier don’t run in parallel, which could be misinterpreted by the illustration of the training-workflow (TODO: ref). Since the (complete) dictionary is needed to encode the Global Representations, the training-workflow firstly generates the dictionary from the local features of all RoIs. After that, the training-workflow runs again by using the existing dictionary to train the classifier.
+
+
 
 
 
