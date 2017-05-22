@@ -198,21 +198,42 @@ Also Apple and Facebook start to invest into this technology. Apple CEO Tim Cook
 Maybe, this technology is finally on the verge of experiencing a big hype.
 
 \subsubsection{Variants}
-There are different variants, all called AR. This starts with simply overlaying a video with information, that is located at specific GPS coordinates or at a tracked marker (see Technical Basics for definition of a marker TODO) and ends with exactly overlaying real-world objects with virtual objects, considering 3D position and pose.
+There are different variants, all called AR. This starts with simply overlaying a video with information that is located at specific GPS coordinates or at a tracked marker and ends with exactly overlaying real-world objects with virtual objects, considering 3D position and pose.
 
 The used variant depends on the use case and on the available hardware. The higher the grade of accuracy, with which the reality shall be augmented, the higher the requirements on the hardware, since AR is usually done in realtime. Whereas overlaying the camera picture with a virtual object while the player is located at specific GPS coordinates is a rather simple job for current hardware, tracking real-world objects from the camera picture and retrieving their position and orientation to blend the virtual object over it needs a powerful CPU that is capable of sophisticated computer vision algorithms. In the following, some common approaches of integrating virtual content into the real world are presented.
 
 \paragraph{Square Markers}
-Square markers are, as the name says, square pictures containing a binary pattern. Square markers are easy and fast to detect in a camera image and the position as well as the pose of the marker can be deduced from its binary pattern in a very efficient way. Most of the AR APIs as ARToolKit \footnote{\url{https://artoolkit.org/}} or MetaIO \footnote{\url{http://www.metaio.eu/}} provide an implementation for this kind of markers. Even current smartphones are able to track multiple square markers in realtime.
+Square markers are, as the name says, square pictures containing a binary pattern (see figure \ref{fig:marker}). Square markers are easy and fast to detect in a camera image and the position as well as the pose of the marker can be deduced from its binary pattern in a very efficient way. Most of the AR APIs as ARToolKit \footnote{\url{https://artoolkit.org/}} or MetaIO \footnote{\url{http://www.metaio.eu/}} provide an implementation for this kind of markers. Even current smartphones are able to track multiple square markers in realtime.
 
-A drawback is, that the markers have to be placed in the real world beforehand. This is a disqualifier for many application fields, where the AR content has to smoothly integrate into an unprepared scene. TODO: Add picture of a hiro marker.
+A drawback is, that the markers have to be placed in the real world beforehand. This is a disqualifier for many application fields, where the AR content has to smoothly integrate into an unprepared scene.
 
 \paragraph{Natural Feature Tracking}
-Natural Feature Tracking (NFT) refers to a technique that searches predefined features in an image. From the locations of the tracked features, the pose and location of the camera is retrieved [69]. TODO: Bild dazu, z. B. figure 2.6 von Hock.
+Natural Feature Tracking (NFT) refers to a technique that searches predefined features in an image. From the locations of the tracked features, the pose and location of the camera is retrieved [69] (see figure \ref{fig:nft-tracking}).
 
 \paragraph{Model-based Tracking}
-Similar to NFT, the captured image is searched for features while these features have to match with those of a reference model. Whereas for the NFT the reference model is an image, for model-based tracking it’s a 3D CAD model. The advantage is, that with a 3D model, multiple perspectives to match the reference model to the real image are supported.
-Because there’s much literature on this subject (e. g. [70]) and since this thesis’ scope only touches this kind of tracking, it won’t be described any further.
+Similar to NFT, the captured image is searched for features while these features have to match with those of a reference model. Whereas for the NFT the reference model is an image, for model-based tracking it’s a 3D CAD model. The advantage is, that with a 3D model, multiple perspectives to match the reference model to the real image are supported (see figure \ref{fig:model-based-tracking}).
+Because there’s much literature on this subject (e. g. [70]) and since this thesis' scope only touches this kind of tracking, it won’t be described any further.
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.2\linewidth]{gfx/jh_marker}
+        \caption{Example for a square marker}
+        \label{fig:marker}
+\end{figure}
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.45\linewidth]{gfx/nft_tracking_reprint}
+        \caption{Both in scene (right) and reference model (left) features are detected. Although the matching in this
+example contains false positives (red boxes) the object and its transformation are estimated correctly
+as its borders are marked at the right place (green). (Caption and image reprinted from \citep{hock2014augmented})}
+        \label{fig:nft-tracking}
+\end{figure}
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.45\linewidth]{gfx/model_based_tracking_reprint}
+        \caption{Model-based tracking: Pose estimation from correspondences between 3D model edge segments and 2D image segments. (Reprinted from [70])}
+        \label{fig:model-based-tracking}
+\end{figure}
 
 \subsubsection{Usage of AR in Games}
 Nowadays, mobile devices used for AR are usually handheld devices (such as smartphones or tablets) or head-mounted displays (such as smartglasses). Head-mounted displays have an advantage over handheld devices, which are embarrassing, annoying, tedious to keep up and watch through and that are socially not accepted [58]. Additionally, a smartphone’s hardware is limited and its camera is hardly able to capture 3D structures of the real world.
@@ -223,7 +244,7 @@ To be smoothly integrated into everyday life, pervasive games want the player to
 
 An early example for a mobile game that uses AR is <em>ARQuake</em> [63], which is an augmented reality version of the video game <em>Quake</em>. It is played outside and uses AR markers.
 
-More recent examples are the popular games <em>Ingress</em> and <em>Pokémon GO</em>, that are described in detail in sections TODO and TODO, respectively.
+More recent examples are the popular games <em>Ingress</em> and <em>Pokémon GO</em>, that are described in detail in section \ref{sec:examples}.
 
 Although this is a subchapter of <em>Pervasive Games</em>, not each augmented reality game is a pervasive game. A game can include augmented reality technology without expanding the magic circle.
 
@@ -232,20 +253,18 @@ In this section, representatives of one or more of the above mentioned game type
 
 The presented games have been chosen because of their close relation to the game <em>RacecAR GO</em>, which is developed within this thesis.
 
-TODO: Add pictures (also for StreetConqAR)
-
 \subsubsection{Ingress}
-Ingress is a location-based mobile exergame, developed for smartphones. It was developed by Niantic (TODO source) and was released in 2012. Players, called <em>agents</em>, have to decide to either belong to the fraction of the Enlightened or to the Resistance.
+Ingress is a location-based mobile exergame, developed for smartphones. It was developed by Niantic and was released in 2012. Players, called <em>agents</em>, have to decide to either belong to the fraction of the Enlightened or to the Resistance.
 
-The anchors are designer placed and are called <em>portals</em>, which have to be “hacked” by the players to gain points for their fraction (see figure TODO image of Portal with players around).
+The anchors are designer placed and are called <em>portals</em>, which have to be "hacked" by the players to gain points for their fraction (see figure \ref{fig:ingressGameplay}).
 
-The portals are usually located at points of social or artistic interest, such as monuments or landmarks. In contrast to StreetConqAR (see TODO), these objects are of no further relevance for the gameplay.
+The portals are usually located at points of social or artistic interest, such as monuments or landmarks. In contrast to StreetConqAR (see below), these objects are of no further relevance for the gameplay.
 
 Ingress is no augmented reality game, although it is sometimes classified as such. It mixes reality and virtuality by the use of anchors, but is does not augment the view of the physical environment.
 
 Ingress is considered an exergame because players have to physically move to portals to succeed in the game. The game developers, however, did not seem interested in exploiting its full potential as an exergame. Players aren’t motivated by the game to walk faster or farther. It is even possible to elude the health aspect completely by moving via car or bus to visit the portals, because the app does not check the speed of the player. It seems that Ingress became an exergame just by chance, since the developers figured out that it is entertaining to embed the virtual game world into the real world around the player [15].
 
-Ingress is based on location data from Google Maps. Its enriched location data was used later to populate <em>Pokémon GO</em> (see section TODO) [64].
+Ingress is based on location data from Google Maps. Its enriched location data was used later to populate <em>Pokémon GO</em> [64].
 
 As said above, the anchors are placed by a designer. Although there exists a process for users to propose locations for new ones, which takes a few weeks to be accepted, there are many (rural) regions, where no anchors exist so far (see map in figure \ref{fig:ingressMap}). In these regions, Ingress cannot be played.
 
@@ -255,13 +274,19 @@ As said above, the anchors are placed by a designer. Although there exists a pro
         \caption{Screenshot of world map with Ingress portals taken with my Ingress account}
         \label{fig:ingressMap}
 \end{figure}
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.45\linewidth]{gfx/ingress_gameplay}
+        \caption{Screenshot of playing Ingress (taken with my Ingress account)}
+        \label{fig:ingressGameplay}
+\end{figure}
 
 \subsubsection{Pokémon GO}
-Pokémon GO is a location-based augmented reality mobile exergame, developed for smartphones. It was developed by Niantic (TODO source) and was released in 2016. Pokémon are fantastical creatures and first appeared in the 1990s in video and card games.
+Pokémon GO is a location-based augmented reality mobile exergame, developed for smartphones. It was developed by Niantic and was released in 2016. Pokémon are fantastical creatures and first appeared in the 1990s in video and card games.
 
 A player of Pokémon GO becomes a Pokémon trainer with the task to hunt up and to catch Pokémon. Catched Pokémon are stored in the player’s Pokédex and can be trained. In Pokémon gyms, Pokémon can fight against each other. There also exist PokéStops, where some useful items can be found.
 
-Data gathered with Ingress was used to place gyms and PokéStops [64]. These are also marked on a map that is visible when playing the game. Pokémon, however, are only visible through the smartphone display, if the player is physically near them. In this case, the Pokémon is blended above the camera video in an AR manner (see figure TODO).
+Data gathered with Ingress was used to place gyms and PokéStops [64]. These are also marked on a map that is visible when playing the game. Pokémon, however, are only visible through the smartphone display, if the player is physically near them. In this case, the Pokémon is blended above the camera video in an AR manner (see figure \ref{fig:pokemonGOGameplay}).
 To actually catch a Pokémon, the player has to throw a virtual Pokéball onto the creature. Only a well-thrown ball captures the Pokémon. Pokéballs can be retrieved from PokéStops.
 
 In contrast to Ingress, the developers emphasize the health aspect in Pokémon GO. Though it’s still possible to visit gyms and PokéStops by car or bus, there’s a feature in the game that can only be used by walking: Brooding eggs. To brood Pokémon eggs, the player has to walk a certain distance until the Pokémon emerges. This distance can only be walked by feet since the app checks the movement speed of the player.
@@ -270,45 +295,62 @@ Another good thing is, that it does not really make sense to play this game insi
 
 The virtual map that displays PokéStops and gyms also motivates the players to move. At least it motivated myself. Seeing these locations in the near environment, I though “I’m tired from work, but there are two PokéStops over there. I just visit them, maybe I find some rare Pokémon on my way”.
 
-TODO: Add picture of Pokémon GO
-
 \paragraph{Hazards}
 Although Pokémon GO contributes to its players’ health, there are some hazards related to playing the game. There have been incidents of players walking onto rails or into restricted areas of hospitals while hunting for these little monsters [65].
 
 There is even a website called <em>Pokémon GO Death Tracker</em> [66] that lists all deaths and injuries caused by Pokémon GO (14 deaths and 54 injuries, effective in April 2017).
 
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.45\linewidth]{gfx/pokemon_go_gameplay}
+        \caption{Screenshot of playing Pokémon GO (reprinted from \url{http://www.pokemongo.com/de-de/explore/})}
+        \label{fig:pokemonGOGameplay}
+\end{figure}
+
 \subsubsection{StreetConqAR}
-StreetConqAR [26] is a location-based augmented reality mobile exergame developed as an Android app. In the game, players have to conquer streets. The player that conquered most streets wins the game. To conquer a street, one has to walk to its street name sign and watch it through the smartphone. The app recognizes the sign and displays an augmented reality version of it with virtual colored letters blended above the original letters. To acquire the street, a riddle according to these letters has to be solved.
+StreetConqAR \citep{hock2014augmented} is a location-based augmented reality mobile exergame developed as an Android app. In the game, players have to conquer streets. The player that conquered most streets wins the game. To conquer a street, one has to walk to its street name sign and watch it through the smartphone. The app recognizes the sign and displays an augmented reality version of it with virtual colored letters blended above the original letters. To acquire the street, a riddle according to these letters has to be solved (see figure \ref{fig:streetConqARGameplay}).
 
 As mentioned above, StreetConqAR presents a new way of creating anchors. Anchors are placed automatically based on real-world objects, the street name signs. The advantage of this approach is, that street name signs can be found all over the world, which means that StreetConqAR can be played all over the world, as well.
 
-TODO: Picture
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.65\linewidth]{gfx/streetconqar_gameplay_reprint}
+        \caption{Screenshot of playing StreetConqAR (reprinted from \citep{hock2014augmented})}
+        \label{fig:streetConqARGameplay}
+\end{figure}
 
 \subsubsection{Maguss}
-TODO
+TODO low prio
 
 \subsubsection{Harry Potter GO}
-TODO
+TODO low prio
 
 
 \section{Vehicle Recognition}
 
 \subsection{General}
-Nowadays, vision-based recognition is a hot topic. Not possible to imagine automated manufacturing without it since many years, vision-based recognition became accessible for normal users with devices like the Microsoft Kinect (TODO: reference), which is able to perform gesture recognition, for example. Another visual recognition which arrested attention (mainly because of privacy issues TODO: source) in early 2015 was Facebook’s (TODO: source) face recognition system named DeepFace \footnote{\url{https://en.wikipedia.org/w/index.php?title=DeepFace&oldid=663499386}}, which searches photos, taken by Facebook users, for people of other Facebook users.
+Nowadays, vision-based recognition is a hot topic. Not possible to imagine automated manufacturing without it since many years, vision-based recognition became accessible for normal users with devices like the Microsoft Kinect \footnote{\url{https://developer.microsoft.com/en-us/windows/kinect}}, which is able to perform gesture recognition, for example. Another visual recognition which arrested attention (mainly because of privacy issues) in early 2015 was Facebook's face recognition system named DeepFace \footnote{\url{https://en.wikipedia.org/w/index.php?title=DeepFace&oldid=663499386}}, which searches photos, taken by Facebook users, for people of other Facebook users.
 
 Another field that is not so famous yet is the vehicle recognition. It is used in different systems like traffic monitoring and control or security and surveillance applications. Instead of a human observer sitting in front of some screens, an automated vehicle recognition system could do the task. Human constraints like multitasking and distinguishing among all the makes and models would be overcome by such a system.
 
-Usually, the steps of a vehicle recognition algorithm are: (1) Feature Extraction, (2) Global Representation, and (3) Classification. Most of the systems do a preceding step and define a region of interest (RoI), which separates the vehicle from the background (see figure TODO: Either use [3]’s figure 1.4 or create a similar one in my own style - see Google Doc for State of the Art for scribble).
+Usually, the steps of a vehicle recognition algorithm are: (1) Feature Extraction, (2) Global Representation, and (3) Classification. Most of the systems do a preceding step and define a region of interest (RoI), which separates the vehicle from the background (see figure \ref{fig:vrSteps}).
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.95\linewidth]{gfx/vr_steps}
+        \caption{General steps of a vehicle recognition algorithm}
+        \label{fig:vrSteps}
+\end{figure}
 
 Feature extraction in the vehicle recognition domain denotes identifying those parts of the image that are relevant (descriptive) for this class (type, make and/or model).
 
-The Global Representation of (Global Descriptor) can be seen as the compound of all the relevant extracted features of one image. In simple phrase, the Global Representation describes a vehicle image of a specific class such that a classifier can understand it. The key task of building a Global Representation is making it informative and discriminating. There are many different ways to construct Global Representations, some of them are illustrated below.
+The Global Representation (or Global Descriptor) can be seen as the compound of all the relevant extracted features of one image. In simple phrase, the Global Representation describes a vehicle image of a specific class such that a classifier can understand it. The key task of building a Global Representation is making it informative and discriminating. There are many different ways to construct Global Representations, some of them are illustrated below.
 Finally, the classification is the process of assigning a class (type, make and/or model) to a Global Representation of an unknown class.
 
 There are different kinds of vehicle recognition, each for a different purpose and with its own challenges.
 
 \subsection{Vehicle Type Recognition}
-For an electronic toll collection system or for the analysis of traffic jams, the actual make or model of a vehicle is not relevant. Whereas the type of a vehicle helps to deduce the properties (like shape or weight) needed for such studies. So the Vehicle Type Recognition classifies vehicles into broad categories such as sedans, SUVs, trucks, vans, motorbikes, buses, etc. [3]
+For an electronic toll collection system or for the analysis of traffic jams, the actual make or model of a vehicle is not relevant. Whereas the type of a vehicle helps to deduce the properties (like shape or weight) needed for such studies. So the Vehicle Type Recognition classifies vehicles into broad categories such as sedans, SUVs, trucks, vans, motorbikes, buses, etc. [3].
 
 As [3] mentions, most of these approaches use feature extraction and classification of different kinds. Examples are TODO.
 
@@ -326,21 +368,19 @@ Nacer Farajzadeh and Negin S. Rezaei (TODO: name) compared these two approaches 
 Examples for Vehicle Make Recognition are TODO.
 
 \subsection{Vehicle Make and Model Recognition}
-The most comprehensive kind of vehicle recognition and also one focus of this work is Vehicle Make and Model Recognition (VMMR), the identification of its make as well as its model (like Mercedes SL, BMW 3 Series, Porsche 911, etc.). For surveillance purposes, this recognition type extends the conventional number plate recognition. It can be used to double-check a recognized number with the corresponding make and model to fight the problem of false number plates. There are plenty of works referring to this topic and also some ready-to-use systems like Car-Rec [6] or the <em>VisualSearch</em> feature \footnote{\url{http://magazin.autoscout24.de/microsites/services/mobile/de-at/txt/android_txt3.html}} (TODO: add photo) of the AutoScout24 app \footnote{\url{https://www.autoscout24.de/}} that do VMMR.
+The most comprehensive kind of vehicle recognition and also one focus of this work is Vehicle Make and Model Recognition (VMMR), the identification of its make as well as its model (like Mercedes SL, BMW 3 Series, Porsche 911, etc.). For surveillance purposes, this recognition type extends the conventional number plate recognition. It can be used to double-check a recognized number with the corresponding make and model to fight the problem of false number plates. There are plenty of works referring to this topic and also some ready-to-use systems like Car-Rec [6] or the <em>VisualSearch</em> feature \footnote{\url{http://magazin.autoscout24.de/microsites/services/mobile/de-at/txt/android_txt3.html}} of the AutoScout24 app \footnote{\url{https://www.autoscout24.de/}} that do VMMR.
 A surveillance and security application for static cameras is eyedea \footnote{\url{http://www.eyedea.cz/make-and-model-recognition/}}, that is able to recognize 500 vehicle models of the types bus, car, truck and van.
 
 Most of the approaches use the front or the back side of the vehicle because it’s the most descriptive part, usually containing the make’s logo and, for the back side, even the lettering of the make and the model.
 
 While most of the systems require strictly frontal or rear view images of vehicles, Shinozuka et al. [23] proposed a solution to transform vehicle pictures taken from an angle of up to 60-degrees into pseudo frontal views.
 
-TODO: Describe an approach based on 3D models ([2, 6, 11] from Petrovic)
-
 The main differences among the various VMMR approaches are the construction of the Global Representations. Differences with minor importance are the choices of the local feature descriptor or the classifier, which does not mean that the local feature descriptor or the classifier have a minor effect to the classification performance, though.
 
 <em>“The quality of a global features representation technique is assessed by its processing speed, computational complexity in forming the holistic representations, and the VMMR accuracy which reflects its discriminative capacity in representing the different makes and models while generalizing over the multiplicity issues within a make-model class.”</em> [3]
 
 \subsubsection{VMMR using Local Features Concatenation}
-One classification approach is done by \citeauthor{petrovic2004analysis} \cite{petrovic2004analysis}, achieving recognition rates of over 93\%, tested on over 1000 images containing 77 different classes (make-models). The recognition is based on a relatively simple set of features extracted from frontal car images. A feature vector of predefined length (the <em>Global Representation</em> as shown in figure TODO reference figure from above with VMMR steps) represents one make-model. The Global Representation is just a pixel-wise concatenation of the vehicle’s image. To determine the class of a queried vehicle, simple nearest neighbor classification is used among these feature vectors. The special thing about this approach is, that it uses only one vehicle image per make-model as training data. What is trained then, is the transformation of the training image into the Global Representation.
+One classification approach is done by \citeauthor{petrovic2004analysis} \cite{petrovic2004analysis}, achieving recognition rates of over 93\%, tested on over 1000 images containing 77 different classes (make-models). The recognition is based on a relatively simple set of features extracted from frontal car images. A feature vector of predefined length (the <em>Global Representation</em> as shown in figure \ref{fig:vrSteps}) represents one make-model. The Global Representation is just a pixel-wise concatenation of the vehicle's image. To determine the class of a queried vehicle, simple nearest neighbor classification is used among these feature vectors. The special thing about this approach is, that it uses only one vehicle image per make-model as training data. What is trained then, is the transformation of the training image into the Global Representation.
 
 The features are not extracted from the whole vehicle image but from a RoI, a section inside of the image. This RoI is defined as an area around the car’s number plate. Thus, relative to the number plate, the RoI is independent from the vehicle’s actual location and scale inside the source image. The recognition system is shown in figure TODO (image showing (similar to Petrovic fig 2, but more detailed): input -> find number plate -> define RoI -> extract features -> Feature Vector -> Find class with nearest neighbor classification)
 
