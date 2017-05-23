@@ -373,7 +373,7 @@ A surveillance and security application for static cameras is eyedea \footnote{\
 
 Most of the approaches use the front or the back side of the vehicle because it’s the most descriptive part, usually containing the make’s logo and, for the back side, even the lettering of the make and the model.
 
-While most of the systems require strictly frontal or rear view images of vehicles, Shinozuka et al. [23] proposed a solution to transform vehicle pictures taken from an angle of up to 60-degrees into pseudo frontal views.
+While most of the systems require strictly frontal or rear view images of vehicles, \citeauthor{shinozuka2013vehicle} proposed a solution to transform vehicle pictures taken from an angle of up to 60-degrees into pseudo frontal views.
 
 The main differences among the various VMMR approaches are the construction of the Global Representations. Differences with minor importance are the choices of the local feature descriptor or the classifier, which does not mean that the local feature descriptor or the classifier have a minor effect to the classification performance, though.
 
@@ -382,9 +382,17 @@ The main differences among the various VMMR approaches are the construction of t
 \subsubsection{VMMR using Local Features Concatenation}
 One classification approach is done by \citeauthor{petrovic2004analysis} \cite{petrovic2004analysis}, achieving recognition rates of over 93\%, tested on over 1000 images containing 77 different classes (make-models). The recognition is based on a relatively simple set of features extracted from frontal car images. A feature vector of predefined length (the <em>Global Representation</em> as shown in figure \ref{fig:vrSteps}) represents one make-model. The Global Representation is just a pixel-wise concatenation of the vehicle's image. To determine the class of a queried vehicle, simple nearest neighbor classification is used among these feature vectors. The special thing about this approach is, that it uses only one vehicle image per make-model as training data. What is trained then, is the transformation of the training image into the Global Representation.
 
-The features are not extracted from the whole vehicle image but from a RoI, a section inside of the image. This RoI is defined as an area around the car’s number plate. Thus, relative to the number plate, the RoI is independent from the vehicle’s actual location and scale inside the source image. The recognition system is shown in figure TODO (image showing (similar to Petrovic fig 2, but more detailed): input -> find number plate -> define RoI -> extract features -> Feature Vector -> Find class with nearest neighbor classification)
+The features are not extracted from the whole vehicle image but from a RoI, a section inside of the image. This RoI is defined as an area around the car's number plate. Thus, relative to the number plate, the RoI is independent from the vehicle's actual location and scale inside the source image.
 
-Starting with a straightforward representation by just concatenating the raw image values into the feature vector, Petrovic et al. ended up with square mapped gradients (TODO: definition) performing best for this purpose. TODO: Reprint [1]’s figure 5 (Feature extraction examples) as examples of different techniques with description: The structure of the original image is still recognizable (more or less clearly) because of the concatenation of image pixels
+Starting with a straightforward representation by just concatenating the raw image values into the feature vector, \citeauthor{petrovic2004analysis} ended up with evaluating different sorts of image gradients. In figure \ref{fig:vmmrConcatenation}, examples of different Global Representations, created by different techniques, are listed.
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.65\linewidth]{gfx/vmmr_concatenation_reprint}
+        \caption{Examples of Global Representations (reprinted from \citep{petrovic2004analysis}): The first picture simply uses the source pixels. The other ones are based on the gradients of the image (with slightly different gradient transformations). The structure of the original image is still recognizable (more or less clearly) in the representation because of the concatenation of image pixels.}
+        \label{fig:vmmrConcatenation}
+\end{figure}
+
 They also investigated in transforming the feature space via Principal Component Analysis (PCA) into a lower dimensional subspace to gain expressiveness and computation time. Finally though, tests including PCA performed slightly worse in most cases.
 
 Another conclusion they made is, that a representation independent from color and contrast of the original vehicle image increases performance.
@@ -396,25 +404,54 @@ There are also cons of their approach that will occur, when testing the system i
 \subsubsection{VMMR using a Bag-of-Words Model}
 Another approach that tries to eliminate all the cons of the system proposed by \citeauthor{petrovic2004analysis} is made by A. J. Siddiqui [3] (TODO name). Since that system is similar to the system proposed in this thesis, it will be discussed in more detail, here.
 
-The challenges, [3] attends to, are <em>multiplicity</em> and <em>inter-make and intra-make ambiguity</em>. <em>Multiplicity</em> describes the problem of vehicles with different shapes or appearances all share the same name (make and model). An example for this is shown in figure TODO reprint [3] figure 1.5 “reprinted from [3]”.
+The challenges, [3] attends to, are <em>multiplicity</em> and <em>inter-make and intra-make ambiguity</em>. <em>Multiplicity</em> describes the problem of vehicles with different shapes or appearances all share the same name (make and model). An example for this is shown in figure \ref{fig:vmmrMultiplicity}.
 
-While <em>inter-make ambiguity</em> describes the issue of models from different companies being akin to each other, <em>intra-make ambiguity</em> refers to different models from the same company that share similar features. Examples for this are shown in figures (TODO reprint [3] figures 1.6 and 1.7 “reprinted from [3]” Inside State of the Art, reprint figures of vehicles from sources, because I talk about it in their context. Inside Concept chapter, I use MY vehicle images)
+While <em>inter-make ambiguity</em> describes the issue of models from different companies being akin to each other, <em>intra-make ambiguity</em> refers to different models from the same company that share similar features. Examples for this are shown in figures \ref{fig:vmmrAmbiguityInterMake} and \ref{fig:vmmrAmbiguityIntraMake}, respectively.
 
-So the task is to build a Global Representation, “that accounts for intra-class differences and inter-class similarities, thereby solving the multiplicity and ambiguity issues in VMMR” [3] and that is robust to occlusions and small changes in the camera angle.
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/multiplicity_reprint}
+        \caption{Multiplicity issue. Both pictures show a Toyota Camry, from 2008 and 2010, respectively (reprinted from \citep{siddiqui2015robust}).}
+        \label{fig:vmmrMultiplicity}
+\end{figure}
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/ambiguity_intermake_reprint}
+        \caption{Inter-make ambiguity issue between a Toyota Camry and a Ford Mondeo (reprinted from \citep{siddiqui2015robust}).}
+        \label{fig:vmmrAmbiguityInterMake}
+\end{figure}
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/ambiguity_intramake_reprint}
+        \caption{Intra-make ambiguity issue between a Toyota Camry and a Toyota Altis (reprinted from \citep{siddiqui2015robust}).}
+        \label{fig:vmmrAmbiguityIntraMake}
+\end{figure}
 
-In contrast to the approach of Petrovic et al., the Global Representations of this system are constructed using a bag-of-words model (TODO: See chapter Technical Basics for explanation) instead of concatenating the pixel values of the RoI. This means, similar to the Vehicle Make Recognition system proposed by [22], mentioned above, the Global Representation is a histogram. Each bin of this histogram represents one distinct feature-codeword while the height of the bin indicates the occurrence-frequency of this specific feature-codeword in the source image.
+So the task is to build a Global Representation, "that accounts for intra-class differences and inter-class similarities, thereby solving the multiplicity and ambiguity issues in VMMR" \citep{siddiqui2015robust} and that is robust to occlusions and small changes in the camera angle.
+
+In contrast to the approach of \citeauthor{petrovic2004analysis}, the Global Representations of this system are constructed using a bag-of-words model (TODO: See chapter Technical Basics for explanation) instead of concatenating the pixel values of the RoI. This means, similar to the Vehicle Make Recognition system proposed by [22], mentioned above, the Global Representation is a histogram. Each bin of this histogram represents one distinct feature-codeword while the height of the bin indicates the occurrence-frequency of this specific feature-codeword in the source image.
 
 The set of all feature-codewords, the <em>visual words</em>, build the dictionary or <em>bag</em>. A feature-codeword in this context is not a feature but a representative of several similar features. This way, the size of the dictionary does not only control the size of the Global Representation (number of bins in the histogram) but also the threshold, at which several features are clustered into one single dictionary feature-codeword. So the dictionary represents the essence of the key features (in this case SURF [31]) of all the training images.
 
 \paragraph{Dictionary Generation}
-Two different schemes of dictionary generation are proposed. One called <em>Single Dictionary</em>, the other called <em>Modular Dictionary</em>. For the Single Dictionary, all the local features of all training images are clustered. Each cluster center then represents one codeword of the Single Dictionary. The number of clusters defines the size of the dictionary, therefore. An advantage of this scheme is, that considering the combined set of features over all the training images (across multiplicity and ambiguity) strengthens the discriminability of this dictionary. A disadvantage is, though, that one cluster could contain features that are similar but originate from different make-model classes. To cope with this, a dictionary is only built out of the training images for one specific make-model class (in the same way as described above), resulting in one dictionary per make-model class. The set of all the codewords of those dictionaries form the Modular Dictionary. An advantage, besides the one noted above, is the flexibility when adding new training data. Only the dictionary of the specific class has to be rebuilt, which saves processing time. A disadvantage is the increased size of the Modular Dictionary compared to the Single Dictionary. Although the size of one of its per-class dictionaries can be smaller than that of the Single Dictionary, multiplying this with the number of make-model classes will boost the number of overall codewords. For an illustration of the two schemes, see figure TODO: reprint figure 3.15 from [3] and explain the variables in the footer.
+Two different schemes of dictionary generation are proposed by \citeauthor{siddiqui2015robust}. One called <em>Single Dictionary</em>, the other called <em>Modular Dictionary</em>. For the Single Dictionary, all the local features of all training images are clustered. Each cluster center then represents one codeword of the Single Dictionary. The number of clusters defines the size of the dictionary, therefore. An advantage of this scheme is, that considering the combined set of features over all the training images (across multiplicity and ambiguity) strengthens the discriminability of this dictionary. A disadvantage is, though, that one cluster could contain features that are similar but originate from different make-model classes. To cope with this, a dictionary is only built out of the training images for one specific make-model class (in the same way as described above), resulting in one dictionary per make-model class. The set of all the codewords of those dictionaries form the Modular Dictionary. An advantage, besides the one noted above, is the flexibility when adding new training data. Only the dictionary of the specific class has to be rebuilt, which saves processing time. A disadvantage is the increased size of the Modular Dictionary compared to the Single Dictionary. Although the size of one of its per-class dictionaries can be smaller than that of the Single Dictionary, multiplying this with the number of make-model classes will boost the number of overall codewords. For an illustration of the two schemes, see figure \ref{fig:dictionarySDMD}.
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.95\linewidth]{gfx/single_dictionary_reprint}
+        \includegraphics[width=.95\linewidth]{gfx/modular_dictionary_reprint}
+        \caption{Dictionary building schemes. Above for the Single Dictionary, below for the Modular Dictionary, where $f_n$ is the $n$-th feature of one image of the respective class $c_m$, $N_c = $ number of classes, and $Nf_j = $ number of features of the $j$-th image of a respective class (reprinted from \citep{siddiqui2015robust}).}
+        \label{fig:dictionarySDMD}
+\end{figure}
 
 \paragraph{Results}
-For the classification (step 3 of vehicle recognition process TODO: Reference image from above), a multi-class SVM (TODO reference SVM in Technical Basics)-based classifier is used. The classifier is trained to learn both similarities among different generations of the same make-model class and differences among inter-class models.
+For the classification (the last step of the vehicle recognition process from figure \ref{fig:vrSteps}), a multi-class SVM (TODO reference SVM in Technical Basics)-based classifier is used. The classifier is trained to learn both similarities among different generations of the same make-model class and differences among inter-class models.
 
-Experiments showed that the Single Dictionary, contrary to the expectations, slightly outperforms the Modular Dictionary. On the other hand, the dictionary training time is much less for the Modular Dictionary. However, for an application, where the dictionary is built offline and does not need to be updated (or only seldomly) during runtime, the Single Dictionary is the better choice.
+Experiments of \citep{siddiqui2015robust} showed that the Single Dictionary, contrary to the expectations, slightly outperforms the Modular Dictionary. On the other hand, the dictionary training time is much less for the Modular Dictionary. However, for an application, where the dictionary is built offline and does not need to be updated (or only seldomly) during runtime, the Single Dictionary is the better choice.
 
-Additionally, the bag-of-words model implicates some advantages in contrast to the local features concatenation approach by \citeauthor{petrovic2004analysis}. Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified (see figure TODO show classification of test image with occlusion). Another advantage is the robustness to slight changes in the camera roll-angle or in the perspective. Due to the local descriptors, in this case SURF, that is rotation invariant, rotated local features would still result in the same bag-of-words histogram.
+TODO: Move the rest into the intro of the VMMR-Concept-chapter. Als Entscheidungsfindung: BoW ist besser als Concatenation, weil ... hat aber auch Nachteile (spatial info). Damit klar ist, dass das meine Schlüsse sind und nicht die aus der Arbeit von Siddiqui!!
+
+The bag-of-words model implicates some advantages in contrast to the local features concatenation approach by \citeauthor{petrovic2004analysis}. Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified. Another advantage is the robustness to slight changes in the camera roll-angle or in the perspective. Due to the local descriptors (in this case SURF, which is rotation invariant), rotated local features would still result in the same bag-of-words histogram.
 
 A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. TODO: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms).
 
