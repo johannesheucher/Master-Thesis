@@ -91,7 +91,7 @@ A subcategory of serious games then again are exergames [41] [15]. As shown in f
 
 The target of an exergame is to combine physical activity with fun of play. During the gameplay, the health aspect is not primarily focused but only a side-effect of playing the game. <em>“The training effect is secondary and nevertheless achieved”</em> [15]. An example for an exergame is <em>Dance Dance Revolution</em> (TODO reference). TODO: Describe Dance Dance Revolution. Bogost (TODO name) says about this game, that it produces exercise as an emergent outcome of play itself [43].
 
-A user of the Nintendo Wii \footnote{\url{http://wii.nintendo.de/}} wrote: “Video games can [be] and are a great way to have exercise and not even know you are burning calories” \footnote{\url{http://www.gamespot.com/forums/nintendo-fan-club-1000001/wii-sports-weight-lossyesits-real-25576131/}}. Debra Lieberman found out that there is growing evidence of exergames helping people to stay fit and to manage their weight if they frequently play them [17].
+A user of the Nintendo Wii \footnote{\url{http://wii.nintendo.de/}} wrote: "Video games can [be] and are a great way to have exercise and not even know you are burning calories" \footnote{\url{http://www.gamespot.com/forums/nintendo-fan-club-1000001/wii-sports-weight-lossyesits-real-25576131/}}. Debra Lieberman found out that there is growing evidence of exergames helping people to stay fit and to manage their weight if they frequently play them [17].
 
 So the challenge of an exergame is to keep the player motivated to do sports. As in the example at the beginning of this thesis (<em>The Running Dead</em>), we all ran away when the mob of zombies came running towards us. We did not think of doing sports in that moment. Maybe some even did not think of playing a game. Our only thought was to escape.
 
@@ -124,7 +124,7 @@ A new member of location-based games is <em>Pokémon GO</em> (see chapter \ref{s
 
 The real-world locations, where entities are placed in the virtual world, play an important role for these games. They have to be well-chosen to fit the purpose of the game and the respective gameplay. These special locations are called <em>anchors</em>.
 
-\subsubsection{Anchors}
+\subsubsection{Anchors}\label{sec:anchorsStateOfTheArt}
 For location-based games, the real world is overlain by the virtual game world. Anchors are well defined positions, where these two worlds are blurred [26]. The word <em>anchor</em> has been introduced by Hock (TODO name) [26]. In literature, there is no fixed term for this. Other works also refer to this as <em>artifacts</em> [54] or as <em>(generic) markers</em> [53], as named in the title. This thesis uses the term anchor [26], because its semantic meaning describes very well what an anchor does: It anchors the virtual world into the real world. Another reason is, that the term \emph{marker} is already established in the context of augmented reality, which this thesis also relates to.
 
 The placement of anchors is very important for a game and is directly associated with the user experience. Because anchors are those positions, where the gameplay usually takes place, players may easily be disappointed if an anchor is either too far away to reach it or if it is at a location not (without further ado) accessible for civilians (such as military areas, airports or the ocean). So anchors have to be placed in a way that they are accessible for all players.
@@ -177,7 +177,7 @@ Hock (TODO name) proposed an automatic placement based on real-world objects, na
 
 The definition of an anchor says, that it is a "well-defined position". In the following, the term anchor is not only the position but also refers to the real-world object itself to describe the kind of blurring of reality and virtuality and the strong relationship between the anchor and its position. This blurring takes place via an object at a well defined position.
 
-Later on, this thesis will define the term of a <em>natural anchor</em> to solve this ambiguity (see chapter \ref{sec:conceptAnchors}).
+Later on, this thesis will define the term of a <em>natural anchor</em> to solve this ambiguity (see chapter \ref{sec:anchorsConcept}).
 
 The advantage of Hock's (TODO name) approach is, that it not only saves the expanses of the a priori design of the anchors, because street name signs are already there. Also the spreading of these signs is very useful for a location-based exergame. There are very few populated regions with no street name signs.
 
@@ -449,11 +449,7 @@ For the classification (the last step of the vehicle recognition process from fi
 
 Experiments of \citep{siddiqui2015robust} showed that the Single Dictionary, contrary to the expectations, slightly outperforms the Modular Dictionary. On the other hand, the dictionary training time is much less for the Modular Dictionary. However, for an application, where the dictionary is built offline and does not need to be updated (or only seldomly) during runtime, the Single Dictionary is the better choice.
 
-TODO: Move the rest into the intro of the VMMR-Concept-chapter. Als Entscheidungsfindung: BoW ist besser als Concatenation, weil ... hat aber auch Nachteile (spatial info). Damit klar ist, dass das meine Schlüsse sind und nicht die aus der Arbeit von Siddiqui!!
-
-The bag-of-words model implicates some advantages in contrast to the local features concatenation approach by \citeauthor{petrovic2004analysis}. Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified. Another advantage is the robustness to slight changes in the camera roll-angle or in the perspective. Due to the local descriptors (in this case SURF, which is rotation invariant), rotated local features would still result in the same bag-of-words histogram.
-
-A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. TODO: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms).
+TODO: Der folgende Absatz kann eigentlich weg. Ich habe keine Zeit mehr dafür und außerdem ist er hier fehl am Platz!!
 
 To solve this problem, a <em>Geometric Validation</em> as seen in the Vehicle Make recognition system proposed by TODO [21] could be applied. Another way to retain the spatial information of a local feature to some extent is to use a grid-based Global Representation (TODO: describe how this would look like, look at [3] 3.2.1, and see scribble in State of the Art Google Doc)
 TODO: IMPORTANT: A proposal to solve this should NOT be made inside State of the Art!!! And only do this, if there's enough time at the end.
@@ -491,12 +487,12 @@ As VMMR is an important part of this game, an approach for this is proposed in t
 \section{Location-based Exergame using AR}
 This section is about the preparation and evaluation of the basic concepts to build a location-based exergame. It first discusses the type and how to integrate anchors, then it generally evaluates the properties of such games that motivate people to play and to move. Later, the usage of augmented reality as a technology to improve the user experience is discussed. A list of requests for a location-based exergame as a result of this evaluation is presented in the final section.
 
-\subsection{Anchors}\label{sec:conceptAnchors}
-As a reminder, <em>“anchors in pervasive [...] games are well defined positions, where reality and virtuality are blurred”</em> [26]. An exergame that shall be playable all over the world also requires anchors placed all over the world.
+\subsection{Anchors}\label{sec:anchorsConcept}
+As a reminder, <em>"anchors in pervasive [...] games are well defined positions, where reality and virtuality are blurred"</em> [26]. An exergame that shall be playable all over the world also requires anchors placed all over the world.
 
-In the State of the Art chapter (see TODO), many approaches for creating anchors have been proposed with pros and cons. It turned out that designer placed anchors are usually well-placed and well-fitted to the game’s purpose, but include an expensive design process. As a result, games with designer placed anchors mostly provide content for only a few limited regions.
+In chapter \ref{sec:anchorsStateOfTheArt}, many approaches for creating anchors have been proposed with pros and cons. It turned out that designer placed anchors are usually well-placed and well-fitted to the game’s purpose, but include an expensive design process. As a result, games with designer placed anchors mostly provide content for only a few limited regions.
 
-On the other hand, placement of anchors by the users takes the work out of the designer’s hands and provides the possibility to create content all over the world. As a drawback, the quality of such anchors usually suffers and depends on the goodness of the editor and on the user’s design-skills. Another disadvantage is, that the user must pass the design-phase before he is able to play the game. Such an approach is not suited for a game that smoothly integrates into the player’s everyday life and shall every time be playable without any pre-setup.
+On the other hand, placement of anchors by the users takes the work out of the designer’s hands and provides the possibility to create content all over the world. As a drawback, the quality of such anchors usually suffers and depends on the goodness of the editor and on the user's design-skills. Another disadvantage is, that the user must pass the design-phase before he is able to play the game. Such an approach is not suited for a game that smoothly integrates into the player’s everyday life and shall every time be playable without any pre-setup.
 
 The automatic anchor generation offers a good middle course for this request, as it doesn’t include an expensive design process but nevertheless produces well-placed anchors depending on the creation rule.
 
@@ -507,7 +503,7 @@ As a solution, this thesis introduces a new term, the <em>natural anchor</em>, w
 
 This means, that the real object and the virtual object are semantically the same. In Hock’s (TODO name) game <em>StreetConqAR</em>, a street name sign in reality is also a street name sign in the virtual game world. In contrast to that, anchors in Ingress or Pokémon GO are often placed at distinct objects like monuments or landmarks, though, but in the game world, the semantic meaning of these objects is different. They turn into portals for Ingress and into PokéStops or gyms for Pokémon GO.
 
-This thesis proposes to use real-world vehicles as natural anchors for an exergame. The way these are integrated into the gameplay and a discussion about the characteristics of this special type of anchor can be found in chapter TODO RacecAR GO and TODO RacecAR GO->Anchors, respectively.
+This thesis proposes to use real-world vehicles as natural anchors for an exergame. The way these are integrated into the gameplay and a discussion about the characteristics of this special type of anchor can be found in chapter \ref{sec:usageOfAnchors}.
 
 \subsection{The Art of Motivating People to do Something for their Health}
 In the previous chapter, many different examples of exergames have been listed, each having its own approach to motivate its players to do something positive for their health. The key seems to be to encourage the players by something that is fun. This something’s main intention is not doing sports. The health aspect is just a side-effect of playing the game.
@@ -532,17 +528,20 @@ As discussed in the State of the Art chapter, augmented reality is an up-and-com
 
 \subsection{Requirements}
 To create a successful exergame that motivates its players to do something for their health, following requirements (\emph{GR} for game request) can be deduced from the previously said:
-\begin{description}
-  \item[GR1:] The game has to be playable everywhere at anytime
-  \item[GR2:] The players must be able to start a game session without needing any previous setup
-  \item[GR3:] The game uses a principle to motivate players to move
-  \item[GR4:] The game integrates augmented reality in a reasonable and supporting manner
-\end{description}
+\begin{itemize}
+  \item\textbf{GR1:} The game has to be playable everywhere at anytime
+  \item\textbf{GR2:} The players must be able to start a game session without needing any previous setup
+  \item\textbf{GR3:} The game uses a principle to motivate players to move
+  \item\textbf{GR4:} The game integrates augmented reality in a reasonable and supporting manner
+\end{itemize}
 \emph{GR1} contains two aspects of the game. The first one relates to the game’s platform and the needed hardware. To be playable everywhere, the game should run on a mobile device. The second aspect is the game content (the anchors), that has to be available everywhere a player could have the idea to go for a quick session.
 
 
 \section{Concept of RacecAR GO}
-TODO: Icon of RacecAR GO goes here (small with much margin, about half a page)
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.25\linewidth]{gfx/app_icon}
+\end{figure}
 
 In this section, the concept of the game <em>RacecAR GO</em>, that uses real-world vehicles as anchors, is presented. It shows approaches to fulfill the previously declared \emph{GRs} and also discusses challenges that accompany them.
 
@@ -552,45 +551,60 @@ RacecAR GO is a location-based exergame. It’s played outside on a mobile devic
 Not only is the name RacecAR GO akin to Pokémon GO, also the gameplay is. This is because Pokémon GO motivated millions of people to play and to move, so its concept can be regarded as exemplary.
 
 \subsection{Platform}
-RacecAR GO is realized as a client-server app. The client app is available for both, iOS and Android. The advantage of current devices running iOS or Android is, that they usually come with a GPS sensor and mobile internet. The server stores and manages all user data and attends to the recognition of the make and the model of a captured car (for an illustration with some exemplary tasks see fig. (TODO: Picture that shows the communication and the tasks of each side.
-Client: camera capture of vehicle, AR, location-tracking
-Server: VMMR, User-Management, Game-Data handling)
-See scribble in google doc
-)
+RacecAR GO is realized as a client-server app. The client app is available for both, iOS and Android. The advantage of current devices running iOS or Android is, that they usually come with a GPS sensor and mobile internet. The server stores and manages all user data and attends to the recognition of the make and the model of a captured car (for an illustration with some exemplary tasks see figure \ref{fig:platform}).
 
-\subsection{Story}
-TODO:
-Hier das Storyboard zeigen. Die einzelnen Bereiche werden in den folgenden Sections erklärt, wie z. B. der Capturing-Process. Dort wird dann wieder auf das Storyboard hier verwiesen.
-Storyboard:
-Anzeige von Wert eines Autos
-Anzeige des gesammelten Geldes
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.95\linewidth]{gfx/platform}
+        \caption{Used platforms with tasks}
+        \label{fig:platform}
+\end{figure}
 
 \subsection{Gameplay}
-The gameplay is described on the basis of the storyboard (see section TODO). Each subsection inside this section refers to one of the storyboard’s views. A player starts the game by creating an account or by being automatically logged in with his existing account.
+The gameplay is described on the basis of the storyboard in figure \ref{fig:storyboard}. Each subsection inside this section refers to one of the storyboard's views. A player starts the game by creating an account or by being automatically logged in with his existing account.
 The game has a centralized structure, i. e. each view is accessed via the menu. With a <em>Back</em> button, the user can always return view by view back to the menu. The menu has six entries, each representing one area of the app:
-\begin{description}
-  \item[Capturing:] To capture new vehicles
-  \item[Garage:] Shows all captured vehicles with its properties. Vehicles can also be upgraded here
-  \item[Map:] Shows a map displaying nearby car dealers or playgrounds
-  \item[Car Dealer:] To sell captured cars to
-  \item[Playground:] To compete with other players
-  \item[Settings:] Shows the game settings
-\end{description}
+\begin{itemize}
+  \item\textbf{Capturing:} To capture new vehicles
+  \item\textbf{Garage:} Shows all captured vehicles with its properties. Vehicles can also be upgraded here
+  \item\textbf{Map:} Shows a map displaying nearby car dealers or playgrounds
+  \item\textbf{Car Dealer:} To sell captured cars to
+  \item\textbf{Playground:} To compete with other players
+  \item\textbf{Settings:} Shows the game settings
+\end{itemize}
 The user is able to achieve money during play, so his current credit is always displayed at the top bar of the game. This is for a motivational reason, because the player earns money by physically moving with a speed less than seven km/h. So always displaying the current credit will motivate him to walk farther and watch it increasing.
 
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/storyboard}
+        \caption{Storyboard of RacecAR GO}
+        \label{fig:storyboard}
+\end{figure}
+TODO:
+Anzeige von Wert eines Autos
+Anzeige des gesammelten Geldes
+Anzeige der Spielkarte
+Anzeige jedes Views mit exemplarischem Inhalt
+
 \subsubsection{Capturing}
-At the start of the game, the player finds himself directly in the <em>Capturing</em> view, ready to capture new vehicles for his garage. This fulfills GR2 which demands that the player must be able to play without any annoying setup. This view is also accessible via the menu. The capturing process is divided into four steps and is illustrated in figure TODO.
+At the start of the game, the player finds himself directly in the <em>Capturing</em> view, ready to capture new vehicles for his garage. This fulfills GR2 which demands that the player must be able to play without any annoying setup. This view is also accessible via the menu. The capturing process is divided into four steps and is illustrated in figure \ref{fig:capturing}.
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/capturing}
+        \caption{Capturing Process of RacecAR GO}
+        \label{fig:capturing}
+\end{figure}
+
 \begin{enumerate}
   \item As long as the capturing process is in step 1, the device shows the vehicle as the camera takes it. To capture it, the player has to point the device's camera towards the desired vehicle's front view or back view. In the background, the app sends a picture of the vehicle to the server. The picture has to be the front view or the back view, because along with the picture, the hashed number plate is sent to the server. This is to check, if the user hasn't captured the car yet. If he has, he cannot capture it for a second time.
 
-Otherwise, the server performs a VMMR (see section TODO) and sends the retrieved make and model along with its respective properties (in the example a "VW K\"afer" with a matching property-set) back to the client.
-  \item With the received make and model, the app chooses the correct virtual vehicle with that make and model and blends it above the real vehicle (see section TODO Augmented Reality in this RacecAR GO section for details).
-The player is then able to walk around the real vehicle while he only sees the virtual one through the device. He can interact with the vehicle by touching on the door or on the hood to open and close it. To continue, the player has two options. He can either touch the trash icon and abort the capturing, or he can opt for the garage icon, to park the vehicle in his garage.
+Otherwise, the server performs a VMMR (see chapter \ref{sec:vmmrConcept}) and sends the retrieved make and model along with its respective properties (in the example a "VW K\"afer" with a matching property-set) back to the client.
+  \item With the received make and model, the app chooses the correct virtual vehicle with that make and model and blends it above the real vehicle (see chapter \ref{sec:usageOfAR} for details). Additionally, it retrieves the vehicle's color from the captured image. This isn't a straightforward task, as there are multiple colors with multiple shadings occurring on a vehicle. One approach is to retrieve the color class containing the most pixels and choose the most similar color from the manufacturer's list of varnishes for that vehicle.
+
+The player is then able to walk around the real vehicle while he only sees the colored virtual one through the device. He can interact with the vehicle by touching on the door or on the hood to open and close it. To continue, the player has two options. He can either touch the trash icon and abort the capturing, or he can opt for the garage icon, to park the vehicle in his garage.
   \item To park the vehicle in his garage, the player first has to fulfill a small task. For the task, a vehicle part appears that matches to the captured vehicle. This part could be a door, a steering wheel, a car seat, an engine or another part the captured vehicle consists of. In the example, it’s an engine. This part overlaps the vehicle and is fixed to the device’s screen, such that when the player moves around the vehicle, the part overlaps different areas of it. The player's task is to place this part at the correct position. E. g. for the engine and the VW K\"afer (which has a rear engine), the user would have to walk around the car, touch on the engine cover to open it, place the engine at the correct position (by moving the device such that the engine icon overlaps the position where the engine of the real car would be) and finally touch the wrench icon.
   \item If the placement is correct, the vehicle will be parked in the player's garage. If not, the capturing will be aborted. The vehicle is stored along with its property-set, containing its power, weight, emission, etc. This data is retrieved from an API like <em>CarQuery</em> \footnote{\url{http://www.carqueryapi.com/}}. In most cases, it's ambiguous to deduce the property-set from a vehicle picture, as the appearance of the vehicle doesn’t change (or only marginally) for different engine configurations. For this reason, the server would have to search clues in the picture, like the exhaust or additional letters on the backside or the grill of the car that indicate a distinct configuration.
 \end{enumerate}
-
-TODO: Also retrieve the vehicle’s color by extracting it from the picture and matching it with available colors from the manufacturer for that model
 
 \subsubsection{Garage}
 The captured vehicle is then parked in the player’s garage. The garage can only be accessed via the menu. It lists all the vehicles, the player has already captured. Touching one vehicle item opens the vehicle’s details. Inside the details, the vehicle’s properties as well as its 3D-model are shown. If there’s a small arrow behind a property, it means that the player has enough money to afford an upgrade for that property. Touching the arrow performs the upgrade and pays the money from the user's credit.
@@ -613,7 +627,7 @@ See Notes
 \subsubsection{Settings}
 In the settings, the player is able to change his password and to enter the battery saving mode (as in Pokémon GO) which turns off the screen if it is not directed towards the user. This is necessary because an app with these requirements will consume much battery power. The durability of the battery would otherwise be a killjoy for motivating the player to move and to immerse into the game.
 
-\subsection{Usage of Anchors}
+\subsection{Usage of Anchors}\label{sec:usageOfAnchors}
 This section is about the types of anchors that are used by RacecAR GO and about their implications. As described in the gameplay section TODO, the game content includes three different location-based items that serve as an anchor: Vehicles, car dealers and playgrounds (actually there are four, as the user can be regarded as a natural anchor itself, since he is integrated into the game as himself, at least in the map view).
 
 In the following, the choice of the anchor for each of these items is discussed.
@@ -654,7 +668,7 @@ How to get account? TODO
 User can login with his credentials from arbitrary device to play.
 Also login via browser without geo- and camera-dependent actions like capturing cars
 
-\subsection{Usage of Augmented Reality}
+\subsection{Usage of Augmented Reality}\label{sec:usageOfAR}
 As denoted in the gameplay, augmented reality is used inside this app to blend the virtual vehicle above the real vehicle during the capturing process. It is expected that the way of blending the real and the virtual world - by the transformation of a real car over an augmented car into a virtual car - greatly improves the immersion effect for the player (\emph{GR4}).
 
 The task is to blend the virtual vehicle in a way above the real vehicle, such that both objects overlap perfectly and the player is able to walk around the vehicle to regard it from different views. To solve this task, there are multiple approaches, which are discussed in the following.
@@ -780,7 +794,7 @@ The last approach is to use the smartphone’s motion sensors to deduce the vehi
 Both, the second and the third approach are applicable to the task. Because of the expectedly high computational resources needed for the model-based tracking on a mobile device, the third one will be implemented.
 
 
-\section{Concept of Vehicle Make and Model Recognition}
+\section{Concept of Vehicle Make and Model Recognition}\label{sec:vmmrConcept}
 In this chapter, the VMMR system that is used in <em>RacecAR GO</em> will be presented. Until now, the work on vehicle recognition has mainly been dedicated to the subject of security observation of parking spaces, toll stops, country borders, etc. In this thesis, the domain of application is something different, using it in a mobile game and capturing the vehicle images with a mobile phone's camera.
 TODO one more sentence to lead to Ambiguity and Multiplicity section.
 
@@ -803,16 +817,20 @@ TODO (Inter- and intra-make.
 
 \subsection{Overview}
 From the use cases of this game, some requirements for the VMMR system (\emph{VR} for VMMR request) can be deduced:
-\begin{description}
-  \item[VR1:] Robustness to partial occlusion: In reality, there is rarely enough clearance around a parked car to take a photo of it without another object occluding a part of it. The other object might be a bush, a tree, a street light, another car, etc (TODO: show picture of occluded vehicles). So if the recognition system cannot cope with a photo of a partially occluded vehicle, the player might be irritated while looking for vehicles with enough clearance around them and might lose fun to continue playing.
-  \item[VR2:] Robustness to different camera roll-angles: As the input image does not come from a fixed camera but from a smartphone’s camera held by a person, it cannot be ensured that the smartphone is always horizontally aligned with the photographed car’s horizontal axis.
-  \item[VR3:] Robustness to different lighting conditions: There's the legend of a project of the US army trying to recognize partially hidden tanks in the woods. So they trained a neural net with pictures of woods with tanks behind trees and pictures of the same woods without tanks. The result was impressive as the net recognized images that hadn't been used for training. After that, the researchers took more pictures of the same woods, but the net failed to discriminate between the two classes. Finally, it turned out, that the pictures with tanks in it were taken on a cloudy day, while those without tanks were taken on a sunny day. <em>“The net had learned to recognize and generalize the difference between a woods with and without shadows!”</em> [35]. To be able to play the game in the daytime as well as at night-time, the recognition system has to be independent from the lighting conditions of the photographed vehicles.
-  \item[VR4:] Ability to cope with ambiguity and multiplicity issues: Mentioned above, the proposed system must be able to differentiate between similar vehicles of different make or model (ambiguity) and not to differentiate between vehicles of the same make and model but with a different appearance (e. g. due to different generations of the model) (multiplicity).
-\end{description}
+\begin{itemize}
+  \item\textbf{VR1:} Robustness to partial occlusion: In reality, there is rarely enough clearance around a parked car to take a photo of it without another object occluding a part of it. The other object might be a bush, a tree, a street light, another car, etc (TODO: show picture of occluded vehicles). So if the recognition system cannot cope with a photo of a partially occluded vehicle, the player might be irritated while looking for vehicles with enough clearance around them and might lose fun to continue playing.
+  \item\textbf{VR2:} Robustness to different camera roll-angles: As the input image does not come from a fixed camera but from a smartphone’s camera held by a person, it cannot be ensured that the smartphone is always horizontally aligned with the photographed car’s horizontal axis.
+  \item\textbf{VR3:} Robustness to different lighting conditions: There's the legend of a project of the US army trying to recognize partially hidden tanks in the woods. So they trained a neural net with pictures of woods with tanks behind trees and pictures of the same woods without tanks. The result was impressive as the net recognized images that hadn't been used for training. After that, the researchers took more pictures of the same woods, but the net failed to discriminate between the two classes. Finally, it turned out, that the pictures with tanks in it were taken on a cloudy day, while those without tanks were taken on a sunny day. <em>“The net had learned to recognize and generalize the difference between a woods with and without shadows!”</em> [35]. To be able to play the game in the daytime as well as at night-time, the recognition system has to be independent from the lighting conditions of the photographed vehicles.
+  \item\textbf{VR4:} Ability to cope with ambiguity and multiplicity issues: Mentioned above, the proposed system must be able to differentiate between similar vehicles of different make or model (ambiguity) and not to differentiate between vehicles of the same make and model but with a different appearance (e. g. due to different generations of the model) (multiplicity).
+\end{itemize}
 
-As proved by [3], a bag-of-words based recognition model is very powerful, coming with robustness to occlusion and with robustness to slight changes in the camera’s roll-angle (along with local descriptors that are rotation independent, like SURF). Hence, the recognition system in RacecAR GO will take advantage of this, meeting requirements VR1 and VR2. For details of the usage of the bag-of-words model, see TODO reference chapter below that explains usage of BoW and reference chapter with decision for the local descriptor ORB.
+As proved by [3], a bag-of-words based recognition model is very powerful, coming with robustness to occlusion and with robustness to slight changes in the camera’s roll-angle (along with local descriptors that are rotation independent, like SURF).
 
-To gain independence from lighting conditions (VR3) - and thus to avoid training a classifier that can solely tell the difference between pictures taken in the morning and pictures taken at noon - three things are done. The first thing is populating the training set with multiple images per make-model class, whereas the per-class-images are taken at different times of day by different kinds of weather (see TODO reference chapter with dataset construction - Implementation?). The second thing is the preprocessing of each vehicle image. Lighting information will be subtracted out of an image before it enters the recognition system (see TODO reference chapter “Region of Interest -> Preprocessing” just below). Third thing is the usage of local feature descriptors, each of which is invariant to illumination changes.
+The bag-of-words model implicates some advantages in contrast to the local features concatenation approach by \citeauthor{petrovic2004analysis}. Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified. Another advantage is the robustness to slight changes in the camera's roll-angle or in the perspective. Depending on the local descriptors (\citeauthor{siddiqui2015robust} used SURF, which is rotation invariant), rotated local features would still result in the same bag-of-words histogram.
+
+A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. TODO: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms). Nevertheless, the recognition system in RacecAR GO will take advantage of bag-of-words model, meeting requirements \emph{VR1} and \emph{VR2}.
+
+To gain independence from lighting conditions (\emph{VR3}) - and thus to avoid training a classifier that can solely tell the difference between pictures taken in the morning and pictures taken at noon - three things are done. The first thing is populating the training set with multiple images per make-model class, whereas the per-class-images are taken at different times of day by different kinds of weather (see TODO reference chapter with dataset construction - Implementation?). The second thing is the preprocessing of each vehicle image. Lighting information will be subtracted out of an image before it enters the recognition system (see TODO reference chapter “Region of Interest -> Preprocessing” just below). Third thing is the usage of local feature descriptors, each of which is invariant to illumination changes.
 
 To fight the multiplicity issues, as demanded by requirement VR4, models of different generations are trained into different classes (see TODO Implementation - Fighting Multiplicity Issues). To handle the ambiguity challenges, the classification process will be optimized (see TODO classification chapter).
 
