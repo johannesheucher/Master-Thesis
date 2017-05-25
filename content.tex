@@ -181,7 +181,7 @@ Later on, this thesis will define the term of a <em>natural anchor</em> to solve
 
 The advantage of Hock's (TODO name) approach is, that it not only saves the expanses of the a priori design of the anchors, because street name signs are already there. Also the spreading of these signs is very useful for a location-based exergame. There are very few populated regions with no street name signs.
 
-\subsection{Augmented Reality Games}
+\subsection{Augmented Reality Games}\label{sec:augmentedRealityStateOfTheArt}
 I still remember my astonishment when I first saw the virtual shark, rising behind Marty McFly and then snapping at him in <em>Back to the Future Part II</em> (see TODO add a photo). The movie was released in 1989, wherein Marty watches the shark during his visit of the future year of 2015.
 
 Although the year 2015 has passed, today’s technology is not able to produce such a holographic shark as it has been predicted by the movie (nor has the movie <em>Jaws 19</em> been released, the shark was advertising for).
@@ -367,7 +367,7 @@ Nacer Farajzadeh and Negin S. Rezaei (TODO: name) compared these two approaches 
 
 Examples for Vehicle Make Recognition are TODO.
 
-\subsection{Vehicle Make and Model Recognition}
+\subsection{Vehicle Make and Model Recognition}\label{sec:vmmrStateOfTheArt}
 The most comprehensive kind of vehicle recognition and also one focus of this work is Vehicle Make and Model Recognition (VMMR), the identification of its make as well as its model (like Mercedes SL, BMW 3 Series, Porsche 911, etc.). For surveillance purposes, this recognition type extends the conventional number plate recognition. It can be used to double-check a recognized number with the corresponding make and model to fight the problem of false number plates. There are plenty of works referring to this topic and also some ready-to-use systems like Car-Rec [6] or the <em>VisualSearch</em> feature \footnote{\url{http://magazin.autoscout24.de/microsites/services/mobile/de-at/txt/android_txt3.html}} of the AutoScout24 app \footnote{\url{https://www.autoscout24.de/}} that do VMMR.
 A surveillance and security application for static cameras is eyedea \footnote{\url{http://www.eyedea.cz/make-and-model-recognition/}}, that is able to recognize 500 vehicle models of the types bus, car, truck and van.
 
@@ -551,7 +551,7 @@ RacecAR GO is a location-based exergame. It’s played outside on a mobile devic
 Not only is the name RacecAR GO akin to Pokémon GO, also the gameplay is. This is because Pokémon GO motivated millions of people to play and to move, so its concept can be regarded as exemplary.
 
 \subsection{Platform}
-RacecAR GO is realized as a client-server app. The client app is available for both, iOS and Android. The advantage of current devices running iOS or Android is, that they usually come with a GPS sensor and mobile internet. The server stores and manages all user data and attends to the recognition of the make and the model of a captured car (for an illustration with some exemplary tasks see figure \ref{fig:platform}).
+RacecAR GO is realized as a client-server app. The client app is available for both, iOS and Android. The advantage of current devices running iOS or Android is, that they usually come with a camera, a GPS sensor and mobile internet. The server stores and manages all user data and attends to the recognition of the make and the model of a captured car (for an illustration with some exemplary tasks see figure \ref{fig:platform}).
 
 \begin{figure}[bth]
   \centering
@@ -560,7 +560,7 @@ RacecAR GO is realized as a client-server app. The client app is available for b
         \label{fig:platform}
 \end{figure}
 
-\subsection{Gameplay}
+\subsection{Gameplay}\label{sec:gameplay}
 The gameplay is described on the basis of the storyboard in figure \ref{fig:storyboard}. Each subsection inside this section refers to one of the storyboard's views. A player starts the game by creating an account or by being automatically logged in with his existing account.
 The game has a centralized structure, i. e. each view is accessed via the menu. With a <em>Back</em> button, the user can always return view by view back to the menu. The menu has six entries, each representing one area of the app:
 \begin{itemize}
@@ -616,30 +616,53 @@ The map shows the surroundings of the player. Its purpose is to visualize the lo
 This view is, like the playground, only available, if the player is physically near to a car dealer marked in the map. Here, he can sell his captured cars. This might be useful for frequent cars, as the player should usually have plenty of them in his garage. Nonetheless, the dealer pays a much better price for rare cars.
 
 \subsubsection{Playground}
-TODO: Here, describe the process of playing happy families. Also refer to upgrades , because only now the reader understands, why a car can get upgrades.
+When I was a schoolchild, me and my friends played a card game every morning in the school bus. Where I come from, this game is called \emph{Supertrumpf} or \emph{Autoquartett}. Internationally, it's also known as \emph{Top Trumps}. A card set relates to one theme, mostly cars. A card displays a car of a specific make and model, along with its property set, mostly including the number of cylinders, the maximum speed and the engine power (see figure TODO for an example). Each player gets the same number of cards in the beginning of the game and has to stack them, such that he (and no one else) cannot see another card than the topmost one. The player left to the giver starts to meld a property with the associated value of his topmost card. The other players announce the respective value of their card in turn. The player with the best property-value wins that round and receives all topmost cards, which he has to put at the bottom of his card stack. The winner also melds for the next round. If there's a draw, all players with the same property-value play a further round with their next card. The winner then receives the cards of both rounds. The game ends, if one player has won all of the cards.
 
-TODO: Show picture of a happy families play card.
-The design of the play card in my game should look like one of these, at least in the design in this thesis.
-Properties:
-Eco bilance
-See Notes
+For RacecAR GO, Supertrumpf will be adapted to be played at the playground locations. Entering such a location, the player has the possibility to start or to join a game with other players at that location. The own card stack will be represented by the vehicles in his garage. During the game, the app displays a virtual play card as the top of the stack. Melding a property is done by touching the respective field on the virtual card. A message after each round informs each player who has won that round. Losing a virtual card also means losing the respective vehicle out of the garage. Winning cards of other players also means that the respective vehicles (including possible upgraded properties) are added to the winner's garage. A player can leave the game whenever he likes to. He necessarily leaves the game as soon as his card stack (and so his garage) is empty. A game necessarily ends, if one player has gained the vehicles of all other players.
+
+RacecAR GO uses the following vehicle properties to list on a play card:
+\begin{itemize}
+  \item\textbf{Engine Power:} A conventionally used property in Supertrumpf.
+  \item\textbf{Maximum Speed:} Also a conventionally used property in Supertrumpf.
+  \item\textbf{Weight:} The weight of the vehicle. An important performance measure, often neglected in this kind of games, although an increasing engine power that comes along with an increasing weight doesn't necessarily improve a vehicle.
+  \item\textbf{Maximum Distance:} The maximum distance, the vehicle is expected to reach with a full fuel tank (or battery). This property has been added, because there are not only petrol heads playing the game but also people thinking of vehicles as means of transport. This kind of people are rather interested in practical measures of a vehicle than in performance measures.
+  \item\textbf{Emission:} The emission of vehicles is a hot topic nowadays. Never having seen this property on any card when I was a child, today's people should a fortiori be aware of the emissions produced by a car. This does not mean that the author of this thesis generally doesn't like vehicles with high emissions. It's rather about the conscious usage of such.
+
+Additionally, vehicles that would have lost any competition in a Supertrumpf game in my childhood will beat reputed super sports cars in this domain.
+  \item\textbf{Number of Clowns:} Denotes the number of clowns, that fit into the vehicle.
+\end{itemize}
+
+TODO: Figure
+Caption: Example of a play card showing a ..., published by TODO: footnote for publisher of card game
+
+\paragraph{Expectations}
+Players could be motivated to visit the playground locations with the prospect of winning rare and upgraded vehicles with little effort. Additionally, players will have to upgrade their vehicles to succeed in the game. As a result, players are motivated to walk by feet, as the game rewards this with virtual money, which is needed to upgrade a property.
+
+On the other hand, players could regard Supertrumpf as unfair and could get demotivated after playing, because a vehicle, including much effort to capture and much money to upgrade, can easily be lost to another player. Concurrently, opponent's rare vehicles can be won the same way. The game's evaluation has to show, if the hurdle for a player to use the playground is too high to clear. If so, a preceding step could be included, in which the player decides which vehicles of his garage shall be put onto the card stack and which ones should be left secure in his garage. This would lower the hurdle to play.
 
 \subsubsection{Settings}
 In the settings, the player is able to change his password and to enter the battery saving mode (as in Pokémon GO) which turns off the screen if it is not directed towards the user. This is necessary because an app with these requirements will consume much battery power. The durability of the battery would otherwise be a killjoy for motivating the player to move and to immerse into the game.
 
 \subsection{Usage of Anchors}\label{sec:usageOfAnchors}
-This section is about the types of anchors that are used by RacecAR GO and about their implications. As described in the gameplay section TODO, the game content includes three different location-based items that serve as an anchor: Vehicles, car dealers and playgrounds (actually there are four, as the user can be regarded as a natural anchor itself, since he is integrated into the game as himself, at least in the map view).
+This section is about the types of anchors that are used by RacecAR GO and about their implications. As described in section \ref{sec:gameplay}, the game content includes three different location-based items that serve as an anchor: Vehicles, car dealers and playgrounds (actually there are four, as the user can be regarded as a natural anchor itself, since he is integrated into the game as himself, at least in the map view).
 
 In the following, the choice of the anchor for each of these items is discussed.
 
 \paragraph{Vehicle Anchors}
 In the game, vehicles function as natural anchors. This means objects, that exist in both, the real world and the virtual world. The big advantage of such anchors is, that they do not have to be distributed a priori by a designer, they are already there.
 
-A special characteristic of the vehicle as anchor is, that it tends to be not fixed in its location. This breaks the criterion of an anchor as a “well-defined position” [26]. But since the vehicle as natural anchor does only persist during the capturing process, where its location is fixed (hopefully, but see section TODO for hazards), this fact hasn’t any impact on the gameplay.
+A special characteristic of the vehicle as anchor is, that it tends to be not fixed in its location. This breaks the criterion of an anchor as a "well-defined position" [26]. But since the vehicle as natural anchor does only persist during the capturing process, where its location is fixed (hopefully, but see section \ref{sec:hazards} for hazards), this fact hasn't any impact on the gameplay.
 
 A positive effect of using vehicles is, that urban areas become attractive to walk in. As Gehl (TODO name) states, today’s cities are car-friendly and unwalkable [68]. People usually don’t find it very attractive to do sports there, like jogging or cycling. From the perspective of this game, these are good prerequisites to play at. Being on the prowl for seldom vehicles, a car-friendly and unwalkable environment turns into a paradise.
 
-In contrast to the anchors placed in Ingress or Pokémon GO, the actual distribution of the vehicle anchors cannot be controlled by the game. The distribution changed continuously and cannot be tracked as a whole. For the capturing process, only the local distribution is important. Considering the map showing the number of vehicles per capita for regions in the whole world (see figure TODO World-vehicles-per-capita from drive images and reference "reprinted from" [67]), there are only a few regions, where it could be difficult for a player to find enough vehicles to have fun playing this game (e. g. in Central Africa or in parts of Asia). So the predefined \emph{GR1}, that the game has to be playable everywhere at anytime, is fulfilled by the vehicle anchors.
+In contrast to the anchors placed in Ingress or Pokémon GO, the actual distribution of the vehicle anchors cannot be controlled by the game. The distribution changed continuously and cannot be tracked as a whole. For the capturing process, only the local distribution is important. Considering the map showing the number of vehicles per capita for regions in the whole world (see figure \ref{fig:worldVehicles}), there are only a few regions, where it could be difficult for a player to find enough vehicles to have fun playing this game (e. g. in Central Africa or in parts of Asia). So the predefined \emph{GR1}, that the game has to be playable everywhere at anytime, is fulfilled by the vehicle anchors.
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.95\linewidth]{gfx/world_vehicles_per_capita}
+        \caption{World vehicles per capita (reprinted from \footnote{\url{https://commons.wikimedia.org/w/index.php?title=File:World_vehicles_per_capita.svg&oldid=242848798}})}
+        \label{fig:worldVehicles}
+\end{figure}
 
 There are also some drawbacks, though. The real-world part of the natural anchor does not have to be distributed, indeed, but the virtual part, the counterpart of each real-world vehicle, has to be created a priori. The VMMR machine has to be trained for each make-model as well. A solution to this problem is to only cover a limited amount of make-models. These include the most-frequent ones, like the VW Golf, which exists nearly all over the world, but also a few rare models. With such a starter-set, the game can be played everywhere, whereas only a subset of the cars around the player can be captured. A crowd-based approach to extend this starter-set is possible. If a player tries to capture a vehicle, that is not yet supported by the app, he would be asked to specify the make and the model. The VMMR machine could then use this data to train itself. The missing virtual vehicle counterparts could also be submitted by a crowd. As it is done for Ingress, there should be a reviewer to check the user-created content.
 
@@ -654,39 +677,32 @@ Car dealers are also represented by natural anchors. This means, that car dealer
 \paragraph{Playground Anchors}
 As opposed to this, playgrounds are an essential part of the gameplay, without which all the hunting and gathering would be aimless. For this reason, well-distributed anchors are needed. Whereas most vehicles need gas to drive, gas stations can be considered as well enough distributed, such that most players are able to visit one without much effort.
 
-\subsection{Usability}
-TODO (low prio):
-Easy to use, no (complicated) setup, start immediately
-Designing the UI of MaM - user focussed, referring to Oppermann 1.3.3.1, 1.3.4.1, participatory design - not only UI but the design of the whole app (software, technology, UI, …)
-Discuss devices to use: Handheld (smartphone, tablet), head-mounted - see Hock 3.3.1
-Prerequisites to play: Smartphone (limitation to iOS later) with mobile internet access, a camera (and GPS?)
-
-\subsection{Users}
-TODO (low prio):
-Accounts on server
-How to get account? TODO
-User can login with his credentials from arbitrary device to play.
-Also login via browser without geo- and camera-dependent actions like capturing cars
-
 \subsection{Usage of Augmented Reality}\label{sec:usageOfAR}
 As denoted in the gameplay, augmented reality is used inside this app to blend the virtual vehicle above the real vehicle during the capturing process. It is expected that the way of blending the real and the virtual world - by the transformation of a real car over an augmented car into a virtual car - greatly improves the immersion effect for the player (\emph{GR4}).
 
 The task is to blend the virtual vehicle in a way above the real vehicle, such that both objects overlap perfectly and the player is able to walk around the vehicle to regard it from different views. To solve this task, there are multiple approaches, which are discussed in the following.
 
 \paragraph{Square Markers}
-As described in State of the Art (TODO reference), square markers are very efficient to track, even for mobile devices. Using square markers for the vehicle capturing process would implicate that there have to be square marker pictures being placed on the real-world vehicle, which isn’t the case.
+As described in chapter \ref{sec:augmentedRealityStateOfTheArt}, square markers are very efficient to track, even for mobile devices. Using square markers for the vehicle capturing process would implicate that there have to be square marker pictures being placed on the real-world vehicle, which isn't the case.
 
 \paragraph{Number Plate as Marker}
-This approach uses the vehicle’s number plate as the AR marker. The marker tracking is realized with NFT (see TODO State of the Art -> Natural Feature Tracking). During the capturing process, the number plate of the vehicle gets detected. When the camera moves, the tracked features from the number plate are used to calculate the location and pose of the vehicle.
+This approach uses the vehicle's number plate as the AR marker. The marker tracking is realized with NFT (see chapter \ref{sec:augmentedRealityStateOfTheArt}). During the capturing process, the number plate of the vehicle gets detected. When the camera moves, the tracked features from the number plate are used to calculate the location and pose of the vehicle.
 
-ARToolKit (TODO reference) provides an implementation for this for mobile devices. The realtime-calculation of the location and pose of the vehicle from its number plate performed quite well, producing robust results for blending the virtual vehicle above the real one (although this only works for perspectives, where the number plate is visible, i. e. not for the vehicle’s side view). But the initial tracking of the number plate’s features took up to a minute (for a number plate width of 100px on a Intel i7 of the year 2012). This is because the process has been designed to train the feature recognizer in an offline phase and just use it in the online phase without changing the set of known features. Since the number plate of the captured car is not known in the offline phase and since the player doesn’t want to wait one minute until the AR magic begins, this technique is not applicable.
+ARToolKit provides an implementation for this for mobile devices. The realtime-calculation of the location and pose of the vehicle from its number plate performed quite well, producing robust results for blending the virtual vehicle above the real one (although this only works for perspectives, where the number plate is visible, i. e. not for the vehicle's side view). But the initial tracking of the number plate's features took up to a minute (for a number plate width of 100px on a Intel i7 of the year 2012). This is because the process has been designed to train the feature recognizer in an offline phase and just use it in the online phase without changing the set of known features. Since the number plate of the captured car is not known in the offline phase and since the player doesn’t want to wait one minute until the AR magic begins, this technique is not applicable.
 
 \paragraph{EURO-Badge as Marker}
-In most european countries, a number plate contains a euro badge (see TODO image). In contrast to the number plate, features of the euro badge can be tracked in the offline phase, because the badge is the same on each number plate.
+In most European countries, a number plate contains a euro badge (see figure \ref{fig:euroBadge}). In contrast to the number plate, features of the euro badge can be tracked in the offline phase, because the badge is the same on each number plate.
 Tests with ARToolKit on a mobile device resulted in an improper calculation of the location and pose of the badge, which was perhaps down to the fact that there aren’t enough (unambiguous) features to track inside this badge image.
 
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.25\linewidth]{gfx/marker_full}
+        \caption{Euro badge of a European number plate}
+        \label{fig:euroBadge}
+\end{figure}
+
 \paragraph{Model-based Tracking}
-As described in State of the Art (TODO reference), this approach relies on a 3D CAD model as reference to identify features in the captured image. Based on the reference model, its pose inside the captured image can be deduced from any perspective. Since the 3D CAD models are already present (the virtual vehicle models), this approach is very suitable to fulfill the requested task.
+As described in chapter \ref{sec:augmentedRealityStateOfTheArt}, this approach relies on a 3D CAD model as reference to identify features in the captured image. Based on the reference model, its pose inside the captured image can be deduced from any perspective. Since the 3D CAD models are already present (the virtual vehicle models), this approach is very suitable to fulfill the requested task.
 
 \paragraph{Smartphone Motion Sensors}
 Another option to blend the virtual vehicle appropriately above the real one is to use the mobile device’s motion sensors. In contrast to the aforementioned methods, this one is not vision-based. To initially fix the virtual vehicle to the real one, the position of the number plate is used. From that time on, the motion of the device is appropriately applied to the virtual object such that the player can move and rotate the device while the virtual object is fixed above the real vehicle.
@@ -697,15 +713,11 @@ This approach works well in tests, although the virtual object and the real obje
 Only the model-based tracking is able to fulfill all the requested tasks accurate enough. Only here, the user would be able to walk around the real car while the virtual car model is always overlaying it correctly. Nevertheless, it is assumed that this technique has high hardware requirements, because features in the camera image have to be tracked and matched with the reference model in realtime.
 
 \subsection{Privacy Concerns}
-TODO:
-Photographing property of other people
-Photographing number plate and sending it to the server
-Hashed for capturing
-unhashed as marker for AR
-Not storing any photographed data
-→ Use a disclaimer and instruct players to behave adequately when playing is enough?
+As mentioned before, a vehicle has to be photographed to be captured. Even more, its number plate (in hashed form) will be stored on the server. But is the personality right of the owner violated by this procedure? In Germany, the main field of application for the app, it's generally granted to publish a photo of a vehicle showing the vehicle's number plate \footnote{\url{https://www.rechtambild.de/2014/09/fotografieren-und-veroeffentlichen-von-autokennzeichen-was-ist-erlaubt/}}. The publishing of the number plate does not violate the personality right of the owner, because civilians usually cannot deduce the owner from a number plate. Nevertheless, there's no definitive right for this and it will be decided from case to case.
 
-\subsection{Hazards}
+Because the app does not publish the number plate but only stores a hashed version of it, there should be no problem with this. But to be on the safe side, place a hint in the app to urge the players to forbear capturing a vehicle, if the owner is present and does not give his permission.
+
+\subsection{Hazards}\label{sec:hazards}
 As proved by Pokémon GO, the hazards accompanying a game that is played outside are not of a minor kind. There have even been cases of death, according to the <em>Pokémon GO Death Tracker</em> [66].
 TODO:
 Discuss hazards (city traffic), unwanted public disturbance, unwanted locations (car dealer, private property?), attention at worst possible times or too much attention in general
@@ -722,12 +734,6 @@ Is it necessary? Evaluate this. Guys who want to play do usually not want to fak
 One is to store the number plate to hinder player to capture same vehicle multiple times (see TODO link Vehicle Recognition and Capturing Process)
 Capturing the photo of a car also works. How to prevent this?
 Check that players move by feet and not by car while playing the game: Like Pokémon GO (brooding eggs), the player has to be rewarded for walking by feet. For a walked distance, he could earn money to tune his cars. Although there is no deeper relation between walking by feet and earning money. Fake check would then be to only earn money for movement with speeds less than seven km/h. ( ← only the speed check belongs to this section. The earn-money-thing belongs to another section).
-
-\subsection{Business Model}
-TODO (low prio):
-Scalability
-Like Ingress and Pokemon GO: Companies pay for their locations to be used as anchors in the game, Such that players visit their company to succeed in the game
-Vehicle Trading Companies pay money to get their makes into the game or to get an area inside their trading houses where virtual cars can be bought for real money
 
 \subsection{Classification as a Location-based Exergame}
 In the previous chapter, exergames have been defined as video games, that combine healthcare exercises with gameplay fun, whereas the healthcare aspect is not primarily focused. To succeed in the game, however, physical activity is necessary.
@@ -749,19 +755,15 @@ Along with this thesis, RacecAR GO will be implemented prototypically. To match 
 \subsection{Limited Story}
 TODO: Here, print the storyboard with all the views, that are included in the prototype.
 
-The prototype focuses on the hunting and gathering of vehicles. The upgrading and selling of vehicles as well as the playground has been omitted. Without these features, a map would be useless, so it has been omitted, too.
+The prototype focuses on the hunting and gathering of vehicles. The upgrading and selling of vehicles as well as the playground has been omitted (whereas the vehicles in the garage are displayed as play cards with corresponding properties). Without these features, a map would be useless, so it has been omitted, too.
 
 \subsection{Platform}
 The prototype will only be implemented for iOS, especially for iPhones. The implementation excludes the iPad, because the game requires a mobile device, that the player always carries with him and that is compact enough to walk through the city with. It’s possible to play RacecAR GO on the iPad, however, but to experience a smooth integration of the game into the everyday life, the iPhone is the better choice.
 
-\subsection{Users}
-TODO (low prio):
-No user-management on the server-side. User-data is holistically stored on the client (name, gathered vehicles).
-
 \subsection{Vehicles}
-The type of vehicles that shall be capturable in RacecAR GO can be of an arbitrary kind, from motorbikes over racecars to trucks. A limitation for the prototype is, that only passenger cars are covered by the app. This is due to the fact, that the VMMR machine, that will be implemented along with this thesis, recognizes vehicles solely based on their front. More precisely, a specific region around the vehicle's number plate is chosen to classify the vehicle with. As motorbikes don't have a wide front and in most cases don't even have a number plate, they are not covered by the prototype. The problem with trucks (or buses) is, that the region around the number plate of a truck is not descriptive enough to differentiate it from other trucks of a different make and model (for further reading see the drawbacks in chapter \ref{sec:regionAroundNumberPlate} or refer to the ambiguity issues in TODO: State of the art: VMMR using a Bag-of-Words Model).
+The type of vehicles that shall be capturable in RacecAR GO can be of an arbitrary kind, from motorbikes over racecars to trucks. A limitation for the prototype is, that only passenger cars are covered by the app. This is due to the fact, that the VMMR machine, that will be implemented along with this thesis, recognizes vehicles solely based on their front. More precisely, a specific region around the vehicle's number plate is chosen to classify the vehicle with. As motorbikes don't have a wide front and in most cases don't even have a number plate, they are not covered by the prototype. The problem with trucks (or buses) is, that the region around the number plate of a truck is not descriptive enough to differentiate it from other trucks of a different make and model (for further reading see the drawbacks in chapter \ref{sec:regionAroundNumberPlate} or refer to the ambiguity issues in the bag-of-words section of chapter \ref{sec:vmmrStateOfTheArt}).
 
-As described above, the app comes with a starter-set of vehicles, that can be recognized and captured. For the prototype, this set is limited to 10 TODO different vehicles. See (TODO respective impl chapter) to see, which make-models have been chosen and why. Unlike to the full version of the app, there is no possibility to add further make-models but for the game designer to add them manually.
+As described above, the app comes with a starter-set of vehicles, that can be recognized and captured. For the prototype, this set is limited to 10 TODO different vehicles. See (TODO respective impl chapter) for an explanation, which make-models have been chosen and why. Unlike to the full version of the app, there is no possibility to add further make-models but for the game designer to add them manually.
 
 For each covered make-model, there is only one property-set, that is automatically applied to the respective captured vehicle.
 
@@ -794,7 +796,9 @@ The last approach is to use the smartphone’s motion sensors to deduce the vehi
 Both, the second and the third approach are applicable to the task. Because of the expectedly high computational resources needed for the model-based tracking on a mobile device, the third one will be implemented.
 
 
+%=============================================================================
 \section{Concept of Vehicle Make and Model Recognition}\label{sec:vmmrConcept}
+%=============================================================================
 In this chapter, the VMMR system that is used in <em>RacecAR GO</em> will be presented. Until now, the work on vehicle recognition has mainly been dedicated to the subject of security observation of parking spaces, toll stops, country borders, etc. In this thesis, the domain of application is something different, using it in a mobile game and capturing the vehicle images with a mobile phone's camera.
 TODO one more sentence to lead to Ambiguity and Multiplicity section.
 
@@ -823,9 +827,6 @@ From the use cases of this game, some requirements for the VMMR system (\emph{VR
   \item\textbf{VR3:} Robustness to different lighting conditions: There's the legend of a project of the US army trying to recognize partially hidden tanks in the woods. So they trained a neural net with pictures of woods with tanks behind trees and pictures of the same woods without tanks. The result was impressive as the net recognized images that hadn't been used for training. After that, the researchers took more pictures of the same woods, but the net failed to discriminate between the two classes. Finally, it turned out, that the pictures with tanks in it were taken on a cloudy day, while those without tanks were taken on a sunny day. <em>“The net had learned to recognize and generalize the difference between a woods with and without shadows!”</em> [35]. To be able to play the game in the daytime as well as at night-time, the recognition system has to be independent from the lighting conditions of the photographed vehicles.
   \item\textbf{VR4:} Ability to cope with ambiguity and multiplicity issues: Mentioned above, the proposed system must be able to differentiate between similar vehicles of different make or model (ambiguity) and not to differentiate between vehicles of the same make and model but with a different appearance (e. g. due to different generations of the model) (multiplicity).
 \end{itemize}
-
-As proved by [3], a bag-of-words based recognition model is very powerful, coming with robustness to occlusion and with robustness to slight changes in the camera’s roll-angle (along with local descriptors that are rotation independent, like SURF).
-
 The bag-of-words model implicates some advantages in contrast to the local features concatenation approach by \citeauthor{petrovic2004analysis}. Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified. Another advantage is the robustness to slight changes in the camera's roll-angle or in the perspective. Depending on the local descriptors (\citeauthor{siddiqui2015robust} used SURF, which is rotation invariant), rotated local features would still result in the same bag-of-words histogram.
 
 A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. TODO: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms). Nevertheless, the recognition system in RacecAR GO will take advantage of bag-of-words model, meeting requirements \emph{VR1} and \emph{VR2}.
@@ -881,7 +882,6 @@ To find the position and extent of the RoI, the location of the vehicle inside o
   \item Defining the RoI relatively to the number plate, the RoI is independent from the actual location and scale of the vehicle inside of the source image.
   \item The location of the number plate on the car is very suitable, because the region around the number plate contains highly descriptive information for the respective make and model (like the headlights, the radiator grill, the bumper or the brand logo itself).
 \end{itemize}
-
 Nevertheless, there also exist some drawbacks of using the number plate and the front of a vehicle:
 
 \begin{itemize}
@@ -889,7 +889,6 @@ Nevertheless, there also exist some drawbacks of using the number plate and the 
   \item There are countries where cars don't have number plates mounted at their front (as in many states of the USA, e. g. Florida, see fig. TODO: add florida-no-front-number-plates.jpg). Additionally, there are some vehicles of specific make and models, where the front number plate has been mounted at the side instead of the middle (e. g. the Alfa Romeo 159 has the front number plate mounted besides the radiator grill for design purpose, see fig. TODO: add number-plate-front-side.jpg).
   \item Using the number plate's size and dimension to deduce the location and extent of the RoI will result in a RoI-mask that is independent of the car's characteristics but is nevertheless applied to all makes and models. A RoI-mask with a location, extent and aspect ratio suitable for a Porsche 911 (containing informative parts as the brand logo and headlights) might not be suitable for a VW T6, whose number plate is mounted rather low, such that its informative parts will be outside of the RoI (see fig. TODO: Show picture of Porsche-RoI and T6-RoI).
 \end{itemize}
-
 Using the hood boundary to deduce the RoI’s properties would fix the last mentioned problem, because the size of the hood boundary depends on the size of the car. Since the detection of the hood boundary is failure prone and since classifiers trained with RoIs including the hood region performed inferior to those trained without the hood region [4], the number plate-approach is chosen for this thesis.
 
 Starting from the front number plate, a RoI can be defined around it that automatically contains descriptive vehicle information. An example for this is illustrated in figure TODO: Image with RoI around number plate (like [1] fig. 3) (with an image describing the factors around the number plate → left = L * number-plate-width, a.s.o. - without concrete values, these come in implementation).
@@ -897,11 +896,10 @@ Starting from the front number plate, a RoI can be defined around it that automa
 \subsubsection{Variations}
 There are different possibilities to define the RoI around a number plate, depending on the choice of the values TODO: list values from the figure denoted in figure TODO: reference fig above.
 
-\begin{itemize}
-  \item Including or not-including the hood region: As shown by [4], RoIs including the hood region perform inferior. This might be due to little discriminative information in there. Additionally, the hood might reflect its environment, which puts <em>negative</em> information in the resulting descriptor.
-  \item Considering only the left (or right) half of the vehicle’s front: In general, vehicles are symmetrical. Knowing one half, the other half can be estimated. For a Global Descriptor built up by concatenating the RoI’s pixels, this might help to reduce training and classification time, because the descriptor’s length would halve itself without losing information (only losing redundant mirrored half). Since the approach used in this thesis is based on a bag-of-words model, the length of the Global Descriptor does not depend on the size of the RoI but on the size of the dictionary. Halving the RoI would in contrast to that reduce the ability of the system to cope with partial occlusions (see VR1) [3]. If the selected half is occluded, there is no chance to recognize the vehicle anyway. TODO: Reprint images from [4] (found in [3] fig. 3.7ff) ?? Only if I need the pages
-\end{itemize}
-
+\begin{description}
+  \item[Including or not-including the hood region:] As shown by [4], RoIs including the hood region perform inferior. This might be due to little discriminative information in there. Additionally, the hood might reflect its environment, which puts <em>negative</em> information in the resulting descriptor.
+  \item[Considering only the left (or right) half of the vehicle's front:] In general, vehicles are symmetrical. Knowing one half, the other half can be estimated. For a Global Descriptor built up by concatenating the RoI’s pixels, this might help to reduce training and classification time, because the descriptor’s length would halve itself without losing information (only losing redundant mirrored half). Since the approach used in this thesis is based on a bag-of-words model, the length of the Global Descriptor does not depend on the size of the RoI but on the size of the dictionary. Halving the RoI would in contrast to that reduce the ability of the system to cope with partial occlusions (see VR1) [3]. If the selected half is occluded, there is no chance to recognize the vehicle anyway. TODO: Reprint images from [4] (found in [3] fig. 3.7ff) ?? Only if I need the pages
+\end{description}
 \citeauthor{petrovic2004analysis} \citep{petrovic2004analysis} shrinked the RoI in horizontal direction to compensate that the vehicle's structure is a little more redundant in that direction. This also only makes sense if the Global Descriptor's size depends on the size of the RoI, which is not the case in this thesis' approach.
 
 To sum up, the RoI should exclude the hood region while including all of the informative parts over all makes and models. In addition to that, the full and unshrinked width of the RoI should be used. For concrete values and tests see TODO: reference implementation chapter.
