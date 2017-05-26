@@ -591,7 +591,7 @@ At the start of the game, the player finds himself directly in the <em>Capturing
 \begin{figure}[bth]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/capturing}
-        \caption{Capturing Process of RacecAR GO}
+        \caption{Capturing process of RacecAR GO}
         \label{fig:capturing}
 \end{figure}
 
@@ -602,8 +602,8 @@ Otherwise, the server performs a VMMR (see chapter \ref{sec:vmmrConcept}) and se
   \item With the received make and model, the app chooses the correct virtual vehicle with that make and model and blends it above the real vehicle (see chapter \ref{sec:usageOfAR} for details). Additionally, it retrieves the vehicle's color from the captured image. This isn't a straightforward task, as there are multiple colors with multiple shadings occurring on a vehicle. One approach is to retrieve the color class containing the most pixels and choose the most similar color from the manufacturer's list of varnishes for that vehicle.
 
 The player is then able to walk around the real vehicle while he only sees the colored virtual one through the device. He can interact with the vehicle by touching on the door or on the hood to open and close it. To continue, the player has two options. He can either touch the trash icon and abort the capturing, or he can opt for the garage icon, to park the vehicle in his garage.
-  \item To park the vehicle in his garage, the player first has to fulfill a small task. For the task, a vehicle part appears that matches to the captured vehicle. This part could be a door, a steering wheel, a car seat, an engine or another part the captured vehicle consists of. In the example, it’s an engine. This part overlaps the vehicle and is fixed to the device’s screen, such that when the player moves around the vehicle, the part overlaps different areas of it. The player's task is to place this part at the correct position. E. g. for the engine and the VW K\"afer (which has a rear engine), the user would have to walk around the car, touch on the engine cover to open it, place the engine at the correct position (by moving the device such that the engine icon overlaps the position where the engine of the real car would be) and finally touch the wrench icon.
-  \item If the placement is correct, the vehicle will be parked in the player's garage. If not, the capturing will be aborted. The vehicle is stored along with its property-set, containing its power, weight, emission, etc. This data is retrieved from an API like <em>CarQuery</em> \footnote{\url{http://www.carqueryapi.com/}}. In most cases, it's ambiguous to deduce the property-set from a vehicle picture, as the appearance of the vehicle doesn’t change (or only marginally) for different engine configurations. For this reason, the server would have to search clues in the picture, like the exhaust or additional letters on the backside or the grill of the car that indicate a distinct configuration.
+  \item To park the vehicle in his garage, the player first has to fulfill a small task. For the task, a vehicle part appears that matches to the captured vehicle. This part could be a door, a steering wheel, a car seat, an engine or another part the captured vehicle consists of. In the example, it’s an engine. This part overlaps the vehicle and is fixed to the device's screen, such that when the player moves around the vehicle, the part overlaps different areas of it. The player's task is to place this part at the correct position. E. g. for the engine and the VW K\"afer (which has a rear engine), the user would have to walk around the car, touch on the engine cover to open it, place the engine at the correct position (by moving the device such that the engine icon overlaps the position where the engine of the real car would be) and finally touch the wrench icon.
+  \item If the placement is correct, the vehicle will be parked in the player's garage. If not, the capturing will be aborted. The vehicle is stored along with its property-set, containing its power, weight, emission, etc. This data is retrieved from an API like <em>CarQuery</em> \footnote{\url{http://www.carqueryapi.com/}}. In most cases, it's ambiguous to deduce the property-set from a vehicle's picture, as the appearance of the vehicle doesn't change (or only marginally) for different engine configurations. For this reason, the server would have to search clues in the picture, like the exhaust or additional letters on the backside or the grill of the car that indicate a distinct configuration.
 \end{enumerate}
 
 \subsubsection{Garage}
@@ -765,24 +765,19 @@ The type of vehicles that shall be capturable in RacecAR GO can be of an arbitra
 
 As described above, the app comes with a starter-set of vehicles, that can be recognized and captured. For the prototype, this set is limited to 10 TODO different vehicles. See (TODO respective impl chapter) for an explanation, which make-models have been chosen and why. Unlike to the full version of the app, there is no possibility to add further make-models but for the game designer to add them manually.
 
-For each covered make-model, there is only one property-set, that is automatically applied to the respective captured vehicle.
-
 \subsection{Vehicle Capturing}
-There are also some restrictions that have to be done for the capturing process.
+There are also some restrictions that have to be done for the capturing process (see figure \ref{fig:capturingLimited}). As said above, a specific region around the number plate is sent to the server for VMMR. To find the number plate in the captured image, a watermark showing a number plate's frame is blended over the camera image. For best recognition results, the user has to position his iPhone such that the watermark covers the number plate of the real car in location, orientation and size. In contrast to the full version, the prototype does not automatically send the captured image to the server. The player has to touch the gearbox button to start the capturing process. Because the prototype-server doesn't perform a hashed-number-plate-check, if the user already captured this car, the number plate will be blacked out in the transferred image for privacy concerns.
 
-TODO: Show the part of the capturing-storyboard that has changed for Limited: Capturing of vehicle with number plate watermark!!
+The server answers the VMMR request solely with the make and model of the car. For each covered make-model, the client stores one corresponding property-set, that is automatically applied to the respective captured vehicle.
 
-Show picture of shortened capturing-workflow with additional steps:
-Because the vehicle will be recognized based on a region around its front number plate, first capture the number plate (with water mark)
-Extrakt roi
-Send
-Classify (ignore number plate, a vehicle can be captured multiple times)
-Receive make, model (without property-set)
-Select matching virtual vehicle model
-… blend over, fix at number plate, use device sensors
-No interaction
-Virtual Vehicle models are stored client-side. This is possible for a few models. For more, another solution is necessary
-No mini-game, vehicle is directly stored in garage
+After having received the make and model, the client loads the respective virtual model and blends it in AR manner above the real car (as it is done for the full version of RacecAR GO). The following mini-game of placing a vehicle-part at the correct location is omitted for the prototype, though it is still possible to move the iPhone and see the virtual model still overlaying the real vehicle adequately. Touching the garage-symbol will immediately store the captured vehicle into the garage and thus finish the capturing process.
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/capturing_limited}
+        \caption{Capturing process of the RacecAR GO prototype}
+        \label{fig:capturingLimited}
+\end{figure}
 
 \subsection{Augmented Reality}
 Because the recognition of the vehicle is fixed to its front and since the capturing task with fitting the vehicle parts will not be implemented, it’s sufficient to overlay the real vehicle with the virtual one in the front view.
