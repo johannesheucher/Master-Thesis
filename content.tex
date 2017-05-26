@@ -799,35 +799,39 @@ In this chapter, the VMMR system that is used in <em>RacecAR GO</em> will be pre
 \subsection{Excursion to the Ambiguity and Multiplicity Challenge}
 As stated by [3], the assembled recognition model should cope with ambiguity and multiplicity issues. Multiplicity means the problem of cars with different appearances but with the same make and model, whereas the ambiguity describes the challenge to differentiate between similar vehicles that do not have the same make (inter-class ambiguity) and/or model (intra-class ambiguity), though.
 
-Assuming a player of RacecAR GO walks along the street and suddenly, he spots a Porsche 911 parked beside him. Fortunately, in front of the Porsche, there's enough clearance to take a photo of its front. Already imagining himself watching this beautiful and seldom car in his virtual garage, wouldn't it be annoying if the app would classify this Porsche 911 as a rather ordinary Mini One, just because of the similarity between the shape of their headlights (see figure TODO: Picture with both cars. Mark both features in the image and also show two histograms, where the same bin would increase because the same codeword would be found. Describe this part of the image later, when the histogram is explained)? Such a failure could kill all the motivation of a player to continue playing, and thus losing the healthy benefits of this game. As a result, the game would miss its purpose to motivate people to move.
+Assuming a player of RacecAR GO walks along the street and suddenly, he spots a Porsche 911 parked beside him. Fortunately, in front of the Porsche, there's enough clearance to take a photo of its front. Already imagining himself watching this beautiful and seldom car in his virtual garage, wouldn't it be annoying if the app would classify this Porsche 911 as a rather ordinary Mini One, just because of the similarity between the shape of their headlights (see figure \ref{fig:ambiguityPorsche})? Such a failure could kill all the motivation of a player to continue playing, and thus losing the healthy benefits of this game. As a result, the game would miss its purpose to motivate people to move.
 
-Due to the small number of realized makes and models for the RacecAR GO prototype, these can be well-chosen to minimize ambiguity and multiplicity problems (see TODO chapter with Choice of Vehicle Classes).
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/ambiguity_porsche_911_mini}
+        \caption{Ambiguity (inter-class) issue between a Porsche 911 (991) and a Mini One (R55)}
+        \label{fig:ambiguityPorsche}
+\end{figure}
 
-TODO: Unterschiedliche Modelle nicht unterscheidbar:
-A Klasse und cla, Golf und Variant
+Additional to the inter-make ambiguity issues mentioned before (also those in chapter \ref{sec:vmmrStateOfTheArt}), there's the problem of rebadging because of licence products (TODO: Write at the end (result-chapter of impl), that my VMMR system cannot generally handle this type of ambiguity, because the differences are too small). In most cases, these vehicles differ solely in the logo on the hood and on the back (see figure \ref{fig:ambiguityRebadging}).
 
-Re-brandings of the same car: Opel vs. Vauxhall, Toyota Hilux vs. VW Taro, Lotus Elan vs. Kia Elan (Lizenzbau) -> TODO: Illustrate with pictures, talk about problem (either train as different classes (possible because different make at the front) → classification will often fail, or train as same class → problem that Kia Elan will be classified wrongly as a Lotus Elan)
-
-(Model of same make has different appearances (Mercedes C with Star inside grill or above); Simply next generation with same name (include year with model?); BMW 3 Series differentiate in their front depending on sport or comfort) Also see concept chapter for ideas to the figure
-
-TODO (Inter- and intra-make.
-1. VW Sharan, Seat Alhambra; Lotus Elan, Kia Elan; Citroën C1, Peugeot 107 2. VW Golf V, VW Jetta; VW Polo I, VW Derby; Generally: Combi or limousine)
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.75\linewidth]{gfx/ambiguity_rebadging}
+        \caption{Ambiguity (inter-class) issue as the Volkswagen Taro \footnote{\url{https://img.favcars.com/volkswagen/taro/volkswagen_taro_1994_images_2.jpg}} is a rebadged Toyota Hilux \footnote{\url{http://image.priceprice.k-img.com/ph/images/article/1020/hilux-5th.jpg}}}
+        \label{fig:ambiguityRebadging}
+\end{figure}
 
 \subsection{Overview}
 From the use cases of this game, some requirements for the VMMR system (\emph{VR} for VMMR request) can be deduced:
 \begin{itemize}
-  \item\textbf{VR1:} Robustness to partial occlusion: In reality, there is rarely enough clearance around a parked car to take a photo of it without another object occluding a part of it. The other object might be a bush, a tree, a street light, another car, etc (TODO: show picture of occluded vehicles). So if the recognition system cannot cope with a photo of a partially occluded vehicle, the player might be irritated while looking for vehicles with enough clearance around them and might lose fun to continue playing.
+  \item\textbf{VR1:} Robustness to partial occlusion: In reality, there is rarely enough clearance around a parked car to take a photo of it without another object occluding a part of it. The other object might be a bush, a tree, a street light, another car, etc. So if the recognition system cannot cope with a photo of a partially occluded vehicle, the player might be irritated while looking for a vehicle with enough clearance around it and might lose fun to continue playing.
   \item\textbf{VR2:} Robustness to different camera roll-angles: As the input image does not come from a fixed camera but from a smartphone’s camera held by a person, it cannot be ensured that the smartphone is always horizontally aligned with the photographed car’s horizontal axis.
   \item\textbf{VR3:} Robustness to different lighting conditions: There's the legend of a project of the US Army trying to recognize partially hidden tanks in the woods. So they trained a neural net with pictures of woods with tanks behind trees and pictures of the same woods without tanks. The result was impressive as the net recognized images that hadn't been used for training. After that, the researchers took more pictures of the same woods, but the net failed to discriminate between the two classes. Finally, it turned out, that the pictures with tanks in it were taken on a cloudy day, while those without tanks were taken on a sunny day. <em>“The net had learned to recognize and generalize the difference between a woods with and without shadows!”</em> [35]. To be able to play the game in the daytime as well as at night-time, the recognition system has to be independent from the lighting conditions of the photographed vehicles.
   \item\textbf{VR4:} Ability to cope with ambiguity and multiplicity issues: Mentioned above, the proposed system must be able to differentiate between similar vehicles of different make or model (ambiguity) and not to differentiate between vehicles of the same make and model but with a different appearance (e. g. due to different generations of the model) (multiplicity).
 \end{itemize}
 The bag-of-words model implicates some advantages in contrast to the local features concatenation approach by \citeauthor{petrovic2004analysis}. Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified. Another advantage is the robustness to slight changes in the camera's roll-angle or in the perspective. Depending on the local descriptors (\citeauthor{siddiqui2015robust} used SURF, which is rotation invariant), rotated local features would still result in the same bag-of-words histogram.
 
-A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. TODO: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms). Nevertheless, the recognition system in RacecAR GO will take advantage of bag-of-words model, meeting requirements \emph{VR1} and \emph{VR2}.
+A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. (TODO low: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms)). Nevertheless, the recognition system in RacecAR GO will take advantage of bag-of-words model, meeting requirements \emph{VR1} and \emph{VR2}.
 
-To gain independence from lighting conditions (\emph{VR3}) - and thus to avoid training a classifier that can solely tell the difference between pictures taken in the morning and pictures taken at noon - three things are done. The first thing is populating the training set with multiple images per make-model class, whereas the per-class-images are taken at different times of day by different kinds of weather (see TODO reference chapter with dataset construction - Implementation?). The second thing is the preprocessing of each vehicle image. Lighting information will be subtracted out of an image before it enters the recognition system (see chapter \ref{sec:roiExtraction}). Third thing is the usage of local feature descriptors, each of which is invariant to illumination changes.
+To gain independence from lighting conditions (\emph{VR3}) - and thus to avoid training a classifier that can solely tell the difference between pictures taken in the morning and pictures taken at noon - three things are done. The first thing is populating the training set with multiple images per make-model class, whereas the per-class-images are taken at different times of day by different kinds of weather (see TODO reference chapter with dataset construction - Implementation). The second thing is the preprocessing of each vehicle image. Lighting information will be subtracted out of an image before it enters the recognition system (see chapter \ref{sec:roiExtraction}). Third thing is the usage of local feature descriptors, each of which is invariant to illumination changes.
 
-To fight the multiplicity issues, as demanded by requirement \emph{VR4}, models of different generations are trained into different classes (see TODO Implementation - Fighting Multiplicity Issues). To handle the ambiguity challenges, the classification process will be optimized (see TODO classification chapter).
+To fight the multiplicity issues, as demanded by requirement \emph{VR4}, models of different generations are trained into different classes (see TODO Implementation - Fighting Multiplicity Issues). To handle the ambiguity challenges, the classification process will be optimized (see TODO classification chapter) and due to the small number of realized makes and models for the RacecAR GO prototype, these can be well-chosen to minimize ambiguity and multiplicity problems (see TODO chapter with Choice of Vehicle Classes).
 
 \subsection{VMMR Workflow}
 TODO: Vom Groben ins Feine erklären. Erst den groben workflow beschreiben. Wie die Local Descriptors entstehen, wie das Dict aufgebaut oder für den Global Descriptor benutzt wird, ist hier egal. Der grobe Prozess der Recognition aus Input Image → Global Descriptor → Classifier wurde vorher ausreichend erklärt, dass man ab diesem Punkt folgen kann, wenn die einzelnen Bestandteile noch Black-Boxen sind.
@@ -931,9 +935,7 @@ The dictionary is built offline. An update is possible, but would require a comp
 \chapter{Examples}\label{ch:examples}
 %*****************************************
 
-Bib\TeX-Test: \cite{Steinmetz2005} \citeauthor{Steinmetz2005} \citep{Steinmetz2005}
-
-\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
+%\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
 
 \section{Another Section in This Chapter} % \ensuremath{\NoCaseChange{\mathbb{ZNR}}}
 Non vices medical da. Se qui peano distinguer demonstrate, personas
@@ -948,8 +950,8 @@ Iala rapide ha del, ma nos esser parlar. Maximo dictionario sed al.
 
 \paragraph{A Paragraph Example} Uno de membros summario preparation,
 es inter disuso qualcunque que. Del hodie philologos occidental al,
-como publicate litteratura in web. Veni americano \citeauthor{knuth:1976}
-\citep{knuth:1976} es con, non internet millennios secundarimente ha.
+%como publicate litteratura in web. Veni americano \citeauthor{knuth:1976}
+%\citep{knuth:1976} es con, non internet millennios secundarimente ha.
 Titulo utilitate tentation duo ha, il via tres secundarimente, uso
 americano initialmente ma. De duo deler personas initialmente. Se 
 duce facite westeuropee web, \ref{tab:example} nos clave 
@@ -974,8 +976,8 @@ articulos ha.
 Deler utilitate methodicamente con se. Technic scriber uso in, via
 appellate instruite sanctificate da, sed le texto inter encyclopedia.
 Ha iste americas que, qui ma tempore capital.
-Sia ma sine svedese americas. Asia \citeauthor{bentley:1999}
-\citep{bentley:1999} representantes un nos, un altere membros
+%Sia ma sine svedese americas. Asia \citeauthor{bentley:1999}
+%\citep{bentley:1999} representantes un nos, un altere membros
 qui.\footnote{De web nostre historia angloromanic.} Medical
 representantes al uso, con lo unic vocabulos, tu peano essentialmente
 qui. Lo malo laborava anteriormente uso.
@@ -991,7 +993,7 @@ qui. Lo malo laborava anteriormente uso.
     avantiate in. Su pro effortio appellate, o.
 \end{description}
 Tu uno veni americano sanctificate. Pan e union linguistic
-\citeauthor{cormen:2001} \citep{cormen:2001} simplificate, traducite
+%\citeauthor{cormen:2001} \citep{cormen:2001} simplificate, traducite
 linguistic del le, del un apprende denomination.
 
 \subsection{Linguistic Registrate}
