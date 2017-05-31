@@ -959,7 +959,15 @@ This thesis introduces a new dictionary scheme as a solution to these problems.
 \subsubsection{Advanced Modular Dictionary}
 This scheme extends the Modular Dictionary scheme. To solve the problem of too few per-class-clusters, the per-class-clustering will be performed with a reasonable high number of clusters, whereas after the clustering, only the \emph{good} clusters are kept. To cope with a too large codeword pool inside the Modular Dictionary, the codewords of the per-class-dictionaries are clustered once more. Though this will also cluster feature-clusters of different classes into one cluster (which was the problem of the Single Dictionary), measures show that the performance increases for lower dictionary sizes (TODO hier ref. Implementierung, wo ich Messungen habe, die zeigen, dass zu große DictSize nicht mehr gut ist, und zu kleine per-class-DictSize auch nicht. In Impl darauf eingehen, dass es ein gutes Verhältnis braucht zw den beiden DictSizes und der Ratio).
 
-TODO Hier jetzt nochmal im Detail mit Bild und Formeln? Oder aus Zeitgründen auf Formeln verzichten? Eine Grafik auf bauen, wie sie [3] für die Dicts gebaut hat. Da dann ein paar Formeln drin (wie dort), die in dem Absatz hier kurz erklärt werden.
+TODO Hier das Bild amd_process hin. Dort die Schritte nummerieren (keine Formeln ins Bild, zu schwierig).
+Hier dann die einzelnen Schritte mit Formeln erklären.
+1. Beziehen auf vmmr workflow. Dict Gen startet mit Local Descriptors per RoI. Hier starten wir jeweils einen Prozess mit den Local Descriptors per RoI einer Klasse c_i (analog zu generation of MD in TODO ref chapter). Hier dann die Formel für alle f1..fN
+2. Clustering aller feature descriptors zu k_c clustern omega_1, .., omega_k_c
+3. Aussortieren der schlechten Clusters. Formel mit Omega-Menge und lc1. Erklären, wie man auf r_c_i kommt: ratio * numInstances(c_i)
+4. Transformation der Clustercenter zu neuen feature descriptors f1'
+5. Über die neuen Feature descriptors ALLER Klassen dann wiederum nochmal clustern zu k clustern
+6. Die k cluster centers werden die Dictionary codewords
+
 
 \begin{figure}[bth]
   \centering
@@ -969,6 +977,7 @@ TODO Hier jetzt nochmal im Detail mit Bild und Formeln? Oder aus Zeitgründen au
 \end{figure}
 
 \subsubsection{Dictionary Generation}
+TODO Das brauche ich dann nicht mehr, weil es alles in AMD steht.
 This section concentrates on the construction of the dictionary. It describes the data-structures and algorithms used. For concrete values that are needed for this VMMR, see the implementation chapter TODO: Ref. impl chapter for dict values.
 
 The dictionary is built offline. An update is possible, but would require a complete rebuild of the dictionary, which is another disadvantage of the Single Dictionary. For the Modular Dictionary, only the partial sub-dictionary of the respective make-model class would have to be built again. Generating the dictionary and training the classifier don’t run in parallel, which could be misinterpreted by the illustration of the training-workflow (TODO: ref). Since the (complete) dictionary is needed to encode the Global Representations, the training-workflow firstly generates the dictionary from the local features of all RoIs. After that, the training-workflow runs again by using the existing dictionary to train the classifier.
