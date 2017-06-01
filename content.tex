@@ -956,24 +956,36 @@ A problem of the Modular Dictionary is its size (see page \pageref{par:dictionar
 
 This thesis introduces a new dictionary scheme as a solution to these problems.
 
-\subsubsection{Advanced Modular Dictionary}
-This scheme extends the Modular Dictionary scheme. To solve the problem of too few per-class-clusters, the per-class-clustering will be performed with a reasonable high number of clusters, whereas after the clustering, only the \emph{good} clusters are kept. To cope with a too large codeword pool inside the Modular Dictionary, the codewords of the per-class-dictionaries are clustered once more. Though this will also cluster feature-clusters of different classes into one cluster (which was the problem of the Single Dictionary), measures show that the performance increases for lower dictionary sizes (TODO hier ref. Implementierung, wo ich Messungen habe, die zeigen, dass zu große DictSize nicht mehr gut ist, und zu kleine per-class-DictSize auch nicht. In Impl darauf eingehen, dass es ein gutes Verhältnis braucht zw den beiden DictSizes und der Ratio).
-
-TODO Hier das Bild amd_process hin. Dort die Schritte nummerieren (keine Formeln ins Bild, zu schwierig).
-Hier dann die einzelnen Schritte mit Formeln erklären.
-1. Beziehen auf vmmr workflow. Dict Gen startet mit Local Descriptors per RoI. Hier starten wir jeweils einen Prozess mit den Local Descriptors per RoI einer Klasse c_i (analog zu generation of MD in TODO ref chapter). Hier dann die Formel für alle f1..fN
-2. Clustering aller feature descriptors zu k_c clustern omega_1, .., omega_k_c
-3. Aussortieren der schlechten Clusters. Formel mit Omega-Menge und lc1. Erklären, wie man auf r_c_i kommt: ratio * numInstances(c_i)
-4. Transformation der Clustercenter zu neuen feature descriptors f1'
-5. Über die neuen Feature descriptors ALLER Klassen dann wiederum nochmal clustern zu k clustern
-6. Die k cluster centers werden die Dictionary codewords
-
-
 \begin{figure}[bth]
   \centering
         \includegraphics[width=.65\linewidth]{gfx/modular_dict_clusters}
         \caption{Problem with too little per-class-clusters for the Modular Dictionary (showing cluster space for one class): Blue dots represent local descriptors of instances of the class. Purple ellipsoids mark the clusters. Too great reduction of the number of clusters (7 instead of 10) increased the importance of clusters that only include outlier-descriptors.}
         \label{fig:modularDictionaryClusters}
+\end{figure}
+
+\subsubsection{Advanced Modular Dictionary}
+The Advanced Modular Dictionary (AMD) scheme extends the Modular Dictionary scheme. To solve the problem of too few per-class-clusters, the per-class-clustering will be performed with a reasonable high number of clusters, whereas after the clustering, only the \emph{good} clusters are kept. To cope with a too large codeword pool inside the Modular Dictionary, the codewords of the per-class-dictionaries are clustered once more.
+
+In the VMMR workflow from figure \ref{fig:vmmrWorkflow}, the dictionary generation is described as a process, that gets the local descriptors of all RoIs as input and produces a ready-to-use dictionary as output. In the following, the intermediate steps are explained. Each numbered section refers to the numbered steps from figure \ref{fig:amdProcess}.
+\begin{enumerate}
+	\item The generation process starts the same way, the Modular Dictionary does: The local descriptors of all instances are gathered class-wise. In the figure, this step is shown exemplarily for class $c_1$. The cloud represents the local-descriptor-space while the blue dots mark the single local descriptors $f_1c1, ..., f_Nf$ (TODO: mark as numbered equation), where TODO.
+	\item In this step, the local descriptors get clustered class-wise. There is also no difference to the proposed Modular Dictionary creation process up to now, except for the requested number of clusters. In contrast to the number evaluated best by TODO siddiqui, which was $29$, the number $k_c$ evaluated best for the AMD is about ten times as large (see (TODO impl chapter) for evaluation details). For each class $c_i$, this step produces $k_c$ clusters $omega_1ci, ..., omega_kcci$ TODO, shown as purple ellipsoids in the figure.
+	\item TODO
+	\item TODO
+	\item Here, the results of the processes for the other classes come into account TODO expression? For each class, there is now a set of local descriptors $f_1 strich$ TODO
+	\item TODO
+\end{enumerate}
+
+3. Aussortieren der schlechten Clusters. Formel mit Omega-Menge und lc1. Erklären, wie man auf $r_ci$ kommt: ratio * numInstances($c_i$)
+4. Transformation der Clustercenter zu neuen feature descriptors f1'
+5. Über die neuen Feature descriptors ALLER Klassen dann wiederum nochmal clustern zu k clustern. Though this will also cluster feature-clusters of different classes into one cluster (which was the inter-class ambiguity problem of the Single Dictionary), measures show that the performance increases for lower dictionary sizes (TODO hier ref. Implementierung, wo ich Messungen habe, die zeigen, dass zu große DictSize nicht mehr gut ist, und zu kleine per-class-DictSize auch nicht. In Impl darauf eingehen, dass es ein gutes Verhältnis braucht zw den beiden DictSizes und der Ratio).
+6. Die k cluster centers werden die Dictionary codewords
+
+\begin{figure}[bth]
+  \centering
+        \includegraphics[width=.65\linewidth]{gfx/amd_process}
+        \caption{Generation process of the Advanced Modular Dictionary. See text for a detailed description.}
+        \label{fig:amdProcess}
 \end{figure}
 
 \subsubsection{Dictionary Generation}
