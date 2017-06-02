@@ -397,14 +397,14 @@ They also investigated in transforming the feature space via Principal Component
 
 Another conclusion they made is, that a representation independent from color and contrast of the original vehicle image increases performance.
 
-Pros of the approach of Petrovic et al. are, that the recognition process is rather easy, which means, that it includes few steps and components for both, building the classifier and recognizing a new vehicle. Thus, it’s easy to implement. It means also, that this process is easy to understand, because finding the nearest neighbor of a vehicle image in any kind of representation-space seems plausible to work properly.
+Pros of the approach of \citeauthor{petrovic2004analysis} are, that the recognition process is rather easy, which means, that it includes few steps and components for both, building the classifier and recognizing a new vehicle. Thus, it's easy to implement. It means also, that this process is easy to understand, because finding the nearest neighbor of a vehicle image in any kind of representation-space seems plausible to work properly.
 
 There are also cons of their approach that will occur, when testing the system in real-life conditions. While the vehicle’s Global Representation (its feature vector) is based on all of the pixels contained in its RoI, the recognition will not be robust to occlusion of some part of this area. For the same reason, slight changes in the camera’s roll-angle or a displaced (or badly captured) number plate will also decrease the recognition performance. Hence, such an approach is not applicable in real-life scenarios.
 
 \subsubsection{VMMR using a Bag-of-Words Model}
-Another approach that tries to eliminate all the cons of the system proposed by \citeauthor{petrovic2004analysis} is made by A. J. Siddiqui [3] (TODO name). Since that system is similar to the system proposed in this thesis, it will be discussed in more detail, here.
+Another approach that tries to eliminate all the cons of the system proposed by \citeauthor{petrovic2004analysis} is made by \citeauthor{siddiqui2015robust} \citep{siddiqui2015robust}. Since that system is similar to the system proposed in this thesis, it will be discussed in more detail, here.
 
-The challenges, [3] attends to, are <em>multiplicity</em> and <em>inter-make and intra-make ambiguity</em>. <em>Multiplicity</em> describes the problem of vehicles with different shapes or appearances all share the same name (make and model). An example for this is shown in figure \ref{fig:vmmrMultiplicity}.
+The challenges, \citep{siddiqui2015robust} attends to, are <em>multiplicity</em> and <em>inter-make and intra-make ambiguity</em>. <em>Multiplicity</em> describes the problem of vehicles with different shapes or appearances all share the same name (make and model). An example for this is shown in figure \ref{fig:vmmrMultiplicity}.
 
 While <em>inter-make ambiguity</em> describes the issue of models from different companies being akin to each other, <em>intra-make ambiguity</em> refers to different models from the same company that share similar features. Examples for this are shown in figures \ref{fig:vmmrAmbiguityInterMake} and \ref{fig:vmmrAmbiguityIntraMake}, respectively.
 
@@ -573,7 +573,7 @@ The game has a centralized structure, i. e. each view is accessed via the menu. 
 \end{itemize}
 The user is able to achieve money during play, so his current credit is always displayed at the top bar of the game. This is for a motivational reason, because the player earns money by physically moving with a speed less than seven km/h. So always displaying the current credit will motivate him to walk farther and watch it increasing.
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/storyboard}
         \caption{Storyboard of RacecAR GO}
@@ -588,10 +588,11 @@ Anzeige jedes Views mit exemplarischem Inhalt
 \subsubsection{Capturing}
 At the start of the game, the player finds himself directly in the <em>Capturing</em> view, ready to capture new vehicles for his garage. This fulfills GR2 which demands that the player must be able to play without any annoying setup. This view is also accessible via the menu. The capturing process is divided into four steps and is illustrated in figure \ref{fig:capturing}.
 
-\begin{figure}[bth]
+TODO: Schritte im Bild nummerieren. Mit Corporate Design Farbe: Hellblau : Schwarze Ziffer in hellblauem Kreis mit schwarzem Rand
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/capturing}
-        \caption{Capturing process of RacecAR GO}
+        \caption{Capturing Process of RacecAR GO}
         \label{fig:capturing}
 \end{figure}
 
@@ -657,7 +658,7 @@ A positive effect of using vehicles is, that urban areas become attractive to wa
 
 In contrast to the anchors placed in Ingress or Pokémon GO, the actual distribution of the vehicle anchors cannot be controlled by the game. The distribution changed continuously and cannot be tracked as a whole. For the capturing process, only the local distribution is important. Considering the map showing the number of vehicles per capita for regions in the whole world (see figure \ref{fig:worldVehicles}), there are only a few regions, where it could be difficult for a player to find enough vehicles to have fun playing this game (e. g. in Central Africa or in parts of Asia). So the predefined \emph{GR1}, that the game has to be playable everywhere at anytime, is fulfilled by the vehicle anchors.
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.95\linewidth]{gfx/world_vehicles_per_capita}
         \caption{World vehicles per capita (reprinted from \footnote{\url{https://commons.wikimedia.org/w/index.php?title=File:World_vehicles_per_capita.svg&oldid=242848798}})}
@@ -694,10 +695,10 @@ ARToolKit provides an implementation for this for mobile devices. The realtime-c
 In most European countries, a number plate contains a euro badge (see figure \ref{fig:euroBadge}). In contrast to the number plate, features of the euro badge can be tracked in the offline phase, because the badge is the same on each number plate.
 Tests with ARToolKit on a mobile device resulted in an improper calculation of the location and pose of the badge, which was perhaps down to the fact that there aren’t enough (unambiguous) features to track inside this badge image.
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.25\linewidth]{gfx/marker_full}
-        \caption{Euro badge of a European number plate}
+        \caption{Euro badge of a European number plate (here from Germany)}
         \label{fig:euroBadge}
 \end{figure}
 
@@ -772,7 +773,8 @@ The server answers the VMMR request solely with the make and model of the car. F
 
 After having received the make and model, the client loads the respective virtual model and blends it in AR manner above the real car (as it is done for the full version of RacecAR GO). The following mini-game of placing a vehicle-part at the correct location is omitted for the prototype, though it is still possible to move the iPhone and see the virtual model still overlaying the real vehicle adequately. Touching the garage-symbol will immediately store the captured vehicle into the garage and thus finish the capturing process.
 
-\begin{figure}[bth]
+TODO: Auch hier die Schritte in der Grafik nummerieren
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/capturing_limited}
         \caption{Capturing process of the RacecAR GO prototype}
@@ -801,7 +803,7 @@ As stated by [3], the assembled recognition model should cope with ambiguity and
 
 Assuming a player of RacecAR GO walks along the street and suddenly, he spots a Porsche 911 parked beside him. Fortunately, in front of the Porsche, there's enough clearance to take a photo of its front. Already imagining himself watching this beautiful and seldom car in his virtual garage, wouldn't it be annoying if the app would classify this Porsche 911 as a rather ordinary Mini One, just because of the similarity between the shape of their headlights (see figure \ref{fig:ambiguityPorsche})? Such a failure could kill all the motivation of a player to continue playing, and thus losing the healthy benefits of this game. As a result, the game would miss its purpose to motivate people to move.
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/ambiguity_porsche_911_mini}
         \caption{Ambiguity (inter-class) issue between a Porsche 911 (991) and a Mini One (R55)}
@@ -810,7 +812,7 @@ Assuming a player of RacecAR GO walks along the street and suddenly, he spots a 
 
 Additional to the inter-make ambiguity issues mentioned before (also those in chapter \ref{sec:vmmrStateOfTheArt}), there's the problem of rebadging because of licence products (TODO: Write at the end (result-chapter of impl), that my VMMR system cannot generally handle this type of ambiguity, because the differences are too small). In most cases, these vehicles differ solely in the logo on the hood and on the back (see figure \ref{fig:ambiguityRebadging}).
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/ambiguity_rebadging}
         \caption{Ambiguity (inter-class) issue as the Volkswagen Taro \footnote{\url{https://img.favcars.com/volkswagen/taro/volkswagen_taro_1994_images_2.jpg}} is a rebadged Toyota Hilux \footnote{\url{http://image.priceprice.k-img.com/ph/images/article/1020/hilux-5th.jpg}}}
@@ -836,13 +838,13 @@ To fight the multiplicity issues, as demanded by requirement \emph{VR4}, models 
 \subsection{VMMR Workflow}
 At this point, after the requirements for the system are defined, its components and their interaction will be described as the <em>VMMR workflow</em>. An illustration for this is shown in figure \ref{fig:vmmrWorkflow}.
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/vmmr_workflow}
         \caption{VMMR workflow as it is used in the RacecAR GO prototype}
         \label{fig:vmmrWorkflow}
 \end{figure}
-TODO: Workflow figure: Show kaefer photos for query AND? train. Show picture fragments as feature descriptors.
+TODO: Workflow figure: Show kaefer photos for query AND? train. Show blue circles as descriptors
 
 Actually, there are two workflows. One to train the system (the <em>Training</em>-workflow), the other one to use the system to classify an image of unknown make and model (<em>Querying</em>-workflow).
 
@@ -881,7 +883,7 @@ To find the position and extent of the RoI, the location of the vehicle inside o
 Nevertheless, there also exist some drawbacks of using the number plate and the front of a vehicle:
 
 \begin{itemize}
-  \item As described in \emph{VR1}, there is often too little clearance around a vehicle to take a photo without occlusion. Although it is helpful in most scenarios to back into a parking space instead of pulling into it (e. g. noticing pedestrians and cyclists more early when exiting the parking space), most drivers don't do it. So while the vehicle sticks out its back side towards the street or a parking area, its front is located besides a wall or a bush etc., not leaving enough space to take a photo of it (at least none without any occlusion). While this problem is acceptable for vehicle photos taken during the game, it is not acceptable for photos taken to train the classifier. Each object not belonging to the vehicle itself decreases the performance of the recognition system.
+  \item One problem concerns the capturing process during play. As described in \emph{VR1}, there is often too little clearance around a vehicle to take a photo without occlusion. Although it is helpful in most scenarios to back into a parking space instead of pulling into it (e. g. to notice pedestrians and cyclists more early when exiting the parking space), most drivers don't do it. So while the vehicle sticks out its back side towards the street or a parking area, its front is located besides a wall or a bush etc., not leaving enough space to take a photo of it (at least none without any occlusion). While this problem is acceptable for vehicle photos taken during the game, it is not acceptable for photos taken to train the classifier. Each object not belonging to the vehicle itself decreases the performance of the recognition system.
   \item There are countries where cars don't have number plates mounted at their front (as in many states of the USA, e. g. Florida, see figure \ref{fig:numberPlateNoFront}). Additionally, there are some vehicles of specific make and models, where the front number plate has been mounted at the side instead of the middle (e. g. the Alfa Romeo 159, that has the front number plate mounted besides the radiator grill for design purpose, see figure \ref{fig:numberPlateSide}).
   \item Using the number plate's size and dimension to deduce the location and extent of the RoI will result in a RoI-mask that is independent of the car's characteristics but is nevertheless applied to all makes and models. A RoI-mask with a location, extent and aspect ratio suitable for a Porsche 911 (containing informative parts as the brand logo and headlights) might not be suitable for a VW T6, whose number plate is mounted rather low, such that its informative parts will be outside of the RoI (see figure \ref{fig:roiMaskPorscheT6}).
 \end{itemize}
@@ -889,25 +891,26 @@ Using the hood boundary to deduce the RoI’s properties would fix the last ment
 
 Starting from the front number plate, a RoI can be defined around it that automatically contains descriptive vehicle information. An example for this is illustrated in figure \ref{fig:roiDimensions}.
 
-\begin{figure}[bth]
+TODO low: Compound the next three images into one figure with sub-images a, b and c
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.35\linewidth]{gfx/florida_no_front_number_plates}
         \caption{Picture of a freeway in Florida, USA, showing vehicles without a front number plate (reprinted from \footnote{\url{http://www.miamiherald.com/news/traffic/article39667194.html}})}
         \label{fig:numberPlateNoFront}
 \end{figure}
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.35\linewidth]{gfx/number_plate_front_side}
         \caption{Picture of an Alfa Romeo 159, which has its front number plate mounted at the side (reprinted from \footnote{\url{http://www.seriouswheels.com/2008/a/2008-Autodelta-Alfa-Romeo-159-J4-2-2-C-Front-1280x960.htm}})}
         \label{fig:numberPlateSide}
 \end{figure}
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.35\linewidth]{gfx/roi_mask_porsche_t6}
         \caption{Picture of the RoIs of a Porsche 911 (left) and a Volkswagen T6 (right)}
         \label{fig:roiMaskPorscheT6}
 \end{figure}
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.35\linewidth]{gfx/roi_dimensions}
         \caption{Definition of the RoI depending on the width $w$ of the number plate. Concrete values for $l$, $r$, $t$ and $b$ are evaluated in the implementation chapter TODO}
@@ -930,19 +933,21 @@ The next step in the workflow is to extract local features. The local features w
 
 A local feature is a point in the RoI, that is significant, like a corner. Such features are located via a feature detector (see figure \ref{fig:localFeaturesExample}). After a feature has been detected, it will be encoded by a feature descriptor. A feature descriptor embeds the feature into its surrounding context. As the name says, the feature descriptor's purpose is to describe the found feature such that the same feature can be recovered in another image (see figure \ref{fig:localFeaturesMatchingExample}).
 
-There are many different feature detectors and feature descriptors with different purposes and properties. Generally, a feature descriptor is a vector, as shown in equation TODO: Add equation with feature descriptor definition (see photo below). The extraction of descriptors can be seen as a projection of the RoI onto a set of feature vectors (TODO: add equation with feature extraction, see photo below). See TODO: reference Technical Basics for more details and examples of feature extractors and feature descriptors.
+There are many different feature detectors and feature descriptors with different purposes and properties. Generally, a feature descriptor is a vector, as shown in equation (TODO: Add equation with feature descriptor definition (see photo in doc)). The extraction of descriptors can be seen as a projection of the RoI onto a set of feature vectors (TODO: add equation with feature extraction, see photo in doc). See TODO: reference Technical Basics for more details and examples of feature extractors and feature descriptors.
 
-It turned out that SIFT (Scale Invariant Feature Transform) [30] and SURF (Speeded Up Robust Features) [31] are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}. An alternative for this is proposed with ORB [32]. TODO: Short explanation. For more details, see TODO: reference section in Technical Basics. For a comparison among these detectors and descriptors, see TODO: reference implementation chapter for comparison
+It turned out that SIFT (Scale Invariant Feature Transform) [30] and SURF (Speeded Up Robust Features) [31] are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented (TODO: only show patent nr) (\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB [32]. TODO: Short explanation. For more details, see TODO: reference section in Technical Basics. For a comparison among these detectors and descriptors, see TODO: reference implementation chapter for comparison
 
-\begin{figure}[bth]
+The output of this step is a set of local descriptors per RoI. In the figure, each set is represented as a cloud with blue dots, which represent the local descriptors in local-descriptor-space.
+
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.35\linewidth]{gfx/local_features_porsche}
         \caption{RoI with found local features marked as yellow points}
         \label{fig:localFeaturesExample}
 \end{figure}
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
-        \includegraphics[width=.35\linewidth]{gfx/local_features_porsche_matching}
+        \includegraphics[width=.65\linewidth]{gfx/local_features_porsche_matching}
         \caption{Two RoIs showing different instances of the same car (Porsche 911) with found local feature matches shown as purple lines (also including false matches)}
         \label{fig:localFeaturesMatchingExample}
 \end{figure}
@@ -952,14 +957,14 @@ Having a collection of local features per RoI, they must be transferred into a G
 
 As said above, this VMMR approach is based on a bag-of-words model, where the dictionary is the <em>bag</em> and the local features form the (code-)<em>words</em>. Similar local features will be clustered into one single codeword. \citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary of local features from various vehicle classes (see page \pageref{par:dictionaryGenerationStateOfTheArt}). One scheme was to build a dictionary out of the local features of all vehicle classes, called the <em>Single Dictionary</em>. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the <em>Modular Dictionary</em>. Although the Single Dictionary has the disadvantage of clustering similar local features but from different vehicle classes into one single codeword (which will cause inter-class ambiguity issues), it performed superior to the Modular Dictionary (according to tests made by \citeauthor{siddiqui2015robust}).
 
-A problem of the Modular Dictionary is its size (see page \pageref{par:dictionaryGenerationStateOfTheArt}). A too large dictionary leads to large Global Representations. A result of this would be a classifier that misses generalizability and tends to be overfitted\footnote{The classifier would perform well for the images in the training set but would perform worse for unknown images}. Reducing the number of per-class-clusters of the per-class-dictionaries (as \citeauthor{siddiqui2015robust} did, reducing the number of per-class-clusters to 29) will fix this problem, but will also lose descriptivity of the per-class codewords. This is because the percentage of useless clusters, created from outlier descriptors, is higher for a low number of clusters (see figure \ref{fig:modularDictionaryClusters}).
+A problem of the Modular Dictionary is its size (see page \pageref{par:dictionaryGenerationStateOfTheArt}). A too large dictionary leads to large Global Representations. A result of this would be a classifier that misses generalizability and tends to be overfitted\footnote{The classifier would perform well for the images in the training set but would perform worse for unknown images}. Drastically reducing the number of per-class-clusters of the per-class-dictionaries (as \citeauthor{siddiqui2015robust} did) will fix this problem, but will also lose descriptivity of the per-class codewords. This is for one thing, because different features that should also be handled different, are clustered into the same cluster. For another thing, the ratio of useless clusters to informative clusters increases for a low number of clusters (see figure \ref{fig:modularDictionaryClusters}). Useless clusters either contain outlier features (e. g. because of noise) or features that only occur in a small fraction of training images of a specific class. Since clusters are used to create dictionary codewords, which are used to create descriptive global representations of classes, useless clusters are counterproductive.
 
 This thesis introduces a new dictionary scheme as a solution to these problems.
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
-        \includegraphics[width=.65\linewidth]{gfx/modular_dict_clusters}
-        \caption{Problem with too little per-class-clusters for the Modular Dictionary (showing cluster space for one class): Blue dots represent local descriptors of instances of the class. Purple ellipsoids mark the clusters. Too great reduction of the number of clusters (7 instead of 10) increased the importance of clusters that only include outlier-descriptors.}
+        \includegraphics[width=.45\linewidth]{gfx/modular_dict_clusters}
+        \caption{Problem with too little per-class-clusters for the Modular Dictionary (showing cluster space for one class): Blue dots represent local descriptors of instances of the class. Purple ellipsoids mark the clusters. Reducing the number of clusters too much raises the importance of clusters that only include few outlier-descriptors.}
         \label{fig:modularDictionaryClusters}
 \end{figure}
 
@@ -968,8 +973,16 @@ The Advanced Modular Dictionary (AMD) scheme extends the Modular Dictionary sche
 
 In the VMMR workflow from figure \ref{fig:vmmrWorkflow}, the dictionary generation is described as a process, that gets the local descriptors of all RoIs as input and produces a ready-to-use dictionary as output. In the following, the intermediate steps are explained. Each numbered section refers to the numbered steps from figure \ref{fig:amdProcess}.
 \begin{enumerate}
-	\item The generation process starts the same way, the Modular Dictionary does: The local descriptors of all instances are gathered class-wise. In the figure, this step is shown exemplarily for class $c_1$. The cloud represents the local-descriptor-space while the blue dots mark the single local descriptors $f_1c1, ..., f_Nf$ (TODO: mark as numbered equation), where TODO.
-	\item In this step, the local descriptors get clustered class-wise. There is also no difference to the proposed Modular Dictionary creation process up to now, except for the requested number of clusters. In contrast to the number evaluated best by TODO siddiqui, which was $29$, the number $k_c$ evaluated best for the AMD is about ten times as large (see (TODO impl chapter) for evaluation details). For each class $c_i$, this step produces $k_c$ clusters $omega_1ci, ..., omega_kcci$ TODO, shown as purple ellipsoids in the figure.
+	\item The generation process starts the same way, the Modular Dictionary does: The local descriptors of all instances are gathered class-wise. In the figure, this step is shown exemplarily for class $c_1$. The cloud represents the local-descriptor-space while the blue dots mark the single local descriptors
+	\[
+	f_1^{c_i},\dots,f_{Nf_{c_i}}^{c_i}
+	\]
+where $f_j^{c_i}$ represents the $j-th$ local descriptor for the class $c_i$ and $Nf_{c_i}$ is the number of local descriptors of the class $c_i$.
+	\item In this step, the local descriptors get clustered class-wise. There is also no difference to the proposed Modular Dictionary creation process up to now, except for the requested number of clusters $k_c$. In contrast to the number evaluated best by \citeauthor{siddiqui2015robust}, which was $29$, the number $k_c$ evaluated best for the AMD is about ten times as large (see (TODO impl chapter) for evaluation details). For each class $c_i$, this step produces $k_c$ clusters
+	\[
+	\Omega_1^{c_i},\dots,\Omega_{k_c}^{c_i}
+	\]
+where $\Omega_j^{c_i}$ represents the $j-th$ cluster for the class $c_i$. The clusters are represented as purple ellipsoids in the figure.
 	\item TODO
 	\item TODO
 	\item Here, the results of the processes for the other classes come into account TODO expression? For each class, there is now a set of local descriptors $f_1 strich$ TODO
@@ -981,7 +994,7 @@ In the VMMR workflow from figure \ref{fig:vmmrWorkflow}, the dictionary generati
 5. Über die neuen Feature descriptors ALLER Klassen dann wiederum nochmal clustern zu k clustern. Though this will also cluster feature-clusters of different classes into one cluster (which was the inter-class ambiguity problem of the Single Dictionary), measures show that the performance increases for lower dictionary sizes (TODO hier ref. Implementierung, wo ich Messungen habe, die zeigen, dass zu große DictSize nicht mehr gut ist, und zu kleine per-class-DictSize auch nicht. In Impl darauf eingehen, dass es ein gutes Verhältnis braucht zw den beiden DictSizes und der Ratio).
 6. Die k cluster centers werden die Dictionary codewords
 
-\begin{figure}[bth]
+\begin{figure}[btph]
   \centering
         \includegraphics[width=.65\linewidth]{gfx/amd_process}
         \caption{Generation process of the Advanced Modular Dictionary. See text for a detailed description.}
