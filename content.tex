@@ -953,9 +953,11 @@ The output of this step is a set of local descriptors per RoI. In the figure, ea
 \end{figure}
 
 \subsection{Dictionary}
-Having a collection of local features per RoI, they must be transferred into a Global Descriptor in some way. This is where the dictionary comes in.
+Having a collection of local features per RoI, they must be transferred into a Global Representation in some way. This is where the dictionary comes in.
 
-As said above, this VMMR approach is based on a bag-of-words model, where the dictionary is the <em>bag</em> and the local features form the (code-)<em>words</em>. Similar local features will be clustered into one single codeword. \citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary of local features from various vehicle classes (see page \pageref{par:dictionaryGenerationStateOfTheArt}). One scheme was to build a dictionary out of the local features of all vehicle classes, called the <em>Single Dictionary</em>. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the <em>Modular Dictionary</em>. Although the Single Dictionary has the disadvantage of clustering similar local features but from different vehicle classes into one single codeword (which will cause inter-class ambiguity issues), it performed superior to the Modular Dictionary (according to tests made by \citeauthor{siddiqui2015robust}).
+As said above, this VMMR approach is based on a bag-of-words model, where the dictionary is the <em>bag</em> containing the (code-)<em>words</em>. Similar local descriptors will be represented by one single codeword, which is then again a local descriptor. Each codeword will then be referred to by the Global Representation, which provides one histogram bin for each codeword (see \ref{sec:globalRepresentationConcept}). For the Global Representation to be expressive, each codeword has to be expressive, too. To retrieve codewords, the inputted local descriptors are clustered, whereas each cluster is turned into a codeword.
+
+\citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary from various vehicle classes' local descriptors (see page \pageref{par:dictionaryGenerationStateOfTheArt}). One scheme was to build a dictionary out of the local descriptors of all vehicle classes, called the <em>Single Dictionary</em>. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the <em>Modular Dictionary</em>. Although the Single Dictionary has the disadvantage of clustering similar local descriptors but from different vehicle classes into one single codeword (which will cause inter-class ambiguity issues), it performed superior to the Modular Dictionary (according to tests made by \citeauthor{siddiqui2015robust}).
 
 A problem of the Modular Dictionary is its size (see page \pageref{par:dictionaryGenerationStateOfTheArt}). A too large dictionary leads to large Global Representations. A result of this would be a classifier that misses generalizability and tends to be overfitted\footnote{The classifier would perform well for the images in the training set but would perform worse for unknown images}. Drastically reducing the number of per-class-clusters of the per-class-dictionaries (as \citeauthor{siddiqui2015robust} did) will fix this problem, but will also lose descriptivity of the per-class codewords. This is for one thing, because different features that should also be handled different, are clustered into the same cluster. For another thing, the ratio of useless clusters to informative clusters increases for a low number of clusters (see figure \ref{fig:modularDictionaryClusters}). Useless clusters either contain outlier features (e. g. because of noise) or features that only occur in a small fraction of training images of a specific class. Since clusters are used to create dictionary codewords, which are used to create descriptive global representations of classes, useless clusters are counterproductive.
 
@@ -974,25 +976,33 @@ The Advanced Modular Dictionary (AMD) scheme extends the Modular Dictionary sche
 In the VMMR workflow from figure \ref{fig:vmmrWorkflow}, the dictionary generation is described as a process, that gets the local descriptors of all RoIs as input and produces a ready-to-use dictionary as output. In the following, the intermediate steps are explained. Each numbered section refers to the numbered steps from figure \ref{fig:amdProcess}.
 \begin{enumerate}
 	\item The generation process starts the same way, the Modular Dictionary does: The local descriptors of all instances are gathered class-wise. In the figure, this step is shown exemplarily for class $c_1$. The cloud represents the local-descriptor-space while the blue dots mark the single local descriptors
-	\[
+	\begin{equation}\label{eq:descriptorsRoI}
 	f_1^{c_i},\dots,f_{Nf_{c_i}}^{c_i}
-	\]
+	\end{equation}
 where $f_j^{c_i}$ represents the $j-th$ local descriptor for the class $c_i$ and $Nf_{c_i}$ is the number of local descriptors of the class $c_i$.
 	\item In this step, the local descriptors get clustered class-wise. There is also no difference to the proposed Modular Dictionary creation process up to now, except for the requested number of clusters $k_c$. In contrast to the number evaluated best by \citeauthor{siddiqui2015robust}, which was $29$, the number $k_c$ evaluated best for the AMD is about ten times as large (see (TODO impl chapter) for evaluation details). For each class $c_i$, this step produces $k_c$ clusters
-	\[
+	\begin{equation}\label{eq:clustersRoI}
 	\Omega_1^{c_i},\dots,\Omega_{k_c}^{c_i}
-	\]
+	\end{equation}
 where $\Omega_j^{c_i}$ represents the $j-th$ cluster for the class $c_i$. The clusters are represented as purple ellipsoids in the figure.
-	\item TODO
-	\item TODO
-	\item Here, the results of the processes for the other classes come into account TODO expression? For each class, there is now a set of local descriptors $f_1 strich$ TODO
-	\item TODO
-\end{enumerate}
+	\item This step is about separating the \emph{good} clusters from the \emph{bad} ones, as said above, whereas the bad ones will be filtered out. The purpose is to end up with just a few clusters, much less than $k_c$, to prevent the final dictionary from blowing up with codewords. Bad or useless clusters, as said above, are clusters that only contain few descriptors, whereas good clusters contain many descriptors of the same kind. That said, a good cluster represents a feature of the class, that occurs in many training images and hence is expressive for that class. To define a good cluster, the parameter $r_{c_i}$ is introduced, which expresses the number of members, a cluster must have to be regarded as a \emph{good} cluster. $r_{c_i}$ is not the same for each class $c_i$ but depends on the number of training images $N_{c_i}$ of class $c_i$. The parameter $t$ controls the ratio, in how many of the $N_{c_i}$ training images a clustered feature has to occur, to be regarded as an expressive feature (resulting into an expressive cluster). So the final expression to reduce the number of per-class-clusters is
+	\begin{equation}\label{eq:clustersReduction}
+	\Omega_1^{c_i},\dots,\Omega_{l_{c_i}}^{c_i} = \{\,\Omega_j^{c_i} \,\mid\,\, |\Omega_j^{c_i}| \ge r_{c_i},\quad j = 1\dots{k_c} \,\}
+	\end{equation}
+where $l_{c_i} << k_c$ is the remaining number of good clusters and $r_{c_i} = N_{c_i} * t$.
+	\item After having reduced the number of clusters, each cluster of local descriptors is turned into one single local descriptor, defined as the mean of this cluster. So each class is represented by a set of local descriptors
+	\begin{equation}\label{eq:perClassCodewords}
+	{f'}_1^{c_i},\dots,{f'}_{l_{c_i}}^{c_i} = mean(\Omega_1^{c_i}),\dots,mean(\Omega_{l_{c_i}}^{c_i})
+	\end{equation}
+	\item Here, the results of the processes for the other classes are taken into account. For each class, there is a set of local descriptors $f'_{c_i}$ now, which have been filtered to be expressive for their class. Analogously to step 1, which gathers the local descriptors $f$ of all RoIs class-wise, the new local descriptors $f'$ are gathered over all classes, resulting into a set
+	\begin{equation}\label{eq:allDescriptors}
+	{f'}_1^{c_1},\dots,{f'}_{l_{c_1}}^{c_1},\quad\dots,\quad{f'}_1^{c_{N_c}},\dots,{f'}_{l_{c_{N_c}}}^{c_{N_c}}
+	\end{equation}
+where $N_c$ is the number of classes. This equation is similar to the set from equation \ref{eq:descriptorsRoI}, but expresses the whole training set instead of just one single class.
 
-3. Aussortieren der schlechten Clusters. Formel mit Omega-Menge und lc1. Erklären, wie man auf $r_ci$ kommt: ratio * numInstances($c_i$)
-4. Transformation der Clustercenter zu neuen feature descriptors f1'
-5. Über die neuen Feature descriptors ALLER Klassen dann wiederum nochmal clustern zu k clustern. Though this will also cluster feature-clusters of different classes into one cluster (which was the inter-class ambiguity problem of the Single Dictionary), measures show that the performance increases for lower dictionary sizes (TODO hier ref. Implementierung, wo ich Messungen habe, die zeigen, dass zu große DictSize nicht mehr gut ist, und zu kleine per-class-DictSize auch nicht. In Impl darauf eingehen, dass es ein gutes Verhältnis braucht zw den beiden DictSizes und der Ratio).
-6. Die k cluster centers werden die Dictionary codewords
+For the Modular Dictionary, the set from equation \ref{eq:allDescriptors} already forms the codewords of the dictionary. But to cope with the large amount of resulting per-class descriptors $f'$, a further clustering process is deployed. Im Gegensatz zum Reduction-Process from equation \ref{eq:clustersReduction} ist es hier gut, wenn ein Cluster wenige local descriptors enthält, da das bedeutet, dass das resultierende codeword nur wenige (ideally genau eine) Klasse kodiert. A cluster containing a local descriptor of each class is useless, because the resulting codeword would encode each class likewise. So an amplitude to that codeword by a Global Representation does not tell anything about the class-belonging. To control the clustering process, wird ein weiterer Degree of Freedom (the desired number $k$ of resulting clusters) spendiert, um zu ermitteln, ob sich ein weiteres Clustering lohnt. Possibly, it doesn't and the evaluated best $k$ just equals the number of inputted descriptors TODO ref. equation mit f-strich-en.
+	\item TODO Die k cluster centers werden die Dictionary codewords
+\end{enumerate}
 
 \begin{figure}[btph]
   \centering
@@ -1007,6 +1017,7 @@ This section concentrates on the construction of the dictionary. It describes th
 
 The dictionary is built offline. An update is possible, but would require a complete rebuild of the dictionary, which is another disadvantage of the Single Dictionary. For the Modular Dictionary, only the partial sub-dictionary of the respective make-model class would have to be built again. Generating the dictionary and training the classifier don’t run in parallel, which could be misinterpreted by the illustration of the training-workflow (TODO: ref). Since the (complete) dictionary is needed to encode the Global Representations, the training-workflow firstly generates the dictionary from the local features of all RoIs. After that, the training-workflow runs again by using the existing dictionary to train the classifier.
 
+\subsection{Global Representation}\label{sec:globalRepresentationConcept}
 
 
 
