@@ -829,11 +829,11 @@ From the use cases of this game, some requirements for the VMMR system (\emph{VR
 \end{itemize}
 The bag-of-words model implicates some advantages in contrast to the local features concatenation approach by \citeauthor{petrovic2004analysis}. Because the Global Representation is not directly depending on the pixels-grid of the source image, it is robust to occlusion to some extent. As long as the remaining set of local features is descriptive enough, the vehicle can still be classified. Another advantage is the robustness to slight changes in the camera's roll-angle or in the perspective. Depending on the local descriptors (\citeauthor{siddiqui2015robust} used SURF, which is rotation invariant), rotated local features would still result in the same bag-of-words histogram.
 
-A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. (TODO low: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms)). Nevertheless, the recognition system in RacecAR GO will take advantage of bag-of-words model, meeting requirements \emph{VR1} and \emph{VR2}.
+A downside of this approach is, though, that the local features lose their spatial information on their way into the Global Representation. The original position of a local feature is neither encoded inside of the local feature descriptor nor inside of the global descriptor. So an image with same features which are in a different order gets the same match. (TODO low: Show two images, one of the front of a vehicle, another, the same image but with parts of them disordered and maybe multiple times occurring. Then show the histograms for both of these images (→ same histograms)). Nevertheless, the recognition system in RacecAR GO will take advantage of the bag-of-words model, meeting requirements \emph{VR1} and \emph{VR2}.
 
 To gain independence from lighting conditions (\emph{VR3}) - and thus to avoid training a classifier that can solely tell the difference between pictures taken in the morning and pictures taken at noon - three things are done. The first thing is populating the training set with multiple images per make-model class, whereas the per-class-images are taken at different times of day by different kinds of weather (see TODO reference chapter with dataset construction - Implementation). The second thing is the preprocessing of each vehicle image. Lighting information will be subtracted out of an image before it enters the recognition system (see chapter \ref{sec:roiExtraction}). Third thing is the usage of local feature descriptors, each of which is invariant to illumination changes.
 
-To fight the multiplicity issues, as demanded by requirement \emph{VR4}, models of different generations are trained into different classes (see TODO Implementation - Fighting Multiplicity Issues). To handle the ambiguity challenges, the classification process will be optimized (see TODO classification chapter) and due to the small number of realized makes and models for the RacecAR GO prototype, these can be well-chosen to minimize ambiguity and multiplicity problems (see TODO chapter with Choice of Vehicle Classes).
+To fight the multiplicity issues, as demanded by requirement \emph{VR4}, models of different generations are trained into different classes (see TODO Implementation - Fighting Multiplicity Issues). To handle the ambiguity challenges, the classification process will be optimized (see TODO classification chapter) and due to the small number of realized makes and models for the RacecAR GO prototype, these can be well-chosen to minimize ambiguity and multiplicity problems (see chapter \ref{sec:choiceOfVehicleClasses}).
 
 \subsection{VMMR Workflow}
 At this point, after the requirements for the system are defined, its components and their interaction will be described as the <em>VMMR workflow</em>. An illustration for this is shown in figure \ref{fig:vmmrWorkflow}.
@@ -848,8 +848,8 @@ TODO: Workflow figure: Show kaefer photos for query AND? train. Show blue circle
 
 Actually, there are two workflows. One to train the system (the <em>Training</em>-workflow), the other one to use the system to classify an image of unknown make and model (<em>Querying</em>-workflow).
 
-The query-workflow basically consists of the same steps listed for a vehicle recognition in figure \ref{fig:vrSteps}, with the preceding step of a RoI-extraction. Both workflows start with extracting the RoI from the input image. The RoI contains a descriptive part of the vehicle illustrated in the image (see chapter \ref{sec:roiExtraction} for details about the RoI extraction). After that, the RoI is used to search for local features. In the training-workflow, the local features from all RoIs of all makes and models from the training data are used to build the bag-of-words dictionary. With this dictionary, the local features of a specific make-model RoI are converted into a histogram, the Global Descriptor of this make-model-instance. In the training-workflow, the make-model of the Global Descriptor is known. In the query-workflow, it's not.
-During training, a classifier is trained by all these Global Descriptors with their corresponding make-models. Whereas in the query-workflow, the trained classifier will be used to get a corresponding make-model for a Global Descriptor.
+The query-workflow basically consists of the same steps listed for a vehicle recognition in figure \ref{fig:vrSteps}, with the preceding step of a RoI-extraction. Both workflows start with extracting the RoI from the input image. The RoI contains a descriptive part of the vehicle illustrated in the image (see chapter \ref{sec:roiExtraction} for details about the RoI extraction). After that, the RoI is used to search for local features. In the training-workflow, the local features from all RoIs of all makes and models from the training data are used to build the bag-of-words dictionary. With this dictionary, the local features of a specific make-model RoI are converted into a histogram, the Global Representation of this make-model-instance. In the training-workflow, the make-model of the Global Representation is known. In the query-workflow, it's not.
+During training, a classifier is trained by all these Global Representations with their corresponding make-models. Whereas in the query-workflow, the trained classifier will be used to get a corresponding make-model for a Global Representation.
 
 The single steps of the workflows will be explained in more detail in the subsequent sections and are oriented by the approach presented by [3].
 
@@ -957,7 +957,7 @@ Having a collection of local features per RoI, they must be transferred into a G
 
 As said above, this VMMR approach is based on a bag-of-words model, where the dictionary is the <em>bag</em> containing the (code-)<em>words</em>. Similar local descriptors will be represented by one single codeword, which is then again a local descriptor. Each codeword will then be referred to by the Global Representation, which provides one histogram bin for each codeword (see \ref{sec:globalRepresentationConcept}). For the Global Representation to be expressive, each codeword has to be expressive, too. To retrieve codewords, the inputted local descriptors are clustered, whereas each cluster is turned into a codeword.
 
-\citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary from various vehicle classes' local descriptors (see page \pageref{par:dictionaryGenerationStateOfTheArt}). One scheme was to build a dictionary out of the local descriptors of all vehicle classes, called the <em>Single Dictionary</em>. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the <em>Modular Dictionary</em>. Although the Single Dictionary has the disadvantage of clustering similar local descriptors but from different vehicle classes into one single codeword (which will cause inter-class ambiguity issues), it performed superior to the Modular Dictionary (according to tests made by \citeauthor{siddiqui2015robust}).
+\citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary from various vehicle classes' local descriptors (see page \pageref{par:dictionaryGenerationStateOfTheArt}). One scheme was to build a dictionary out of the local descriptors of all vehicle classes, called the <em>Single Dictionary</em>. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the <em>Modular Dictionary</em>. Although the Single Dictionary has the disadvantage of clustering similar local descriptors but from different vehicle classes into one single codeword (which will cause inter-class ambiguity issues), it performed superior to the Modular Dictionary (according to tests made by \citeauthor{siddiqui2015robust}). As an example, referring to picture \ref{fig:ambiguityPorsche}, descriptors of the round headlights of both, the Mini and the Porsche, could be clustered into the same codeword because of their similarity.
 
 A problem of the Modular Dictionary is its size (see page \pageref{par:dictionaryGenerationStateOfTheArt}). A too large dictionary leads to large Global Representations. A result of this would be a classifier that misses generalizability and tends to be overfitted\footnote{The classifier would perform well for the images in the training set but would perform worse for unknown images}. Drastically reducing the number of per-class-clusters of the per-class-dictionaries (as \citeauthor{siddiqui2015robust} did) will fix this problem, but will also lose descriptivity of the per-class codewords. This is for one thing, because different features that should also be handled different, are clustered into the same cluster. For another thing, the ratio of useless clusters to informative clusters increases for a low number of clusters (see figure \ref{fig:modularDictionaryClusters}). Useless clusters either contain outlier features (e. g. because of noise) or features that only occur in a small fraction of training images of a specific class. Since clusters are used to create dictionary codewords, which are used to create descriptive global representations of classes, useless clusters are counterproductive.
 
@@ -971,7 +971,14 @@ This thesis introduces a new dictionary scheme as a solution to these problems.
 \end{figure}
 
 \subsubsection{Advanced Modular Dictionary}
-The Advanced Modular Dictionary (AMD) scheme extends the Modular Dictionary scheme. To solve the problem of too few per-class-clusters, the per-class-clustering will be performed with a reasonable high number of clusters, whereas after the clustering, only the \emph{good} clusters are kept. To cope with a too large codeword pool inside the Modular Dictionary, the codewords of the per-class-dictionaries are clustered once more.
+The Advanced Modular Dictionary (AMD) scheme extends the Modular Dictionary scheme. To solve the problem of too poor per-class-clusters, the per-class-clustering will be performed with a reasonable high number of clusters, whereas after the clustering, only the \emph{good} clusters are kept. To cope with a too large codeword pool inside the Modular Dictionary, the codewords of the per-class-dictionaries are clustered once more.
+
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.65\linewidth]{gfx/amd_process}
+        \caption{Generation process of the Advanced Modular Dictionary. See text for a detailed description.}
+        \label{fig:amdProcess}
+\end{figure}
 
 In the VMMR workflow from figure \ref{fig:vmmrWorkflow}, the dictionary generation is described as a process, that gets the local descriptors of all RoIs as input and produces a ready-to-use dictionary as output. In the following, the intermediate steps are explained. Each numbered section refers to the numbered steps from figure \ref{fig:amdProcess}.
 \begin{enumerate}
@@ -985,43 +992,52 @@ where $f_j^{c_i}$ represents the $j-th$ local descriptor for the class $c_i$ and
 	\Omega_1^{c_i},\dots,\Omega_{k_c}^{c_i}
 	\end{equation}
 where $\Omega_j^{c_i}$ represents the $j-th$ cluster for the class $c_i$. The clusters are represented as purple ellipsoids in the figure.
-	\item This step is about separating the \emph{good} clusters from the \emph{bad} ones, as said above, whereas the bad ones will be filtered out. The purpose is to end up with just a few clusters, much less than $k_c$, to prevent the final dictionary from blowing up with codewords. Bad or useless clusters, as said above, are clusters that only contain few descriptors, whereas good clusters contain many descriptors of the same kind. That said, a good cluster represents a feature of the class, that occurs in many training images and hence is expressive for that class. To define a good cluster, the parameter $r_{c_i}$ is introduced, which expresses the number of members, a cluster must have to be regarded as a \emph{good} cluster. $r_{c_i}$ is not the same for each class $c_i$ but depends on the number of training images $N_{c_i}$ of class $c_i$. The parameter $t$ controls the ratio, in how many of the $N_{c_i}$ training images a clustered feature has to occur, to be regarded as an expressive feature (resulting into an expressive cluster). So the final expression to reduce the number of per-class-clusters is
+	\item This step is about separating the \emph{good} clusters from the \emph{bad} ones, as said above, whereas the bad ones will be filtered out. The purpose is to end up with just a few clusters, much less than $k_c$, to prevent the final dictionary from blowing up with codewords. Bad or useless clusters, as said above, are clusters that only contain few descriptors, whereas good clusters contain many descriptors of the same kind. That said, a good cluster represents a feature of the class, that occurs in many training images and hence is expressive for that class. To define a good cluster, the parameter $r_{c_i}$ is introduced, which expresses the number of members, a cluster must have to be regarded as a \emph{good} cluster. $r_{c_i}$ is not the same for each class $c_i$ but depends on the number of training images $N_{c_i}$ of class $c_i$. The parameter $t$ controls the ratio, in how many of the $N_{c_i}$ training images a clustered descriptor has to occur, to be regarded as to describe an expressive feature (resulting into an expressive cluster). So the final expression to reduce the number of per-class-clusters is
 	\begin{equation}\label{eq:clustersReduction}
 	\Omega_1^{c_i},\dots,\Omega_{l_{c_i}}^{c_i} = \{\,\Omega_j^{c_i} \,\mid\,\, |\Omega_j^{c_i}| \ge r_{c_i},\quad j = 1\dots{k_c} \,\}
 	\end{equation}
 where $l_{c_i} << k_c$ is the remaining number of good clusters and $r_{c_i} = N_{c_i} * t$.
-	\item After having reduced the number of clusters, each cluster of local descriptors is turned into one single local descriptor, defined as the mean of this cluster. So each class is represented by a set of local descriptors
+	\item After having reduced the number of clusters, each cluster of local descriptors is turned into one single local descriptor, defined as the mean of this cluster. So each class is represented by a set of local descriptors, which are the codewords of the per-class dictionaries
 	\begin{equation}\label{eq:perClassCodewords}
 	{f'}_1^{c_i},\dots,{f'}_{l_{c_i}}^{c_i} = mean(\Omega_1^{c_i}),\dots,mean(\Omega_{l_{c_i}}^{c_i})
 	\end{equation}
-	\item Here, the results of the processes for the other classes are taken into account. For each class, there is a set of local descriptors $f'_{c_i}$ now, which have been filtered to be expressive for their class. Analogously to step 1, which gathers the local descriptors $f$ of all RoIs class-wise, the new local descriptors $f'$ are gathered over all classes, resulting into a set
+	\item Here, the results of the processes for the other classes are taken into account. For each class, there is a set of codewords $f'_{c_i}$ now, which have been filtered to be expressive for their class. Analogously to step 1, which gathers the local descriptors $f$ of all RoIs class-wise, the codewords $f'$ are gathered over all classes, resulting into a set
 	\begin{equation}\label{eq:allDescriptors}
 	{f'}_1^{c_1},\dots,{f'}_{l_{c_1}}^{c_1},\quad\dots,\quad{f'}_1^{c_{N_c}},\dots,{f'}_{l_{c_{N_c}}}^{c_{N_c}}
 	\end{equation}
 where $N_c$ is the number of classes. This equation is similar to the set from equation \ref{eq:descriptorsRoI}, but expresses the whole training set instead of just one single class.
 
-For the Modular Dictionary, the set from equation \ref{eq:allDescriptors} already forms the codewords of the dictionary. But to cope with the large amount of resulting per-class descriptors $f'$, a further clustering process is deployed. Im Gegensatz zum Reduction-Process from equation \ref{eq:clustersReduction} ist es hier gut, wenn ein Cluster wenige local descriptors enthält, da das bedeutet, dass das resultierende codeword nur wenige (ideally genau eine) Klasse kodiert. A cluster containing a local descriptor of each class is useless, because the resulting codeword would encode each class likewise. So an amplitude to that codeword by a Global Representation does not tell anything about the class-belonging. To control the clustering process, wird ein weiterer Degree of Freedom (the desired number $k$ of resulting clusters) spendiert, um zu ermitteln, ob sich ein weiteres Clustering lohnt. Possibly, it doesn't and the evaluated best $k$ just equals the number of inputted descriptors TODO ref. equation mit f-strich-en.
-	\item TODO Die k cluster centers werden die Dictionary codewords
+For the Modular Dictionary scheme, the set from equation \ref{eq:allDescriptors} already forms the codewords of the final dictionary. But to cope with the large amount of resulting per-class descriptors $f'$, a further clustering process is deployed. In contrast to the reduction process from equation \ref{eq:clustersReduction}, for this clustering it's good, if a cluster contains a few local descriptors. Because this means, that the resulting codeword only occurs in a few classes. So an amplitude for such a codeword in a Global Representation histogram gives a useful clue to the classes, the instance could correspond to. A cluster containing a local descriptor of each class is useless, because the resulting codeword would encode each class likewise. So an amplitude to that codeword by a Global Representation does not tell anything about the class-belonging.
+
+To control the clustering process, a further degree of freedom (the desired number $k$ of resulting clusters) is introduced. With a small value for $k$, it's possible to shrink the number of codewords drastically while losing a lot of per-class information. A large value for $k$ will leave many descriptors untouched by creating one-member-clusters. A special case is, if the value for $k$ equals the number of inputted descriptors, which has the same behavior as the Modular Dictionary scheme. The best value for $k$ will be evaluated in the implementation chapter TODO.
+	\item Finally, the means of the resulting $k$ clusters are turned into local descriptors, as it is done in equation \ref{eq:perClassCodewords}. Each resulting local descriptor represents one of the $k$ codewords $cw$ of the Advanced Modular Dictionary:
+	\begin{equation}\label{eq:finalCodewords}
+	{cw}_1,\dots,{cw}_k = mean({\Omega'}_1),\dots,mean({\Omega'}_k)
+	\end{equation}
+where ${\Omega'}_j$ represents the $j-th$ cluster from step 5.
 \end{enumerate}
+
+\subsection{Global Representation}\label{sec:globalRepresentationConcept}
+The purpose of the Global Representation is to describe the vehicle instance with all its specific properties, such that a classifier can understand it. A classifier can handle data instances that consist of a set of attributes. Each attribute is of a specific data type, either <em>nominal</em> (which has no order, like \emph{color}), <em>ordinal</em> (which can be ordered, like \emph{size} with values \emph{small}, \emph{medium} and \emph{big}), or <em>numeric</em> (which can be measured, like \emph{number of seats}). A Global Representation must be expressible via such an instance.
+
+Because of the above mentioned downsides, a simple transformation of the image’s pixels into the Global Representation (the instance would have one numeric pixel value for each attribute) will not be used here. A bag-of-words-based representation can better handle partial occlusions and changes of the camera angle. For this reason, a dictionary was built to project the local descriptors, extracted from the vehicle image, onto dictionary (code-)<em>words</em>. This is usually done by storing the word-frequencies in a histogram.
+
+Generating the dictionary and training the classifier don't run in parallel, which could be misinterpreted by the illustration of the training-workflow in figure \ref{fig:vmmrWorkflow}. Since the (complete) dictionary is needed to encode the Global Representations, the training-workflow firstly generates the dictionary from the local descriptors of all RoIs. After that, the training-workflow runs again by using the existing dictionary to train the classifier.
+
+For a given RoI $r$ and its set of local descriptors $F^r$, the corresponding Global Representation $H$, the histogram, is a vector that has an entry for each dictionary codeword $cw$. Each entry $H_i^r,\,i = 1..k$ represents the number of local descriptors $f \in F^r$, that are closest to the respective dictionary codeword $cw_i$:
+\begin{equation}
+H_i^r = |\{\, f \in F^r \,\mid\, dist(f, cw_i) < dist(f, cw_j) \quad \forall i, j: 1 \le i, j \le k,\, i \ne j \,\}|
+\end{equation}
+As distance measure $dist$, this thesis uses the euclidean distance, as it is done by \citep{siddiqui2015robust}. Figure \ref{fig:histogram} illustrates the generation of a histogram exemplarily.
 
 \begin{figure}[btph]
   \centering
-        \includegraphics[width=.65\linewidth]{gfx/amd_process}
-        \caption{Generation process of the Advanced Modular Dictionary. See text for a detailed description.}
-        \label{fig:amdProcess}
+        \includegraphics[width=.45\linewidth]{gfx/histogram}
+        \caption{Generation of a Global Representation Histogram: The upper cloud represents the dictionary space with six codewords. The cloud below contains the local descriptors found in a vehicle image. The bottommost figure shows how a histogram for this image would look like.}
+        \label{fig:histogram}
 \end{figure}
 
-\subsubsection{Dictionary Generation}
-TODO Das brauche ich dann nicht mehr, weil es alles in AMD steht.
-This section concentrates on the construction of the dictionary. It describes the data-structures and algorithms used. For concrete values that are needed for this VMMR, see the implementation chapter TODO: Ref. impl chapter for dict values.
-
-The dictionary is built offline. An update is possible, but would require a complete rebuild of the dictionary, which is another disadvantage of the Single Dictionary. For the Modular Dictionary, only the partial sub-dictionary of the respective make-model class would have to be built again. Generating the dictionary and training the classifier don’t run in parallel, which could be misinterpreted by the illustration of the training-workflow (TODO: ref). Since the (complete) dictionary is needed to encode the Global Representations, the training-workflow firstly generates the dictionary from the local features of all RoIs. After that, the training-workflow runs again by using the existing dictionary to train the classifier.
-
-\subsection{Global Representation}\label{sec:globalRepresentationConcept}
-
-
-
-
+\subsection{Choice of Vehicle Classes}\label{sec:choiceOfVehicleClasses}
 
 
 
