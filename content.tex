@@ -887,29 +887,25 @@ Nevertheless, there also exist some drawbacks of using the number plate and the 
   \item There are countries where cars don't have number plates mounted at their front (as in many states of the USA, e. g. Florida, see figure \ref{fig:numberPlateNoFront}). Additionally, there are some vehicles of specific make and models, where the front number plate has been mounted at the side instead of the middle (e. g. the Alfa Romeo 159, that has the front number plate mounted besides the radiator grill for design purpose, see figure \ref{fig:numberPlateSide}).
   \item Using the number plate's size and dimension to deduce the location and extent of the RoI will result in a RoI-mask that is independent of the car's characteristics but is nevertheless applied to all makes and models. A RoI-mask with a location, extent and aspect ratio suitable for a Porsche 911 (containing informative parts as the brand logo and headlights) might not be suitable for a VW T6, whose number plate is mounted rather low, such that its informative parts will be outside of the RoI (see figure \ref{fig:roiMaskPorscheT6}).
 \end{itemize}
+
+\begin{figure}[btph]
+        \myfloatalign
+        \subfloat[Freeway in Florida, USA, showing vehicles without a front number plate (reprinted from \footnote{\url{http://www.miamiherald.com/news/traffic/article39667194.html}})]
+        {\label{fig:numberPlateNoFront}%
+         \includegraphics[height=.12\linewidth]{gfx/florida_no_front_number_plates}} \quad
+        \subfloat[Alfa Romeo 159 with number plate mounted at the side (reprinted from \footnote{\url{http://www.seriouswheels.com/2008/a/2008-Autodelta-Alfa-Romeo-159-J4-2-2-C-Front-1280x960.htm}})]
+        {\label{fig:numberPlateSide}%
+         \includegraphics[height=.12\linewidth]{gfx/number_plate_front_side}} \quad
+        \subfloat[RoIs of a Porsche 911 (left) and a Volkswagen T6 (right)]
+        {\label{fig:roiMaskPorscheT6}%
+         \includegraphics[height=.12\linewidth]{gfx/roi_mask_porsche_t6}}
+        \caption[Problems when choosing the front number plate as center of the RoI]{Problems when choosing the front number plate as center of the RoI}
+\end{figure}
+
 Using the hood boundary to deduce the RoI's properties would fix the last mentioned problem, because the size of the hood boundary depends on the size of the car. Since the detection of the hood boundary is failure prone and since classifiers trained with RoIs including the hood region performed inferior to those trained without the hood region [4], the number plate-approach is chosen for this thesis.
 
 Starting from the front number plate, a RoI can be defined around it that automatically contains descriptive vehicle information. An example for this is illustrated in figure \ref{fig:roiDimensions}.
 
-TODO low: Compound the next three images into one figure with sub-images a, b and c
-\begin{figure}[btph]
-  \centering
-        \includegraphics[width=.35\linewidth]{gfx/florida_no_front_number_plates}
-        \caption{Picture of a freeway in Florida, USA, showing vehicles without a front number plate (reprinted from \footnote{\url{http://www.miamiherald.com/news/traffic/article39667194.html}})}
-        \label{fig:numberPlateNoFront}
-\end{figure}
-\begin{figure}[btph]
-  \centering
-        \includegraphics[width=.35\linewidth]{gfx/number_plate_front_side}
-        \caption{Picture of an Alfa Romeo 159, which has its front number plate mounted at the side (reprinted from \footnote{\url{http://www.seriouswheels.com/2008/a/2008-Autodelta-Alfa-Romeo-159-J4-2-2-C-Front-1280x960.htm}})}
-        \label{fig:numberPlateSide}
-\end{figure}
-\begin{figure}[btph]
-  \centering
-        \includegraphics[width=.35\linewidth]{gfx/roi_mask_porsche_t6}
-        \caption{Picture of the RoIs of a Porsche 911 (left) and a Volkswagen T6 (right)}
-        \label{fig:roiMaskPorscheT6}
-\end{figure}
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.35\linewidth]{gfx/roi_dimensions}
@@ -920,10 +916,10 @@ TODO low: Compound the next three images into one figure with sub-images a, b an
 \subsubsection{Variations}
 There are different possibilities to define the RoI around a number plate, depending on the choice of the values $l$, $r$, $t$ and $b$ denoted in figure \ref{fig:roiDimensions}.
 
-\begin{description}
-  \item[Including or not-including the hood region:] As shown by [4], RoIs including the hood region perform inferior. This might be due to little discriminative information in there. Additionally, the hood might reflect its environment, which puts <em>negative</em> information in the resulting descriptor.
-  \item[Considering only the left (or right) half of the vehicle's front:] In general, vehicles are symmetrical. Knowing one half, the other half can be estimated. For a Global Descriptor built up by concatenating the RoI's pixels, this might help to reduce training and classification time, because the descriptor's length would halve itself without losing information (only losing redundant mirrored half). Since the approach used in this thesis is based on a bag-of-words model, the length of the Global Descriptor does not depend on the size of the RoI but on the size of the dictionary. Halving the RoI would in contrast to that reduce the ability of the system to cope with partial occlusions (see VR1) [3]. If the selected half is occluded, there is no chance to recognize the vehicle anyway. TODO low: Reprint images from [4] (found in [3] fig. 3.7ff) ?? Only if I need the pages
-\end{description}
+\begin{itemize}
+  \item Including or not-including the hood region: As shown by [4], RoIs including the hood region perform inferior. This might be due to little discriminative information in there. Additionally, the hood might reflect its environment, which puts <em>negative</em> information in the resulting descriptor.
+  \item Considering only the left (or right) half of the vehicle's front: In general, vehicles are symmetrical. Knowing one half, the other half can be estimated. For a Global Descriptor built up by concatenating the RoI's pixels, this might help to reduce training and classification time, because the descriptor's length would halve itself without losing information (only losing redundant mirrored half). Since the approach used in this thesis is based on a bag-of-words model, the length of the Global Descriptor does not depend on the size of the RoI but on the size of the dictionary. Halving the RoI would in contrast to that reduce the ability of the system to cope with partial occlusions (see VR1) [3]. If the selected half is occluded, there is no chance to recognize the vehicle anyway. TODO low: Reprint images from [4] (found in [3] fig. 3.7ff) ?? Only if I need the pages
+\end{itemize}
 \citeauthor{petrovic2004analysis} \citep{petrovic2004analysis} shrinked the RoI in horizontal direction to compensate that the vehicle's structure is a little more redundant in that direction. This also only makes sense if the Global Descriptor's size depends on the size of the RoI, which is not the case in this thesis' approach.
 
 To sum up, the RoI should exclude the hood region while including all of the informative parts over all makes and models. In addition to that, the full and unshrinked width of the RoI should be used. For concrete values and tests see TODO: reference implementation chapter.
@@ -1038,209 +1034,35 @@ As distance measure $dist$, this thesis uses the euclidean distance, as it is do
 \end{figure}
 
 \subsection{Choice of Vehicle Classes}\label{sec:choiceOfVehicleClasses}
-As mentioned in the concept for RacecAR GO, the prototypical version of the game that is implemented within this thesis' scope will only implement a subset of all the world's makes and models, i. e. 10 different make-model-classes. The choice of the actual classes plays a role because of the following reasons:
-\begin{description}
-  \item[Control of multiplicity and ambiguity issues:] As defined in \emph{VR4}, the VMMR has to be able <em>"to cope with ambiguity and multiplicity issues"</em>. The choice of vehicle classes affects the discriminability of the different makes and models. Choosing 10 vehicle classes with high inter-class differences will increase the discrimination power of the VMMR. (TODO: Show examples and counter-examples. Good counter-example: VW Polo 9N3 and VW Golf V. Maybe just this example is enough). With equation TODO, this is explained in more detail. Let <formula>F_class_i</formula> be all the local features of <formula>class_i</formula>. Then <formula>E_class_i</formula> will be the intra-class error of the distances of all features from <formula>class_i</formula>. In other words, the nearer the local features lie to the center of <formula>F_class_i</formula>, the lesser the error.<br/>Furthermore, let <formula>E</formula> be the overall inter-class error among all centers of <formula>F_class_i</formula>. The greater this error, the more distance lies between the different class-features centers.<br/>So the target is to maximize <formula>E</formula> while minimizing all <formula>E_class_i, forall i</formula>.<br/>An optimal choice of vehicle classes will have the effect of a distribution of their local features as shown in figure TODO: show figure with near-optimal distribution in feature space (below). This also leads to a beneficial distribution of the dictionary codewords, because each cluster (and so the codeword) will be strongly related to a specific vehicle class. As a result, the histogram (the Global Representation) will encode one main vehicle class with each bin (see figure TODO: show figure with near-optimal per-class histogram bins (below)), which makes it easy for the classifier to classify by the histogram.<br/>This is achieved by training the classifier with all possible vehicle-class-subsets of size 10 (TODO number of limited vehicles) while maximizing the accuracy. For more details see TODO ref implementation chapter.
-
-
-
-
-
-
-
-
-
-
-%*****************************************
-\chapter{Examples}\label{ch:examples}
-%*****************************************
+As mentioned in the concept for RacecAR GO, the prototypical version of the game that is implemented within this thesis' scope will only cover a subset of all the world's makes and models, i. e. 10 different make-model-classes. The choice of the actual classes plays a role because of the following reasons:
+\begin{itemize}
+  \item Control of multiplicity and ambiguity issues: As defined in \emph{VR4}, the VMMR has to be able <em>"to cope with ambiguity and multiplicity issues"</em>. The choice of vehicle classes affects the discriminability of the different makes and models. Choosing 10 vehicle classes with high inter-class differences will increase the discrimination power of the VMMR. This is of no relevance with regard to a final version of the game, where all the world's makes and models shall be covered. But as long as this isn't the case, the covered vehicles have to be recognized as well as possible. As an example, choosing both, a Porsche and a Mini to be recognized by the VMMR system is a bad choice due to high inter-class ambiguity issues between these classes (see picture \ref{fig:ambiguityPorsche}). Thus the target is to achieve a distribution of dictionary codewords, where each codeword encodes as few classes as possible while the pairwise distance among the codewords is as large as possible.
+  
+  For local descriptors $f^{c_i}$ and $\hat f^{c_i}$ of class $c_i$, let
+  \begin{equation}
+  E^{c_i} = \sum_{f^{c_i}, \hat f^{c_i}} dist(f^{c_i},\hat f^{c_i})^2 \quad \forall f^{c_i}, \hat f^{c_i}
+  \end{equation}
+  be the intra-class error of class $c_i$ and
+  \begin{equation}
+  E = \sum_{i, j = 1}^{\hat N_c} dist(mean(c_i), mean(c_j))^2
+  \end{equation}
+  be the inter-class error, where $\hat N_c > N_c$ is the number of classes with available training data and $mean(c)$ is the mean of all local descriptors of class $c$. Then the task is to maximize $E$ while minimizing $E^{c_i} \, \forall i = 1,\dots,N_c$ for all possible combinations of $N_c$ different classes:
+  \begin{equation}
+  K_{opt}^{N_c} = \argmin_{\{c_1,\dots,c_{N_c}\} \,\in\, perm_{N_c} \, K} \frac{\sum_{i = 1}^{N_c}E^{c_i}}{E}
+  \end{equation}
+  where
+  
+  \begin{tabular}{ll}
+  $K$                     & set with all classes with available training data, $|K| = \hat N_c$ \\
+  $K_{opt}^{N_c}$         & subset of $K$ with $N_c$ classes with optimal distribution \\
+  $perm_{N_c}$            & function that generates all possible permutations of size $N_c$ \\
+  \end{tabular}
+  \item Availability of chosen classes in the player's surroundings: To keep the fun of play, the game must recognize vehicles, that frequently occur in those areas, the game will be played in. Additionally, the game should represent some seldom cars to challenge the players to be on the prowl for them. If the game supports too many frequent cars, the player could lose fun because of the missing challenge. If there are too little, the player could be too challenged. So to hold the player in flow, the set of represented classes should thus consist of a reasonable ratio of frequent and seldom vehicle classes. For this reason, the training data solely consists of vehicles occurring in Germany (where the prototype will be tested), some of them are frequent (like a VW Golf IV), others are rare (like a Porsche 911).
+  \item Last but not least, photos of these vehicles must exist to train the VMM recognizer. The problem with seldom cars is that one rarely sees them on the street or at public car parks. In contrast to that, there's no problem to find vehicles of frequent classes.
+\end{itemize}
 
 %\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
 
-\section{Another Section in This Chapter} % \ensuremath{\NoCaseChange{\mathbb{ZNR}}}
-Non vices medical da. Se qui peano distinguer demonstrate, personas
-internet in nos. Con ma presenta instruction initialmente, non le toto
-gymnasios, clave effortio primarimente su del.\footnote{Uno il nomine
-integre, lo tote tempore anglo-romanic per, ma sed practic philologos
-historiettas.} Chapter~\ref{ch:examples} %\autoref
-
-\subsection{Personas Initialmente}
-Uno pote summario methodicamente al, uso debe nomina hereditage ma.
-Iala rapide ha del, ma nos esser parlar. Maximo dictionario sed al.
-
-\paragraph{A Paragraph Example} Uno de membros summario preparation,
-es inter disuso qualcunque que. Del hodie philologos occidental al,
-%como publicate litteratura in web. Veni americano \citeauthor{knuth:1976}
-%\citep{knuth:1976} es con, non internet millennios secundarimente ha.
-Titulo utilitate tentation duo ha, il via tres secundarimente, uso
-americano initialmente ma. De duo deler personas initialmente. Se 
-duce facite westeuropee web, \ref{tab:example} nos clave 
-articulos ha.
-
-\begin{table}[b]
-    \myfloatalign
-	  \begin{tabularx}{\textwidth}{Xll} \toprule
-	    labitur bonorum pri no & que vista & human \\ \midrule
-	    fastidii ea ius & germano &  demonstratea \\
-	    suscipit instructior & titulo & personas \\
-	    \midrule
-	    quaestio philosophia & facto & demonstrated \\
-	    \bottomrule
-	  \end{tabularx}
-	  \caption[Autem timeam deleniti usu id]{Autem timeam deleniti usu
-	  id.}
-	  \label{tab:example}
-\end{table}
-
-\subsubsection{A Subsubsection}
-Deler utilitate methodicamente con se. Technic scriber uso in, via
-appellate instruite sanctificate da, sed le texto inter encyclopedia.
-Ha iste americas que, qui ma tempore capital.
-%Sia ma sine svedese americas. Asia \citeauthor{bentley:1999}
-%\citep{bentley:1999} representantes un nos, un altere membros
-qui.\footnote{De web nostre historia angloromanic.} Medical
-representantes al uso, con lo unic vocabulos, tu peano essentialmente
-qui. Lo malo laborava anteriormente uso.
-
-\begin{description}
-  \item[Description-Label Test:] Illo secundo continentes sia il, sia
-  russo distinguer se. Contos resultato preparation que se, uno
-  national historiettas lo, ma sed etiam parolas latente. Ma unic
-  quales sia. Pan in patre altere summario, le pro latino resultato.
-    \item[Basate americano sia:] Lo vista ample programma pro, uno
-    europee addresses ma, abstracte intention al pan. Nos duce infra
-    publicava le. Es que historia encyclopedia, sed terra celos
-    avantiate in. Su pro effortio appellate, o.
-\end{description}
-Tu uno veni americano sanctificate. Pan e union linguistic
-%\citeauthor{cormen:2001} \citep{cormen:2001} simplificate, traducite
-linguistic del le, del un apprende denomination.
-
-\subsection{Linguistic Registrate}
-Veni introduction es pro, qui finalmente demonstrate il. E tamben
-anglese programma uno. Sed le debitas demonstrate. Non russo existe o,
-facite linguistic registrate se nos. Gymnasios, sanctificate sia
-le, publicate \ref{fig:example} methodicamente e qui.
-
-Lo sed apprende instruite. Que altere responder su, pan ma, signo
-studio. Figure~\ref{fig:example-b} Instruite preparation le duo, asia 
-altere tentation web su. Via unic facto rapide de, iste questiones 
-methodicamente o uno, nos al.
-
-\begin{figure}[bth]
-        \myfloatalign
-        \subfloat[Asia personas duo.]
-        {\includegraphics[width=.45\linewidth]{gfx/example_1}} \quad
-        \subfloat[Pan ma signo.]
-        {\label{fig:example-b}%
-         \includegraphics[width=.45\linewidth]{gfx/example_2}} \\
-        \subfloat[Methodicamente o uno.]
-        {\includegraphics[width=.45\linewidth]{gfx/example_3}} \quad
-        \subfloat[Titulo debitas.]
-        {\includegraphics[width=.45\linewidth]{gfx/example_4}}
-        \caption[Tu duo titulo debitas latente]{Tu duo titulo debitas
-        latente.}\label{fig:example}
-\end{figure}
-
-
-%************************************************
-\chapter{Math Test Chapter}\label{ch:mathtest} % $\mathbb{ZNR}$
-%************************************************
-Ei choro aeterno antiopam mea, labitur bonorum pri no. His no decore
-nemore graecis. In eos meis nominavi, liber soluta vim cu. Sea commune
-suavitate interpretaris eu, vix eu libris efficiantur.
-
-\section{Some Formulas}
-Due to the statistical nature of ionisation energy loss, large
-fluctuations can occur in the amount of energy deposited by a particle
-traversing an absorber element\footnote{Examples taken from Walter
-Schmidt's great gallery: \\
-\url{http://home.vrweb.de/~was/mathfonts.html}}.  Continuous processes
-such as multiple
-scattering and energy loss play a relevant role in the longitudinal
-and lateral development of electromagnetic and hadronic
-showers, and in the case of sampling calorimeters the
-measured resolution can be significantly affected by such fluctuations
-in their active layers.  The description of ionisation fluctuations is
-characterised by the significance parameter $\kappa$, which is
-proportional to the ratio of mean energy loss to the maximum allowed
-energy transfer in a single collision with an atomic electron:
-
-\[
-\kappa =\frac{\xi}{E_{\mathrm{max}}} \mathbb{ZNR}
-\]
-$E_{\mathrm{max}}$ is the maximum transferable energy in a single
-collision with
-an atomic electron.
-\[
-E_{\mathrm{max}} =\frac{2 m_{\mathrm{e}} \beta^2\gamma^2 }{1 +
-2\gamma m_{\mathrm{e}}/m_{\mathrm{x}} + \left ( m_{\mathrm{e}}
-/m_{\mathrm{x}}\right)^2}\ ,
-\]
-where $\gamma = E/m_{\mathrm{x}}$, $E$ is energy and
-$m_{\mathrm{x}}$ the mass of the incident particle,
-$\beta^2 = 1 - 1/\gamma^2$ and $m_{\mathrm{e}}$ is the electron mass.
-$\xi$ comes from the Rutherford scattering cross section
-and is defined as:
-\begin{eqnarray*} \xi  = \frac{2\pi z^2 e^4 N_{\mathrm{Av}} Z \rho
-\delta x}{m_{\mathrm{e}} \beta^2 c^2 A} =  153.4 \frac{z^2}{\beta^2}
-\frac{Z}{A}
-  \rho \delta x \quad\mathrm{keV},
-\end{eqnarray*}
-where
-
-\begin{tabular}{ll}
-$z$          & charge of the incident particle \\
-$N_{\mathrm{Av}}$     & Avogadro's number \\
-$Z$          & atomic number of the material \\
-$A$          & atomic weight of the material \\
-$\rho$       & density \\
-$ \delta x$  & thickness of the material \\
-\end{tabular}
-
-$\kappa$ measures the contribution of the collisions with energy
-transfer close to $E_{\mathrm{max}}$.  For a given absorber, $\kappa$
-tends
-towards large values if $\delta x$ is large and/or if $\beta$ is
-small.  Likewise, $\kappa$ tends towards zero if $\delta x $ is small
-and/or if $\beta$ approaches $1$.
-
-The value of $\kappa$ distinguishes two regimes which occur in the
-description of ionisation fluctuations:
-
-\begin{enumerate}
-\item A large number of collisions involving the loss of all or most
-  of the incident particle energy during the traversal of an absorber.
-
-  As the total energy transfer is composed of a multitude of small
-  energy losses, we can apply the central limit theorem and describe
-  the fluctuations by a Gaussian distribution.  This case is
-  applicable to non-relativistic particles and is described by the
-  inequality $\kappa > 10 $ (when the mean energy loss in the
-  absorber is greater than the maximum energy transfer in a single
-  collision).
-
-\item Particles traversing thin counters and incident electrons under
-  any conditions.
-
-  The relevant inequalities and distributions are $ 0.01 < \kappa < 10
-  $,
-  Vavilov distribution, and $\kappa < 0.01 $, Landau distribution.
-\end{enumerate}
-
-
-\section{Various Mathematical Examples}
-If $n > 2$, the identity
-\[
-  t[u_1,\dots,u_n] = t\bigl[t[u_1,\dots,u_{n_1}], t[u_2,\dots,u_n]
-  \bigr]
-\]
-defines $t[u_1,\dots,u_n]$ recursively, and it can be shown that the
-alternative definition
-\[
-  t[u_1,\dots,u_n] = t\bigl[t[u_1,u_2],\dots,t[u_{n-1},u_n]\bigr]
-\]
-gives the same result.
 
 
 %*****************************************
