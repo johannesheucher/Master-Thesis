@@ -764,7 +764,7 @@ There are also some restrictions that have to be done for the capturing process 
 
 The server answers the VMMR request solely with the make and model of the car. For each covered make-model, the client stores one corresponding property-set, that is automatically applied to the respective captured vehicle.
 
-After having received the make and model, the client loads the respective virtual model and blends it in AR manner above the real car (as it is done for the full version of RacecAR GO). The following mini-game of placing a vehicle-part at the correct location is omitted for the prototype, though it is still possible to move the iPhone and see the virtual model still overlaying the real vehicle adequately. Touching the garage-symbol will immediately store the captured vehicle into the garage and thus finish the capturing process.
+After having received the make and model, the client loads the respective virtual model and blends it in AR manner above the real car (as it is done for the full version of RacecAR GO). The color of the vehicle will not be tracked, so a blank virtual model is used. The following mini-game of placing a vehicle-part at the correct location is omitted for the prototype, though it is still possible to move the iPhone and see the virtual model still overlaying the real vehicle adequately. Touching the garage-symbol will immediately store the captured vehicle into the garage and thus finish the capturing process.
 
 TODO: Auch hier die Schritte in der Grafik nummerieren
 \begin{figure}[btph]
@@ -851,7 +851,7 @@ As mentioned as the optional preceding basic step for a general vehicle recognit
 
 The task of the RoI-extraction is to separate the foreground from the background. So the output of this step is a smaller part of the inputted image, containing just the vehicle, where, in the optimal case, all information not belonging to that vehicle has been erased.
 
-The advantage of using a RoI instead of the whole input image in the following workflow steps are, that for one thing, the global representation of the vehicle is solely built out of information exclusively containing descriptive vehicle data. Simultaneously, all the classification-noise caused by the background will disappear. All this increases the expressiveness of the global representation. For another thing, the processing speed increases due to the lesser amount of pixels compared to the original image.
+The advantage of using a RoI instead of the whole input image in the following workflow steps are, that for one thing, the global representation of the vehicle is solely built out of information exclusively containing descriptive vehicle data. Simultaneously, all the noise caused by the background will disappear. All this increases the expressiveness of the global representation. For another thing, the processing speed increases due to the lesser amount of pixels compared to the original image.
 
 \subsubsection{Preprocessing}
 There is usually some preprocessing done on the RoI. The target is to transfer the different RoIs into a state of reasonable comparability. This is often called the \emph{normalization} of the RoI. So one preprocessing step is the normalization of its size. The term \emph{size} of the RoI is ambigue here. It can either describe the number of pixels in each dimension, the RoI is made of. Or it means the size of the cutting out of the original image. Only before normalizing the size (former one), these two are equal. To avoid misunderstandings, the latter will be referred to as the \emph{extent} of the RoI.
@@ -875,7 +875,7 @@ To find the position and extent of the RoI, the location of the vehicle inside o
 Nevertheless, there also exist some drawbacks of using the number plate and the front of a vehicle:
 
 \begin{itemize}
-  \item One problem concerns the capturing process during play. As described in \emph{VR1}, there is often too little clearance around a vehicle to take a photo without occlusion. Although it is helpful in most scenarios to back into a parking space instead of pulling into it (e. g. to notice pedestrians and cyclists more early when exiting the parking space), most drivers don't do it. So while the vehicle sticks out its back side towards the street or a parking area, its front is located besides a wall or a bush etc., not leaving enough space to take a photo of it (at least none without any occlusion). While this problem is acceptable for vehicle photos taken during the game, it is not acceptable for photos taken to train the classifier. Each object not belonging to the vehicle itself decreases the performance of the recognition system.
+  \item One problem concerns the capturing process during play. As described in \emph{VR1}, there is often too little clearance around a vehicle to take a photo without occlusion. Although it is helpful in most scenarios to back into a parking space instead of pulling into it (e. g. to notice pedestrians and cyclists more early when exiting the parking space), most drivers don't do it. So while the vehicle sticks out its back side towards the street or a parking area, its front is located besides a wall or a bush etc., not leaving enough space to take a photo of it (at least none without any occlusion). While this problem is acceptable for vehicle photos taken during the game, it is not acceptable for photos taken for the training set. Training with a picture of a car that is partially occluded decreases the performance of the recognition system.
   \item There are countries where cars don't have number plates mounted at their front (as in many states of the USA, e. g. Florida, see figure \ref{fig:numberPlateNoFront}). Additionally, there are some vehicles of specific make and models, where the front number plate has been mounted at the side instead of the middle (e. g. the Alfa Romeo 159, that has the front number plate mounted besides the radiator grill for design purpose, see figure \ref{fig:numberPlateSide}).
   \item Using the number plate's size and dimension to deduce the location and extent of the RoI will result in a RoI-mask that is independent of the car's characteristics but is nevertheless applied to all makes and models. A RoI-mask with a location, extent and aspect ratio suitable for a Porsche 911 (containing informative parts as the brand logo and headlights) might not be suitable for a VW T6, whose number plate is mounted rather low, such that its informative parts will be outside of the RoI (see figure \ref{fig:roiMaskPorscheT6}).
 \end{itemize}
@@ -901,12 +901,12 @@ Starting from the front number plate, a RoI can be defined around it that automa
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.35\linewidth]{gfx/roi_dimensions}
-        \caption{Definition of the RoI depending on the width $w$ of the number plate. Concrete values for $l$, $r$, $t$ and $b$ are evaluated in the implementation chapter TODO}
+        \caption{Definition of the RoI extent depending on the width $w$ of the number plate. Concrete values for $left$, $right$, $top$ and $bottom$ are evaluated in the implementation chapter TODO}
         \label{fig:roiDimensions}
 \end{figure}
 
 \subsubsection{Variations}
-There are different possibilities to define the RoI around a number plate, depending on the choice of the values $l$, $r$, $t$ and $b$ denoted in figure \ref{fig:roiDimensions}.
+There are different possibilities to define the RoI around a number plate, depending on the choice of the values $left$, $right$, $top$ and $bottom$ denoted in figure \ref{fig:roiDimensions}.
 
 \begin{itemize}
   \item Including or not-including the hood region: As shown by \citep{hsieh2014symmetrical}, RoIs including the hood region perform inferior. This might be due to little discriminative information in there. Additionally, the hood might reflect its environment, which puts \emph{negative} information in the resulting descriptor.
@@ -923,7 +923,7 @@ A local feature is a point in the RoI, that is significant, like a corner. Such 
 
 There are many different feature detectors and feature descriptors with different purposes and properties. Generally, a feature descriptor is a vector, as shown in equation (TODO: Add equation with feature descriptor definition (see photo in doc)). The extraction of descriptors can be seen as a projection of the RoI onto a set of feature vectors (TODO: add equation with feature extraction, see photo in doc). See TODO: reference Technical Basics for more details and examples of feature extractors and feature descriptors.
 
-It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented (TODO: only show patent nr) (\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB \citep{rublee2011orb}. TODO: Short explanation. For more details, see TODO: reference section in Technical Basics. For a comparison among these detectors and descriptors, see TODO: reference implementation chapter for comparison
+It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented (TODO: only show patent nr) (\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB. ORB is said to be rotation invariant and resistant to noise. Furthermore, it's said to be faster than SIFT and in many situations performing equally well \citep{rublee2011orb}. And best of all, it's not patented. So the implementation is based on ORB-features.
 
 The output of this step is a set of local descriptors per RoI. In the figure, each set is represented as a cloud with blue dots, which represent the local descriptors in local-descriptor-space.
 
@@ -1053,8 +1053,42 @@ As mentioned in the concept for RacecAR GO, the prototypical version of the game
   \item Last but not least, photos of these vehicles must exist to train the VMM recognizer. The problem with seldom cars is that one rarely sees them on the street or at public car parks. In contrast to that, there's no problem to find vehicles of frequent classes.
 \end{itemize}
 
-%\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
 
+
+
+
+
+
+%*****************************************************************************
+%*****************************************************************************
+\chapter{Implementation}\label{ch:implementation}
+%*****************************************************************************
+%*****************************************************************************
+\section{Overview}
+TODO: Später aufschreiben, wenn ich weiß, was wo steht: Dieses Kapitel aufgeteilt: Zuerst serverseitige Implementierung
+Dann Netzwerkschnittstelle
+Dann Client mit Capturing Process
+Am Ende Testergebnisse und Schlussfolgerungen
+
+\section{Server}
+Figure \ref{fig:platform} says, that the server takes care for tasks like VMMR, the user management and the game state. Since the prototype is mainly limited to the capturing of vehicles, the only part left for the server is the VMMR.
+
+The recognition is realized as a machine learning system, that trains a classifier based on labeled training images. In this chapter, the several components along with implementation details will be described. The order of described components equals the order denoted in the VMMR workflow in figure \ref{fig:vmmrWorkflow}.
+
+The Server is realized as a Java application. 
+
+
+Dabei wird in den subsections die Reihenfolge eingehalten, wie sie im vmmr workflow beschrieben ist.
+Server is realized as a Java application.
+For image processing, OpenCV 3\footnote{\url{http://opencv.org/}} is used. For training the final classifier, Weka 3.8\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is used.
+
+
+
+
+
+
+
+%\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
 
 
 %*****************************************
