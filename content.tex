@@ -580,7 +580,7 @@ Anzeige der Spielkarte
 Anzeige jedes Views mit exemplarischem Inhalt
 
 \subsubsection{Capturing}
-At the start of the game, the player finds himself directly in the \emph{Capturing} view, ready to capture new vehicles for his garage. This fulfills GR2 which demands that the player must be able to play without any annoying setup. This view is also accessible via the menu. The capturing process is divided into four steps and is illustrated in figure \ref{fig:capturing}.
+At the start of the game, the player finds himself directly in the \emph{Capturing} view, ready to capture new vehicles for his garage. This fulfills \emph{GR2} which demands that the player must be able to play without any annoying setup. This view is also accessible via the menu. The capturing process is divided into four steps and is illustrated in figure \ref{fig:capturing}.
 
 TODO: Schritte im Bild nummerieren. Mit Corporate Design Farbe: Hellblau : Schwarze Ziffer in hellblauem Kreis mit schwarzem Rand
 \begin{figure}[btph]
@@ -802,7 +802,6 @@ Assuming a player of RacecAR GO walks along the street and suddenly, he spots a 
         \caption{Ambiguity (inter-class) issue between a Porsche 911 (991) and a Mini One (R55)}
         \label{fig:ambiguityPorsche}
 \end{figure}
-
 Additional to the inter-make ambiguity issues mentioned before (also those in chapter \ref{sec:vmmrStateOfTheArt}), there's the problem of rebadging because of licence products (TODO: Write at the end (result-chapter of impl), that my VMMR system cannot generally handle this type of ambiguity, because the differences are too small). In most cases, these vehicles differ solely in the logo on the hood and on the back (see figure \ref{fig:ambiguityRebadging}).
 
 \begin{figure}[btph]
@@ -893,7 +892,6 @@ Nevertheless, there also exist some drawbacks of using the number plate and the 
          \includegraphics[height=.12\linewidth]{gfx/roi_mask_porsche_t6}}
         \caption[Problems when choosing the front number plate as center of the RoI]{Problems when choosing the front number plate as center of the RoI}
 \end{figure}
-
 Using the hood boundary to deduce the RoI's properties would fix the last mentioned problem, because the size of the hood boundary depends on the size of the car. Since the detection of the hood boundary is failure prone and since classifiers trained with RoIs including the hood region performed inferior to those trained without the hood region \citep{hsieh2014symmetrical}, the number plate-approach is chosen for this thesis.
 
 Starting from the front number plate, a RoI can be defined around it that automatically contains descriptive vehicle information. An example for this is illustrated in figure \ref{fig:roiDimensions}.
@@ -1075,13 +1073,27 @@ Figure \ref{fig:platform} says, that the server takes care for tasks like VMMR, 
 
 The recognition is realized as a machine learning system, that trains a classifier based on labeled training images. In this chapter, the several components along with implementation details will be described. The order of described components equals the order denoted in the VMMR workflow in figure \ref{fig:vmmrWorkflow}.
 
-The Server is realized as a Java application. 
+The Server is realized as a Java application. For image processing, OpenCV 3\footnote{\url{http://opencv.org/}} is used. For training the final classifier, Weka 3.8\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is used.
 
+\subsection{Dataset}\label{sec:dataset}
+The VMMR workflow starts with a set of training images, the dataset. In this case, the training images are pictures of cars with make-model labels assigned. As described in chapter \ref{sec:vmmrConcept}, there are different criteria, the training images have to fulfill:
+\begin{itemize}
+  \item The decision was made to recognize a car only by its front. So the training images need to depict the front of a vehicle. Retrospectively, it would have been better to choose the vehicle's backside. This would at least have simplified the collecting of training data, because most people pull into a parking space.
+  \item Since the main application area is Germany (at least for the initial launch of the app), pictures of vehicles occurring in Germany should be included. It should be a reasonable mix of frequent and rare make-models.
+  \item For the prototype, the limitation has been made to solely recognize cars and no trucks, buses, motorbikes, etc. So the training set should be specialized to cars.
+  \item The per-class images should vary lightning- and weather-conditions. As requested by \emph{VR3}, the recognizer shall be independent from lighting to prevent making the same mistake as the recognizer of tanks, that recognizes cloudy and sunny instead. To fulfill this request, the recognizer has to learn a large variance of lighting conditions for each vehicle class.
+  \item The cars on the per-class images should be as diverse as possible to cover all variants of that specific vehicle class. E. g. a VW Golf VII is available as standard Golf, as GTI, GTD, GTE, e-Golf or Golf R, all slightly differing in the front.
+  \item The perspective of the picture, though frontal, should also vary to be prepared to cope with different view angles and player sizes during the capturing process.
+  \item The pictures must be occlusion-free.
+\end{itemize}
+It is also possible to use the same real vehicle multiple times inside the training data, as long as it has been photographed under different lighting conditions or view perspectives.
 
-Dabei wird in den subsections die Reihenfolge eingehalten, wie sie im vmmr workflow beschrieben ist.
-Server is realized as a Java application.
-For image processing, OpenCV 3\footnote{\url{http://opencv.org/}} is used. For training the final classifier, Weka 3.8\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is used.
+Since I'm not the first one to train a VMMR, there already exist datasets for this purpose. For example, there's the NTOU-MMR dataset \citep{ntoummrDataset} that is used by \citep{siddiqui2016real} or another dataset used in the work \citep{krause20133d}. Unfortunately, both datasets mostly consist of pictures of vehicles made in the USA. Though there are vehicles that are also available in Germany (like the Toyota Yaris), most of them aren't. Additionally, the latter dataset's pictures don't show purely frontal views of vehicles but also pictures from the side or the front-side. As a result, there wasn't any dataset available that fitted the needs denoted above. So an own dataset was created along with this thesis.
 
+\subsubsection{Dataset Creation}\label{sec:datasetCreation}
+To save time and improve the diversity of available vehicle classes, an extra app has been created to take photos of vehicles along with the corresponding make and model. The app has been spread among some of my friends with the request to take as many pictures as possible while regarding the above-mentioned criteria. An advantage is, that these pictures are taken with ordinary smartphone cameras, so the quality of the images equals that one of those pictures, taken by the RacecAR GO app during the capturing process. Such a collector app has the further advantage that it reminds the training data collectors to collect training data, because they always see the app when looking on their smartphone. The app stores these pictures locally with the make, model and a time stamp as file name, so that the collectors only had to push the collected images onto a web storage regularly.
+
+As a result, the final dataset consists of TODO N Bildern, $\hat{N_c} = TODO$ verschiedenen Makes und L verschiedenen Models. Their original sizes vary between TODO x TODO pixels.
 
 
 
