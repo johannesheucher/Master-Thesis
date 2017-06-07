@@ -434,20 +434,20 @@ In contrast to the approach of \citeauthor{petrovic2004analysis}, the global rep
 The set of all feature-codewords, the \emph{visual words}, build the dictionary or \emph{bag}. A feature-codeword in this context is not a feature but a representative of several similar features. This way, the size of the dictionary does not only control the size of the global representation (number of bins in the histogram) but also the threshold, at which several features are clustered into one single dictionary feature-codeword. So the dictionary represents the essence of the key features (in this case SURF \citep{bay2008speeded}) of all the training images.
 
 \paragraph{Dictionary Generation}\label{par:dictionaryGenerationStateOfTheArt}
-Two different schemes of dictionary generation are proposed by \citeauthor{siddiqui2015robust}. One called \emph{Single Dictionary}, the other called \emph{Modular Dictionary}. For the Single Dictionary, all the local features of all training images are clustered. Each cluster center then represents one codeword of the Single Dictionary. The number of clusters defines the size of the dictionary, therefore. An advantage of this scheme is, that considering the combined set of features over all the training images (across multiplicity and ambiguity) strengthens the discriminability of this dictionary. A disadvantage is, though, that one cluster could contain features that are similar but originate from different make-model classes. To cope with this, a dictionary is only built out of the training images for one specific make-model class (in the same way as described above), resulting in one dictionary per make-model class. The set of all the codewords of those dictionaries form the Modular Dictionary. An advantage, besides the one noted above, is the flexibility when adding new training data. Only the dictionary of the specific class has to be rebuilt, which saves processing time. A disadvantage is the increased size of the Modular Dictionary compared to the Single Dictionary. Although the size of one of its per-class dictionaries can be smaller than that of the Single Dictionary, multiplying this with the number of make-model classes will boost the number of overall codewords. For an illustration of the two schemes, see figure \ref{fig:dictionarySDMD}.
+Two different schemes of dictionary generation are proposed by \citeauthor{siddiqui2015robust}. One called \emph{Single Dictionary} (SD), the other called \emph{Modular Dictionary} (MD). For the SD, all the local features of all training images are clustered. Each cluster center then represents one codeword of the Single Dictionary. The number of clusters defines the size of the dictionary, therefore. An advantage of this scheme is, that considering the combined set of features over all the training images (across multiplicity and ambiguity) strengthens the discriminability of this dictionary. A disadvantage is, though, that one cluster could contain features that are similar but originate from different make-model classes. To cope with this, a dictionary is only built out of the training images for one specific make-model class (in the same way as described above), resulting in one dictionary per make-model class. The set of all the codewords of those dictionaries form the MD. An advantage, besides the one noted above, is the flexibility when adding new training data. Only the dictionary of the specific class has to be rebuilt, which saves processing time. A disadvantage is the increased size of the Modular Dictionary compared to the Single Dictionary. Although the size of one of its per-class dictionaries can be smaller than that of the Single Dictionary, multiplying this with the number of make-model classes will boost the number of overall codewords. For an illustration of the two schemes, see figure \ref{fig:dictionarySDMD}.
 
 \begin{figure}[bth]
   \centering
         \includegraphics[width=.95\linewidth]{gfx/single_dictionary_reprint}
         \includegraphics[width=.95\linewidth]{gfx/modular_dictionary_reprint}
-        \caption{Dictionary building schemes. Above for the Single Dictionary, below for the Modular Dictionary, where $f_n$ is the $n$-th feature of one image of the respective class $c_m$, $N_c = $ number of classes, and $Nf_j = $ number of features of the $j$-th image of a respective class (reprinted from \citep{siddiqui2015robust}).}
+        \caption{Dictionary building schemes. Above for the Single Dictionary, below for the MD, where $f_n$ is the $n$-th feature of one image of the respective class $c_m$, $N_c = $ number of classes, and $Nf_j = $ number of features of the $j$-th image of a respective class (reprinted from \citep{siddiqui2015robust}).}
         \label{fig:dictionarySDMD}
 \end{figure}
 
 \paragraph{Results}
 For the classification (the last step of the vehicle recognition process from figure \ref{fig:vrSteps}), a multi-class SVM (TODO reference SVM in Technical Basics)-based classifier is used. The classifier is trained to learn both similarities among different generations of the same make-model class and differences among inter-class models.
 
-Experiments of \citep{siddiqui2015robust} showed that the Single Dictionary, contrary to the expectations, slightly outperforms the Modular Dictionary. On the other hand, the dictionary training time is much less for the Modular Dictionary. However, for an application, where the dictionary is built offline and does not need to be updated (or only seldomly) during runtime, the Single Dictionary is the better choice, according to this experiments.
+Experiments of \citep{siddiqui2015robust} showed that the SD, contrary to the expectations, slightly outperforms the MD. On the other hand, the dictionary training time is much less for the MD. However, for an application, where the dictionary is built offline and does not need to be updated (or only seldomly) during runtime, the Single Dictionary is the better choice, according to this experiments.
 
 \section{Number Plate Region Detection}
 
@@ -914,14 +914,14 @@ There are different possibilities to define the RoI around a number plate, depen
 
 To sum up, the RoI should exclude the hood region while including all of the informative parts over all makes and models. In addition to that, the full and unshrinked width of the RoI should be used. For concrete values and tests see TODO: reference implementation chapter.
 
-\subsection{Local Feature Extraction}
+\subsection{Local Feature Extraction}\label{sec:localFeatureExtractionConcept}
 The next step in the workflow is to extract local features. The local features will be extracted from the preprocessed RoI, which is the output of the previous step.
 
 A local feature is a point in the RoI, that is significant, like a corner. Such features are located via a feature detector (see figure \ref{fig:localFeaturesExample}). After a feature has been detected, it will be encoded by a feature descriptor. A feature descriptor embeds the feature into its surrounding context. As the name says, the feature descriptor's purpose is to describe the found feature such that the same feature can be recovered in another image (see figure \ref{fig:localFeaturesMatchingExample}).
 
 There are many different feature detectors and feature descriptors with different purposes and properties. Generally, a feature descriptor is a vector, as shown in equation (TODO: Add equation with feature descriptor definition (see photo in doc)). The extraction of descriptors can be seen as a projection of the RoI onto a set of feature vectors (TODO: add equation with feature extraction, see photo in doc). See TODO: reference Technical Basics for more details and examples of feature extractors and feature descriptors.
 
-It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented (TODO: only show patent nr) (\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB. ORB is said to be rotation invariant and resistant to noise. Furthermore, it's said to be faster than SIFT and in many situations performing equally well \citep{rublee2011orb}. And best of all, it's not patented. So the implementation is based on ORB-features.
+It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented (TODO: only show patent nr. BibTeX has an extra tag for patents) (\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB. ORB is said to be rotation invariant and resistant to noise. Furthermore, it's said to be faster than SIFT and in many situations performing equally well \citep{rublee2011orb}. And best of all, it's not patented. So the implementation is based on ORB-features.
 
 The output of this step is a set of local descriptors per RoI. In the figure, each set is represented as a cloud with blue dots, which represent the local descriptors in local-descriptor-space.
 
@@ -938,12 +938,12 @@ The output of this step is a set of local descriptors per RoI. In the figure, ea
         \label{fig:localFeaturesMatchingExample}
 \end{figure}
 
-\subsection{Dictionary}
+\subsection{Dictionary}\label{sec:dictionaryConcept}
 Having a collection of local features per RoI, they must be transferred into a global representation in some way. This is where the dictionary comes in.
 
 As said above, this VMMR approach is based on a bag-of-words model, where the dictionary is the \emph{bag} containing the (code-)\emph{words}. Similar local descriptors will be represented by one single codeword, which is then again a local descriptor. Each codeword will then be referred to by the global representation, which provides one histogram bin for each codeword (see \ref{sec:globalRepresentationConcept}). For the global representation to be expressive, each codeword has to be expressive, too. To retrieve codewords, the inputted local descriptors are clustered, whereas each cluster is turned into a codeword.
 
-\citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary from various vehicle classes' local descriptors (see page \pageref{par:dictionaryGenerationStateOfTheArt}). One scheme was to build a dictionary out of the local descriptors of all vehicle classes, called the \emph{Single Dictionary}. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the \emph{Modular Dictionary}. Although the Single Dictionary has the disadvantage of clustering similar local descriptors but from different vehicle classes into one single codeword (which will cause inter-class ambiguity issues), it performed superior to the Modular Dictionary (according to tests made by \citeauthor{siddiqui2015robust}). As an example, referring to picture \ref{fig:ambiguityPorsche}, descriptors of the round headlights of both, the Mini and the Porsche, could be clustered into the same codeword because of their similarity.
+\citeauthor{siddiqui2015robust} \citep{siddiqui2015robust} investigated in two different schemes of building a dictionary from various vehicle classes' local descriptors (see page \pageref{par:dictionaryGenerationStateOfTheArt}). One scheme was to build a dictionary out of the local descriptors of all vehicle classes, called the \emph{Single Dictionary}. The other scheme was to build one dictionary for each vehicle class and then pooling all the codewords. The latter is called the \emph{Modular Dictionary}. Although the SD has the disadvantage of clustering similar local descriptors but from different vehicle classes into one single codeword (which will cause inter-class ambiguity issues), it performed superior to the MD (according to tests made by \citeauthor{siddiqui2015robust}). As an example, referring to picture \ref{fig:ambiguityPorsche}, descriptors of the round headlights of both, the Mini and the Porsche, could be clustered into the same codeword because of their similarity.
 
 A problem of the Modular Dictionary is its size (see page \pageref{par:dictionaryGenerationStateOfTheArt}). A too large dictionary leads to large global representations. A result of this would be a classifier that misses generalizability and tends to be overfitted\footnote{The classifier would perform well for the images in the training set but would perform worse for unknown images}. Drastically reducing the number of per-class-clusters of the per-class-dictionaries (as \citeauthor{siddiqui2015robust} did) will fix this problem, but will also lose descriptivity of the per-class codewords. This is for one thing, because different features that should also be handled different, are clustered into the same cluster. For another thing, the ratio of useless clusters to informative clusters increases for a low number of clusters (see figure \ref{fig:modularDictionaryClusters}). Useless clusters either contain outlier features (e. g. because of noise) or features that only occur in a small fraction of training images of a specific class. Since clusters are used to create dictionary codewords, which are used to create descriptive global representations of classes, useless clusters are counterproductive.
 
@@ -952,7 +952,7 @@ This thesis introduces a new dictionary scheme as a solution to these problems.
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.45\linewidth]{gfx/modular_dict_clusters}
-        \caption{Problem with too little per-class-clusters for the Modular Dictionary (showing cluster space for one class): Blue dots represent local descriptors of instances of the class. Purple ellipsoids mark the clusters. Reducing the number of clusters too much raises the importance of clusters that only include few outlier-descriptors.}
+        \caption{Problem with too little per-class-clusters for the MD (showing cluster space for one class): Blue dots represent local descriptors of instances of the class. Purple ellipsoids mark the clusters. Reducing the number of clusters too much raises the importance of clusters that only include few outlier-descriptors.}
         \label{fig:modularDictionaryClusters}
 \end{figure}
 
@@ -993,7 +993,7 @@ where $l_{c_i} << k_c$ is the remaining number of good clusters and $r_{c_i} = N
 	\end{equation}
 where $N_c$ is the number of classes. This equation is similar to the set from equation \ref{eq:descriptorsRoI}, but expresses the whole training set instead of just one single class.
 
-For the Modular Dictionary scheme, the set from equation \ref{eq:allDescriptors} already forms the codewords of the final dictionary. But to cope with the large amount of resulting per-class descriptors $f'$, a further clustering process is deployed. In contrast to the reduction process from equation \ref{eq:clustersReduction}, for this clustering it's good, if a cluster contains a few local descriptors. Because this means, that the resulting codeword only occurs in a few classes. So an amplitude for such a codeword in a global representation histogram gives a useful clue to the classes, the instance could correspond to. A cluster containing a local descriptor of each class is useless, because the resulting codeword would encode each class likewise. So an amplitude to that codeword by a global representation does not tell anything about the class-belonging.
+For the MD scheme, the set from equation \ref{eq:allDescriptors} already forms the codewords of the final dictionary. But to cope with the large amount of resulting per-class descriptors $f'$, a further clustering process is deployed. In contrast to the reduction process from equation \ref{eq:clustersReduction}, for this clustering it's good, if a cluster contains a few local descriptors. Because this means, that the resulting codeword only occurs in a few classes. So an amplitude for such a codeword in a global representation histogram gives a useful clue to the classes, the instance could correspond to. A cluster containing a local descriptor of each class is useless, because the resulting codeword would encode each class likewise. So an amplitude to that codeword by a global representation does not tell anything about the class-belonging.
 
 To control the clustering process, a further degree of freedom (the desired number $k$ of resulting clusters) is introduced. With a small value for $k$, it's possible to shrink the number of codewords drastically while losing a lot of per-class information. A large value for $k$ will leave many descriptors untouched by creating one-member-clusters. A special case is, if the value for $k$ equals the number of inputted descriptors, which has the same behavior as the Modular Dictionary scheme. The best value for $k$ will be evaluated in the implementation chapter TODO.
 	\item Finally, the means of the resulting $k$ clusters are turned into local descriptors, as it is done in equation \ref{eq:perClassCodewords}. Each resulting local descriptor represents one of the $k$ codewords $cw$ of the Advanced Modular Dictionary:
@@ -1014,7 +1014,7 @@ For a given RoI $r$ and its set of local descriptors $F^r$, the corresponding gl
 \begin{equation}
 H_i^r = |\{\, f \in F^r \,\mid\, dist(f, cw_i) < dist(f, cw_j) \quad \forall i, j: 1 \le i, j \le k,\, i \ne j \,\}|
 \end{equation}
-As distance measure $dist$, this thesis uses the euclidean distance, as it is done by \citep{siddiqui2015robust}. Figure \ref{fig:histogram} illustrates the generation of a histogram exemplarily.
+As distance measure $dist$, this thesis uses the Hamming distance. Figure \ref{fig:histogram} illustrates the generation of a histogram exemplarily.
 
 \begin{figure}[btph]
   \centering
@@ -1037,7 +1037,7 @@ As mentioned in the concept for RacecAR GO, the prototypical version of the game
   E = \sum_{i, j = 1}^{\hat N_c} dist(mean(c_i), mean(c_j))^2
   \end{equation}
   be the inter-class error, where $\hat N_c > N_c$ is the number of classes with available training data and $mean(c)$ is the mean of all local descriptors of class $c$. Then the task is to maximize $E$ while minimizing $E^{c_i} \, \forall i = 1,\dots,N_c$ for all possible combinations of $N_c$ different classes:
-  \begin{equation}
+  \begin{equation}\label{eq:optClasses}
   K_{opt}^{N_c} = \argmin_{\{c_1,\dots,c_{N_c}\} \,\in\, perm_{N_c} \, K} \frac{\sum_{i = 1}^{N_c}E^{c_i}}{E}
   \end{equation}
   where
@@ -1073,7 +1073,9 @@ Figure \ref{fig:platform} says, that the server takes care for tasks like VMMR, 
 
 The recognition is realized as a machine learning system, that trains a classifier based on labeled training images. In this chapter, the several components along with implementation details will be described. The order of described components equals the order denoted in the VMMR workflow in figure \ref{fig:vmmrWorkflow}.
 
-The Server is realized as a Java application. For image processing, OpenCV 3\footnote{\url{http://opencv.org/}} is used. For training the final classifier, Weka 3.8\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is used.
+The Server is realized as a Java application. For image processing, OpenCV 3\footnote{\url{http://opencv.org/}} is used. OpenCV is a commonly used library for computer vision purposes. It is implemented in C, but it was ported to be used with Java or Objective-C on many platforms. For training the final classifier, Weka 3.8\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is used. Weka provides a set of classifiers of different kind and useful functions to train them.
+
+TODO: Hier kurz was über parameter optimization schreiben, was dann in Classif. chapter gemacgt wird. Damit man sich vorher nicht wundert, wie die ganzen Werte evaluiert werden. mit ref auf fig
 
 \subsection{Dataset}\label{sec:dataset}
 The VMMR workflow starts with a set of training images, the dataset. In this case, the training images are pictures of cars with make-model labels assigned. As described in chapter \ref{sec:vmmrConcept}, there are different criteria, the training images have to fulfill:
@@ -1093,7 +1095,68 @@ Since I'm not the first one to train a VMMR, there already exist datasets for th
 \subsubsection{Dataset Creation}\label{sec:datasetCreation}
 To save time and improve the diversity of available vehicle classes, an extra app has been created to take photos of vehicles along with the corresponding make and model. The app has been spread among some of my friends with the request to take as many pictures as possible while regarding the above-mentioned criteria. An advantage is, that these pictures are taken with ordinary smartphone cameras, so the quality of the images equals that one of those pictures, taken by the RacecAR GO app during the capturing process. Such a collector app has the further advantage that it reminds the training data collectors to collect training data, because they always see the app when looking on their smartphone. The app stores these pictures locally with the make, model and a time stamp as file name, so that the collectors only had to push the collected images onto a web storage regularly.
 
-As a result, the final dataset consists of TODO N Bildern, $\hat{N_c} = TODO$ verschiedenen Makes und L verschiedenen Models. Their original sizes vary between TODO x TODO pixels.
+As a result, the final dataset consists of 313 vehicle pictures, 11 different makes and $\hat{N_c} = 24$ different make-model classes. Their original sizes vary from 5312 x 2988 to 554 x 444 pixels. Actually, many more make-models have been photographed, but only those classes with a reasonable amount of images per class (at least six) made their way into the dataset. Make-models of the dataset are: Citroen C4 Cactus, Ford Fiesta, Ford Fiesta (FL), Mazda MX-5 ND, Mercedes A, Mini One R55, Opel Adam, Opel Astra H, Opel Astra H (FL), Opel Corsa D, Opel Corsa D (FL), Opel Mokka, Porsche 991, Skoda Fabia II, Skoda Octavia, Suzuki Swift MZ, Tesla Model S, VW Golf IV, VW Golf, VI, VW Golf VII, VW K\"afer, VW Polo 6R, VW Polo 9N3, VW UP. An illustration of the complete dataset is attached at the end of the thesis in figure TODO: Bild mit komplettem Dataset (/raw) ans Ende der Arbeit!!
+
+Unlike \citep{siddiqui2015robust} who trained the classifier to learn similarities among facelifts of the same make-model class, this approach splits each facelift of a make-model into a different class (e. g. there's the \emph{Opel Corsa D} and the \emph{Open Corsa D (FL)}). Building a classifier that regards facelifts inside one make-model generation as one single class turned out to decrease the classification accuracy due to multiplicity issues.
+
+\subsubsection{Supported Vehicle Classes}\label{sec:supportedVehicleClassesImpl}
+In Chapter \ref{sec:choiceOfVehicleClasses}, an approach has been presented to retrieve a set of those classes that cope best with ambiguity and multiplicity issues. Instead of using all $\hat{N_c} = 24$ classes, the training set contains pictures for, only $N_c = 10$ of them with best discriminability are chosen to be covered by the prototype. As described in equation \ref{eq:optClasses}, calculating the errors and building the $argmin$ over all possible subsets with size $N_c$ yields the desired ten vehicle classes that will be used to train the VMMR with.
+
+The ten classes, evaluated by the proposed approach, are: Citroen C4 Cactus, Ford Fiesta, Mazda MX-5 ND, Opel Corsa D (FL), Opel Mokka, Porsche 991, Tesla Model S, VW Golf IV, VW K\"afer, VW Polo 9N3. The features $f^{c_i}$ to calculate the per-class errors $E^{c_i}$ and the class means were taken from the normalized RoIs.
+
+\subsection{Region of Interest}
+To extract the RoIs of the training images, each number plate has been marked manually. The position and size of each image's number plate is stored in a separate file, coming along with the dataset. When loading the dataset, the data structure for each image retrieves this data, such that it can export the RoI.
+
+The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, left, right)$ and the size in pixels, whereas for the size only the width $RoI_W$ is important. The height is deduced from $RoI_W$ and the aspect ratio of the extent. This means, that the RoIs of all the training images have the same size. This is important for comparable image operations like detecting or describing features. The filter kernels used for this have a distinct size and the car in each image should cover a more or less constant percentage of area of the image. The best width has been evaluated to $RoI_W = 400$, whereas the extent was evaluated to work best with $top = 0.7, bottom = 0.1, left = 0.6, right = 0.6$. See chapter TODO for details to the evaluation process.
+
+TODO low: Algorithm to find number plate (see doc)
+
+\subsection{Preprocessing}\label{sec:preprocessingImpl}
+In \emph{VR3}, the VMMR was requested to be robust to different lighting conditions. To cope with this on the one hand, the training images should cover a large variety of different lighting conditions. On the other hand, the images have to pass a normalization step before entering the training process. To be independent from different vehicle colors, all training images are turned into grayscale images. It also turned out to improve the recognition accuracy, if the contrast is normalized as well by a histogram equalization. An illustration of the training data at this point of state is shown in figure TODO Bild zeigen, wie die Trainingsdaten zu diesem Zeitpunkt aussehen (d.h. Bild mit allen RoIs des Trainingsets aus /training2)
+
+\subsection{Local Feature Extraction}\label{sec:localFeatureExtractionImpl}
+As described in chapter \ref{sec:localFeatureExtractionConcept}, the common and popular feature detectors and descriptors SIFT and SURF are patented. As a solution, ORB is another feature detector and descriptor, that is faster than SIFT and performs equally well in many situations \citep{rublee2011orb}. Fortunately, ORB is not patented and is included in OpenCV 3. TODO: Weg beschreiben von Feature zu descriptor. Welche OpenCV Funktionen werden benutzt?
+
+Unfortunately, both SIFT and SURF are not even included into OpenCV 3, so a comparison among these three regarding VMMR has not been done.
+
+\subsection{Dictionary}\label{sec:dictionaryImpl}
+On page \ref{par:dictionaryGenerationStateOfTheArt}, two different schemes of generating the bag-of-words dictionary have been described, the Single Dictionary and the Modular Dictionary. In chapter \ref{sec:dictionaryConcept}, a further scheme, the Advanced Modular Dictionary, was proposed. Within this thesis, both the Single Dictionary and the Advanced Modular Dictionary have been implemented for a comparison.
+
+For both, the Single Dictionary and the Advanced Modular Dictionary, the underlying data structure is an array of (ORB) feature descriptors (the codewords). They only differ in the generation process.
+
+\subsubsection{Implementation of the Advanced Modular Dictionary}
+\paragraph{Parameters:}
+\begin{itemize}
+  \item Number of per-class dictionary codewords $k_c$
+  \item Minimum population ratio $t$
+  \item Number of final dictionary codewords $k$
+\end{itemize}
+To cluster the descriptors of the extracted features per class, the clustering algorithm \emph{k-means} is used. OpenCV provides an implementation for this algorithm, called with \texttt{kmeans(descriptors, k, labels, termCriteria, attempts, flags, vocabulary)}. The per-class clusterings are called each with the respective class-descriptors, the number of desired clusters $k_c$, an \texttt{attempts}-value of $1$ and as termination criteria a maximum count of $1000$ algorithm steps. The \texttt{flags}-parameter specifies the kind of initial cluster centers, which has been set to \texttt{KMEANS\_PP\_CENTERS}. The resulting cluster centers are stored in the \texttt{vocabulary}-parameter and represent the per-class dictionary codewords.
+
+After the clustering is done, the minimum population value is calculated for each class with $r_{c_i} = N_{c_i} * t$. The output parameter \texttt{labels} represent a mapping for each descriptor to its containing cluster. They are used to find those clusters (-centers), that have to be eliminated because of a population count $< r_{c_i}$.
+
+For a RoI size of 400 x 190 pixels, there are about 400 features found with the ORB detector. A good value for $k_c$ has been evaluated to $320$ (by the parameter optimizer). For $t$, a value of $0.85$ is optimal, which requires a minimum population of $17$ descriptors for a class with $20$ instances. With these values, between 5\% and 50\% of clusters with too few descriptors have been eliminated for each class.
+
+For the second clustering, that clusters the per-class codewords, k-means is used again. The same parameters as above are used, whereas the value for $k$ was evaluated to $500$ by the parameter optimizer. With a number of $2594$ total codewords from the per-class dictionaries after the elimination process, it turns out that the clustering of codewords belonging to different classes (which was the inter-class ambiguity problem of the SD) seems to be acceptable up to a certain amount.
+
+Especially a configuration of the parameters like ($k_c = 29$, $t = 0$, $k = k_c * N_c$), which represents the standard MD as it has been configured by \citep{siddiqui2015robust}, is inferior to the AMD used with the described parameters (as it can be seen in figure TODO visualisierung).
+
+\subsubsection{Implementation of the Single Dictionary}
+\paragraph{Parameters:}
+\begin{itemize}
+  \item Number of dictionary codewords $k$
+\end{itemize}
+To cluster the descriptors from all extracted features, k-means is used with the same configuration as described above. The optimum value for $k$ was evaluated to $450$ for the SD.
+
+The built dictionary is finally exported into a file. The server application imports this dictionary to generate the global representations of the queried vehicle instances.
+
+\subsection{Global Representation}\label{sec:globalRepresentationImpl}
+The global representation is implemented as an array of doubles, where each entry represents the number of (normalized) matches of found descriptors with the respective dictionary codeword. The OpenCV function \texttt{DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE\_HAMMINGLUT)} is used for this, using the Hamming distance as distance measure. To train a classifier with the global representations, they have to be converted into a format, the classifier understands. Since this thesis uses Weka for classification purposes, the histograms have to be converted to the ARFF format, which describes a list of instances sharing a set of attributes. The attributes are represented by the dictionary codewords (numeric attributes) plus an additional nominal attribute to hold the make-model class.
+
+\subsection{Classification}\label{sec:classificationImpl}
+
+
+
 
 
 
