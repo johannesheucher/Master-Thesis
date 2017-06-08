@@ -1023,6 +1023,17 @@ As distance measure $dist$, this thesis uses the Hamming distance. Figure \ref{f
         \label{fig:histogram}
 \end{figure}
 
+\subsection{Classification}\label{sec:classificationConcept}
+The job of a classifier is to assign a class to an unknown instance. To be able to do this, the classifier is trained beforehand with instances and corresponding classes. The instances, the classifier is trained with, are the resulting global representations of the training workflow. With these, the classifier learns how to differ the classes based on the instances' attributes.
+
+There are many different kinds of classifiers, like tree- or rule-based ones, neural networks or SVMs. A description of the various classifiers and their inner processes is not part of this thesis. It has just to be said, however, that different classifiers have their pros and cons, including the training or classification speed, the amount of storage needed, the adaptability for new training data a. s. o.
+
+Concerning the adaptability for new training data: For RacecAR GO, the classifier should be ready to be trained online, i. e. training the classifier is a never-ending process. The classifier is constantly fed with new training data and improves its performance. Since there arrives a new vehicle image with every captured vehicle during play, retrieving new training instances is easy. To get the class label for the new training instance, the classified label could be used, as long as the classification is certain enough. If not, the player could be asked if the classification was correct. If not, the instance could be stored apart to be classified manually by the designer.
+
+For time reasons during the implementation, the classifier of the prototype is trained solely offline, i. e. during the implementation phase of the game. So the classification performance will not change during play. This has the advantage of a reliable and known recognition performance. The disadvantage is, that the classifier cannot improve its performance by adopting new training data.
+
+For the actual decision of the classifier, see chapter \ref{sec:classificationImpl}.
+
 \subsection{Choice of Vehicle Classes}\label{sec:choiceOfVehicleClasses}
 As mentioned in the concept for RacecAR GO, the prototypical version of the game that is implemented within this thesis' scope will only cover a subset of all the world's makes and models, i. e. 10 different make-model-classes. The choice of the actual classes plays a role because of the following reasons:
 \begin{itemize}
@@ -1095,19 +1106,19 @@ Since I'm not the first one to train a VMMR, there already exist datasets for th
 \subsubsection{Dataset Creation}\label{sec:datasetCreation}
 To save time and improve the diversity of available vehicle classes, an extra app has been created to take photos of vehicles along with the corresponding make and model. The app has been spread among some of my friends with the request to take as many pictures as possible while regarding the above-mentioned criteria. An advantage is, that these pictures are taken with ordinary smartphone cameras, so the quality of the images equals that one of those pictures, taken by the RacecAR GO app during the capturing process. Such a collector app has the further advantage that it reminds the training data collectors to collect training data, because they always see the app when looking on their smartphone. The app stores these pictures locally with the make, model and a time stamp as file name, so that the collectors only had to push the collected images onto a web storage regularly.
 
-As a result, the final dataset consists of 313 vehicle pictures, 11 different makes and $\hat{N_c} = 24$ different make-model classes. Their original sizes vary from 5312 x 2988 to 554 x 444 pixels. Actually, many more make-models have been photographed, but only those classes with a reasonable amount of images per class (at least six) made their way into the dataset. Make-models of the dataset are: Citroen C4 Cactus, Ford Fiesta, Ford Fiesta (FL), Mazda MX-5 ND, Mercedes A, Mini One R55, Opel Adam, Opel Astra H, Opel Astra H (FL), Opel Corsa D, Opel Corsa D (FL), Opel Mokka, Porsche 991, Skoda Fabia II, Skoda Octavia, Suzuki Swift MZ, Tesla Model S, VW Golf IV, VW Golf, VI, VW Golf VII, VW K\"afer, VW Polo 6R, VW Polo 9N3, VW UP. An illustration of the complete dataset is attached at the end of the thesis in figure TODO: Bild mit komplettem Dataset (/raw) ans Ende der Arbeit!!
+As a result, the final dataset consists of 313 vehicle pictures, 11 different makes and $\hat{N_c} = 24$ different make-model classes. Their original sizes vary from 5312 x 2988 to 554 x 444 pixels. Actually, many more make-models have been photographed, but only those classes with a reasonable amount of images per class (at least six) made their way into the dataset. Make-models of the dataset are: Citro\"en C4 Cactus, Ford Fiesta, Ford Fiesta (FL), Mazda MX-5 ND, Mercedes A, Mini One R55, Opel Adam, Opel Astra H, Opel Astra H (FL), Opel Corsa D, Opel Corsa D (FL), Opel Mokka, Porsche 991, Skoda Fabia II, Skoda Octavia, Suzuki Swift MZ, Tesla Model S, VW Golf IV, VW Golf, VI, VW Golf VII, VW K\"afer, VW Polo 6R, VW Polo 9N3, VW UP. An illustration of the complete dataset is attached at the end of the thesis in figure TODO: Bild mit komplettem Dataset (/raw) ans Ende der Arbeit!!
 
 Unlike \citep{siddiqui2015robust} who trained the classifier to learn similarities among facelifts of the same make-model class, this approach splits each facelift of a make-model into a different class (e. g. there's the \emph{Opel Corsa D} and the \emph{Open Corsa D (FL)}). Building a classifier that regards facelifts inside one make-model generation as one single class turned out to decrease the classification accuracy due to multiplicity issues.
 
 \subsubsection{Supported Vehicle Classes}\label{sec:supportedVehicleClassesImpl}
 In Chapter \ref{sec:choiceOfVehicleClasses}, an approach has been presented to retrieve a set of those classes that cope best with ambiguity and multiplicity issues. Instead of using all $\hat{N_c} = 24$ classes, the training set contains pictures for, only $N_c = 10$ of them with best discriminability are chosen to be covered by the prototype. As described in equation \ref{eq:optClasses}, calculating the errors and building the $argmin$ over all possible subsets with size $N_c$ yields the desired ten vehicle classes that will be used to train the VMMR with.
 
-The ten classes, evaluated by the proposed approach, are: Citroen C4 Cactus, Ford Fiesta, Mazda MX-5 ND, Opel Corsa D (FL), Opel Mokka, Porsche 991, Tesla Model S, VW Golf IV, VW K\"afer, VW Polo 9N3. The features $f^{c_i}$ to calculate the per-class errors $E^{c_i}$ and the class means were taken from the normalized RoIs.
+The ten classes, evaluated by the proposed approach, are: Citro\"en C4 Cactus, Ford Fiesta, Mazda MX-5 ND, Opel Corsa D (FL), Opel Mokka, Porsche 991, Tesla Model S, VW Golf IV, VW K\"afer, VW Polo 9N3. The features $f^{c_i}$ to calculate the per-class errors $E^{c_i}$ and the class means were taken from the normalized RoIs. The total number of training instances for these classes is 189.
 
 \subsection{Region of Interest}
 To extract the RoIs of the training images, each number plate has been marked manually. The position and size of each image's number plate is stored in a separate file, coming along with the dataset. When loading the dataset, the data structure for each image retrieves this data, such that it can export the RoI.
 
-The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, left, right)$ and the size in pixels, whereas for the size only the width $RoI_W$ is important. The height is deduced from $RoI_W$ and the aspect ratio of the extent. This means, that the RoIs of all the training images have the same size. This is important for comparable image operations like detecting or describing features. The filter kernels used for this have a distinct size and the car in each image should cover a more or less constant percentage of area of the image. The best width has been evaluated to $RoI_W = 400$, whereas the extent was evaluated to work best with $top = 0.7, bottom = 0.1, left = 0.6, right = 0.6$. See chapter TODO for details to the evaluation process.
+The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, left, right)$ and the size in pixels, whereas for the size only the width $w_{RoI}$ is important. The height is deduced from $w_{RoI}$ and the aspect ratio of the extent. This means, that the RoIs of all the training images have the same size. This is important for comparable image operations like detecting or describing features. The filter kernels used for this have a distinct size and the car in each image should cover a more or less constant percentage of area of the image. The best width has been evaluated to $w_{RoI} = 400$, whereas the extent was evaluated to work best with $top = 0.7, bottom = 0.1, left = 0.6, right = 0.6$. See chapter TODO for details to the evaluation process.
 
 TODO low: Algorithm to find number plate (see doc)
 
@@ -1131,7 +1142,11 @@ For both, the Single Dictionary and the Advanced Modular Dictionary, the underly
   \item Minimum population ratio $t$
   \item Number of final dictionary codewords $k$
 \end{itemize}
-To cluster the descriptors of the extracted features per class, the clustering algorithm \emph{k-means} is used. OpenCV provides an implementation for this algorithm, called with \texttt{kmeans(descriptors, k, labels, termCriteria, attempts, flags, vocabulary)}. The per-class clusterings are called each with the respective class-descriptors, the number of desired clusters $k_c$, an \texttt{attempts}-value of $1$ and as termination criteria a maximum count of $1000$ algorithm steps. The \texttt{flags}-parameter specifies the kind of initial cluster centers, which has been set to \texttt{KMEANS\_PP\_CENTERS}. The resulting cluster centers are stored in the \texttt{vocabulary}-parameter and represent the per-class dictionary codewords.
+To cluster the descriptors of the extracted features per class, the clustering algorithm \emph{k-means} is used. OpenCV provides an implementation for this algorithm, called with
+\begin{verbatim}
+  kmeans(descriptors, k, labels, termCriteria, attempts, flags, vocabulary)
+\end{verbatim}
+The per-class clusterings are called each with the respective class-descriptors, the number of desired clusters $k_c$, an \texttt{attempts}-value of $1$ and as termination criteria a maximum count of $1000$ algorithm steps. The \texttt{flags}-parameter specifies the kind of initial cluster centers, which has been set to \texttt{KMEANS\_PP\_CENTERS}. The resulting cluster centers are stored in the \texttt{vocabulary}-parameter and represent the per-class dictionary codewords.
 
 After the clustering is done, the minimum population value is calculated for each class with $r_{c_i} = N_{c_i} * t$. The output parameter \texttt{labels} represent a mapping for each descriptor to its containing cluster. They are used to find those clusters (-centers), that have to be eliminated because of a population count $< r_{c_i}$.
 
@@ -1151,14 +1166,57 @@ To cluster the descriptors from all extracted features, k-means is used with the
 The built dictionary is finally exported into a file. The server application imports this dictionary to generate the global representations of the queried vehicle instances.
 
 \subsection{Global Representation}\label{sec:globalRepresentationImpl}
-The global representation is implemented as an array of doubles, where each entry represents the number of (normalized) matches of found descriptors with the respective dictionary codeword. The OpenCV function \texttt{DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE\_HAMMINGLUT)} is used for this, using the Hamming distance as distance measure. To train a classifier with the global representations, they have to be converted into a format, the classifier understands. Since this thesis uses Weka for classification purposes, the histograms have to be converted to the ARFF format, which describes a list of instances sharing a set of attributes. The attributes are represented by the dictionary codewords (numeric attributes) plus an additional nominal attribute to hold the make-model class.
+The global representation is implemented as an array of doubles, where each entry represents the number of (normalized) matches of found descriptors with the respective dictionary codeword. The OpenCV function
+\begin{verbatim}
+  DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMINGLUT)
+\end{verbatim}
+is used for this, using the Hamming distance as distance measure. To train a classifier with the global representations, they have to be converted into a format, the classifier understands. Since this thesis uses Weka for classification purposes, the histograms have to be converted to the ARFF format, which describes a list of instances sharing a set of attributes. The attributes are represented by the dictionary codewords (numeric attributes) plus an additional nominal attribute to hold the make-model class. So each instance is listed inside of the ARFF file as a list of histogram values and the respective make-model class.
 
 \subsection{Classification}\label{sec:classificationImpl}
+This chapter is about the tuning of the aforementioned VMMR parameters and the selection of the classifier performing with the best accuracy. The tuning is done within an automatic process, which evaluates different values for each parameter to finally retrieve the parameter set with the best performance. The parameters that are tuned are listed in table \ref{table:tunedParameters}. For each parameter, a set of discrete possible values was defined. The tuning process tests all combinations of possible values and yields the best ones. As measure for the best parameter setup, the classification accuracy is used, which is defined as the portion of correctly classified instances (\emph{true positives} and \emph{true negatives}) to the totally classified instances. The accuracy is evaluated via a 5-fold cross validation, i. e. there's no explicit test set.
 
+\subsection{Results}\label{sec:results}
+In table \ref{table:tunedParameters}, all the parameters that are passed to the tuning process are listed. For each parameter, the possible values, the tuner has to test, are specified as well as the resulting optimum value.
+\begin{table}[btph]
+    \centering
+    \begin{tabular}{ | l | p{4cm} | p{6cm} | l |}
+    \hline
+    \textbf{Name} & \textbf{Description} & \textbf{Possible Values} & \textbf{Optimum Value} \\ \hline
+    $w_{RoI}$    & Width of each RoI in pixels      & {200, 250, 300, 350, 400, 450, 500, 550, 600, 800} & 400 \\ \hline
+    $top$      & Top factor for the RoI extent    & {0.6, 0.7, 0.9, 1.4}                               & 0.7 \\ \hline
+    $bottom$   & Bottom factor for the RoI extent & {0, 0.1, 0.2}                                      & 0.1 \\ \hline
+    $left$     & Left factor for the RoI extent   & {0.6, 0.8, 0.9}                                    & 0.6 \\ \hline
+    $right$    & Right factor for the RoI extent  & {0.6, 0.8, 0.9}                                    & 0.6 \\ \hline
+    $k$        & Total number of codewords in the dictionary & {250, 290, 350, 400, 450, 500, 550, 600} & 500 \\ \hline
+    $k_c$      & Number of codewords in the per-class dictionaries & {29, 80, 150, 200, 270, 300, 320, 350, 400} & 320 \\ \hline
+    $t$        & Minimum cluster population ratio for elimination process & {0, 0.3, 0.6, 0.85, 0.95}  & 0.85 \\ \hline
+    classifier & Classifier used for VMMR classification & {SVM, Random Forest, Neural Network}        & SVM \\ \hline
+    \end{tabular}
+    \caption{VMMR parameters for tuning and the evaluated optima (using the AMD)}
+    \label{table:tunedParameters}
+\end{table}
+For the classifiers, there are further sub-parameters, where possible values have been specified for. These sub-parameters and their possible values have been omitted in the table.
 
-
-
-
+The resulting accuracy, using the Advanced Modular Dictionary, is 72.5\% with a precision of 73.1\%. This process has also been done using the Single Dictionary, resulting in an accuracy of 70.4\%, so the SD performs slightly inferior to the AMD. The classification results for the several classes are listed in table \ref{table:classificationResults}.
+\begin{table}[btph]
+    \centering
+    \begin{tabular}{ | l | l | l |}
+    \hline
+    \textbf{Class} & \textbf{true positive rate} & \textbf{false positive rate} \\ \hline
+    Opel Corsa D (FL)  & 0,800 &  0,011 \\ \hline
+    VW K\"afer & 	0,385 &  0,017 \\ \hline
+    VW Polo 9N3  & 	0,926 &  0,037 \\ \hline
+    Mazda MX-5 ND  & 0,682 &  0,054 \\ \hline
+    Opel Mokka & 	1,000 &  0,000 \\ \hline
+    Ford Fiesta  & 	0,308 &  0,006 \\ \hline
+    Porsche 991  & 	0,533 &  0,017 \\ \hline
+    Tesla Model S  & 0,792 &  0,085 \\ \hline
+    Citro\"en C4 Cactus & 	0,652 &  0,042 \\ \hline
+    VW Golf IV  & 	0,906 &  0,045 \\ \hline
+    \end{tabular}
+    \caption{Classification results (using the AMD)}
+    \label{table:classificationResults}
+\end{table}
 
 
 
