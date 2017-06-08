@@ -791,7 +791,7 @@ Both, the second and the third approach are applicable to the task. Because of t
 %=============================================================================
 In this chapter, the VMMR system that is used in \emph{RacecAR GO} will be presented. Until now, the work on vehicle recognition has mainly been dedicated to the subject of security observation of parking spaces, toll stops, country borders, etc. In this thesis, the domain of application is something different, using it in a mobile game and capturing the vehicle images with a mobile phone's camera. One main challenge to handle when recognizing vehicle makes and models is to fight ambiguity and multiplicity issues.
 
-\subsection{Excursion to the Ambiguity and Multiplicity Challenge}
+\subsection{Excursion to the Ambiguity and Multiplicity Challenge}\label{sec:excursionAmbiguity}
 As stated by \citep{siddiqui2015robust}, the assembled recognition model should cope with ambiguity and multiplicity issues. Multiplicity means the problem of cars with different appearances but with the same make and model, whereas the ambiguity describes the challenge to differentiate between similar vehicles that do not have the same make (inter-class ambiguity) and/or model (intra-class ambiguity), though.
 
 Assuming a player of RacecAR GO walks along the street and suddenly, he spots a Porsche 911 parked beside him. Fortunately, in front of the Porsche, there's enough clearance to take a photo of its front. Already imagining himself watching this beautiful and seldom car in his virtual garage, wouldn't it be annoying if the app would classify this Porsche 911 as a rather ordinary Mini One, just because of the similarity between the shape of their headlights (see figure \ref{fig:ambiguityPorsche})? Such a failure could kill all the motivation of a player to continue playing, and thus losing the healthy benefits of this game. As a result, the game would miss its purpose to motivate people to move.
@@ -1217,6 +1217,73 @@ The resulting accuracy, using the Advanced Modular Dictionary, is 72.5\% with a 
     \caption{Classification results (using the AMD)}
     \label{table:classificationResults}
 \end{table}
+The training of the classifier with 189 training images took about 7 seconds, while the classification of one instance averagely took 30 milliseconds. This has been evaluated on an Intel(R) Xeon(R) CPU E3-1230 V2 @3.30GHz.
+
+The bad accuracy in comparison to other VMMRs, which usually performed at accuracies better than 90\% \citep{petrovic2004analysis} \citep{siddiqui2015robust}, could be caused by different factors:
+\begin{itemize}
+  \item The used training set is rather small in comparison to e. g. the NTOU-MMR dataset \citep{ntoummrDataset}, which contains 2846 images for training, and 3793 images for testing for a total number of 29 classes.
+  \item The quality of the training data could be better. Maybe, the variance between the per-class images is too high. Additionally, there are some vehicles with mirroring effects on their front, which could have brought some noise into the classification space.
+  \item Splitting the data explicitly into a training and testing set instead of using cross validation could increase the accuracy. But with such a small dataset, each instance is needed for training, so cross validation was used.
+  \item It could also be caused by the usage of ORB detectors and descriptors. According to \citep{rublee2011orb}, ORB performs equal to SIFT in many scenarios. But in contrast to SIFT and SURF, ORB isn't established in the domain of VMMR, yet and no explicit tests have been made to compare ORB with SIFT and SURF on vehicle images.
+  \item The clustering with k-means uses generated initial cluster centers. It hasn't been evaluated, if randomly or manually placed centers would improve the result.
+\end{itemize}
+
+TODO low: Visualisierung der Testergebnisse in Multi-Parameter Diagramm MIT ZUSÄTZLICH UNTERSCHIEDLICH VIELEN TRAININGSDATEN
+
+\subsubsection{Robustness}
+It has been said that the VMMR uses a bag-of-words model to be able to recognize vehicles that are partially occluded. The VMMR has also been requested to be independent of different lighting conditions. Tests have proven, that this is actually the case. Figure \ref{fig:tests} illustrates some vehicles in problematic scenarios (occlusions, bad lighting conditions) and their classifications. In most cases, classifications under bad lighting conditions are correct. And if a vehicle is occluded, there are usually enough descriptive features left to find the correct class (in some cases with occlusions of up to 50\% of the vehicle).
+
+\begin{figure}[btph]
+        \myfloatalign
+        \subfloat[Golf IV]
+        {\label{fig:test1}%
+         \includegraphics[height=.25\linewidth]{gfx/test1}} \quad
+        \subfloat[Citro\"en C4 Cactus]
+        {\label{fig:test2}%
+         \includegraphics[height=.25\linewidth]{gfx/test2}} \quad
+        \subfloat[VW Golf IV]
+        {\label{fig:test3}%
+         \includegraphics[height=.25\linewidth]{gfx/test3}} \quad
+        \subfloat[Opel Corsa D]
+        {\label{fig:test4}%
+         \includegraphics[height=.25\linewidth]{gfx/test4}} \\
+        \subfloat[Golf IV]
+        {\label{fig:test5}%
+         \includegraphics[height=.2\linewidth]{gfx/test5}} \quad
+        \subfloat[Golf IV]
+        {\label{fig:test6}%
+         \includegraphics[height=.2\linewidth]{gfx/test6}} \quad
+        \subfloat[Tesla Model S]
+        {\label{fig:test7}%
+         \includegraphics[height=.2\linewidth]{gfx/test7}} \quad
+        \subfloat[VW Polo 9N3]
+        {\label{fig:test8}%
+         \includegraphics[height=.2\linewidth]{gfx/test8}}
+        \caption[Classification results in problematic scenarios: Only the Porsche (\ref{fig:test7}) has been classified wrongly because of too much occlusion]{Classification results in problematic scenarios: Only the Porsche (\ref{fig:test7}) has been classified wrongly because of too much occlusion}
+\label{fig:tests}
+\end{figure}
+
+\subsubsection{Multiplicity and Ambiguity}
+Despite of the selection of the $N_c = 10$ optimal matching classes out of the total classes from the training set, there exist ambiguity issues among these classes. E. g. the VW K\"afer is often classified as a Porsche 991 and vice versa. Even the classifier recognizes the shared origin of these two vehicles.
+
+Additionally, the VW New Beetle (see figure \ref{fig:testAmbiguity}) is classified as a VW K\"afer, although only the generation from the 60s and 70s has been trained. For a VMMR, that only knows a couple of make-models, this is a welcome side effect due to inter-class ambiguity. Whereas for the final version of the game, this is an unwanted behavior, because the price the car dealer pays for a rare classic VW K\"afer is much higher than for a rather common VW New Beetle.
+
+The inter-class ambiguity issue due to a rebadging of a vehicle is not solved by this VMMR (see chapter \ref{sec:excursionAmbiguity} and figure \ref{fig:ambiguityRebadging}). The changes between the original and the rebadged vehicle are usually too marginal. For the game RacecAR GO, this is not a big problem, because the worth and the property-set of the original and the rebadged vehicle usually do not differ, so the player wouldn't be bothered about a wrong classification. Whereas for a surveillance application, this is a more severe issue.
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.35\linewidth]{gfx/test_ambiguity}
+        \caption{VW New Beetle is classified as a VW K\"afer}
+        \label{fig:testAmbiguity}
+\end{figure}
+
+\section{Network}\label{sec:network}
+TODO
+
+\section{Client}\label{sec:clientImpl}
+TODO
+
+
+
 
 
 
