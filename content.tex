@@ -1175,6 +1175,9 @@ is used for this, using the Hamming distance as distance measure. To train a cla
 \subsection{Classification}\label{sec:classificationImpl}
 This chapter is about the tuning of the aforementioned VMMR parameters and the selection of the classifier performing with the best accuracy. The tuning is done within an automatic process, which evaluates different values for each parameter to finally retrieve the parameter set with the best performance. The parameters that are tuned are listed in table \ref{table:tunedParameters}. For each parameter, a set of discrete possible values was defined. The tuning process tests all combinations of possible values and yields the best ones. As measure for the best parameter setup, the classification accuracy is used, which is defined as the portion of correctly classified instances (\emph{true positives} and \emph{true negatives}) to the totally classified instances. The accuracy is evaluated via a 5-fold cross validation, i. e. there's no explicit test set.
 
+\subsection{Querying}
+For the querying, the server receives a captured vehicle RoI from the client. So the query-process on the server-side begins with the preprocessing of the queried RoI (cf. figure \ref{fig:vmmrWorkflow}). Each client query is processed in a separate thread. As soon as the query workflow has finished and the make-model of the queried instance has been determined, the result gets sent back to the client.
+
 \subsection{Results}\label{sec:results}
 In table \ref{table:tunedParameters}, all the parameters that are passed to the tuning process are listed. For each parameter, the possible values, the tuner has to test, are specified as well as the resulting optimum value.
 \begin{table}[btph]
@@ -1202,7 +1205,7 @@ The resulting accuracy, using the Advanced Modular Dictionary, is 72.5\% with a 
     \centering
     \begin{tabular}{ | l | l | l |}
     \hline
-    \textbf{Class} & \textbf{true positive rate} & \textbf{false positive rate} \\ \hline
+    \textbf{Class} & \textbf{True Positive Rate} & \textbf{False Positive Rate} \\ \hline
     Opel Corsa D (FL)  & 0,800 &  0,011 \\ \hline
     VW K\"afer & 	0,385 &  0,017 \\ \hline
     VW Polo 9N3  & 	0,926 &  0,037 \\ \hline
@@ -1264,9 +1267,9 @@ It has been said that the VMMR uses a bag-of-words model to be able to recognize
 \end{figure}
 
 \subsubsection{Multiplicity and Ambiguity}
-Despite of the selection of the $N_c = 10$ optimal matching classes out of the total classes from the training set, there exist ambiguity issues among these classes. E. g. the VW K\"afer is often classified as a Porsche 991 and vice versa. Even the classifier recognizes the shared origin of these two vehicles.
+Despite of the selection of the $N_c = 10$ optimal matching classes out of the total classes from the training set, there exist ambiguity issues among these classes. E. g. the VW K\"afer is often classified as a Porsche 991 and vice versa. Even the classifier recognizes the common origin of these two vehicles.
 
-Additionally, the VW New Beetle (see figure \ref{fig:testAmbiguity}) is classified as a VW K\"afer, although only the generation from the 60s and 70s has been trained. For a VMMR, that only knows a couple of make-models, this is a welcome side effect due to inter-class ambiguity. Whereas for the final version of the game, this is an unwanted behavior, because the price the car dealer pays for a rare classic VW K\"afer is much higher than for a rather common VW New Beetle.
+Additionally, the VW New Beetle (see figure \ref{fig:testAmbiguity}) is classified as a VW K\"afer, although only the classic generation from the 60s and 70s has been trained. For a VMMR that only knows a couple of make-models, this is a welcome side effect due to inter-class ambiguity. Whereas for the final version of the game, this is an unwanted behavior, because the price the car dealer pays for a rare classic VW K\"afer is much higher than for a rather common VW New Beetle.
 
 The inter-class ambiguity issue due to a rebadging of a vehicle is not solved by this VMMR (see chapter \ref{sec:excursionAmbiguity} and figure \ref{fig:ambiguityRebadging}). The changes between the original and the rebadged vehicle are usually too marginal. For the game RacecAR GO, this is not a big problem, because the worth and the property-set of the original and the rebadged vehicle usually do not differ, so the player wouldn't be bothered about a wrong classification. Whereas for a surveillance application, this is a more severe issue.
 \begin{figure}[btph]
@@ -1276,16 +1279,75 @@ The inter-class ambiguity issue due to a rebadging of a vehicle is not solved by
         \label{fig:testAmbiguity}
 \end{figure}
 
-\section{Network}\label{sec:network}
-TODO
+\section{Network Interface}\label{sec:network}
+For the transmission of data, TCP sockets are used. In comparison to e. g. HTTP, the protocol is lean and only the needed data is sent. Additionally, the server application is independent of a web server.
+
+For the VMMR request, the whole RoI pixels are transmitted to the server. To just recognize the make and model and to keep the message size low, the normalized global representation histogram (4 bytes * 500 = 2 kB instead of 400 * 190 bytes = 76 kB) would be enough. For this, the client would have to do the feature detection and extraction as well as building the global representation out of the learned dictionary. This has some drawbacks:
+\begin{itemize}
+  \item The client has to know the dictionary, which makes it hard to improve the dictionary without updating the app
+  \item The client-side feature detection and extraction has to work the same way as it has been done to train the VMMR machine. Since the server and the client are implemented in different languages, this is not so easy to assure (actually, it's possible, as long as e. g. OpenCV is used, which is available for both, a Java and an iOS environment).
+\end{itemize}
+So the decision was made to send the whole RoI and leave the complete recognition process to the server. For evaluation purposes, also the player name and location data is transmitted to the server (see TODO for more info). In table \ref{table:network}, the network protocol is listed.
+\begin{table}[btph]
+  \centering
+  \begin{tabular}{|p{0.15\textwidth}|p{.3\textwidth}|p{0.3\textwidth}|}
+	\hline
+	\textbf{Message Type} & \textbf{Request Payload} & \textbf{Response Payload} \\ \hline
+	%%%
+	VMMR &
+	\begin{itemize}
+	\item number of rows
+	\item number of columns
+	\item RoI pixels
+	\end{itemize} &
+	\begin{itemize}
+	\item error status
+	\item make-model
+	\end{itemize} \\ \hline
+	%%%
+	Player Name &
+	\begin{itemize}
+	\item length of name
+	\item name
+	\end{itemize} &
+	\emph{nothing} \\ \hline
+	%%%
+	Location &
+	\begin{itemize}
+	\item latitude
+	\item longitude
+	\end{itemize} &
+	\emph{nothing} \\ \hline
+  \end{tabular}
+  \caption{Network protocol used in the RacecAR GO Prototype}
+  \label{table:network}
+\end{table}
 
 \section{Client}\label{sec:clientImpl}
-TODO
+The client has been implemented as an iOS app for iPhones. Here, OpenCV was used as well for the extraction of the RoI. Used languages are Swift, Objective-C and C++, while latter was only needed to communicate with the OpenCV API. Objective-C was used for the image capturing component because of having trouble when trying to do this with Swift. The rest and thus the main part of the client is implemented in Swift 2.3.
 
+\subsection{Virtual Models}
+Although there are ten different make-models to be recognized by the VMMR machine, only four different virtual models have been created for lack of time. Three of them to fit the exact recognized make and model, a further one to be a placeholder for all the other classes. Figure \ref{fig:virtualModels} shows the created 3D models, available for the prototype\footnote{While the Polo, the K\"afer and the Placeholder Car have been created by myself, the Porsche has been retrieved and adapted from \url{https://www.cgtrader.com/free-3d-models/car/sport/porsche-911-carrera-s4-police-concept}}.
 
+\begin{figure}[btph]
+        \myfloatalign
+        \subfloat[VW Polo 9N3]
+        {\label{fig:test1}%
+         \includegraphics[height=.15\linewidth]{gfx/icon_vw_polo_9n3}} \quad
+        \subfloat[VW K\"afer]
+        {\label{fig:test2}%
+         \includegraphics[height=.15\linewidth]{gfx/icon_vw_kaefer}} \quad
+        \subfloat[Porsche 911\footnote{Blabla}]
+        {\label{fig:test3}%
+         \includegraphics[height=.15\linewidth]{gfx/icon_porsche_911}} \quad
+        \subfloat[Placeholder Car]
+        {\label{fig:test4}%
+         \includegraphics[height=.15\linewidth]{gfx/icon_placeholder_car}}
+        \caption[Virtual 3D models to be used in the prototype. Actually, the virtual model for the Porsche 911 is the generation 996, whereas only the newest generation 991 has been trained]{Virtual 3D models to be used in the prototype. Actually, the virtual model for the Porsche 911 is the generation 996, whereas only the current generation 991 has been trained}
+\label{fig:virtualModels}
+\end{figure}
 
-
-
+\subsection{Capturing Process}
 
 
 %\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
