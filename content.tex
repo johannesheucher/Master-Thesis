@@ -683,7 +683,7 @@ As described in chapter \ref{sec:augmentedRealityStateOfTheArt}, square markers 
 \paragraph{Number Plate as Marker}
 This approach uses the vehicle's number plate as the AR marker. The marker tracking is realized with NFT (see chapter \ref{sec:augmentedRealityStateOfTheArt}). During the capturing process, the number plate of the vehicle gets detected. When the camera moves, the tracked features from the number plate are used to calculate the location and pose of the vehicle.
 
-ARToolKit provides an implementation for this for mobile devices. The realtime-calculation of the location and pose of the vehicle from its number plate performed quite well, producing robust results for blending the virtual vehicle above the real one (although this only works for perspectives, where the number plate is visible, i. e. not for the vehicle's side view). But the initial tracking of the number plate's features took up to a minute (for a number plate width of 100px on a Intel i7 of the year 2012). This is because the process has been designed to train the feature recognizer in an offline phase and just use it in the online phase without changing the set of known features. Since the number plate of the captured car is not known in the offline phase and since the player doesn't want to wait one minute until the AR magic begins, this technique is not applicable.
+ARToolKit provides an implementation for this for mobile devices. The realtime-calculation of the location and pose of the vehicle from its number plate performed quite well, producing robust results for blending the virtual vehicle above the real one (although this only works for perspectives, where the number plate is visible, i. e. not for the vehicle's side view). But the initial tracking of the number plate's features took up to a minute (for a number plate width of 100px on an Intel(R) Xeon(R) CPU E3-1230 V2 @3.30GHz of the year 2012). This is because the process has been designed to train the feature recognizer in an offline phase and just use it in the online phase without changing the set of known features. Since the number plate of the captured car is not known in the offline phase and since the player doesn't want to wait one minute until the AR magic begins, this technique is not applicable.
 
 \paragraph{EURO-Badge as Marker}
 In most European countries, a number plate contains a euro badge (see figure \ref{fig:euroBadge}). In contrast to the number plate, features of the euro badge can be tracked in the offline phase, because the badge is the same on each number plate.
@@ -702,7 +702,7 @@ As described in chapter \ref{sec:augmentedRealityStateOfTheArt}, this approach r
 \paragraph{Smartphone Motion Sensors}
 Another option to blend the virtual vehicle appropriately above the real one is to use the mobile device's motion sensors. In contrast to the aforementioned methods, this one is not vision-based. To initially fix the virtual vehicle to the real one, the position of the number plate is used. From that time on, the motion of the device is appropriately applied to the virtual object such that the player can move and rotate the device while the virtual object is fixed above the real vehicle.
 
-This approach works well in tests, although the virtual object and the real object drift apart over time. This is because the virtual object is only once (in the beginning) stitched to the real vehicle. After that, accumulating errors in the device motion updates could account for the drift.
+This approach works well in tests, although the virtual object and the real object sometimes drift apart over time. This is because the virtual object is only once (in the beginning) stitched to the real vehicle. After that, accumulating errors in the device motion updates could account for the drift.
 
 \subsubsection{Conclusion}
 Only the model-based tracking is able to fulfill all the requested tasks accurate enough. Only here, the user would be able to walk around the real car while the virtual car model is always overlaying it correctly. Nevertheless, it is assumed that this technique has high hardware requirements, because features in the camera image have to be tracked and matched with the reference model in realtime.
@@ -760,7 +760,7 @@ The type of vehicles that shall be capturable in RacecAR GO can be of an arbitra
 As described above, the app comes with a starter-set of vehicles, that can be recognized and captured. For the prototype, this set is limited to 10 different vehicles. See (TODO respective impl chapter) for an explanation, which make-models have been chosen and why. Unlike to the full version of the app, there is no possibility to add further make-models but for the game designer to add them manually.
 
 \subsection{Vehicle Capturing}
-There are also some restrictions that have to be done for the capturing process (see figure \ref{fig:capturingLimited}). As said above, a specific region around the number plate is sent to the server for VMMR. To find the number plate in the captured image, a watermark showing a number plate's frame is blended over the camera image. For best recognition results, the user has to position his iPhone such that the watermark covers the number plate of the real car in location, orientation and size. In contrast to the full version, the prototype does not automatically send the captured image to the server. The player has to touch the gearbox button to start the capturing process. Because the prototype-server doesn't perform a hashed-number-plate-check, if the user already captured this car, the number plate will be blacked out in the transferred image for privacy concerns.
+There are also some restrictions that have to be done for the capturing process (see figure \ref{fig:capturingLimited}). As said above, a specific region around the number plate is sent to the server for VMMR. To find the number plate in the captured image, a watermark showing a number plate's frame is blended above the camera image. For best recognition results, the user has to position his iPhone such that the watermark covers the number plate of the real car in location, orientation and size. In contrast to the full version, the prototype does not automatically send the captured image to the server. The player has to touch the gearbox button to start the capturing process. Because the prototype-server doesn't perform a hashed-number-plate-check, if the user already captured this car, the number plate will be blacked out in the transferred image for privacy concerns.
 
 The server answers the VMMR request solely with the make and model of the car. For each covered make-model, the client stores one corresponding property-set, that is automatically applied to the respective captured vehicle.
 
@@ -1266,7 +1266,7 @@ It has been said that the VMMR uses a bag-of-words model to be able to recognize
 \label{fig:tests}
 \end{figure}
 
-\subsubsection{Multiplicity and Ambiguity}
+\subsubsection{Ambiguity and Multiplicity}
 Despite of the selection of the $N_c = 10$ optimal matching classes out of the total classes from the training set, there exist ambiguity issues among these classes. E. g. the VW K\"afer is often classified as a Porsche 991 and vice versa. Even the classifier recognizes the common origin of these two vehicles.
 
 Additionally, the VW New Beetle (see figure \ref{fig:testAmbiguity}) is classified as a VW K\"afer, although only the classic generation from the 60s and 70s has been trained. For a VMMR that only knows a couple of make-models, this is a welcome side effect due to inter-class ambiguity. Whereas for the final version of the game, this is an unwanted behavior, because the price the car dealer pays for a rare classic VW K\"afer is much higher than for a rather common VW New Beetle.
@@ -1274,7 +1274,7 @@ Additionally, the VW New Beetle (see figure \ref{fig:testAmbiguity}) is classifi
 The inter-class ambiguity issue due to a rebadging of a vehicle is not solved by this VMMR (see chapter \ref{sec:excursionAmbiguity} and figure \ref{fig:ambiguityRebadging}). The changes between the original and the rebadged vehicle are usually too marginal. For the game RacecAR GO, this is not a big problem, because the worth and the property-set of the original and the rebadged vehicle usually do not differ, so the player wouldn't be bothered about a wrong classification. Whereas for a surveillance application, this is a more severe issue.
 \begin{figure}[btph]
   \centering
-        \includegraphics[width=.35\linewidth]{gfx/test_ambiguity}
+        \includegraphics[width=.2\linewidth]{gfx/test_ambiguity}
         \caption{VW New Beetle is classified as a VW K\"afer}
         \label{fig:testAmbiguity}
 \end{figure}
@@ -1319,7 +1319,7 @@ So the decision was made to send the whole RoI and leave the complete recognitio
 	\end{itemize} &
 	\emph{nothing} \\ \hline
   \end{tabular}
-  \caption{Network protocol used in the RacecAR GO Prototype}
+  \caption{Network protocol used in the RacecAR GO prototype}
   \label{table:network}
 \end{table}
 
@@ -1337,7 +1337,7 @@ Although there are ten different make-models to be recognized by the VMMR machin
         \subfloat[VW K\"afer]
         {\label{fig:test2}%
          \includegraphics[height=.15\linewidth]{gfx/icon_vw_kaefer}} \quad
-        \subfloat[Porsche 911\footnote{Blabla}]
+        \subfloat[Porsche 911]
         {\label{fig:test3}%
          \includegraphics[height=.15\linewidth]{gfx/icon_porsche_911}} \quad
         \subfloat[Placeholder Car]
@@ -1348,6 +1348,41 @@ Although there are ten different make-models to be recognized by the VMMR machin
 \end{figure}
 
 \subsection{Capturing Process}
+In figure \ref{fig:capturingScreenshots}, the capturing process, as it looks like in the game, is illustrated with screenshots. The first one (\ref{fig:capturing1}) displays the view after entering the capturing mode. The entire display (except for the navigation bar) is covered with the camera capture. In the lower third of the screen, there's the watermark, which has to cover the real number plate (displaced a bit in the screenshot for better visibility).
+
+Since the smartphone's motion sensors are used to retrieve the correct pose for AR, the device's \texttt{initialAttitude} is saved when pressing the capture-button (and the RoI around the number plate watermark is transmitted to the server). To retrieve the attitude, the \texttt{CMMotionManager} of the \texttt{CoreMotion} component is used. With this, updates to the device's attitude can be tracked regularly. As soon as the make-model is returned from the server (\ref{fig:capturing2}), the client loads the respective 3D model and property-set (both stored client-side). The 3D model is rendered above the camera capture, while the pose of the virtual camera is deduced from the current device's attitude as
+\begin{verbatim}
+  camera.pose = currentAttitude.pose * inverse(initialAttitude.pose)
+\end{verbatim}
+In virtual camera-space, the 3D model is placed at that position, where the real car is expected to be at time of capturing. So leaving the camera in place after capturing will blend the 3D model above the expected real-world vehicle's position. Changing the pose of the smartphone (i. e. of the smartphone's camera) also means changing the pose of the virtual camera, which moves the virtual vehicle along with the real-world vehicle. This works well, as long as solely the orientation of the smartphone is changed. Because of too great inaccuracies, the location changes of the smartphone are not transferred to the virtual camera.
+
+\begin{figure}[btph]
+        \myfloatalign
+        \subfloat[Placing the watermark]
+        {\label{fig:capturing1}%
+         \includegraphics[height=.4\linewidth]{gfx/racecar_go_capturing1}} \quad
+        \subfloat[AR with recognized make-model]
+        {\label{fig:capturing2}%
+         \includegraphics[height=.4\linewidth]{gfx/racecar_go_capturing2}} \quad
+        \subfloat[Garage]
+        {\label{fig:capturing3}%
+         \includegraphics[height=.4\linewidth]{gfx/racecar_go_garage}} \quad
+        \subfloat[Play Card]
+        {\label{fig:capturing4}%
+         \includegraphics[height=.4\linewidth]{gfx/racecar_go_play_card}}
+        \caption[Screenshots from RacecAR GO illustrating the capturing process. (a) Capturing the real-world vehicle and placing the watermark. (b) AR overlay of the 3D model. (c) Garage, where all captured vehicles are listed. (d) Selecting one vehicle from the Garage shows that vehicle as a play card, as it would be used in the Supertrumpf game]{Screenshots from RacecAR GO illustrating the capturing process. (a) Capturing the real-world vehicle and placing the watermark. (b) AR overlay of the 3D model. (c) Garage, where all captured vehicles are listed. (d) Selecting one vehicle from the Garage shows that vehicle as a play card, as it would be used in the Supertrumpf game}
+\label{fig:capturingScreenshots}
+\end{figure}
+
+TODO: Also describe test with euro badge and number plate as marker. Shortly mentioned in concept, that I tested it. So it has to be described here, HOW I tested it (maybe with mostly images to show what I did)
+
+
+\chapter{Evaluation}\label{ch:evaluation}
+TODO
+
+
+
+
 
 
 %\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
