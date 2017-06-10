@@ -712,8 +712,8 @@ As mentioned before, a vehicle has to be photographed to be captured. Even more,
 
 Because the app does not publish the number plate but only stores a hashed version of it, there should be no problem with this. But to be on the safe side, place a hint in the app to urge the players to forbear capturing a vehicle, if the owner is present and does not give his permission.
 
-\subsection{Hazards}\label{sec:hazards}
-As proved by Pok\'{e}mon GO, the hazards accompanying a game that is played outside are not of a minor kind. There have even been cases of death, according to the \emph{Pok\'{e}mon GO Death Tracker} \citep{PokemonGoDeathTracker}.
+\subsection{Hazards}
+There have even been cases of death, according to the \emph{Pok\'{e}mon GO Death Tracker} \citep{PokemonGoDeathTracker}.
 
 TODO:
 Discuss hazards (city traffic), unwanted public disturbance, unwanted locations (car dealer, private property?), attention at worst possible times or too much attention in general
@@ -1074,10 +1074,8 @@ As mentioned in the concept for RacecAR GO, the prototypical version of the game
 %*****************************************************************************
 %*****************************************************************************
 \section{Overview}
-TODO: Später aufschreiben, wenn ich weiß, was wo steht: Dieses Kapitel aufgeteilt: Zuerst serverseitige Implementierung
-Dann Netzwerkschnittstelle
-Dann Client mit Capturing Process
-Am Ende Testergebnisse und Schlussfolgerungen
+This chapter is about implementations of some of the components and algorithms, described in the Concept chapter. It's subdivided into one part for the server implementation, one for the network interface and one for the client implementation. The server chapter also includes an evaluation of the VMMR machine at the end.
+
 
 \section{Server}
 Figure \ref{fig:platform} says, that the server takes care for tasks like VMMR, the user management and the game state. Since the prototype is mainly limited to the capturing of vehicles, the only part left for the server is the VMMR.
@@ -1086,7 +1084,7 @@ The recognition is realized as a machine learning system, that trains a classifi
 
 The Server is realized as a Java application. For image processing, OpenCV 3\footnote{\url{http://opencv.org/}} is used. OpenCV is a commonly used library for computer vision purposes. It is implemented in C, but it was ported to be used with Java or Objective-C on many platforms. For training the final classifier, Weka 3.8\footnote{\url{http://www.cs.waikato.ac.nz/ml/weka/}} is used. Weka provides a set of classifiers of different kind and useful functions to train them.
 
-TODO: Hier kurz was über parameter optimization schreiben, was dann in Classif. chapter gemacgt wird. Damit man sich vorher nicht wundert, wie die ganzen Werte evaluiert werden. mit ref auf fig
+The performance of the VMMR strongly depends on the choice of parameters. There are many configurations to make, from the size of the RoI through the size of the dictionary to parameters of the final classifier. To find suitable parameters for a good performance, an automatic parameter tuning is used, which is presented in chapter \ref{sec:parameterTuning}.
 
 \subsection{Dataset}\label{sec:dataset}
 The VMMR workflow starts with a set of training images, the dataset. In this case, the training images are pictures of cars with make-model labels assigned. As described in chapter \ref{sec:vmmrConcept}, there are different criteria, the training images have to fulfill:
@@ -1118,7 +1116,7 @@ The ten classes, evaluated by the proposed approach, are: Citro\"en C4 Cactus, F
 \subsection{Region of Interest}
 To extract the RoIs of the training images, each number plate has been marked manually. The position and size of each image's number plate is stored in a separate file, coming along with the dataset. When loading the dataset, the data structure for each image retrieves this data, such that it can export the RoI.
 
-The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, left, right)$ and the size in pixels, whereas for the size only the width $w_{RoI}$ is important. The height is deduced from $w_{RoI}$ and the aspect ratio of the extent. This means, that the RoIs of all the training images have the same size. This is important for comparable image operations like detecting or describing features. The filter kernels used for this have a distinct size and the car in each image should cover a more or less constant percentage of area of the image. The best width has been evaluated to $w_{RoI} = 400$, whereas the extent was evaluated to work best with $top = 0.7, bottom = 0.1, left = 0.6, right = 0.6$. See chapter TODO for details to the evaluation process.
+The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, left, right)$ and the size in pixels, whereas for the size only the width $w_{RoI}$ is important. The height is deduced from $w_{RoI}$ and the aspect ratio of the extent. This means, that the RoIs of all the training images have the same size. This is important for comparable image operations like detecting or describing features. The filter kernels used for this have a distinct size and the car in each image should cover a more or less constant percentage of area of the image. The best width has been evaluated to $w_{RoI} = 400$, whereas the extent was evaluated to work best with $top = 0.7, bottom = 0.1, left = 0.6, right = 0.6$. See chapter \ref{sec:parameterTuning} for details to the parameter evaluation process.
 
 TODO low: Algorithm to find number plate (see doc)
 
@@ -1126,7 +1124,7 @@ TODO low: Algorithm to find number plate (see doc)
 In \emph{VR3}, the VMMR was requested to be robust to different lighting conditions. To cope with this on the one hand, the training images should cover a large variety of different lighting conditions. On the other hand, the images have to pass a normalization step before entering the training process. To be independent from different vehicle colors, all training images are turned into grayscale images. It also turned out to improve the recognition accuracy, if the contrast is normalized as well by a histogram equalization. An illustration of the training data at this point of state is shown in figure TODO Bild zeigen, wie die Trainingsdaten zu diesem Zeitpunkt aussehen (d.h. Bild mit allen RoIs des Trainingsets aus /training2)
 
 \subsection{Local Feature Extraction}\label{sec:localFeatureExtractionImpl}
-As described in chapter \ref{sec:localFeatureExtractionConcept}, the common and popular feature detectors and descriptors SIFT and SURF are patented. As a solution, ORB is another feature detector and descriptor, that is faster than SIFT and performs equally well in many situations \citep{rublee2011orb}. Fortunately, ORB is not patented and is included in OpenCV 3. TODO: Weg beschreiben von Feature zu descriptor. Welche OpenCV Funktionen werden benutzt?
+As described in chapter \ref{sec:localFeatureExtractionConcept}, the common and popular feature detectors and descriptors SIFT and SURF are patented. As a solution, ORB is another feature detector and descriptor, that is faster than SIFT and performs equally well in many situations \citep{rublee2011orb}. Fortunately, ORB is not patented and is included in OpenCV 3.
 
 Unfortunately, both SIFT and SURF are not even included into OpenCV 3, so a comparison among these three regarding VMMR has not been done.
 
@@ -1154,7 +1152,7 @@ For a RoI size of 400 x 190 pixels, there are about 400 features found with the 
 
 For the second clustering, that clusters the per-class codewords, k-means is used again. The same parameters as above are used, whereas the value for $k$ was evaluated to $500$ by the parameter optimizer. With a number of $2594$ total codewords from the per-class dictionaries after the elimination process, it turns out that the clustering of codewords belonging to different classes (which was the inter-class ambiguity problem of the SD) seems to be acceptable up to a certain amount.
 
-Especially a configuration of the parameters like ($k_c = 29$, $t = 0$, $k = k_c * N_c$), which represents the standard MD as it has been configured by \citep{siddiqui2015robust}, is inferior to the AMD used with the described parameters (as it can be seen in figure TODO visualisierung).
+Especially a configuration of the parameters like ($k_c = 29$, $t = 0$, $k = k_c * N_c = 290$), which represents the standard MD as it has been configured by \citep{siddiqui2015robust}, is inferior to the AMD used with the described parameters (as it can be seen in figure TODO visualisierung).
 
 \subsubsection{Implementation of the Single Dictionary}
 \paragraph{Parameters:}
@@ -1172,7 +1170,7 @@ The global representation is implemented as an array of doubles, where each entr
 \end{verbatim}
 is used for this, using the Hamming distance as distance measure. To train a classifier with the global representations, they have to be converted into a format, the classifier understands. Since this thesis uses Weka for classification purposes, the histograms have to be converted to the ARFF format, which describes a list of instances sharing a set of attributes. The attributes are represented by the dictionary codewords (numeric attributes) plus an additional nominal attribute to hold the make-model class. So each instance is listed inside of the ARFF file as a list of histogram values and the respective make-model class.
 
-\subsection{Classification}\label{sec:classificationImpl}
+\subsection{Paramter Tuning}\label{sec:parameterTuning}
 This chapter is about the tuning of the aforementioned VMMR parameters and the selection of the classifier performing with the best accuracy. The tuning is done within an automatic process, which evaluates different values for each parameter to finally retrieve the parameter set with the best performance. The parameters that are tuned are listed in table \ref{table:tunedParameters}. For each parameter, a set of discrete possible values was defined. The tuning process tests all combinations of possible values and yields the best ones. As measure for the best parameter setup, the classification accuracy is used, which is defined as the portion of correctly classified instances (\emph{true positives} and \emph{true negatives}) to the totally classified instances. The accuracy is evaluated via a 5-fold cross validation, i. e. there's no explicit test set.
 
 \subsection{Querying}
@@ -1220,18 +1218,18 @@ The resulting accuracy, using the Advanced Modular Dictionary, is 72.5\% with a 
     \caption{Classification results (using the AMD)}
     \label{table:classificationResults}
 \end{table}
-The training of the classifier with 189 training images took about 7 seconds, while the classification of one instance averagely took 30 milliseconds. This has been evaluated on an Intel(R) Xeon(R) CPU E3-1230 V2 @3.30GHz.
+The training of the classifier with 189 training images took about 7 seconds, while the classification of one instance averagely took 25 milliseconds. This has been evaluated on an Intel(R) Xeon(R) CPU E3-1230 V2 @3.30GHz.
 
 The bad accuracy in comparison to other VMMRs, which usually performed at accuracies better than 90\% \citep{petrovic2004analysis} \citep{siddiqui2015robust}, could be caused by different factors:
 \begin{itemize}
-  \item The used training set is rather small in comparison to e. g. the NTOU-MMR dataset \citep{ntoummrDataset}, which contains 2846 images for training, and 3793 images for testing for a total number of 29 classes.
+  \item The used training set is rather small in comparison to e. g. the NTOU-MMR dataset \citep{ntoummrDataset}, which contains 2846 images for training, and 3793 images for testing for a total number of 29 classes. The VMMR has been tested at different stadiums of the training data and such with different numbers of training images. It turned out, though, that an increasing number of training images also increases the VMMR accuracy.
   \item The quality of the training data could be better. Maybe, the variance between the per-class images is too high. Additionally, there are some vehicles with mirroring effects on their front, which could have brought some noise into the classification space.
   \item Splitting the data explicitly into a training and testing set instead of using cross validation could increase the accuracy. But with such a small dataset, each instance is needed for training, so cross validation was used.
   \item It could also be caused by the usage of ORB detectors and descriptors. According to \citep{rublee2011orb}, ORB performs equal to SIFT in many scenarios. But in contrast to SIFT and SURF, ORB isn't established in the domain of VMMR, yet and no explicit tests have been made to compare ORB with SIFT and SURF on vehicle images.
   \item The clustering with k-means uses generated initial cluster centers. It hasn't been evaluated, if randomly or manually placed centers would improve the result.
 \end{itemize}
 
-TODO low: Visualisierung der Testergebnisse in Multi-Parameter Diagramm MIT ZUSÄTZLICH UNTERSCHIEDLICH VIELEN TRAININGSDATEN
+TODO: Visualisierung der Testergebnisse in Multi-Parameter Diagramm MIT ZUSÄTZLICH UNTERSCHIEDLICH VIELEN TRAININGSDATEN
 
 \subsubsection{Robustness}
 It has been said that the VMMR uses a bag-of-words model to be able to recognize vehicles that are partially occluded. The VMMR has also been requested to be independent of different lighting conditions. Tests have proven, that this is actually the case. Figure \ref{fig:tests} illustrates some vehicles in problematic scenarios (occlusions, bad lighting conditions) and their classifications. In most cases, classifications under bad lighting conditions are correct. And if a vehicle is occluded, there are usually enough descriptive features left to find the correct class (in some cases with occlusions of up to 50\% of the vehicle).
@@ -1279,6 +1277,9 @@ The inter-class ambiguity issue due to a rebadging of a vehicle is not solved by
         \label{fig:testAmbiguity}
 \end{figure}
 
+If the VMMR accuracy, the robustness to different lighting conditions and to occlusion is good enough to keep the players motivated, will be evaluated during the testing phase (see chapter \ref{ch:evaluation}), when RacecAR GO is played in a real-world environment.
+
+
 \section{Network Interface}\label{sec:network}
 For the transmission of data, TCP sockets are used. In comparison to e. g. HTTP, the protocol is lean and only the needed data is sent. Additionally, the server application is independent of a web server.
 
@@ -1287,7 +1288,7 @@ For the VMMR request, the whole RoI pixels are transmitted to the server. To jus
   \item The client has to know the dictionary, which makes it hard to improve the dictionary without updating the app
   \item The client-side feature detection and extraction has to work the same way as it has been done to train the VMMR machine. Since the server and the client are implemented in different languages, this is not so easy to assure (actually, it's possible, as long as e. g. OpenCV is used, which is available for both, a Java and an iOS environment).
 \end{itemize}
-So the decision was made to send the whole RoI and leave the complete recognition process to the server. For evaluation purposes, also the player name and location data is transmitted to the server (see TODO for more info). In table \ref{table:network}, the network protocol is listed.
+So the decision was made to send the whole RoI and leave the complete recognition process to the server. For evaluation purposes, also the player name and location data is transmitted to the server. In table \ref{table:network}, the network protocol is listed.
 \begin{table}[btph]
   \centering
   \begin{tabular}{|p{0.15\textwidth}|p{.3\textwidth}|p{0.3\textwidth}|}
@@ -1322,6 +1323,7 @@ So the decision was made to send the whole RoI and leave the complete recognitio
   \caption{Network protocol used in the RacecAR GO prototype}
   \label{table:network}
 \end{table}
+
 
 \section{Client}\label{sec:clientImpl}
 The client has been implemented as an iOS app for iPhones. Here, OpenCV was used as well for the extraction of the RoI. Used languages are Swift, Objective-C and C++, while latter was only needed to communicate with the OpenCV API. Objective-C was used for the image capturing component because of having trouble when trying to do this with Swift. The rest and thus the main part of the client is implemented in Swift 2.3.
@@ -1374,14 +1376,31 @@ In virtual camera-space, the 3D model is placed at that position, where the real
 \label{fig:capturingScreenshots}
 \end{figure}
 
-TODO: Also describe test with euro badge and number plate as marker. Shortly mentioned in concept, that I tested it. So it has to be described here, HOW I tested it (maybe with mostly images to show what I did)
+TODO low: Also describe test with euro badge and number plate as marker. Shortly mentioned in concept, that I tested it. So it has to be described here, HOW I tested it (maybe with mostly images to show what I did)
+
+\subsection{Location Data}
+To evaluate the players' movement, the app also transmits location data to the server. This is only done, when the app is currently running and only with permission of the user. Location updates are sent in five meters distance steps. Although more accurate data is available and could be logged, it is not necessary for the evaluation. The location of the iPhone is retrieved by the \texttt{CLLocationManager} of the \texttt{CoreLocation} component. It allows to get continuous updates of the latitude and longitude.
 
 
+
+
+
+%*****************************************************************************
+%*****************************************************************************
 \chapter{Evaluation}\label{ch:evaluation}
-TODO
+%*****************************************************************************
+%*****************************************************************************
+TODO: Hier zuallererst ein Foto von einer Person, die RacecAR GO spielt, vllt. Raphael mit Handy, wie er gerade ein Auto fotografiert und sich freut :-)
+Dann noch ein Bild machen, wo man den Screen sieht, auf dem gerade ein Auto gecapturt wurde, aber man auch die Umgebung sieht.
+
+The purpose of this thesis was to investigate, if real-world vehicles are suited to be used as anchors in an exergame. So an evaluation has been done, including a test phase of the RacecAR GO prototype in the real world.
+
+For this reason, questions in the following domains were examined: The first domain is the adaptation of the game in different environments, such as urban and rural areas. One of the decisive reasons to pick real-world vehicles as anchors was their availability all over the world. So this domain is an important one. Another domain is the integration of the game into their players' everyday life. As this is a focus of pervasive games, answers to this allow to draw conclusions about the pervasive qualities of the game. Correspondingly, the immersion effect of the game and how AR benefits this was evaluated. To investigate the game's strengths in motivating people to move, there are some questions in this domain as well as location data, tracked by the app. It is additionally evaluated, if especially the hunting and collecting of items was a motivator. Since the gameplay requests the player to photograph other people's properties, and since playing mobile games in the public is not yet TODO common (so richtig weit verbreitet und üblich bei allen Menschen), the counter-motivational factor of embarrassment was examined. The recognition accuracy as perceived by the user is also evaluated. And because hazards accompanying a game that is played outside are such a big issue since Pok\'{e}mon GO exists, it was investigated if RacecAR GO also has the potential to cause hazardous moments.
 
 
 
+
+TODO: Auswertungsdiagramme von Google Forms dann auch in Appendix, zusammen mit den Fragen.
 
 
 
