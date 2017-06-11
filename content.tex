@@ -1378,7 +1378,7 @@ In virtual camera-space, the 3D model is placed at that position, where the real
 
 TODO low: Also describe test with euro badge and number plate as marker. Shortly mentioned in concept, that I tested it. So it has to be described here, HOW I tested it (maybe with mostly images to show what I did)
 
-\subsection{Location Data}
+\subsection{Location Data}\label{sec:locationTracking}
 To evaluate the players' movement, the app also transmits location data to the server. This is only done, when the app is currently running and only with permission of the user. Location updates are sent in five meters distance steps. Although more accurate data is available and could be logged, it is not necessary for the evaluation. The location of the iPhone is retrieved by the \texttt{CLLocationManager} of the \texttt{CoreLocation} component. It allows to get continuous updates of the latitude and longitude.
 
 
@@ -1395,7 +1395,30 @@ Dann noch ein Bild machen, wo man den Screen sieht, auf dem gerade ein Auto geca
 
 The purpose of this thesis was to investigate, if real-world vehicles are suited to be used as anchors in an exergame. So an evaluation has been done, including a test phase of the RacecAR GO prototype in the real world.
 
-For this reason, questions in the following domains were examined: The first domain is the adaptation of the game in different environments, such as urban and rural areas. One of the decisive reasons to pick real-world vehicles as anchors was their availability all over the world. So this domain is an important one. Another domain is the integration of the game into their players' everyday life. As this is a focus of pervasive games, answers to this allow to draw conclusions about the pervasive qualities of the game. Correspondingly, the immersion effect of the game and how AR benefits this was evaluated. To investigate the game's strengths in motivating people to move, there are some questions in this domain as well as location data, tracked by the app. It is additionally evaluated, if especially the hunting and collecting of items was a motivator. Since the gameplay requests the player to photograph other people's properties, and since playing mobile games in the public is not yet TODO common (so richtig weit verbreitet und üblich bei allen Menschen), the counter-motivational factor of embarrassment was examined. The recognition accuracy as perceived by the user is also evaluated. And because hazards accompanying a game that is played outside are such a big issue since Pok\'{e}mon GO exists, it was investigated if RacecAR GO also has the potential to cause hazardous moments.
+For this reason, questions in the following domains were examined: The first domain is the adaptation of the game in different environments, such as urban and rural areas. One of the decisive reasons to pick real-world vehicles as anchors was their availability all over the world. So this domain is an important one. Another domain is the integration of the game into their players' everyday life. As this is a focus of pervasive games, answers to this allow to draw conclusions about the pervasive qualities of the game. Correspondingly, the immersion effect of the game and how AR benefits this was evaluated. To investigate the game's strengths in motivating people to move, there are some questions concerning this domain as well as location data, tracked by the app. In more detail, players have been asked before and after the test phase, which distance they walk weekly and if they consider themselves as athletic. It is additionally evaluated, if especially the hunting and collecting of items was a motivator. Since the gameplay requests the player to photograph other people's properties, and since playing mobile games in the public is not easy for anyone, the counter-motivational factor of embarrassment was examined. The recognition accuracy as perceived by the user is also evaluated. And because hazards accompanying a game that is played outside are such a big issue since Pok\'{e}mon GO came out, it was investigated if RacecAR GO also has the potential to cause hazardous moments.
+
+\section{Evaluation Setup}
+17 people with ages from eight to 56 took part at the evaluation. Eleven of them had the app installed on their own iPhone and tested it during the whole evaluation phase of 21 days. The rest of the testers only played the app once for about an hour. Since RacecAR GO is a single player game for now, each player tested it by himself. Each player was given a short explanation of the gameplay and a list of vehicles, that can be recognized.
+
+Additionally, two questionnaires have been prepared, one had to be filled out before, the other one after the testing phase. The questions and answers can be found in the appendix of this thesis. Most of the questions had to be answered on a scale with five steps from \emph{1 = absolutely} to \emph{5 = not at all}. RacecAR GO has been built as an iOS app and was spread among the testers\footnote{An iOS app is not so easy to distribute as an Android app. For a distribution, a membership to the Apple Developer Program is necessary, and this is not for free. So it was done with the iOS Developer University Program of the TU Darmstadt. To finally deploy the app onto the tester's iPhones, \url{https://www.diawi.com/} was used.}.
+
+In addition to the questionnaires, the app itself collects data of the player. This includes the location (see chapter \ref{sec:locationTracking}), the start and end time of each play session and VMMR data. For the VMMR data, each recognition request was logged along with the RoI and the classification result.
+
+The RacecAR GO server was running most of the time during the 21 days of the evaluation phase, whereas in the second week, the VMMR machine has been improved to recognize ten instead of originally seven different make-models.
+
+Within the 21 days, RacecAR GO has been tested in many different urban areas, including the city and suburbs of Mainz, Wiesbaden and Bonn. It was also played in rural environments beyond cities in small villages somewhere in Rheinhessen (evaluated by the tracked GPS data).
+
+\section{Results}
+TODO Calculated moments
+
+The majority of testers (40\%) TODO answered the question of the adaptability of RacecAR GO with $3$, two testers evaluated the adaptability even worse with $4$ and $5$. The left XX TODO \% considered the app as adaptive to be playable everywhere they wanted to. TODO Schlechter fallen die Antworten für die Co-Frage aus, ob denn auch Autos da waren, die man einfangen konnte. Autos waren zwar da, aber 50\% of the testers haben beim Spielen nicht genug Autos gefunden, die erkannt wurden. XX TODO testers haben angegeben, dass es ihnen den Spaß am Spielen verdorben hat, dass nur so wenige Autos erkannt werden konnten.
+
+TODO: Integration into everyday life - qualities of pervasive game
+TODO: Immersion of AR
+TDO: Motivation to move - pre und post. Auch athletic. Esp hunting und collecting
+
+
+
 
 
 
