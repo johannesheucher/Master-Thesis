@@ -103,7 +103,7 @@ There is a special type of exergames, the mobile exergames, in which the player 
 These games do not take place at special locations like in a gym, a laboratory or at home, separated from the real world. They are played everywhere such as on the way to school or work, at work itself, after the lunch time, after work with your kids or whenever and wherever the player (or the game, as said above for pervasive games with temporal expansion) wants to. The aim is a transformation of the player's everyday environment into a world in play \citep{nieuwdorp2009pervasive}.
 
 
-\subsection{Evolution of Location-based Games}
+\subsection{Evolution of Location-based Games}\label{sec:locationBasedGames}
 In the previous chapters, different types of pervasive games have been presented. Many of them depend on the current location of the player, e. g. Ingress or Pok\'{e}mon GO (see section \ref{sec:examples}). This kind of games uses the current location as a basic part of the gameplay. Without the exact location, a player of Ingress could not conquer a portal and a hunter on the prowl for Pok\'{e}mons would not find one nor would he find a Pok\'{e}stop to retrieve useful items. Concluded, these games would be absolutely unplayable without being able to track the location of the player with a reasonable accuracy.
 
 Using GPS, this is only possible since May 2, 2000, when the \emph{Selective Availability} was turned off. Selective Availability was a service to prevent civilians to perceive a better GPS accuracy than a 100 meters radius, reserving better accuracy for the military only. Since it was disabled, the GPS location is accurate to a few meters for anybody\footnote{\url{http://www.gps.gov/systems/gps/modernization/sa/data/}}.
@@ -235,7 +235,7 @@ as its borders are marked at the right place (green). (Caption and image reprint
         \label{fig:model-based-tracking}
 \end{figure}
 
-\subsubsection{Usage of AR in Games}
+\subsubsection{Usage of AR in Games}\label{sec:usageOfARStateOfTheArt}
 Nowadays, mobile devices used for AR are usually handheld devices (such as smartphones or tablets) or head-mounted displays (such as smartglasses). Head-mounted displays have an advantage over handheld devices, which are embarrassing, annoying, tedious to keep up and watch through and that are socially not accepted\footnote{\url{http://mobilbranche.de/2017/04/augmented-virtuelle-realitaet-facebook-f8}}. Additionally, a smartphone's hardware is limited and its camera is hardly able to capture 3D structures of the real world.
 
 On the other hand, smartphones are common and nearly everyone will always have one at hand in the near future, whereas head-mounted displays are still a rarity.
@@ -499,7 +499,7 @@ This means, that the real object and the virtual object are semantically the sam
 
 This thesis proposes to use real-world vehicles as natural anchors for an exergame. The way these are integrated into the gameplay and a discussion about the characteristics of this special type of anchor can be found in chapter \ref{sec:usageOfAnchors}.
 
-\subsection{The Art of Motivating People to do Something for their Health}
+\subsection{The Art of Motivating People to do Something for their Health}\label{sec:motivationToMove}
 In the previous chapter, many different examples of exergames have been listed, each having its own approach to motivate its players to do something positive for their health. The key seems to be to encourage the players by something that is fun. This something's main intention is not doing sports. The health aspect is just a side-effect of playing the game.
 
 In the following, the concepts used by various exergames to motivate their players to move are compared and discussed.
@@ -712,7 +712,7 @@ As mentioned before, a vehicle has to be photographed to be captured. Even more,
 
 Because the app does not publish the number plate but only stores a hashed version of it, there should be no problem with this. But to be on the safe side, place a hint in the app to urge the players to forbear capturing a vehicle, if the owner is present and does not give his permission.
 
-\subsection{Hazards}
+\subsection{Hazards}\label{sec:hazards}
 There have even been cases of death, according to the \emph{Pok\'{e}mon GO Death Tracker} \citep{PokemonGoDeathTracker}.
 
 TODO:
@@ -1390,15 +1390,24 @@ To evaluate the players' movement, the app also transmits location data to the s
 \chapter{Evaluation}\label{ch:evaluation}
 %*****************************************************************************
 %*****************************************************************************
-TODO: Hier zuallererst ein Foto von einer Person, die RacecAR GO spielt, vllt. Raphael mit Handy, wie er gerade ein Auto fotografiert und sich freut :-)
-Dann noch ein Bild machen, wo man den Screen sieht, auf dem gerade ein Auto gecapturt wurde, aber man auch die Umgebung sieht.
-
+\begin{figure}[btph]
+        \myfloatalign
+        {\label{fig:eval1}%
+         \includegraphics[height=.3\linewidth]{gfx/eval1}} \quad
+        {\label{fig:eval2}%
+         \includegraphics[height=.3\linewidth]{gfx/eval2}} \quad
+        {\label{fig:eval3}%
+         \includegraphics[height=.3\linewidth]{gfx/eval3}} \quad
+        {\label{fig:eval4}%
+         \includegraphics[height=.3\linewidth]{gfx/eval4}} \quad
+        \caption[Photos taken during a testing session]{Photos taken during a testing session}
+\end{figure}
 The purpose of this thesis was to investigate, if real-world vehicles are suited to be used as anchors in an exergame. So an evaluation has been done, including a test phase of the RacecAR GO prototype in the real world.
 
 For this reason, questions in the following domains were examined: The first domain is the adaptation of the game in different environments, such as urban and rural areas. One of the decisive reasons to pick real-world vehicles as anchors was their availability all over the world. So this domain is an important one. Another domain is the integration of the game into their players' everyday life. As this is a focus of pervasive games, answers to this allow to draw conclusions about the pervasive qualities of the game. Correspondingly, the immersion effect of the game and how AR benefits this was evaluated. To investigate the game's strengths in motivating people to move, there are some questions concerning this domain as well as location data, tracked by the app. In more detail, players have been asked before and after the test phase, which distance they walk weekly and if they consider themselves as athletic. It is additionally evaluated, if especially the hunting and collecting of items was a motivator. Since the gameplay requests the player to photograph other people's properties, and since playing mobile games in the public is not easy for anyone, the counter-motivational factor of embarrassment was examined. The recognition accuracy as perceived by the user is also evaluated. And because hazards accompanying a game that is played outside are such a big issue since Pok\'{e}mon GO came out, it was investigated if RacecAR GO also has the potential to cause hazardous moments.
 
 \section{Evaluation Setup}
-17 people with ages from eight to 56 took part at the evaluation. Eleven of them had the app installed on their own iPhone and tested it during the whole evaluation phase of 21 days. The rest of the testers only played the app once for about an hour. Since RacecAR GO is a single player game for now, each player tested it by himself. Each player was given a short explanation of the gameplay and a list of vehicles, that can be recognized.
+17 people with ages from eight to 56 took part at the evaluation, three of them are females. Eleven of them had the app installed on their own iPhone and tested it during the whole evaluation phase of 21 days. The rest of the testers only played the app once for about an hour. Since RacecAR GO is a single player game for now, each player tested it by himself. Each player was given a short explanation of the gameplay and a list of vehicles, the app was able to recognize.
 
 Additionally, two questionnaires have been prepared, one had to be filled out before, the other one after the testing phase. The questions and answers can be found in the appendix of this thesis. Most of the questions had to be answered on a scale with five steps from \emph{1 = absolutely} to \emph{5 = not at all}. RacecAR GO has been built as an iOS app and was spread among the testers\footnote{An iOS app is not so easy to distribute as an Android app. For a distribution, a membership to the Apple Developer Program is necessary, and this is not for free. So it was done with the iOS Developer University Program of the TU Darmstadt. To finally deploy the app onto the tester's iPhones, \url{https://www.diawi.com/} was used.}.
 
@@ -1413,22 +1422,32 @@ TODO Calculated moments
 
 The majority of testers (40\%) TODO answered the question of the adaptability of RacecAR GO with $3$, two testers evaluated the adaptability even worse with $4$ and $5$. The left XX TODO \% considered the app as adaptive to be playable everywhere they wanted to. Although the app may have been playable, because there were some vehicles to capture, TODO XX \% of testers stated that often, the make-models around them weren't covered by the app's VMMR machine. XX TODO \% of the testers (XX\% rated with $1$, XX\% with $2$) reported, that the small number of covered make-models spoiled their enjoyment of the game.
 
-The ability of the game to be integrated into the everyday life of its players was rated differently. While the majority (XX TODO\%) rated with a $3$, XX TODO players found it easy to play the app during their daily routine. This corresponds to the collected data by the app, according to which four testers played the game multiple times at different times of day. XX TODO testers found it hard to integrate the game into their everyday lives. A corresponding question has been added to evaluate, if the usual behavior of using the smartphone correlates to this, i. e. a tester that usually hardly uses his smartphone in the daily life may also hardly think of playing the game in his daily life. But the evaluation of this question shows, that this is not the case. While only one tester voted with a $2$ (i. e. he rather agrees that his sporadic smartphone usage corresponds to the integration problems), most of them (XX TODO \%) voted, that they not at all didn't think of playing the game because of their infrequent smartphone usage.
+The ability of the game to be integrated into the everyday life of its players was rated differently. While the majority (XX TODO\%) rated with a $3$, XX TODO players found it easy to play the app during their daily routine. This corresponds to the collected data by the app, according to which four testers played the game multiple times at different times of day. XX TODO testers found it hard to integrate the game into their everyday lives. A corresponding question has been added to evaluate, if the usual behavior of using the smartphone correlates to this, i. e. a tester that usually hardly uses his smartphone in the daily life may also hardly think of playing the game in his daily life. But the evaluation of this question shows, that this is not the case. While only one tester voted with a $2$ (i. e. he rather agrees that his sporadic smartphone usage corresponds to the integration problems), most of them (XX TODO \%) voted, that they not at all didn't think of playing the game because of their infrequent smartphone usage. From personal experiences, sending push messages at the right time can remind the user to play the game. But sending push messages at the wrong time could annoy people, such that they play the game even less. The art of finding a good moment to remind the player to play instead of annoying him has been investigated in the app Twostone, which was described in chapter \ref{sec:locationBasedGames}. A motivating reminder could be for example: "Attention! Two other players recently captured a Porsche 911 50 meters away. Go and catch it, too!".
 
-TODO: Immersion of AR
-TDO: Motivation to move - pre und post. Auch athletic. Esp hunting und collecting
-TODO: Embarrassment
-TODO: VMMR
-TDO: hazards
+When using AR (or fancy technology in general), game designers can fall into the trap of concentrating too much on that technology and neglect the gameplay (as discussed on page \pageref{sec:usageOfARStateOfTheArt}). The testers, however, did not find, that the AR effects distracted them from the actual gameplay. While just one tester voted with a $2$ (when $1$ means, that AR absolutely distracted from the gameplay), the rest voted with $3$ (TODO \%), $4$ (TODO \%) and $5$ (TODO \%). In contrast to that, no player was absolutely satisfied with the accuracy of the overlaying effect. Nevertheless, the majority (XX TODO \%) voted with $2$ and $3$. So on balance, this is an acceptable result for a rather simple implementation of the overlaying effect. In section \ref{sec:motivationToMove} it was supposed that the capturing process including the AR effects could help the players to build an emotional relation to the caught item and thus motivate them to keep playing. In fact, most of the testers (TODO \%) answered this question with \emph{not at all}, whereas one player was absolutely able to build an emotional relation and anyway 31\% felt \emph{rather able} to build an emotional relationship.
 
+If the app did actually motivate the testers to move has been evaluated in many ways. For one thing, the players have been asked beforehand, which distance they walk weekly and if they think, that the app will motivate them to walk even more. For another thing, the tracked location data and the answers of the questionnaire after the test phase help to comprehend, if the app was actually motivating people to move more. Sadly, no tester exceeded the weekly distance, he specified before the test phase (at least not with the running app). But there is one more tester absolutely considering himself as athletic in comparison to before the test phase. The drop of bitterness is, that the number of testers, that considered themselves as absolutely not athletic increased from one to three. The answers to the question, if the testers move more than before, now, confirms this. Most testers voted with $4$ or $5$ (TODO \%), whereas only TODO \% voted with $2$. Conclusively it could be said, that the app has the potential to motivate some people to move. But as long as the players get frustrated because of the few supported make-models, this motivator is only short-lived. It has been assumed, that hunting and collecting could be a motivator, which cannot be approved by the evaluation. Most testers (TODO \%) voted with $3$ for this question. However, the hunting for especially cars seems to be interesting for people. TODO \% voted with $1$ and TODO \% with $2$.
 
+The factor of embarrassment is not negligible for this game. Whereas the majority (TODO \%) voted with $3$ for the embarrassment of being watched by bystanders while playing the game, TODO \% of testers voted with $1$ or $2$ for finding it embarrassing to photograph other people's cars. There was even one case, in which a car owner was angry about his car being photographed.
 
+The rating of the VMMR speed was rather good, most of the testers (TODO \%) rated with $3$ to $5$ for that the recognition took too long. In contrast to that, all testers voted with $1$ to $3$, that it was annoying that cars haven't been classified correctly. An explanation for this could be, that many testers aren't at home in the subject of cars (TODO \% specified to like cars). So many of them weren't able to differentiate between cars that are covered by the VMMR and cars that aren't. The good thing is, that the testers were totally undeterred by that and just captured any car they wanted to possess in their virtual garage. Since most of those cars did not belong to the list of covered cars, testers became disappointed. Vehicles from the list of covered make-models have usually been classified correctly. An outlier is the Ford Fiesta, that has never been classified correctly while totally eight capturing attempts have been made. An explanation for that is its bad true positive rate from table \ref{table:classificationResults}.
+
+Although RacecAR GO has the potential to cause hazardous situations (see chapter \ref{sec:hazards}), most of the testers did not feel unsafe while playing it. TODO \% answered with \emph{not at all}. Additionally, during the whole testing phase, no hazardous situations occurred.
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.95\linewidth]{gfx/eval5}
+        \caption{Photo showing a tester having captured a VW Polo with RacecAR GO}
+        \label{fig:eval5}
+\end{figure}
 
 
 
 
 TODO: Am Ende dann ein paar interessante Correlationen plotten, wie: Leute, die sich für unsportlich halten, sind am weitesten gelaufen, oder Non-Autofans haben die meisten Autos gecapturt.
 Gibt es einen Fall, wo ein Non-Autofan nach dem Spiel einer ist? Oder andersrum?
+Oder Unterschied von erachten als sportlich vorher nachher?
+Einfluss von schon mal Ingress oder Pokemon GO gespielt?
+
 
 TODO: Auswertungsdiagramme von Google Forms dann auch in Appendix, zusammen mit den Fragen.
 
