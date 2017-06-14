@@ -1,5 +1,5 @@
 \begin{abstract}
- The abstract goes here...
+TODO The abstract goes here...
 \end{abstract}
 
 
@@ -9,13 +9,33 @@
 \chapter{Introduction}
 %*****************************************************************************
 %*****************************************************************************
-Some short information how to get started:
+\section{Motivation}
+Imagine you're meeting with your friends at a factory site to take part at a new game. On the floor, you find a piece of paper. Someone has written something on it, apparently in great haste: "They are everywhere! They are fast, intelligent! But they are not human anymore! Don't let one of them touch you or you'll become one of them! I've heard of a safe house, where you are supposed to take shelter from them. And I've hidden some weapons, with which you may stun them. I've marked the places on this map." Below, there's a link to a website, showing a map. While we are watching the linked map with our smartphones, a yelling horde of scary looking people ran up to us.
+ 
+This is a game I played with some of my friends a couple of years ago. Let's call it "The Running Dead". Many other games like this come out these days. Games, in which the player has to physically move to succeed in the game. They are called \emph{exergames}. A popular example is Pok\'{e}mon GO. An important part of these games is the location-based content that comes along with them. For the game described above, it's the map with the marked stashes. For Pok\'{e}mon GO, it's the locations of Pok\'{e}Stops and TODO arenas. The creation of this content is one of the big challenges today. To be able to play such a game in more than just one distinct place, there also has to be content available for these locations. It isn't fun to play The Running Dead in London, whereas the stashes have only been marked in Mainz. Nor wouldn't there be so many people playing Pok\'{e}mon GO, if one had to go to a big city each time to visit a Pok\'{e}Stop. Letting a game designer place all this content is usual, but very expensive in time and money. For this reason, this thesis presents a new approach to dynamically create content - on the basis of real-world vehicles.
+
+\section{Challenges}
+This thesis is dedicated to three domains: Pervasive games, vehicle recognition and augmented reality. In each of these domains, this thesis faces challenges and proposes and discusses solutions.
+
+Since there is an app created along with this thesis to prove the later proposed concept, one challenge is to use motivators to attract people to play and move. Therefore, other exergames are explored and used motivators are discussed. Motivators can either be distinct aspects of the gameplay or utilized technology. Another challenge in this domain is to investigate, in which way to include vehicles as generic markers into the game.
+
+VMMR (building dataset, training classifier, tuning parameters, multiplicity and ambiguity issues as siddiqui mentions)
+ 
+AR on mobile device (vision-based approach (marker-based or marker-less), or alternative) and how to use it in a reasonable manner
+
+\section{Thesis Outline}
+This thesis is structured as follows:
 \begin{itemize}
-	\item Download the \texttt{tuddesign} files from \url{http://exp1.fkp.physik.tu-darmstadt.de/tuddesign/}, these are required to run any of the KOM templates!
-	\item Open the main file of your template document and adjust the section containing the main document information. Afterwards, it might also be a good idea to adjust the filenames to your needs.
-	\item For your convenience, common \LaTeX\ examples are included with the template and can be found in the file \texttt{content.tex}.
-	\item Carefully check the comments included in the \LaTeX\ sources of the template and the manual of \texttt{tuddesign} (for general problems with \texttt{tuddesign} it is a good idea to visit the forum on their website). General \LaTeX\ problems should be resolved via the web, manuals, or the corresponding usenet groups (\texttt{de.comp.text.tex}, \texttt{comp.text.tex}).
+  \item Chapter \ref{ch:stateOfTheArt} discusses the state of the art of both, pervasive games and automatic vehicle recognition. For the pervasive games, a short historic overview is given and subgenres are listed. Finally, some examples are presented.
+  
+  For the automatic vehicle recognition, some different types of vehicle recognition are discussed, until the VMMR and different realizations are investigated in more detail.
+  \item Chapter \ref{ch:concept} presents the concept of the mobile exergame \emph{RacecAR GO}, that is developed along with this thesis and uses vehicles as generic markers.
+  \item Chapter \ref{ch:implementation} presents the server-client-architecture of RacecAR GO as well as some implementation details of the components, described in chapter \ref{ch:concept}. At the end of this chapter, the performance of the implemented VMMR system is discussed.
+  \item A prototype of the RacecAR GO has been evaluated by some testers over 21 days. Chapter \ref{ch:evaluation} is about the setup and discusses the results of the evaluation critically.
+  \item Chapter \ref{ch:conclusion} TODO
 \end{itemize}
+
+
 
 
 
@@ -31,31 +51,21 @@ Additionally, some interesting approaches about vehicle recognition (TODO low: a
 
 \section{Pervasive Games}
 \subsection{Definition}
-Although the term pervasive gaming is becoming more and more popular within the last years, its definition is still vague \citep{nieuwdorp2009pervasive}. One is calling them a new type of digital games that combine game reality and physical reality within the gameplay \citep{Lankoski:2004:CSP:1028014.1028083}.
-
-Another definition says, that it is a game, in which the game world exists beside the everyday environment and that never stops but surrounds the player 24 hours a day \citep{sotamaa2002all}.
+Although the term pervasive gaming is becoming more and more popular within the last years, its definition is still vague \citep{nieuwdorp2009pervasive}. One is calling them a new type of digital games that combine game reality and physical reality within the gameplay \citep{Lankoski:2004:CSP:1028014.1028083}. Another definition says, that it is a game, in which the game world exists beside the everyday environment and that never stops but surrounds the player 24 hours a day \citep{sotamaa2002all}.
 \citeauthor{nieuwdorp2009pervasive} defined pervasive games as special type of game that emphasizes the relation between reality and game \citep{nieuwdorp2009pervasive}.
 
-There is some consensus in those definitions, such as the importance of the relation between the reality and the game world.
-
-But instead of bringing up another definition to compete with the other ones, this thesis compiles definitions of some works to define the boundary of pervasive games, as fitted for this thesis' scope.
+There is some consensus in those definitions, such as the importance of the relation between the reality and the game world. But instead of bringing up another definition to compete with the other ones, this thesis compiles definitions of some works to define the boundary of pervasive games, as fitted for this thesis' scope.
 
 A definition that tries to comprise the bottom line of many other definitions was made by \citeauthor{hock2014augmented}: \emph{"A pervasive game is an overlay of the real world where it (the overlay) is persistently present. It takes place in physical environments and its gameplay interacts with or is in some way related to parts of the real world. It thereby blurs the boundaries between reality and virtuality. It ideally integrates smoothly into its user's everyday life where it ideally is omnipresent which means that the user should be able to play it at any time in any place"} \citep{hock2014augmented}.
 
 
 \subsection{Beyond Traditional Games}
-\citeauthor{montola2005exploring} tried to approach the definition problem by investigating all kinds of games that have been classified as pervasive games for different and not unique reasons. He found out, that there is no single common denominator of those reasons.
-
-But regarding the magic circle of play, each of these games broke out of this circle in a distinct manner \citep{montola2005exploring}.
+\citeauthor{montola2005exploring} tried to approach the definition problem by investigating all kinds of games that have been classified as pervasive games for different and not unique reasons. He found out, that there is no single common denominator of those reasons. But regarding the magic circle of play, each of these games broke out of this circle in a distinct manner \citep{montola2005exploring}.
 
 \subsubsection{The Magic Circle of Play}
-\citeauthor{huizinga1955homo} defines a play as \emph{some activities} in \emph{some places} that are considered playfully by the players to belong to the game and not to reality \citep{huizinga1955homo}.
+\citeauthor{huizinga1955homo} defines a play as \emph{some activities} in \emph{some places} that are considered playfully by the players to belong to the game and not to reality \citep{huizinga1955homo}. Traditionally, a game takes place at \emph{"certain spaces, at certain times, by certain players"} \citep{montola2005exploring}. This is referred to as the magic circle of play.
 
-Traditionally, a game takes place at \emph{"certain spaces, at certain times, by certain players"} \citep{montola2005exploring}. This is referred to as the magic circle of play.
-
-For a pervasive game, this circle does not have a rigid border but a "permeable membrane where conventional meanings, psychological artefacts and environments, and players alike can slip through" \citep{nieuwdorp2009pervasive}.
-
-In relation to the magic circle of play, another definition for a pervasive game is \emph{"a game that has one or more salient features that expand the contractual magic circle of play socially, spatially or temporally."} \citep{montola2005exploring}
+For a pervasive game, this circle does not have a rigid border but a "permeable membrane where conventional meanings, psychological artifacts and environments, and players alike can slip through" \citep{nieuwdorp2005}. In relation to the magic circle of play, another definition for a pervasive game is \emph{"a game that has one or more salient features that expand the contractual magic circle of play socially, spatially or temporally."} \citep{montola2005exploring}
 
 In the following, each of the named dimensions, in which pervasive games expand the magic circle of play, are described.
 
@@ -110,11 +120,11 @@ Using GPS, this is only possible since May 2, 2000, when the \emph{Selective Ava
 
 Suddenly, many location based games came up. For example, the term \emph{Geocaching} was formed during that time to describe a hunt for treasures (the \emph{geocaches}) in the real world \citep{Geocaching}. To find these geocaches, their locations are marked on a virtual map via GPS.
 
-A few years later, the popular 80s game \emph{Pacman} \footnote{\url{https://en.wikipedia.org/wiki/Pac-Man}} was transferred into a real-life version named \emph{Pac-Manhattan} \citep{Pac-Manhattan}, using GPS sensors to track the position of the players.
+A few years later, the popular 80s game \emph{Pacman}\footnote{\url{https://en.wikipedia.org/wiki/Pac-Man}} was transferred into a real-life version named \emph{Pac-Manhattan} \citep{Pac-Manhattan}, using GPS sensors to track the position of the players.
 
 With the launch of the iPhone in 2007, an era began where people always have a device at hand that is not only capable of tracking the GPS location but that is also powerful enough to run useful apps on it. This caused another hype of location-based applications.
 
-One of it, heavily relying on GPS-based location, is Foursquare \footnote{\url{https://foursquare.com/}}. The service makes personalized recommendations of places to a user. These recommendations depend on the user's current location and his profile. The service exists as a mobile app and as a website. Providing an iPhone app in 2009, Foursquare was one of the pioneers that combined a serious mobile application with a location-based service.
+One of it, heavily relying on GPS-based location, is Foursquare\footnote{\url{https://foursquare.com/}}. The service makes personalized recommendations of places to a user. These recommendations depend on the user's current location and his profile. The service exists as a mobile app and as a website. Providing an iPhone app in 2009, Foursquare was one of the pioneers that combined a serious mobile application with a location-based service.
 
 At that time, the app had a check-in feature to virtually check into specific locations. This game-like feature motivated users to visit different places to check-in and leave a Tip.
 
@@ -1226,7 +1236,7 @@ The bad accuracy in comparison to other VMMRs, which usually performed at accura
 TODO: Visualisierung der Testergebnisse in Multi-Parameter Diagramm MIT ZUSÄTZLICH UNTERSCHIEDLICH VIELEN TRAININGSDATEN
 
 \subsubsection{Robustness}
-It has been said that the VMMR uses a bag-of-words model to be able to recognize vehicles that are partially occluded. The VMMR has also been requested to be independent of different lighting conditions. Tests have proven, that this is actually the case. Figure \ref{fig:tests} illustrates some vehicles in problematic scenarios (occlusions, bad lighting conditions) and their classifications. In most cases, classifications under bad lighting conditions are correct. And if a vehicle is occluded, there are usually enough descriptive features left to find the correct class (in some cases with occlusions of up to 50\% of the vehicle).
+It has been said that the VMMR uses a bag-of-words model to be able to recognize vehicles that are partially occluded. The VMMR has also been requested to be independent of different lighting conditions. Tests have proven, that this is actually the case. Figure \ref{fig:tests} illustrates some vehicles in problematic scenarios (occlusions, bad lighting conditions) and their classifications. In most cases, classifications under bad lighting conditions are correct. And if a vehicle is occluded, there are usually enough descriptive features left in the captured photo to find the correct class (in some cases with occlusions of up to 50\% of the vehicle).
 
 \begin{figure}[btph]
         \myfloatalign
@@ -1254,7 +1264,7 @@ It has been said that the VMMR uses a bag-of-words model to be able to recognize
         \subfloat[VW Polo 9N3]
         {\label{fig:test8}%
          \includegraphics[height=.2\linewidth]{gfx/test8}}
-        \caption[Classification results in problematic scenarios: Only the Porsche (\ref{fig:test7}) has been classified wrongly because of too much occlusion]{Classification results in problematic scenarios: Only the Porsche (\ref{fig:test7}) has been classified wrongly because of too much occlusion}
+        \caption[Classification results (shown as caption of each picture) in problematic scenarios: Only the Porsche (\ref{fig:test7}) has been classified wrongly because of too much occlusion]{Classification results (shown as caption of each picture) in problematic scenarios: Only the Porsche (\ref{fig:test7}) has been classified wrongly because of too much occlusion}
 \label{fig:tests}
 \end{figure}
 
@@ -1432,7 +1442,9 @@ Although RacecAR GO has the potential to cause hazardous situations (see chapter
         \label{fig:eval5}
 \end{figure}
 
+TODO: Frei-Text Antworten: z. B. Problem mit großen Menschen, weil Trainingsdaten zwar von mehreren verschiedenen Menschen gesammelt wurde, die sind aber alle zwischen 1.73m und 1.76m groß.
 
+TODO: Multiple Param Diagramm nur in Praesentation.
 
 
 TODO: Am Ende dann ein paar interessante Correlationen plotten, wie: Leute, die sich für unsportlich halten, sind am weitesten gelaufen, oder Non-Autofans haben die meisten Autos gecapturt.
@@ -1442,6 +1454,16 @@ Einfluss von schon mal Ingress oder Pokemon GO gespielt?
 
 
 TODO: Auswertungsdiagramme von Google Forms dann auch in Appendix, zusammen mit den Fragen.
+
+
+
+
+
+%*****************************************************************************
+%*****************************************************************************
+\chapter{Conclusion}\label{ch:conclusion}
+%*****************************************************************************
+%*****************************************************************************
 
 
 
