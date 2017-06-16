@@ -32,7 +32,7 @@ This thesis is structured as follows:
   \item Chapter \ref{ch:concept} presents the concept of the mobile exergame \emph{RacecAR GO}, that is developed along with this thesis and uses vehicles as generic markers.
   \item Chapter \ref{ch:implementation} presents the server-client-architecture of RacecAR GO as well as some implementation details of the components, described in chapter \ref{ch:concept}. At the end of this chapter, the performance of the implemented VMMR system is discussed.
   \item A prototype of the RacecAR GO has been evaluated by some testers over 21 days. Chapter \ref{ch:evaluation} is about the setup and discusses the results of the evaluation critically.
-  \item Chapter \ref{ch:conclusion} TODO
+  \item Chapter \ref{ch:conclusion} shortly recapitulates what has been the motivation of this thesis and what has been done and accomplished after all. Additionally, it gives an outlook of what could be the next steps to continue with this work.
 \end{itemize}
 
 
@@ -47,7 +47,9 @@ This thesis is structured as follows:
 \section{Overview}
 In this chapter, the history and the state of the art of pervasive games in general and exergames in special will be presented. Popular representatives like \emph{Ingress}\footnote{\url{https://www.ingress.com/}} or \emph{Pok\'{e}mon GO}\footnote{\url{http://www.pokemongo.com/}}, published by Niantic\footnote{\url{https://www.nianticlabs.com/}}, will be looked at.
 
-Additionally, some interesting approaches about vehicle recognition (TODO low: and number plate region detection) will be discussed as the concept presented in this thesis also includes automatic vision-based vehicle recognition.
+Additionally, some interesting approaches about vehicle recognition
+%(TODO low: and number plate region detection)
+will be discussed as the concept presented in this thesis also includes automatic vision-based vehicle recognition.
 
 \section{Pervasive Games}
 \subsection{Definition}
@@ -447,16 +449,16 @@ For the classification (the last step of the vehicle recognition process from fi
 
 Experiments of \citep{siddiqui2015robust} showed that the SD, contrary to the expectations, slightly outperforms the MD. On the other hand, the dictionary training time is much less for the MD. However, for an application, where the dictionary is built offline and does not need to be updated (or only seldomly) during runtime, the Single Dictionary is the better choice, according to this experiments.
 
-\section{Number Plate Region Detection}
+%TODO \section{Number Plate Region Detection}
 
-\subsection{Definition}
-In contrast to "Number Plate Detection" or automatic license plate recognition (ALPR), where (also) the content of the number plate is desired.
+%\subsection{Definition}
+%In contrast to "Number Plate Detection" or automatic license plate recognition (ALPR), where (also) the content of the number plate is desired.
 
-TODO: Reference already working Systems. I heard that automatic recognition is used in Österreich to recognize the Vignette.
+%TODO: Reference already working Systems. I heard that automatic recognition is used in Österreich to recognize the Vignette.
 
-TODO: Refer to [7] and [8], [9], [10]
+%TODO: Refer to [7] and [8], [9], [10]
 
-TODO: Explain Hough Transform in detail with image and formula and such (as Hock did in Technical Basics)
+%TODO: Explain Hough Transform in detail with image and formula and such (as Hock did in Technical Basics)
 
 
 
@@ -567,20 +569,14 @@ The user is able to achieve money during play, so his current credit is always d
 
 \begin{figure}[btph]
   \centering
-        \includegraphics[width=.75\linewidth]{gfx/storyboard}
-        \caption{Storyboard of RacecAR GO}
+        \includegraphics[width=.8\linewidth]{gfx/storyboard}
+        \caption{Storyboard of RacecAR GO: In the \emph{Map}-view, the vehicle icon marks a car dealer, whereas the play cards mark a playground.}
         \label{fig:storyboard}
 \end{figure}
-TODO:
-Anzeige von Wert eines Autos
-Anzeige des gesammelten Geldes
-Anzeige der Spielkarte
-Anzeige jedes Views mit exemplarischem Inhalt
 
 \subsubsection{Capturing}
 At the start of the game, the player finds himself directly in the \emph{Capturing} view, ready to capture new vehicles for his garage. This fulfills \emph{GR2} which demands that the player must be able to play without any annoying setup. This view is also accessible via the menu. The capturing process is divided into four steps and is illustrated in figure \ref{fig:capturing}.
 
-TODO: Schritte im Bild nummerieren. Mit Corporate Design Farbe: Hellblau : Schwarze Ziffer in hellblauem Kreis mit schwarzem Rand
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/capturing}
@@ -592,10 +588,10 @@ TODO: Schritte im Bild nummerieren. Mit Corporate Design Farbe: Hellblau : Schwa
   \item As long as the capturing process is in step 1, the device shows the vehicle as the camera takes it. To capture it, the player has to point the device's camera towards the desired vehicle's front view or back view. In the background, the app sends a picture of the vehicle to the server. The picture has to be the front view or the back view, because along with the picture, the hashed number plate is sent to the server. This is to check, if the user hasn't captured the car yet. If he has, he cannot capture it for a second time.
 
 Otherwise, the server performs a VMMR (see chapter \ref{sec:vmmrConcept}) and sends the retrieved make and model along with its respective properties (in the example a "VW K\"afer" with a matching property-set) back to the client.
-  \item With the received make and model, the app chooses the correct virtual vehicle with that make and model and blends it above the real vehicle (see chapter \ref{sec:usageOfAR} for details). Additionally, it retrieves the vehicle's color from the captured image. This isn't a straightforward task, as there are multiple colors with multiple shadings occurring on a vehicle. One approach is to retrieve the color class containing the most pixels and choose the most similar color from the manufacturer's list of varnishes for that vehicle.
+  \item Step 2: With the received make and model, the app chooses the correct virtual vehicle with that make and model and blends it above the real vehicle (see chapter \ref{sec:usageOfAR} for details). Additionally, it retrieves the vehicle's color from the captured image. This isn't a straightforward task, as there are multiple colors with multiple shadings occurring on a vehicle. One approach is to retrieve the color class containing the most pixels and choose the most similar color from the manufacturer's list of varnishes for that vehicle.
 
 The player is then able to walk around the real vehicle while he only sees the colored virtual one through the device. He can interact with the vehicle by touching on the door or on the hood to open and close it. To continue, the player has two options. He can either touch the trash icon and abort the capturing, or he can opt for the garage icon, to park the vehicle in his garage.
-  \item To park the vehicle in his garage, the player first has to fulfill a small task. For the task, a vehicle part appears that matches to the captured vehicle. This part could be a door, a steering wheel, a car seat, an engine or another part the captured vehicle consists of. In the example, it's an engine. This part overlaps the vehicle and is fixed to the device's screen, such that when the player moves around the vehicle, the part overlaps different areas of it. The player's task is to place this part at the correct position. E. g. for the engine and the VW K\"afer (which has a rear engine), the user would have to walk around the car, touch on the engine cover to open it, place the engine at the correct position (by moving the device such that the engine icon overlaps the position where the engine of the real car would be) and finally touch the wrench icon.
+  \item To park the vehicle in his garage, the player first has to fulfill a small task in step 3. For the task, a vehicle part appears that matches to the captured vehicle. This part could be a door, a steering wheel, a car seat, an engine or another part the captured vehicle consists of. In the example, it's an engine. This part overlaps the vehicle and is fixed to the device's screen, such that when the player moves around the vehicle, the part overlaps different areas of it. The player's task is to place this part at the correct position. E. g. for the engine and the VW K\"afer (which has a rear engine), the user would have to walk around the car, touch on the engine cover to open it, place the engine at the correct position (by moving the device such that the engine icon overlaps the position where the engine of the real car would be) and finally touch the wrench icon.
   \item If the placement is correct, the vehicle will be parked in the player's garage. If not, the capturing will be aborted. The vehicle is stored along with its property-set, containing its power, weight, emission, etc. This data is retrieved from an API like \emph{CarQuery} \footnote{\url{http://www.carqueryapi.com/}}. In most cases, it's ambiguous to deduce the property-set from a vehicle's picture, as the appearance of the vehicle doesn't change (or only marginally) for different engine configurations. For this reason, the server would have to search clues in the picture, like the exhaust or additional letters on the backside or the grill of the car that indicate a distinct configuration.
 \end{enumerate}
 
@@ -709,13 +705,13 @@ As mentioned before, a vehicle has to be photographed to be captured. Even more,
 Because the app does not publish the number plate but only stores a hashed version of it, there should be no problem with this. But to be on the safe side, place a hint in the app to urge the players to forbear capturing a vehicle, if the owner is present and does not give his permission.
 
 \subsection{Hazards}\label{sec:hazards}
-There have even been cases of death, according to the \emph{Pok\'{e}mon GO Death Tracker} \citep{PokemonGoDeathTracker}.
+Pok\'{e}mon GO proved, that games that are played outside can cause hazardous moments for the players and their environment. That there’s even a website, the \emph{Pok\'{e}mon GO Death Tracker} \citep{PokemonGoDeathTracker}, shows the severity of this issue.
 
-TODO:
-Discuss hazards (city traffic), unwanted public disturbance, unwanted locations (car dealer, private property?), attention at worst possible times or too much attention in general
-Running onto the street to take a photo of a driving car (maybe if the marque is very seldom)
-Gas stations as playgrounds: At gas stations, there is usually a lot of traffic. Crowds of people standing there and playing RacecAR GO could for one thing cause a jam and for another thing endanger themselves when carelessly standing in the way of driving cars.
-Compare to hazards (and really occurred cases) of Pok\'{e}mon GO
+Due to the affinity of RacecAR GO with Pok\'{e}mon GO, it is obvious that it also has the potential to cause hazardous moments. Because the gameplay inevitably takes place at locations that are made for vehicles, players will often move inside potential danger zones. Hence, they always need to be aware of being attentive to that. It is also possible that he game causes an inappropriate behavior. Players running onto the street to capture a rare vehicle parked over there, people invading private grounds to photograph a vehicle parked in the entry or hindering driving cars to capture them are only a few possibilities of unwanted behavior of RacecAR GO players.
+
+The choice of using gas stations as playgrounds also involves dangers. At gas stations, there is usually a lot of traffic. Crowds of people standing there and playing RacecAR GO could for one thing cause a jam and for another thing endanger themselves when carelessly standing in the way of driving cars.
+
+To react to this, RacecAR GO will show a hint on startup to inform the player of always being attentive when playing the game in city traffic and to not disturb or invade other people’s privacy. Wether the players themselves feel unsafe while playing the game has to be evaluated during the evaluation (see chapter \ref{ch:evaluation}).
 
 \subsection{Cheating}
 Like Pok\'{e}mon GO, RacecAR GO will implement an algorithm to check, if a player is walking by feet or if he is moving with a car. He will only be rewarded for walking by feet. For a walked distance, he will earn money to tune his cars, although there is no deeper relation between walking by feet and earning money. Nor is there a deeper relation in walking by feet and brooding Pok\'{e}mon eggs.
@@ -736,9 +732,14 @@ The game also covers concepts of pervasive games, such as breaking the magic cir
 Along with this thesis, RacecAR GO will be implemented prototypically. To match the timeframe of a master thesis, a reasonable subset of features will be defined in the following.
 
 \subsection{Limited Story}
-TODO: Here, print the storyboard with all the views, that are included in the prototype.
+The prototype focuses on the hunting and gathering of vehicles. The upgrading and selling of vehicles as well as the playground has been omitted (whereas the vehicles in the garage are displayed as play cards with corresponding properties). Without these features, a map would be useless, so it has been omitted, too. See figure \ref{fig:storyboardPrototype} for the covered views and components.
 
-The prototype focuses on the hunting and gathering of vehicles. The upgrading and selling of vehicles as well as the playground has been omitted (whereas the vehicles in the garage are displayed as play cards with corresponding properties). Without these features, a map would be useless, so it has been omitted, too.
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.6\linewidth]{gfx/storyboard_limited}
+        \caption{Storyboard of the RacecAR GO prototype: Only the capturing process will be implemented within the prototype.}
+        \label{fig:storyboardPrototype}
+\end{figure}
 
 \subsection{Platform}
 The prototype will only be implemented for iOS, especially for iPhones. The implementation excludes the iPad, because the game requires a mobile device, that the player always carries with him and that is compact enough to walk through the city with. It's possible to play RacecAR GO on the iPad, however, but to experience a smooth integration of the game into the everyday life, the iPhone is the better choice.
@@ -755,7 +756,7 @@ The server answers the VMMR request solely with the make and model of the car. F
 
 After having received the make and model, the client loads the respective virtual model and blends it in AR manner above the real car (as it is done for the full version of RacecAR GO). The color of the vehicle will not be tracked, so a blank virtual model is used. The following mini-game of placing a vehicle-part at the correct location is omitted for the prototype, though it is still possible to move the iPhone and see the virtual model still overlaying the real vehicle adequately. Touching the garage-symbol will immediately store the captured vehicle into the garage and thus finish the capturing process.
 
-TODO: Auch hier die Schritte in der Grafik nummerieren
+%TODO: Auch hier die Schritte in der Grafik nummerieren
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/capturing_limited}
@@ -825,7 +826,7 @@ At this point, after the requirements for the system are defined, its components
         \caption{VMMR workflow as it is used in the RacecAR GO prototype}
         \label{fig:vmmrWorkflow}
 \end{figure}
-TODO: Workflow figure: Show kaefer photos for query AND? train. Show blue circles as descriptors
+%TODO: Workflow figure: Show kaefer photos for query AND? train. Show blue circles as descriptors
 
 Actually, there are two workflows. One to train the system (the \emph{Training}-workflow), the other one to use the system to classify an image of unknown make and model (\emph{Querying}-workflow).
 
@@ -854,9 +855,9 @@ Like most of the VMMR systems, this one chooses the vehicle's front to be depict
 To find the position and extent of the RoI, the location of the vehicle inside of the source image has to be located first. This is done by locating the vehicle's number plate (as it is done by \citep{petrovic2004analysis} or \citep{siddiqui2015robust}). Having found the number plate, there are different options to evaluate the location and the dimensions of the RoI. One option is to use the number plate again, deducing the location and dimension of the RoI from the location and dimension of the number plate. Another option is to detect the hood and use the hood boundary (boundary between hood and windshield) as an indicator for the RoI's properties. Using the number plate as fixed point for the RoI has following advantages:
 
 \begin{itemize}
-  \item A number plate is relatively easy to find in an image. There are many free libraries like (TODO refer to State of the Art. Da sollte ich sowas aufgeschrieben haben) that do the task.
-  \item Most of the cars all over the world have a number plate mounted at their front (TODO low prio: Some examples from all over the world?? Japan, India, Saudi Arabia, SAFR, Germany, Russia, Iceland, USA, Australia, Chile - just one row with pictures, not to kill space).
-  \item Depending on the country or state the game is played in, the appearance (shape, aspect ratio, color, font, etc.) of the number plate is known. TODO: Examples of different number plates in different countries
+  \item A number plate is relatively easy to find in an image. %There are many free libraries like (TODO refer to State of the Art. Da sollte ich sowas aufgeschrieben haben) that do the task.
+  \item Most of the cars all over the world have a number plate mounted at their front.
+  \item Depending on the country or state the game is played in, the appearance (shape, aspect ratio, color, font, etc.) of the number plate is known.
   \item Defining the RoI relatively to the number plate, the RoI is independent from the actual location and scale of the vehicle inside of the source image.
   \item The location of the number plate on the car is very suitable, because the region around the number plate contains highly descriptive information for the respective make and model (like the headlights, the radiator grill, the bumper or the brand logo itself).
 \end{itemize}
@@ -908,9 +909,9 @@ The next step in the workflow is to extract local features. The local features w
 
 A local feature is a point in the RoI, that is significant, like a corner. Such features are located via a feature detector (see figure \ref{fig:localFeaturesExample}). After a feature has been detected, it will be encoded by a feature descriptor. A feature descriptor embeds the feature into its surrounding context. As the name says, the feature descriptor's purpose is to describe the found feature such that the same feature can be recovered in another image (see figure \ref{fig:localFeaturesMatchingExample}).
 
-There are many different feature detectors and feature descriptors with different purposes and properties. Generally, a feature descriptor is a vector, as shown in equation (TODO: Add equation with feature descriptor definition (see photo in doc)). The extraction of descriptors can be seen as a projection of the RoI onto a set of feature vectors (TODO: add equation with feature extraction, see photo in doc). See TODO: reference Technical Basics for more details and examples of feature extractors and feature descriptors.
-
-It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented (TODO: only show patent nr. BibTeX has an extra tag for patents) (\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB. ORB is said to be rotation invariant and resistant to noise. Furthermore, it's said to be faster than SIFT and in many situations performing equally well \citep{rublee2011orb}. And best of all, it's not patented. So the implementation is based on ORB-features.
+There are many different feature detectors and feature descriptors with different purposes and properties. It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented
+%(TODO: only show patent nr. BibTeX has an extra tag for patents)
+(\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB. ORB is said to be rotation invariant and resistant to noise. Furthermore, it's said to be faster than SIFT and in many situations performing equally well \citep{rublee2011orb}. And best of all, it's not patented. So the implementation is based on ORB-features.
 
 The output of this step is a set of local descriptors per RoI. In the figure, each set is represented as a cloud with blue dots, which represent the local descriptors in local-descriptor-space.
 
@@ -1065,7 +1066,13 @@ As mentioned in the concept for RacecAR GO, the prototypical version of the game
 \section{Overview}
 This chapter is about implementations of some of the components and algorithms, described in the Concept chapter. It's subdivided into one part for the server implementation, one for the network interface and one for the client implementation. The server chapter also includes an evaluation of the VMMR machine at the end.
 
-TODO: Links to repositories with code: Server, Client, Training Data
+The source code can be found at following locations:
+\begin{itemize}
+  \item Server component, including the implementation of the VMMR: \url{https://github.com/johannesheucher/VehicleFeatureExtractor}
+  \item iOS app: \url{https://github.com/johannesheucher/RacecAR_GO_Client}
+  \item Dataset, created along with this thesis: \url{https://github.com/johannesheucher/VehicleData}
+  \item Vehicle collector app to fill the dataset: \url{https://github.com/johannesheucher/VehicleCollector}
+\end{itemize}
 
 
 \section{Server}
@@ -1095,7 +1102,7 @@ Since I'm not the first one to train a VMMR, there already exist datasets for th
 \subsubsection{Dataset Creation}\label{sec:datasetCreation}
 To save time and improve the diversity of available vehicle classes, an extra app has been created to take photos of vehicles along with the corresponding make and model. The app has been spread among some of my friends with the request to take as many pictures as possible while regarding the above-mentioned criteria. An advantage is, that these pictures are taken with ordinary smartphone cameras, so the quality of the images equals that one of those pictures, taken by the RacecAR GO app during the capturing process. Such a collector app has the further advantage that it reminds the training data collectors to collect training data, because they always see the app when looking on their smartphone. The app stores these pictures locally with the make, model and a time stamp as file name, so that the collectors only had to push the collected images onto a web storage regularly.
 
-As a result, the final dataset consists of 313 vehicle pictures, 11 different makes and $\hat{N_c} = 24$ different make-model classes. Their original sizes vary from 5312 x 2988 to 554 x 444 pixels. Actually, many more make-models have been photographed, but only those classes with a reasonable amount of images per class (at least six) made their way into the dataset. Make-models of the dataset are: Citro\"en C4 Cactus, Ford Fiesta, Ford Fiesta (FL), Mazda MX-5 ND, Mercedes A, Mini One R55, Opel Adam, Opel Astra H, Opel Astra H (FL), Opel Corsa D, Opel Corsa D (FL), Opel Mokka, Porsche 991, Skoda Fabia II, Skoda Octavia, Suzuki Swift MZ, Tesla Model S, VW Golf IV, VW Golf, VI, VW Golf VII, VW K\"afer, VW Polo 6R, VW Polo 9N3, VW UP. An illustration of the complete dataset is attached at the end of the thesis in figure TODO: Bild mit komplettem Dataset (/raw) ans Ende der Arbeit!!
+As a result, the final dataset consists of 313 vehicle pictures, 11 different makes and $\hat{N_c} = 24$ different make-model classes. Their original sizes vary from 5312 x 2988 to 554 x 444 pixels. Actually, many more make-models have been photographed, but only those classes with a reasonable amount of images per class (at least six) made their way into the dataset. Make-models of the dataset are: Citro\"en C4 Cactus, Ford Fiesta, Ford Fiesta (FL), Mazda MX-5 ND, Mercedes A, Mini One R55, Opel Adam, Opel Astra H, Opel Astra H (FL), Opel Corsa D, Opel Corsa D (FL), Opel Mokka, Porsche 991, Skoda Fabia II, Skoda Octavia, Suzuki Swift MZ, Tesla Model S, VW Golf IV, VW Golf, VI, VW Golf VII, VW K\"afer, VW Polo 6R, VW Polo 9N3, VW UP.
 
 Unlike \citep{siddiqui2015robust} who trained the classifier to learn similarities among facelifts of the same make-model class, this approach splits each facelift of a make-model into a different class (e. g. there's the \emph{Opel Corsa D} and the \emph{Open Corsa D (FL)}). Building a classifier that regards facelifts inside one make-model generation as one single class turned out to decrease the classification accuracy due to multiplicity issues.
 
@@ -1109,10 +1116,11 @@ To extract the RoIs of the training images, each number plate has been marked ma
 
 The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, left, right)$ and the size in pixels, whereas for the size only the width $w_{RoI}$ is important. The height is deduced from $w_{RoI}$ and the aspect ratio of the extent. This means, that the RoIs of all the training images have the same size. This is important for comparable image operations like detecting or describing features. The filter kernels used for this have a distinct size and the car in each image should cover a more or less constant percentage of area of the image. The best width has been evaluated to $w_{RoI} = 400$, whereas the extent was evaluated to work best with $top = 0.7, bottom = 0.1, left = 0.6, right = 0.6$. See chapter \ref{sec:parameterTuning} for details to the parameter evaluation process.
 
-TODO low: Algorithm to find number plate (see doc)
+%TODO low: Algorithm to find number plate (see doc)
 
 \subsection{Preprocessing}\label{sec:preprocessingImpl}
-In \emph{VR3}, the VMMR was requested to be robust to different lighting conditions. To cope with this on the one hand, the training images should cover a large variety of different lighting conditions. On the other hand, the images have to pass a normalization step before entering the training process. To be independent from different vehicle colors, all training images are turned into grayscale images. It also turned out to improve the recognition accuracy, if the contrast is normalized as well by a histogram equalization. An illustration of the training data at this point of state is shown in figure TODO Bild zeigen, wie die Trainingsdaten zu diesem Zeitpunkt aussehen (d.h. Bild mit allen RoIs des Trainingsets aus /training2)
+In \emph{VR3}, the VMMR was requested to be robust to different lighting conditions. To cope with this on the one hand, the training images should cover a large variety of different lighting conditions. On the other hand, the images have to pass a normalization step before entering the training process. To be independent from different vehicle colors, all training images are turned into grayscale images. It also turned out to improve the recognition accuracy, if the contrast is normalized as well by a histogram equalization.
+%An illustration of the training data at this point of state is shown in figure TODO Bild zeigen, wie die Trainingsdaten zu diesem Zeitpunkt aussehen (d.h. Bild mit allen RoIs des Trainingsets aus /training2)
 
 \subsection{Local Feature Extraction}\label{sec:localFeatureExtractionImpl}
 As described in chapter \ref{sec:localFeatureExtractionConcept}, the common and popular feature detectors and descriptors SIFT and SURF are patented. As a solution, ORB is another feature detector and descriptor, that is faster than SIFT and performs equally well in many situations \citep{rublee2011orb}. Fortunately, ORB is not patented and is included in OpenCV 3.
@@ -1143,7 +1151,7 @@ For a RoI size of 400 x 190 pixels, there are about 400 features found with the 
 
 For the second clustering, that clusters the per-class codewords, k-means is used again. The same parameters as above are used, whereas the value for $k$ was evaluated to $500$ by the parameter optimizer. With a number of $2594$ total codewords from the per-class dictionaries after the elimination process, it turns out that the clustering of codewords belonging to different classes (which was the inter-class ambiguity problem of the SD) seems to be acceptable up to a certain amount.
 
-Especially a configuration of the parameters like ($k_c = 29$, $t = 0$, $k = k_c * N_c = 290$), which represents the standard MD as it has been configured by \citep{siddiqui2015robust}, is inferior to the AMD used with the described parameters (as it can be seen in figure TODO visualisierung).
+Especially a configuration of the parameters like ($k_c = 29$, $t = 0$, $k = k_c * N_c = 290$), which represents the standard MD as it has been configured by \citep{siddiqui2015robust}, is inferior to the AMD used with the described parameters.
 
 \subsubsection{Implementation of the Single Dictionary}
 \paragraph{Parameters:}
@@ -1219,8 +1227,6 @@ The bad accuracy in comparison to other VMMRs, which usually performed at accura
   \item It could also be caused by the usage of ORB detectors and descriptors. According to \citep{rublee2011orb}, ORB performs equal to SIFT in many scenarios. But in contrast to SIFT and SURF, ORB isn't established in the domain of VMMR, yet and no explicit tests have been made to compare ORB with SIFT and SURF on vehicle images.
   \item The clustering with k-means uses generated initial cluster centers. It hasn't been evaluated, if randomly or manually placed centers would improve the result.
 \end{itemize}
-
-TODO: Visualisierung der Testergebnisse in Multi-Parameter Diagramm MIT ZUSÄTZLICH UNTERSCHIEDLICH VIELEN TRAININGSDATEN
 
 \subsubsection{Robustness}
 It has been said that the VMMR uses a bag-of-words model to be able to recognize vehicles that are partially occluded. The VMMR has also been requested to be independent of different lighting conditions. Tests have proven, that this is actually the case. Figure \ref{fig:tests} illustrates some vehicles in problematic scenarios (occlusions, bad lighting conditions) and their classifications. In most cases, classifications under bad lighting conditions are correct. And if a vehicle is occluded, there are usually enough descriptive features left in the captured photo to find the correct class (in some cases with occlusions of up to 50\% of the vehicle).
@@ -1417,7 +1423,7 @@ The ability of the game to be integrated into the everyday life of its players w
 
 When using AR (or fancy technology in general), game designers can fall into the trap of concentrating too much on that technology and neglect the gameplay (as discussed on page \pageref{sec:usageOfARStateOfTheArt}). The testers, however, did not find, that the AR effects distracted them from the actual gameplay. While just one tester voted with a $2$ (when $1$ means, that AR absolutely distracted from the gameplay), the rest voted with $3$ (35.3\%), $4$ (17.6\%) and $5$ (41.2\%). Considering that the AR overlay does not have a direct purpose in the prototype, this is an acceptable result.  In contrast to that, no player was absolutely satisfied with the accuracy of the overlaying effect. Nevertheless, the majority (70.6\%) voted with $2$ and $3$. So on balance, this is an acceptable result for a rather simple implementation of the overlaying effect. In section \ref{sec:motivationToMove} it was supposed that the capturing process including the AR effects could help the players to build an emotional relation to the caught item and thus motivate them to keep playing. In fact, many testers (41\%) answered this question with \emph{not at all}, whereas one player was absolutely able to build an emotional relation and anyway 29.4\% felt \emph{rather able} to build an emotional relationship.
 
-If the app did actually motivate the testers to move has been evaluated in many ways. For one thing, the players have been asked beforehand, which distance they walk weekly and if they think, that the app will motivate them to walk even more. For another thing, the tracked location data and the answers of the questionnaire after the test phase help to comprehend, if the app was actually motivating people to move more. Sadly, no tester exceeded the weekly distance, he specified before the test phase (at least not with the running app). But there is one more tester absolutely considering himself as athletic in comparison to before the test phase. The drop of bitterness is, that the number of testers, that considered themselves as absolutely not athletic increased from one to three. The answers to the question, if the testers move more than before, now, confirms this. Most of them voted with \emph{no} (70.6\%), whereas only 11.8\% voted with \emph{rather yes}. Conclusively it could be said, that the app has the potential to motivate some people to move. But as long as the players get frustrated because of the few supported make-models, this motivator is only short-lived. It has also been assumed, that hunting and collecting could be a motivator, which cannot be approved by the evaluation. Most testers (41.2\%) weren't sure for this question and only 5.9\% and 23.5\% voted with \emph{yes, absolutely} and \emph{rather yes}, respectively. However, the hunting for especially cars seems to be interesting for people. 17.6\% voted with \emph{yes, absolutely} and 29.4\% with \emph{rather yes}.
+If the app did actually motivate the testers to move has been evaluated in many ways. For one thing, the players have been asked beforehand, which distance they walk weekly and if they think, that the app will motivate them to walk even more. For another thing, the tracked location data and the answers of the questionnaire after the test phase help to comprehend, if the app was actually motivating people to move more than before. Sadly, no tester exceeded the weekly distance, he specified before the test phase (at least not with the running app). But there is one more tester absolutely considering himself as athletic in comparison to before the test phase. The drop of bitterness is, that the number of testers, that considered themselves as not at all athletic increased from one to three. The answers to the question, if a tester moves more than before, now, confirms this. Most of them voted with \emph{no} (70.6\%), whereas only 11.8\% voted with \emph{rather yes}. Conclusively it could be said, that the app has the potential to motivate some people to move. But as long as the players get frustrated because of the few supported make-models, this motivator is only short-lived. It has also been assumed, that hunting and collecting could be a motivator, which cannot be approved by the evaluation. Most testers (41.2\%) weren't sure for this question and only 5.9\% and 23.5\% voted with \emph{yes, absolutely} and \emph{rather yes}, respectively. However, the hunting for especially cars seems to be even more interesting for people. 17.6\% voted with \emph{yes, absolutely} and 29.4\% with \emph{rather yes}.
 
 The factor of embarrassment is not negligible for this game. Whereas the majority (52.9\%) voted with $3$ for the embarrassment of being watched by bystanders while playing the game, 64.7\% of testers voted with \emph{yes} for finding it embarrassing to photograph other people's cars. Especially, there was no tester finding this not at all embarrassing. There was even one case, in which a car owner was angry about his car being photographed.
 
@@ -1437,10 +1443,9 @@ The testers also had the possibility to mention things they like and things they
 
 One thing, nearly all testers do not like, is the support of too few different make-models. Another point of criticism was the placement of the number plate watermark, which requires a steady hand.
 
-TODO: Am Ende dann ein paar interessante Correlationen plotten, wie: Leute, die sich für unsportlich halten, sind am weitesten gelaufen, oder Non-Autofans haben die meisten Autos gecapturt.
-Gibt es einen Fall, wo ein Non-Autofan nach dem Spiel einer ist? Oder andersrum?
-Oder Unterschied von erachten als sportlich vorher nachher?
-Einfluss von schon mal Ingress oder Pokemon GO gespielt?
+%TODO: Am Ende dann ein paar interessante Correlationen plotten, wie: Leute, die sich für unsportlich halten, sind am weitesten gelaufen, oder Non-Autofans haben die meisten Autos gecapturt.
+%Gibt es einen Fall, wo ein Non-Autofan nach dem Spiel einer ist? Oder andersrum?
+%Einfluss von schon mal Ingress oder Pokemon GO gespielt?
 
 \section{Lessons Learned}
 The game is headed in the right direction. After all, the question if the app has finally not only been played to do me a favor was answered with \emph{rather yes} by three generous testers. Additionally, most testers reported, they would like to play the game, if more different make-models were supported.
@@ -1463,7 +1468,7 @@ One thing, inseparably linked to using vehicles as natural anchors is the necess
 
 
 
-TODO: Auswertungsdiagramme von Google Forms dann auch in Appendix, zusammen mit den Fragen.
+%TODO: Auswertungsdiagramme von Google Forms dann auch in Appendix, zusammen mit den Fragen.
 
 %\nocite{*} % invisibly cite all that is in the bib file! (not a good idea, only for demonstration purposes!)
 
