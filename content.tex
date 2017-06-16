@@ -640,7 +640,7 @@ This section is about the types of anchors that are used by RacecAR GO and about
 
 In the following, the choice of the anchor for each of these items is discussed.
 
-\paragraph{Vehicle Anchors}
+\paragraph{Vehicle Anchors}\label{par:vehicleAnchors}
 In the game, vehicles function as natural anchors. This means objects, that exist in both, the real world and the virtual world. The big advantage of such anchors is, that they do not have to be distributed a priori by a designer, they are already there.
 
 A special characteristic of the vehicle as anchor is, that it tends to be not fixed in its location. This breaks the criterion of an anchor as a "well-defined position" \citep{hock2014augmented}. But since the vehicle as natural anchor does only persist during the capturing process, where its location is fixed (hopefully, but see section \ref{sec:hazards} for hazards), this fact hasn't any impact on the gameplay.
@@ -705,13 +705,13 @@ As mentioned before, a vehicle has to be photographed to be captured. Even more,
 Because the app does not publish the number plate but only stores a hashed version of it, there should be no problem with this. But to be on the safe side, place a hint in the app to urge the players to forbear capturing a vehicle, if the owner is present and does not give his permission.
 
 \subsection{Hazards}\label{sec:hazards}
-Pok\'{e}mon GO proved, that games that are played outside can cause hazardous moments for the players and their environment. That there’s even a website, the \emph{Pok\'{e}mon GO Death Tracker} \citep{PokemonGoDeathTracker}, shows the severity of this issue.
+Pok\'{e}mon GO proved, that games that are played outside can cause hazardous moments for the players and their environment. That there's even a website, the \emph{Pok\'{e}mon GO Death Tracker} \citep{PokemonGoDeathTracker}, shows the severity of this issue.
 
 Due to the affinity of RacecAR GO with Pok\'{e}mon GO, it is obvious that it also has the potential to cause hazardous moments. Because the gameplay inevitably takes place at locations that are made for vehicles, players will often move inside potential danger zones. Hence, they always need to be aware of being attentive to that. It is also possible that he game causes an inappropriate behavior. Players running onto the street to capture a rare vehicle parked over there, people invading private grounds to photograph a vehicle parked in the entry or hindering driving cars to capture them are only a few possibilities of unwanted behavior of RacecAR GO players.
 
 The choice of using gas stations as playgrounds also involves dangers. At gas stations, there is usually a lot of traffic. Crowds of people standing there and playing RacecAR GO could for one thing cause a jam and for another thing endanger themselves when carelessly standing in the way of driving cars.
 
-To react to this, RacecAR GO will show a hint on startup to inform the player of always being attentive when playing the game in city traffic and to not disturb or invade other people’s privacy. Wether the players themselves feel unsafe while playing the game has to be evaluated during the evaluation (see chapter \ref{ch:evaluation}).
+To react to this, RacecAR GO will show a hint on startup to inform the player of always being attentive when playing the game in city traffic and to not disturb or invade other people's privacy. Wether the players themselves feel unsafe while playing the game has to be evaluated during the evaluation (see chapter \ref{ch:evaluation}).
 
 \subsection{Cheating}
 Like Pok\'{e}mon GO, RacecAR GO will implement an algorithm to check, if a player is walking by feet or if he is moving with a car. He will only be rewarded for walking by feet. For a walked distance, he will earn money to tune his cars, although there is no deeper relation between walking by feet and earning money. Nor is there a deeper relation in walking by feet and brooding Pok\'{e}mon eggs.
@@ -732,7 +732,7 @@ The game also covers concepts of pervasive games, such as breaking the magic cir
 Along with this thesis, RacecAR GO will be implemented prototypically. To match the timeframe of a master thesis, a reasonable subset of features will be defined in the following.
 
 \subsection{Limited Story}
-The prototype focuses on the hunting and gathering of vehicles. The upgrading and selling of vehicles as well as the playground has been omitted (whereas the vehicles in the garage are displayed as play cards with corresponding properties). Without these features, a map would be useless, so it has been omitted, too. See figure \ref{fig:storyboardPrototype} for the covered views and components.
+The prototype focuses on the hunting and gathering of vehicles. The upgrading and selling of vehicles as well as the playground has been omitted (whereas the vehicles in the garage are displayed as play cards with corresponding properties). Without these features, a map would be useless, so it has been omitted, too. This choice has been made because of the motivation of this thesis: To evaluate whether real-world vehicles are suited as natural anchors in an augmented reality exergame. Since the capturing of a vehicle and the storage inside of the virtual garage are the main parts, in which these natural anchors occur, they are used for the evaluation of the concept. See figure \ref{fig:storyboardPrototype} for the covered views and components.
 
 \begin{figure}[btph]
   \centering
@@ -1115,7 +1115,7 @@ The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, 
 %TODO low: Algorithm to find number plate (see doc)
 
 \subsection{Preprocessing}\label{sec:preprocessingImpl}
-In \emph{VR3}, the VMMR was requested to be robust to different lighting conditions. To cope with this on the one hand, the training images should cover a large variety of different lighting conditions. On the other hand, the images have to pass a normalization step before entering the training process. To be independent from different vehicle colors, all training images are turned into grayscale images. It also turned out to improve the recognition accuracy, if the contrast is normalized as well by a histogram equalization.
+In \emph{VR3}, the VMMR was requested to be robust to different lighting conditions. To cope with this on the one hand, the training images should cover a large variety of different lighting conditions. On the other hand, the images have to pass a normalization step before entering the training process. To be independent from different vehicle colors, all training images are turned into grayscale images. It also turned out to improve the recognition accuracy, if the contrast is normalized as well by a histogram equalization. Figure \ref{fig:trainingData} shows the current state of training data after this step.
 %An illustration of the training data at this point of state is shown in figure TODO Bild zeigen, wie die Trainingsdaten zu diesem Zeitpunkt aussehen (d.h. Bild mit allen RoIs des Trainingsets aus /training2)
 
 \subsection{Local Feature Extraction}\label{sec:localFeatureExtractionImpl}
@@ -1193,7 +1193,7 @@ In table \ref{table:tunedParameters}, all the parameters that are passed to the 
 \end{table}
 For the classifiers, there are further sub-parameters, where possible values have been specified for. These sub-parameters and their possible values have been omitted in the table.
 
-The resulting accuracy, using the Advanced Modular Dictionary, is 72.5\% with a precision of 73.1\%. This process has also been done using the Single Dictionary, resulting in an accuracy of 70.4\%, so the SD performs slightly inferior to the AMD. The classification results for the several classes are listed in table \ref{table:classificationResults}.
+The resulting accuracy, using the Advanced Modular Dictionary, is 72.5\% with a precision of 73.1\%. This process has been repeated using the Single Dictionary, resulting in an accuracy of 70.4\%, so the SD performs slightly inferior to the AMD. The classification results for the several classes are listed in table \ref{table:classificationResults}.
 \begin{table}[btph]
     \centering
     \begin{tabular}{ | l | l | l |}
@@ -1328,16 +1328,16 @@ Although there are ten different make-models to be recognized by the VMMR machin
         \myfloatalign
         \subfloat[VW Polo 9N3]
         {\label{fig:test1}%
-         \includegraphics[height=.15\linewidth]{gfx/icon_vw_polo_9n3}} \quad
+         \includegraphics[height=.17\linewidth]{gfx/icon_vw_polo_9n3}} \quad
         \subfloat[VW K\"afer]
         {\label{fig:test2}%
-         \includegraphics[height=.15\linewidth]{gfx/icon_vw_kaefer}} \quad
+         \includegraphics[height=.17\linewidth]{gfx/icon_vw_kaefer}} \quad
         \subfloat[Porsche 911]
         {\label{fig:test3}%
-         \includegraphics[height=.15\linewidth]{gfx/icon_porsche_911}} \quad
+         \includegraphics[height=.17\linewidth]{gfx/icon_porsche_911}} \quad
         \subfloat[Placeholder Car]
         {\label{fig:test4}%
-         \includegraphics[height=.15\linewidth]{gfx/icon_placeholder_car}}
+         \includegraphics[height=.17\linewidth]{gfx/icon_placeholder_car}}
         \caption[Virtual 3D models to be used in the prototype. Actually, the virtual model for the Porsche 911 is the generation 996, whereas only the newest generation 991 has been trained]{Virtual 3D models to be used in the prototype. Actually, the virtual model for the Porsche 911 is the generation 996, whereas only the current generation 991 has been trained}
 \label{fig:virtualModels}
 \end{figure}
@@ -1461,7 +1461,46 @@ One thing, inseparably linked to using vehicles as natural anchors is the necess
 \chapter{Conclusion}\label{ch:conclusion}
 %*****************************************************************************
 %*****************************************************************************
+The motivation of this thesis was to present and to evaluate a new way to dynamically create content for exergames, that is available all over the world, on the basis of real-world vehicles. This thesis proposed a concept of how to integrate these vehicles into an exergame, by capturing them with the mobile phone's camera. Therefore, the term \emph{natural anchor} has been defined. Along with this thesis, a prototype was developed to prove this concept. The evaluation of this prototype shows, that real-world vehicles are suited, as long as enough of them can be recognized properly. The prototype was playable in both, urban and rural environments.
+ 
+Evaluated properties of vehicle anchors are, that many testers were fascinated by the idea of hunting for vehicles. Disadvantages of vehicle anchors are the expensive creation of the dataset to increase the number of recognizable make-models and the time-consuming modeling process to create their virtual 3D-counterparts. A further downside is the embarrassment, that comes with photographing other people's cars.
+ 
+The accuracy of the vehicle recognition is crucial for the success and the UX of such an exergame. The developed VMMR system has been evaluated and reached the moderate accuracy of 72.5\% for ten different make-models. The recognizer has been optimized via parameter tuning. Hence the assumption is, that the collected training data wasn't large and accurate enough.
+ 
+For pervasive games to integrate in their players' everyday lives, the immersion-effect is important. The evaluation shows, that the immersion was benefited by using AR during the capturing process. But this effect was quashed because of too few supported vehicles. Additionally, a pervasive game can only be integrated into the player's daily routine, if the player allows this. \emph{"The player needs to accept the game world as an omnipresent, persistent and consistent universe of which everything can be part, otherwise the interface, the edge of the magic circle, will become damaged – obliterating the very existence of the pervasive game"} \citep{nieuwdorp2009pervasive}. Thinking back to the beginning of this thesis, playing \emph{The Running Dead} immediately took us into a world of play, which was easy to enter. If a player agrees to enter, every vehicle is a potential game-object to be captured. The embarrassment will fade into the background, because the surrounding environment is turned into a working game. But unless the the app does not support more than ten different make-models, this effect cannot be reached.
 
+\section{Outlook and Future Work}
+Many players remonstrated against the small number of recognizable vehicles. So one next step must be to elaborate the process of extending the dataset, such that most vehicles, occurring all over the world, can be recognized properly. A crowd-based approach as described in the section \emph{Vehicle Anchors} on page \pageref{par:vehicleAnchors} is conceivable.
+ 
+A further task to investigate is the moderate VMMR accuracy of only 72.5\% over ten different classes. To support the suspicion of a too sparse and poor used dataset, this VMMR using the AMD should be tested with the NTOU-MMR dataset, which has been used by \citep{siddiqui2015robust} with accuracies of over 90\%. At the same time, the AMD could be compared to the SD and MD under more expressive conditions.
+ 
+For each covered make-model, there has to be a virtual 3D counterpart. Along with this thesis, four different 3D models have been created with the result, that this task is too time-consuming to be done by only one designer. It could be investigated in a crowd-based approach. Thinking of covering the most common vehicles in the world, all corresponding 3D models cannot be included into the client anymore, as it has been done for the prototype. The consumed storage for a reasonable amount of 100 supported make-models and an average size of 500 KB per 3D model is only 50 MB, which is affordable, but with each new make-model, the client app would need to be updated. One possibility is to transfer new 3D models on startup of the app. Another possibility is to transfer the 3D model along with the VMMR response.
+ 
+The embarrassment while photographing other people's cars could play a key role for the success of RacecAR GO. A solution to decrease the embarrassment has to be found.
+ 
+The implementation of the AR during the capturing process has been accepted by the testers. As soon as the capturing process gets extended by the mini-game, proposed in chapter \ref{sec:gameplay}, it has to be evaluated, if the sensor-based approach is still accurate enough or if a vision-based approach would be more suitable.
+
+\clearpage
+\subsubsection{Abbreviations}
+
+
+%TODO: Abbreviations
+
+%---------------------------------------------------------------------------
+% Appendix
+%---------------------------------------------------------------------------
+\cleardoublepage
+    \appendix
+\chapter{Training Data}
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.7\linewidth]{gfx/training_data}
+        \caption{Training data used for the VMMR: The data consists of 189 images of ten different make-models. Illustrated is the state after the preprocessing, i. e. these images are searched for local features.}
+        \label{fig:trainingData}
+\end{figure}
+
+
+\chapter{Questionnaire}
 
 
 %TODO: Auswertungsdiagramme von Google Forms dann auch in Appendix, zusammen mit den Fragen.

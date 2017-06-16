@@ -1,0 +1,65 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Context of Exergames\relax }}{7}{figure.caption.15}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Example for a square marker\relax }}{12}{figure.caption.27}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Both in scene (right) and reference model (left) features are detected. Although the matching in this example contains false positives (red boxes) the object and its transformation are estimated correctly as its borders are marked at the right place (green). (Caption and image reprinted from \citep {hock2014augmented})\relax }}{12}{figure.caption.28}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Model-based tracking: Pose estimation from correspondences between 3D model edge segments and 2D image segments. (Reprinted from \citep {lepetit2005monocular})\relax }}{13}{figure.caption.29}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Screenshot of world map with Ingress portals taken with my Ingress account\relax }}{14}{figure.caption.32}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Screenshot of playing Ingress (taken with my Ingress account)\relax }}{15}{figure.caption.33}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Screenshot of playing Pok\'{e}mon GO (reprinted from \url {http://www.pokemongo.com/de-de/explore/})\relax }}{16}{figure.caption.36}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Screenshot of playing StreetConqAR (reprinted from \citep {hock2014augmented})\relax }}{17}{figure.caption.38}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces General steps of a vehicle recognition algorithm\relax }}{17}{figure.caption.39}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Examples of global representations (reprinted from \citep {petrovic2004analysis}): The first picture simply uses the source pixels. The other ones are based on the gradients of the image (with slightly different gradient transformations). The structure of the original image is still recognizable (more or less clearly) in the representation because of the concatenation of image pixels.\relax }}{19}{figure.caption.41}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Multiplicity issue. Both pictures show a Toyota Camry, from 2008 and 2010, respectively (reprinted from \citep {siddiqui2015robust}).\relax }}{20}{figure.caption.43}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Inter-make ambiguity issue between a Toyota Camry and a Ford Mondeo (reprinted from \citep {siddiqui2015robust}).\relax }}{20}{figure.caption.44}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Intra-make ambiguity issue between a Toyota Camry and a Toyota Altis (reprinted from \citep {siddiqui2015robust}).\relax }}{21}{figure.caption.45}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Dictionary building schemes. Above for the Single Dictionary, below for the MD, where $f_n$ is the $n$-th feature of one image of the respective class $c_m$, $N_c = $ number of classes, and $Nf_j = $ number of features of the $j$-th image of a respective class (reprinted from \citep {siddiqui2015robust}).\relax }}{22}{figure.caption.47}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Used platforms with tasks\relax }}{26}{figure.caption.52}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Storyboard of RacecAR GO: In the \emph {Map}-view, the vehicle icon marks a car dealer, whereas the play cards mark a playground.\relax }}{27}{figure.caption.53}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Capturing Process of RacecAR GO\relax }}{28}{figure.caption.55}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Example of a play card showing the first generation of the Porsche 911. It is part of the card game \emph {Sportwagen Quartett Nr. 52522}, published by \emph {F. X. Schmid Vereinigte M\"unchener Spielkarten Fabriken KG}.\relax }}{31}{figure.caption.60}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces World vehicles per capita (reprinted from \FN@sf@gobble@opt {\url {https://commons.wikimedia.org/w/index.php?title=File:World_vehicles_per_capita.svg&oldid=242848798}})\relax }}{32}{figure.caption.64}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Euro badge of a European number plate (here from Germany)\relax }}{33}{figure.caption.70}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Storyboard of the RacecAR GO prototype: Only the capturing process will be implemented within the prototype.\relax }}{36}{figure.caption.74}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Capturing process of the RacecAR GO prototype\relax }}{38}{figure.caption.75}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Ambiguity (inter-class) issue between a Porsche 911 (991) and a Mini One (R55)\relax }}{39}{figure.caption.76}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Ambiguity (inter-class) issue as the Volkswagen Taro \FN@sf@gobble@opt {\url {https://img.favcars.com/volkswagen/taro/volkswagen_taro_1994_images_2.jpg}} is a rebadged Toyota Hilux \FN@sf@gobble@opt {\url {http://image.priceprice.k-img.com/ph/images/article/1020/hilux-5th.jpg}}\relax }}{39}{figure.caption.77}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces VMMR workflow as it is used in the RacecAR GO prototype\relax }}{41}{figure.caption.78}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Problems when choosing the front number plate as center of the RoI}}{44}{figure.caption.81}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Freeway in Florida, USA, showing vehicles without a front number plate (reprinted from \FN@sf@gobble@opt {\url {http://www.miamiherald.com/news/traffic/article39667194.html}})}}}{44}{subfigure.12.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Alfa Romeo 159 with number plate mounted at the side (reprinted from \FN@sf@gobble@opt {\url {http://www.seriouswheels.com/2008/a/2008-Autodelta-Alfa-Romeo-159-J4-2-2-C-Front-1280x960.htm}})}}}{44}{subfigure.12.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {RoIs of a Porsche 911 (left) and a Volkswagen T6 (right)}}}{44}{subfigure.12.3}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Definition of the RoI extent depending on the width $w$ of the number plate. Concrete values for $left$, $right$, $top$ and $bottom$ have been evaluated in table \ref {table:tunedParameters}\relax }}{44}{figure.caption.82}
+\contentsline {figure}{\numberline {3.14}{\ignorespaces RoI with found local features marked as yellow points\relax }}{45}{figure.caption.84}
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Two RoIs showing different instances of the same car (Porsche 911) with found local feature matches shown as purple lines (also including false matches)\relax }}{46}{figure.caption.85}
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Problem with too little per-class-clusters for the MD (showing cluster space for one class): Blue dots represent local descriptors of instances of the class. Purple ellipsoids mark the clusters. Reducing the number of clusters too much raises the importance of clusters that only include few outlier-descriptors.\relax }}{47}{figure.caption.86}
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Generation process of the Advanced Modular Dictionary. See text for a detailed description.\relax }}{48}{figure.caption.88}
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Generation of a global representation histogram: The upper cloud represents the dictionary space with six codewords. The cloud below contains the local descriptors found in a vehicle image. The bottommost figure shows how a histogram for this image would look like.\relax }}{50}{figure.caption.89}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Classification results (shown as caption of each picture) in problematic scenarios: Only the Porsche (\ref {fig:test7}) has been classified wrongly because of too much occlusion}}{60}{figure.caption.99}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Golf IV}}}{60}{subfigure.1.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Citro\"en C4 Cactus}}}{60}{subfigure.1.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {VW Golf IV}}}{60}{subfigure.1.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Opel Corsa D}}}{60}{subfigure.1.4}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Golf IV}}}{60}{subfigure.1.5}
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {Golf IV}}}{60}{subfigure.1.6}
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {Tesla Model S}}}{60}{subfigure.1.7}
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {VW Polo 9N3}}}{60}{subfigure.1.8}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces VW New Beetle is classified as a VW K\"afer\relax }}{60}{figure.caption.101}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Virtual 3D models to be used in the prototype. Actually, the virtual model for the Porsche 911 is the generation 996, whereas only the newest generation 991 has been trained}}{62}{figure.caption.103}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {VW Polo 9N3}}}{62}{subfigure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {VW K\"afer}}}{62}{subfigure.3.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Porsche 911}}}{62}{subfigure.3.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Placeholder Car}}}{62}{subfigure.3.4}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Screenshots from RacecAR GO illustrating the capturing process. (a) Capturing the real-world vehicle and placing the watermark. (b) AR overlay of the 3D model. (c) Garage, where all captured vehicles are listed. (d) Selecting one vehicle from the Garage shows that vehicle as a play card, as it would be used in the Supertrumpf game}}{63}{figure.caption.104}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Placing the watermark}}}{63}{subfigure.4.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {AR with recognized make-model}}}{63}{subfigure.4.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Garage}}}{63}{subfigure.4.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Play Card}}}{63}{subfigure.4.4}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Photos taken during a testing session}}{65}{figure.caption.105}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Photo showing a tester having captured a VW Polo with RacecAR GO\relax }}{68}{figure.caption.106}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Training data used for the VMMR: The data consists of 189 images of ten different make-models. Illustrated is the state after the preprocessing, i. e. these images are searched for local features.\relax }}{72}{figure.caption.107}
