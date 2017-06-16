@@ -441,4 +441,21 @@
   url    = {http://mmplab.cs.ntou.edu.tw/mmplab/MMR/MMR.html},
 }
 
+@InProceedings{nieuwdorp2005,
+  author    = {Eva Nieuwdorp},
+  title     = {The pervasive interface: Tracing the magic circle},
+  booktitle = {Changing views - proceedings of digital games research association conference},
+  year      = {2005},
+}
+
+@Misc{lowe2004method,
+  author    = {Lowe, D.G.},
+  title     = {Method and apparatus for identifying scale invariant features in an image and use of same for locating an object in an image},
+  month     = mar #{~23},
+  year      = {2004},
+  note      = {US Patent 6,711,293},
+  publisher = {Google Patents},
+  url       = {https://www.google.com/patents/US6711293},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

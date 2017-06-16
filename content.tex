@@ -756,7 +756,6 @@ The server answers the VMMR request solely with the make and model of the car. F
 
 After having received the make and model, the client loads the respective virtual model and blends it in AR manner above the real car (as it is done for the full version of RacecAR GO). The color of the vehicle will not be tracked, so a blank virtual model is used. The following mini-game of placing a vehicle-part at the correct location is omitted for the prototype, though it is still possible to move the iPhone and see the virtual model still overlaying the real vehicle adequately. Touching the garage-symbol will immediately store the captured vehicle into the garage and thus finish the capturing process.
 
-%TODO: Auch hier die Schritte in der Grafik nummerieren
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/capturing_limited}
@@ -826,7 +825,6 @@ At this point, after the requirements for the system are defined, its components
         \caption{VMMR workflow as it is used in the RacecAR GO prototype}
         \label{fig:vmmrWorkflow}
 \end{figure}
-%TODO: Workflow figure: Show kaefer photos for query AND? train. Show blue circles as descriptors
 
 Actually, there are two workflows. One to train the system (the \emph{Training}-workflow), the other one to use the system to classify an image of unknown make and model (\emph{Querying}-workflow).
 
@@ -909,9 +907,7 @@ The next step in the workflow is to extract local features. The local features w
 
 A local feature is a point in the RoI, that is significant, like a corner. Such features are located via a feature detector (see figure \ref{fig:localFeaturesExample}). After a feature has been detected, it will be encoded by a feature descriptor. A feature descriptor embeds the feature into its surrounding context. As the name says, the feature descriptor's purpose is to describe the found feature such that the same feature can be recovered in another image (see figure \ref{fig:localFeaturesMatchingExample}).
 
-There are many different feature detectors and feature descriptors with different purposes and properties. It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented
-%(TODO: only show patent nr. BibTeX has an extra tag for patents)
-(\footnote{SIFT patent: \url{https://www.google.com/patents/US6711293}}, \footnote{SURF patent: \url{https://worldwide.espacenet.com/publicationDetails/biblio?CC=US&NR=2009238460&KC=&FT=E&locale=en_EP}}). An alternative for this is proposed with ORB. ORB is said to be rotation invariant and resistant to noise. Furthermore, it's said to be faster than SIFT and in many situations performing equally well \citep{rublee2011orb}. And best of all, it's not patented. So the implementation is based on ORB-features.
+There are many different feature detectors and feature descriptors with different purposes and properties. It turned out that SIFT (Scale Invariant Feature Transform) \citep{lowe1999object} and SURF (Speeded Up Robust Features) \citep{bay2008speeded} are very suitable to describe vehicle features. SIFT and SURF are in some extent invariant to scaling (of course, as the name says) and to rotation, which was requested by \emph{VR2} above. They are also partially invariant to illumination changes and robust to local geometric distortion, which satisfies \emph{VR3} to work under various lighting conditions. But there is one big problem with these feature transformations: They are both patented \citep{siftPatent2004} \citep{surfPatent2009}. An alternative for this is proposed with ORB. ORB is said to be rotation invariant and resistant to noise. Furthermore, it's said to be faster than SIFT and in many situations performing equally well \citep{rublee2011orb}. And best of all, it's not patented. So the implementation is based on ORB-features.
 
 The output of this step is a set of local descriptors per RoI. In the figure, each set is represented as a cloud with blue dots, which represent the local descriptors in local-descriptor-space.
 
@@ -1009,7 +1005,7 @@ As distance measure $dist$, this thesis uses the Hamming distance. Figure \ref{f
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.45\linewidth]{gfx/histogram}
-        \caption{Generation of a global representation Histogram: The upper cloud represents the dictionary space with six codewords. The cloud below contains the local descriptors found in a vehicle image. The bottommost figure shows how a histogram for this image would look like.}
+        \caption{Generation of a global representation histogram: The upper cloud represents the dictionary space with six codewords. The cloud below contains the local descriptors found in a vehicle image. The bottommost figure shows how a histogram for this image would look like.}
         \label{fig:histogram}
 \end{figure}
 
