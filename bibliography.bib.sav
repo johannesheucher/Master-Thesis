@@ -468,4 +468,26 @@
   url       = {https://www.google.de/patents/US20090238460},
 }
 
+@Misc{kaeferPicture,
+  author = {{Christoph Masson}},
+  title  = {VW K\"afer Frontansicht},
+  year   = {2014},
+  note   = {[Online; accessed June 16, 2017]},
+  url    = {http://www.fotocommunity.de/photo/vw-kaefer-frontansicht-christoph-masson/34427688},
+}
+
+@Misc{PokemonGO,
+  author = {{Website}},
+  title  = {Pokemon GO},
+  note   = {[Online; accessed March 18, 2017]},
+  url    = {http://www.pokemongo.com/},
+}
+
+@Misc{WiiSportsWeightLoss,
+  author = {{tonysh518}},
+  title  = {Wii Sports Weight Loss?Yes,it's real!},
+  note   = {[Online; accessed June 16, 2017]},
+  url    = {http://www.gamespot.com/forums/nintendo-fan-club-1000001/wii-sports-weight-lossyesits-real-25576131/},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

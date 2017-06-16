@@ -448,7 +448,7 @@
   year      = {2005},
 }
 
-@Misc{lowe2004method,
+@Misc{siftPatent2004,
   author    = {Lowe, D.G.},
   title     = {Method and apparatus for identifying scale invariant features in an image and use of same for locating an object in an image},
   month     = mar #{~23},
@@ -456,6 +456,31 @@
   note      = {US Patent 6,711,293},
   publisher = {Google Patents},
   url       = {https://www.google.com/patents/US6711293},
+}
+
+@Misc{surfPatent2009,
+  author    = {Funayama, R. and Yanagihara, H. and Van Gool, L. and Tuytelaars, T. and Bay, H.},
+  title     = {Robust interest point detector and descriptor},
+  month     = sep #{~24},
+  year      = {2009},
+  note      = {US Patent App. 12/298,879},
+  publisher = {Google Patents},
+  url       = {https://www.google.de/patents/US20090238460},
+}
+
+@Misc{kaeferPicture,
+  author = {{Christoph Masson}},
+  title  = {VW K\"afer Frontansicht},
+  year   = {2014},
+  note   = {[Online; accessed June 16, 2017]},
+  url    = {http://www.fotocommunity.de/photo/vw-kaefer-frontansicht-christoph-masson/34427688},
+}
+
+@Misc{PokemonGO,
+  author = {{Website}},
+  title  = {Pokemon GO},
+  note   = {[Online; accessed March 18, 2017]},
+  url    = {http://www.pokemongo.com/},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

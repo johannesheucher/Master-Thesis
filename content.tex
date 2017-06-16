@@ -1,5 +1,9 @@
 \begin{abstract}
-TODO The abstract goes here...
+Location-based exergames connect outside-exercises with games. To motivate the players to move among different locations, game content has to be spread around the players. One of the big problems nowadays is the creation of this content, such that a game can not only be played at one distinct location but all over the world.
+ 
+This thesis proposes and evaluates a method to create qualitative content on the basis of real-world vehicles. For this, recent works in the domain of pervasive games, augmented reality games and exergames are discussed. Since the integration of vehicles into the game is done via recognizing its make and model, this thesis also lists the state of the art of automatic vehicle recognition.
+ 
+To prove the proposed concept of integrating real-world vehicles as location-based content into an exergame, an iOS app has been developed and evaluated along with this thesis.
 \end{abstract}
 
 
@@ -10,8 +14,8 @@ TODO The abstract goes here...
 %*****************************************************************************
 %*****************************************************************************
 \section{Motivation}
-Imagine you're meeting with your friends at a factory site to take part at a new game. On the floor, you find a piece of paper. Someone has written something on it, apparently in great haste: "They are everywhere! They are fast, intelligent! But they are not human anymore! Don't let one of them touch you or you'll become one of them! I've heard of a safe house, where you are supposed to take shelter from them. And I've hidden some weapons, with which you may stun them. I've marked the places on this map." Below, there's a link to a website, showing a map. While we are watching the linked map with our smartphones, a yelling horde of scary looking people ran up to us.
- 
+Imagine you're meeting with your friends at a factory site to take part at a new game. On the floor, you find a piece of paper. Someone has written something on it, apparently in great haste: "They are everywhere! They are fast, intelligent! But they are NOT HUMAN anymore! Don't let one of them touch you or you'll become one of them! I've heard of a safe house, where you are supposed to take shelter from them. And I've hidden some weapons, with which you may stun them. I've marked the places on this map. Don't waste time - RUN!!!" Below, there's a link to a website, showing a map. While we are watching the linked map with our smartphones, a yelling horde of scary looking people ran up to us.
+
 This is a game I played with some of my friends a couple of years ago. Let's call it "The Running Dead". Many other games like this come out these days. Games, in which the player has to physically move to succeed in the game. They are called \emph{exergames}. A popular example is Pok\'{e}mon GO. An important part of these games is the location-based content that comes along with them. For the game described above, it's the map with the marked stashes. For Pok\'{e}mon GO, it's the locations of Pok\'{e}Stops and gyms. The creation of this content is one of the big challenges today. To be able to play such a game in more than just one distinct place, there also has to be content available for these locations. It isn't fun to play The Running Dead in London, whereas the stashes have only been marked in Mainz. Nor wouldn't there be so many people playing Pok\'{e}mon GO, if one had to go to a big city each time to visit a Pok\'{e}Stop. Letting a game designer place all this content is usual, but very expensive in time and money. For this reason, this thesis presents a new approach to dynamically create content - on the basis of real-world vehicles.
 
 \section{Challenges}
@@ -45,9 +49,9 @@ This thesis is structured as follows:
 %*****************************************************************************
 %*****************************************************************************
 \section{Overview}
-In this chapter, the history and the state of the art of pervasive games in general and exergames in special will be presented. Popular representatives like \emph{Ingress}\footnote{\url{https://www.ingress.com/}} or \emph{Pok\'{e}mon GO}\footnote{\url{http://www.pokemongo.com/}}, published by Niantic\footnote{\url{https://www.nianticlabs.com/}}, will be looked at.
+In this chapter, the history and the state of the art of pervasive games in general and exergames in special will be presented. Popular representatives like \emph{Ingress} \citep{Ingress} or \emph{Pok\'{e}mon GO} \citep{PokemonGO}, published by Niantic\footnote{\url{https://www.nianticlabs.com/}}, will be looked at.
 
-Additionally, some interesting approaches about vehicle recognition
+Finally, some interesting approaches about vehicle recognition
 %(TODO low: and number plate region detection)
 will be discussed as the concept presented in this thesis also includes automatic vision-based vehicle recognition.
 
@@ -103,7 +107,7 @@ A subcategory of serious games then again are exergames \citep{gobel2010serious}
 
 The target of an exergame is to combine physical activity with fun of play. During the gameplay, the health aspect is not primarily focused but only a side-effect of playing the game. \emph{"The training effect is secondary and nevertheless achieved"} \citep{knoll2014urban}. An example for an exergame is \emph{Dance Dance Revolution} (DDR) \footnote{\url{http://www.ddrgame.com/}}. DDR is available for multiple platforms, as the Nintendo Wii, the PlayStation or the Xbox. The player stands on a platform with arrows printed on it. When the screen shows an arrow (corresponding to the rhythm of a played song), the player has to step on the matching arrow on the platform. \citeauthor{bogost2007persuasive} says about this game, that it produces exercise as an emergent outcome of play itself \citep{bogost2007persuasive}.
 
-A user of the Nintendo Wii \footnote{\url{http://wii.nintendo.de/}} wrote: "Video games can [be] and are a great way to have exercise and not even know you are burning calories" \footnote{\url{http://www.gamespot.com/forums/nintendo-fan-club-1000001/wii-sports-weight-lossyesits-real-25576131/}}. Debra Lieberman found out that there is growing evidence of exergames helping people to stay fit and to manage their weight if they frequently play them \citep{Lieberman06dancegames}.
+A user of the Nintendo Wii \footnote{\url{http://wii.nintendo.de/}} wrote: "Video games can [be] and are a great way to have exercise and not even know you are burning calories" \citep{WiiSportsWeightLoss}. Debra Lieberman found out that there is growing evidence of exergames helping people to stay fit and to manage their weight if they frequently play them \citep{Lieberman06dancegames}.
 
 So the challenge of an exergame is to keep the player motivated to do sports. As in the example at the beginning of this thesis (\emph{The Running Dead}), we all ran away when the mob of zombies came running towards us. We did not think of doing sports in that moment. Maybe some even did not think of playing a game. Our only thought was to escape.
 
@@ -570,7 +574,7 @@ The user is able to achieve money during play, so his current credit is always d
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.8\linewidth]{gfx/storyboard}
-        \caption{Storyboard of RacecAR GO: In the \emph{Map}-view, the vehicle icon marks a car dealer, whereas the play cards mark a playground.}
+        \caption{Storyboard of RacecAR GO: In the \emph{Map}-view, the vehicle icon marks a car dealer, whereas the play cards mark a playground. (The picture of the red VW K\"afer has been taken from \citep{kaeferPicture})}
         \label{fig:storyboard}
 \end{figure}
 
