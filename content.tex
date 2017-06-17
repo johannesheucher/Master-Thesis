@@ -10,15 +10,15 @@ To prove the proposed concept of integrating real-world vehicles as location-bas
 
 \section*{Acknowledgements}
 All thanks and honor are due to the Almighty God for his unending grace and inspiration.
- 
+
 I also want to express my gratitude to my friends Raphael and Tobias for relentlessly and boldly photographing vehicles. Thanks to Mazda Wiatr for providing me with photos of the amazing Mazda MX-5 ND.
- 
+
 Special thanks to my supervisor Dr. Tim Dutz for calmly supporting me, although his own works were piled up to the ceiling. I owe a debt of gratitude to Robert Konrad and to his patience while battling our way through the iOS app distribution process.
- 
+
 I feel honored by the readiness, dedication and honesty of all the people who took part in the testing phase of RacecAR GO.
- 
+
 I sincerely thank Michael H., my colleague at work, who advocated for me to take leave from work to finish my thesis.
- 
+
 Finally, I thank my dear parents, my wife and my son for encouraging me to study what I'm passionate about, for constantly supporting and motivating me, for backing me up and bearing with me during hard times!
 
 
@@ -873,7 +873,7 @@ Like most of the VMMR systems, this one chooses the vehicle's front to be depict
 To find the position and extent of the RoI, the location of the vehicle inside of the source image has to be located first. This is done by locating the vehicle's number plate (as it is done by \citep{petrovic2004analysis} or \citep{siddiqui2015robust}). Having found the number plate, there are different options to evaluate the location and the dimensions of the RoI. One option is to use the number plate again, deducing the location and dimension of the RoI from the location and dimension of the number plate. Another option is to detect the hood and use the hood boundary (boundary between hood and windshield) as an indicator for the RoI's properties. Using the number plate as fixed point for the RoI has following advantages:
 
 \begin{itemize}
-  \item A number plate is relatively easy to find in an image. %There are many free libraries like (TODO refer to State of the Art. Da sollte ich sowas aufgeschrieben haben) that do the task.
+  \item A number plate is relatively easy to find in an image. There are many free libraries like \citep{OpenALPR} that do the task.
   \item Most of the cars all over the world have a number plate mounted at their front.
   \item Depending on the country or state the game is played in, the appearance (shape, aspect ratio, color, font, etc.) of the number plate is known.
   \item Defining the RoI relatively to the number plate, the RoI is independent from the actual location and scale of the vehicle inside of the source image.
@@ -1136,7 +1136,6 @@ The RoI is defined by two properties, the content extent $RoI_E = (top, bottom, 
 
 \subsection{Preprocessing}\label{sec:preprocessingImpl}
 In \emph{VR3}, the VMMR was requested to be robust to different lighting conditions. To cope with this on the one hand, the training images should cover a large variety of different lighting conditions. On the other hand, the images have to pass a normalization step before entering the training process. To be independent from different vehicle colors, all training images are turned into grayscale images. It also turned out to improve the recognition accuracy, if the contrast is normalized as well by a histogram equalization. Figure \ref{fig:trainingData} shows the current state of training data after this step.
-%An illustration of the training data at this point of state is shown in figure TODO Bild zeigen, wie die Trainingsdaten zu diesem Zeitpunkt aussehen (d.h. Bild mit allen RoIs des Trainingsets aus /training2)
 
 \subsection{Local Feature Extraction}\label{sec:localFeatureExtractionImpl}
 As described in chapter \ref{sec:localFeatureExtractionConcept}, the common and popular feature detectors and descriptors SIFT and SURF are patented. As a solution, ORB is another feature detector and descriptor, that is faster than SIFT and performs equally well in many situations \citep{rublee2011orb}. Fortunately, ORB is not patented and is included in OpenCV 3.
