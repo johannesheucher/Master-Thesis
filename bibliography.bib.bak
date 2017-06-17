@@ -483,4 +483,39 @@
   url    = {http://www.pokemongo.com/},
 }
 
+@Misc{WiiSportsWeightLoss,
+  author = {{tonysh518}},
+  title  = {Wii Sports Weight Loss?Yes,it's real!},
+  note   = {[Online; accessed June 16, 2017]},
+  url    = {http://www.gamespot.com/forums/nintendo-fan-club-1000001/wii-sports-weight-lossyesits-real-25576131/},
+}
+
+@Online{iPhone8AR,
+  author       = {Mike Wuerthele},
+  title        = {'iPhone 8' could herald start of Apple's augmented reality ambitions},
+  howpublished = {\url{http://appleinsider.com/articles/17/03/17/iphone-8-could-herald-start-of-apples-augmented-reality-ambitions}},
+  note         = {Accessed: 2017-06-17},
+}
+
+@Online{facebookAR,
+  author       = {Alex Heath},
+  title        = {Facebook's next big thing is augmented reality, says Mark Zuckerberg},
+  howpublished = {\url{http://www.businessinsider.de/facebook-next-big-thing-augmented-reality-mark-zuckerberg-2017-4?_ga=1.68446423.790124447.1492966107&r=US&IR=T}},
+  note         = {Accessed: 2017-06-17},
+}
+
+@Online{smartphoneAR,
+  author       = {Samuel Held},
+  title        = {Facebook treibt Realitätserweiterung voran.},
+  howpublished = {\url{http://mobilbranche.de/2017/04/augmented-virtuelle-realitaet-facebook-f8}},
+  note         = {Accessed: 2017-06-17},
+}
+
+@Online{pokemonGORailway,
+  author       = {Rachel Middleton},
+  title        = {Pokemon Go: Dutch rail operator tells Nintendo to change game after players wander onto tracks},
+  howpublished = {\url{http://www.ibtimes.co.uk/pokemon-go-dutch-rail-operator-tells-nintendo-change-game-after-players-wonder-onto-tracks-1570308}},
+  note         = {Accessed: 2017-06-17},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
