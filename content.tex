@@ -6,6 +6,22 @@ This thesis proposes and evaluates a method to create qualitative content on the
 To prove the proposed concept of integrating real-world vehicles as location-based content into an exergame, an iOS app has been developed and evaluated along with this thesis.
 \end{abstract}
 
+\clearpage
+
+\section*{Acknowledgements}
+All thanks and honor are due to the Almighty God for his unending grace and inspiration.
+ 
+I also want to express my gratitude to my friends Raphael and Tobias for relentlessly and boldly photographing vehicles. Thanks to Mazda Wiatr for providing me with photos of the amazing Mazda MX-5 ND.
+ 
+Special thanks to my supervisor Dr. Tim Dutz for calmly supporting me, although his own works were piled up to the ceiling. I owe a debt of gratitude to Robert Konrad and to his patience while battling our way through the iOS app distribution process.
+ 
+I feel honored by the readiness, dedication and honesty of all the people who took part in the testing phase of RacecAR GO.
+ 
+I sincerely thank Michael H., my colleague at work, who advocated for me to take leave from work to finish my thesis.
+ 
+Finally, I thank my dear parents, my wife and my son for encouraging me to study what I'm passionate about, for constantly supporting and motivating me, for backing me up and bearing with me during hard times!
+
+
 
 
 %*****************************************************************************
@@ -122,7 +138,7 @@ These games do not take place at special locations like in a gym, a laboratory o
 \subsection{Evolution of Location-based Games}\label{sec:locationBasedGames}
 In the previous chapters, different types of pervasive games have been presented. Many of them depend on the current location of the player, e. g. Ingress or Pok\'{e}mon GO (see section \ref{sec:examples}). This kind of games uses the current location as a basic part of the gameplay. Without the exact location, a player of Ingress could not conquer a portal and a hunter on the prowl for Pok\'{e}mons would not find one nor would he find a Pok\'{e}stop to retrieve useful items. Concluded, these games would be absolutely unplayable without being able to track the location of the player with a reasonable accuracy.
 
-Using GPS, this is only possible since May 2, 2000, when the \emph{Selective Availability} was turned off. Selective Availability was a service to prevent civilians to perceive a better GPS accuracy than a 100 meters radius, reserving better accuracy for the military only. Since it was disabled, the GPS location is accurate to a few meters for anybody\footnote{For more information about the selective availability, see \url{http://www.gps.gov/systems/gps/modernization/sa/data/}}.
+Using GPS, this is only possible since May 2, 2000, when the \emph{Selective Availability} was turned off. Selective Availability was a service to prevent civilians to perceive a better GPS accuracy than a 100 meters radius, reserving better accuracy for the military only. Since it was disabled, the GPS location is accurate to a few meters for anybody \citep{SelectiveAvailability}.
 
 Suddenly, many location based games came up. For example, the term \emph{Geocaching} was formed during that time to describe a hunt for treasures (the \emph{geocaches}) in the real world \citep{Geocaching}. To find these geocaches, their locations are marked on a virtual map via GPS.
 
@@ -151,7 +167,7 @@ Another thing is the content, that is linked to an anchor. For example, the game
 \paragraph{User-placed at Runtime}
 With this method, the user places his own anchors. For this, the game has to provide some kind of editor, with which the user creates the content he needs to play the game.
 
-The advantages of this method are, that the game can be played everywhere, because it does not depend on predefined anchors. Another advantage is, that users can create the anchors such that they fit their individual needs. In Twostone \footnote{The Android app can be downloaded at \url{https://play.google.com/store/apps/details?id=de.tu.darmstadt.uhg}} for example, the player plays a stone-eating caterpillar that moves on a maze-like virtual track while the player moves in the real world. To win the game, the caterpillar named "Twostone" has to eat all stones, that are spread all over the track while escaping from some monsters, that try to catch it. The game includes an editor, wherewith the user can design a track by walking along the paths, where the track should be created and placing anchors at corners. The game can thus be played anywhere. Also, highly motivated and sporty players can build their own large tracks covering the whole city, whereas beginners are able to design a small one for a short sport unit during the lunch time.
+The advantages of this method are, that the game can be played everywhere, because it does not depend on predefined anchors. Another advantage is, that users can create the anchors such that they fit their individual needs. In Twostone\footnote{The Android app can be downloaded at \url{https://play.google.com/store/apps/details?id=de.tu.darmstadt.uhg}} for example, the player plays a stone-eating caterpillar that moves on a maze-like virtual track while the player moves in the real world. To win the game, the caterpillar named "Twostone" has to eat all stones, that are spread all over the track while escaping from some monsters, that try to catch it. The game includes an editor, wherewith the user can design a track by walking along the paths, where the track should be created and placing anchors at corners. The game can thus be played anywhere. Also, highly motivated and sporty players can build their own large tracks covering the whole city, whereas beginners are able to design a small one for a short sport unit during the lunch time.
 
 Drawbacks of this method are, that a user is not a designer and may not have the required artistic skills and knowledge to produce qualitative anchors. And much less in a small amount of time \citep{carraca2014procedural}.
 
@@ -207,7 +223,7 @@ Augmented reality (AR) means augmenting perceived real-world elements with virtu
 
 The term \emph{augmented reality} exists for many years now. There have been moments in the past, the technology seemed likely to experience the hype, many people are waiting for. But a big hype never happened (at least until the time of writing this thesis, May 2017).
 
-Today, there are some popular apps that use AR, such as Snapchat \footnote{\url{https://www.snapchat.com/}} (which tracks the user's face and augments it with some fancy extras like a dog's snout with matching ears and tongue) or Pok\'{e}mon GO (described as one of the examples in chapter \ref{sec:examples}).
+Today, there are some popular apps that use AR, such as Snapchat\footnote{\url{https://www.snapchat.com/}} (which tracks the user's face and augments it with some fancy extras like a dog's snout with matching ears and tongue) or Pok\'{e}mon GO (described as one of the examples in chapter \ref{sec:examples}).
 
 Also Apple and Facebook start to invest into this technology. Apple CEO Tim Cook even denotes augmented reality and virtual reality as potential cornerstones of the company's future. Also the coming iPhone 8 is said to be equipped with technology customized for AR \citep{iPhone8AR}. Facebook CEO Mark Zuckerberg teased an upcoming games platform for AR \citep{facebookAR}.
 
@@ -339,7 +355,7 @@ As mentioned above, StreetConqAR presents a new way of creating anchors. Anchors
 \section{Vehicle Recognition}
 
 \subsection{General}
-Nowadays, vision-based recognition is a hot topic. Not possible to imagine automated manufacturing without it since many years, vision-based recognition became accessible for normal users with devices like the Microsoft Kinect \footnote{\url{https://developer.microsoft.com/en-us/windows/kinect}}, which is able to perform gesture recognition, for example. Another visual recognition which arrested attention (mainly because of privacy issues) in early 2015 was Facebook's face recognition system named DeepFace \footnote{\url{https://en.wikipedia.org/w/index.php?title=DeepFace&oldid=663499386}}, which searches photos, taken by Facebook users, for faces of other Facebook users.
+Nowadays, vision-based recognition is a hot topic. Not possible to imagine automated manufacturing without it since many years, vision-based recognition became accessible for normal users with devices like the Microsoft Kinect\footnote{\url{https://developer.microsoft.com/en-us/windows/kinect}}, which is able to perform gesture recognition, for example. Another visual recognition which arrested attention (mainly because of privacy issues) in early 2015 was Facebook's face recognition system named DeepFace \citep{deepFace}, which searches photos, taken by Facebook users, for faces of other Facebook users.
 
 Another field that is not so famous yet is the vehicle recognition. It is used in different systems like traffic monitoring and control or security and surveillance applications. Instead of a human observer sitting in front of some screens, an automated vehicle recognition system could do the task. Human constraints like multitasking and distinguishing among all the makes and models would be overcome by such a system.
 
@@ -372,8 +388,8 @@ However, a more widely used technique is using feature detection with classifica
 \citeauthor{rezaeivehicle} compared these two approaches with the result, that the image matching approach performed more accurate while a feature detection method was about 80\% faster \citep{rezaeivehicle}. While the logo detection alone as a preprocessing step of the recognition can be very time consuming \citep{siddiqui2015robust} and while this approach is very sensitive to occlusion due to the relatively small snippet of a vehicle image, using the whole front or back of a vehicle gives more robust classification results.
 
 \subsection{Vehicle Make and Model Recognition}\label{sec:vmmrStateOfTheArt}
-The most comprehensive kind of vehicle recognition and also one focus of this work is Vehicle Make and Model Recognition (VMMR), the identification of its make as well as its model (like Mercedes SL, BMW 3 Series, Porsche 911, etc.). For surveillance purposes, this recognition type extends the conventional number plate recognition. It can be used to double-check a recognized number with the corresponding make and model to fight the problem of false number plates. There are plenty of works referring to this topic and also some ready-to-use systems like Car-Rec \citep{jang2011car} or the \emph{VisualSearch} feature \footnote{\url{http://magazin.autoscout24.de/microsites/services/mobile/de-at/txt/android_txt3.html}} of the AutoScout24 app \footnote{\url{https://www.autoscout24.de/}}, which classifies vehicles by their backsides.
-A surveillance and security application for static cameras is eyedea \footnote{\url{http://www.eyedea.cz/make-and-model-recognition/}}, that is able to recognize 500 vehicle models of the types bus, car, truck and van.
+The most comprehensive kind of vehicle recognition and also one focus of this work is Vehicle Make and Model Recognition (VMMR), the identification of its make as well as its model (like Mercedes SL, BMW 3 Series, Porsche 911, etc.). For surveillance purposes, this recognition type extends the conventional number plate recognition. It can be used to double-check a recognized number with the corresponding make and model to fight the problem of false number plates. There are plenty of works referring to this topic and also some ready-to-use systems like Car-Rec \citep{jang2011car} or the \emph{VisualSearch}\footnote{\url{http://magazin.autoscout24.de/microsites/services/mobile/de-at/txt/android_txt3.html}} of the AutoScout24 app\footnote{\url{https://www.autoscout24.de/}}, which classifies vehicles by their backsides.
+A surveillance and security application for static cameras is eyedea\footnote{\url{http://www.eyedea.cz/make-and-model-recognition/}}, that is able to recognize 500 vehicle models of the types bus, car, truck and van.
 
 Most of the approaches use the front or the back side of the vehicle because it's the most descriptive part, usually containing the make's logo and, for the back side, even the lettering of the make and the model.
 
@@ -596,7 +612,7 @@ Otherwise, the server performs a VMMR (see chapter \ref{sec:vmmrConcept}) and se
 
 The player is then able to walk around the real vehicle while he only sees the colored virtual one through the device. He can interact with the vehicle by touching on the door or on the hood to open and close it. To continue, the player has two options. He can either touch the trash icon and abort the capturing, or he can opt for the garage icon, to park the vehicle in his garage.
   \item To park the vehicle in his garage, the player first has to fulfill a small task in step 3. For the task, a vehicle part appears that matches to the captured vehicle. This part could be a door, a steering wheel, a car seat, an engine or another part the captured vehicle consists of. In the example, it's an engine. This part overlaps the vehicle and is fixed to the device's screen, such that when the player moves around the vehicle, the part overlaps different areas of it. The player's task is to place this part at the correct position. E. g. for the engine and the VW K\"afer (which has a rear engine), the user would have to walk around the car, touch on the engine cover to open it, place the engine at the correct position (by moving the device such that the engine icon overlaps the position where the engine of the real car would be) and finally touch the wrench icon.
-  \item If the placement is correct, the vehicle will be parked in the player's garage. If not, the capturing will be aborted. The vehicle is stored along with its property-set, containing its power, weight, emission, etc. This data is retrieved from an API like \emph{CarQuery} \footnote{\url{http://www.carqueryapi.com/}}. In most cases, it's ambiguous to deduce the property-set from a vehicle's picture, as the appearance of the vehicle doesn't change (or only marginally) for different engine configurations. For this reason, the server would have to search clues in the picture, like the exhaust or additional letters on the backside or the grill of the car that indicate a distinct configuration.
+  \item If the placement is correct, the vehicle will be parked in the player's garage. If not, the capturing will be aborted. The vehicle is stored along with its property-set, containing its power, weight, emission, etc. This data is retrieved from an API like \emph{CarQuery}\footnote{\url{http://www.carqueryapi.com/}}. In most cases, it's ambiguous to deduce the property-set from a vehicle's picture, as the appearance of the vehicle doesn't change (or only marginally) for different engine configurations. For this reason, the server would have to search clues in the picture, like the exhaust or additional letters on the backside or the grill of the car that indicate a distinct configuration.
 \end{enumerate}
 
 \subsubsection{Garage}
@@ -656,7 +672,7 @@ In contrast to the anchors placed in Ingress or Pok\'{e}mon GO, the actual distr
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.95\linewidth]{gfx/world_vehicles_per_capita}
-        \caption{World vehicles per capita (reprinted from \footnote{\url{https://commons.wikimedia.org/w/index.php?title=File:World_vehicles_per_capita.svg&oldid=242848798}})}
+        \caption{World vehicles per capita (reprinted from \citep{capita})}
         \label{fig:worldVehicles}
 \end{figure}
 
@@ -704,7 +720,7 @@ This approach works well in tests, although the virtual object and the real obje
 Only the model-based tracking is able to fulfill all the requested tasks accurate enough. Only here, the user would be able to walk around the real car while the virtual car model is always overlaying it correctly. Nevertheless, it is assumed that this technique has high hardware requirements, because features in the camera image have to be tracked and matched with the reference model in realtime.
 
 \subsection{Privacy Concerns}
-As mentioned before, a vehicle has to be photographed to be captured. Even more, its number plate (in hashed form) will be stored on the server. But is the personality right of the owner violated by this procedure? In Germany, the main field of application for the app, it's generally granted to publish a photo of a vehicle showing the vehicle's number plate \footnote{\url{https://www.rechtambild.de/2014/09/fotografieren-und-veroeffentlichen-von-autokennzeichen-was-ist-erlaubt/}}. The publishing of the number plate does not violate the personality right of the owner, because civilians usually cannot deduce the owner from a number plate. Nevertheless, there's no definitive right for this and it will be decided from case to case.
+As mentioned before, a vehicle has to be photographed to be captured. Even more, its number plate (in hashed form) will be stored on the server. But is the personality right of the owner violated by this procedure? In Germany, the main field of application for the app, it's generally granted to publish a photo of a vehicle showing the vehicle's number plate \citep{recht}. The publishing of the number plate does not violate the personality right of the owner, because civilians usually cannot deduce the owner from a number plate. Nevertheless, there's no definitive right for this and it will be decided from case to case.
 
 Because the app does not publish the number plate but only stores a hashed version of it, there should be no problem with this. But to be on the safe side, place a hint in the app to urge the players to forbear capturing a vehicle, if the owner is present and does not give his permission.
 
@@ -800,7 +816,7 @@ Additional to the inter-make ambiguity issues mentioned before (also those in ch
 \begin{figure}[btph]
   \centering
         \includegraphics[width=.75\linewidth]{gfx/ambiguity_rebadging}
-        \caption{Ambiguity (inter-class) issue as the Volkswagen Taro \footnote{\url{https://img.favcars.com/volkswagen/taro/volkswagen_taro_1994_images_2.jpg}} is a rebadged Toyota Hilux \footnote{\url{http://image.priceprice.k-img.com/ph/images/article/1020/hilux-5th.jpg}}}
+        \caption{Ambiguity (inter-class) issue as the Volkswagen Taro \citep{taro} is a rebadged Toyota Hilux \citep{hilux}}
         \label{fig:ambiguityRebadging}
 \end{figure}
 
@@ -873,10 +889,10 @@ Nevertheless, there also exist some drawbacks of using the number plate and the 
 
 \begin{figure}[btph]
         \myfloatalign
-        \subfloat[Freeway in Florida, USA, showing vehicles without a front number plate (reprinted from \footnote{\url{http://www.miamiherald.com/news/traffic/article39667194.html}})]
+        \subfloat[Freeway in Florida, USA, showing vehicles without a front number plate (reprinted from \citep{miami})]
         {\label{fig:numberPlateNoFront}%
          \includegraphics[height=.12\linewidth]{gfx/florida_no_front_number_plates}} \quad
-        \subfloat[Alfa Romeo 159 with number plate mounted at the side (reprinted from \footnote{\url{http://www.seriouswheels.com/2008/a/2008-Autodelta-Alfa-Romeo-159-J4-2-2-C-Front-1280x960.htm}})]
+        \subfloat[Alfa Romeo 159 with number plate mounted at the side (reprinted from \citep{alfa})]
         {\label{fig:numberPlateSide}%
          \includegraphics[height=.12\linewidth]{gfx/number_plate_front_side}} \quad
         \subfloat[RoIs of a Porsche 911 (left) and a Volkswagen T6 (right)]
@@ -1326,7 +1342,7 @@ So the decision was made to send the whole RoI and leave the complete recognitio
 The client has been implemented as an iOS app for iPhones. Here, OpenCV was used as well for the extraction of the RoI. Used languages are Swift, Objective-C and C++, while latter was only needed to communicate with the OpenCV API. Objective-C was used for the image capturing component because of having trouble when trying to do this with Swift. The rest and thus the main part of the client is implemented in Swift 2.3.
 
 \subsection{Virtual Models}
-Although there are ten different make-models to be recognized by the VMMR machine, only four different virtual models have been created for lack of time. Three of them to fit the exact recognized make and model, a further one to be a placeholder for all the other classes. Figure \ref{fig:virtualModels} shows the created 3D models, available for the prototype\footnote{While the Polo, the K\"afer and the Placeholder Car have been created by myself, the Porsche has been retrieved and adapted from \url{https://www.cgtrader.com/free-3d-models/car/sport/porsche-911-carrera-s4-police-concept}}.
+Although there are ten different make-models to be recognized by the VMMR machine, only four different virtual models have been created for lack of time. Three of them to fit the exact recognized make and model, a further one to be a placeholder for all the other classes. Figure \ref{fig:virtualModels} shows the created 3D models, available for the prototype\footnote{While the Polo, the K\"afer and the Placeholder Car have been created by myself, the Porsche has been retrieved and adapted from \citep{porscheModel}}.
 
 \begin{figure}[btph]
         \myfloatalign
@@ -1504,7 +1520,12 @@ The implementation of the AR during the capturing process has been accepted by t
 Bla
 
 \section{After Testing Phase}
-Blubb
+\begin{figure}[btph]
+  \centering
+        \includegraphics[page=3,width=.7\linewidth]{gfx/Evaluation_post}
+        \caption{Training data used for the VMMR: The data consists of 189 images of ten different make-models. Illustrated is the state after the preprocessing, i. e. these images are searched for local features.}
+        \label{fig:evaluationPost}
+\end{figure}
 
 %TODO: Auswertungsdiagramme von Google Forms dann auch in Appendix, zusammen mit den Fragen.
 

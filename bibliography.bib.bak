@@ -518,4 +518,67 @@
   note         = {Accessed: 2017-06-17},
 }
 
+@Misc{SelectiveAvailability,
+  author = {{GPS.GOV}},
+  title  = {Selective Availability},
+  note   = {[Online; accessed June 17, 2017]},
+  url    = {http://www.gps.gov/systems/gps/modernization/sa/data/},
+}
+
+@Online{deepFace,
+  author       = {Wikipedia},
+  title        = {Deep Face},
+  howpublished = {\url{https://en.wikipedia.org/w/index.php?title=DeepFace&oldid=663499386}},
+  note         = {Accessed: 2017-02-21},
+}
+
+@Misc{capita,
+  author = {{Wikimedia}},
+  title  = {World vehicles per capita},
+  note   = {[Online; accessed June 17, 2017]},
+  url    = {https://commons.wikimedia.org/w/index.php?title=File:World_vehicles_per_capita.svg&oldid=242848798},
+}
+
+@Online{recht,
+  author       = {Sarah Schletter},
+  title        = {Fotografieren und Veröffentlichen von Autokennzeichen – was ist erlaubt?},
+  howpublished = {\url{https://www.rechtambild.de/2014/09/fotografieren-und-veroeffentlichen-von-autokennzeichen-was-ist-erlaubt/}},
+  note         = {Accessed: 2017-07-17},
+}
+
+@Misc{taro,
+  author = {{img.favcars.com}},
+  title  = {volkswagen taro 1994 images 2.jpg},
+  note   = {[Online; accessed June 17, 2017]},
+  url    = {https://img.favcars.com/volkswagen/taro/volkswagen_taro_1994_images_2.jpg},
+}
+
+@Misc{hilux,
+  author = {{image.priceprice.k-img.com}},
+  title  = {hilux-5th.jpg},
+  note   = {[Online; accessed June 17, 2017]},
+  url    = {http://image.priceprice.k-img.com/ph/images/article/1020/hilux-5th.jpg},
+}
+
+@Misc{miami,
+  author = {{C.M. GUERRERO - EL NUEVO HERALD}},
+  title  = {Morning traffic congestion heading eastbound on the 836 bottles up near NW 57th Ave},
+  note   = {[Online; accessed June 17, 2017]},
+  url    = {http://www.miamiherald.com/news/traffic/article39667194.html},
+}
+
+@Misc{alfa,
+  author = {{seriouswheels.com}},
+  title  = {2008-Autodelta-Alfa-Romeo-159-J4-2-2-C-Front-1280x960.htm},
+  note   = {[Online; accessed June 17, 2017]},
+  url    = {http://www.seriouswheels.com/2008/a/2008-Autodelta-Alfa-Romeo-159-J4-2-2-C-Front-1280x960.htm},
+}
+
+@Misc{porscheModel,
+  author = {{affekta}},
+  title  = {porsche-911-carrera-s4-police-concept},
+  note   = {[Online; accessed June 17, 2017]},
+  url    = {https://www.cgtrader.com/free-3d-models/car/sport/porsche-911-carrera-s4-police-concept},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
