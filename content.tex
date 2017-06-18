@@ -166,7 +166,7 @@ For location-based games, the real world is overlain by the virtual game world. 
 The placement of anchors is very important for a game and is directly associated with the user experience. Because anchors are those positions, where the gameplay usually takes place, players may easily be disappointed if an anchor is either too far away to reach it or if it is at a location not (without further ado) accessible for civilians (such as military areas, airports or the ocean). So anchors have to be placed in a way that they are accessible for all players.
 Another thing is the content, that is linked to an anchor. For example, the game \emph{Escape From the Tower} \citep{EscapeFromTheTower} lets its players reenact the escapes of some popular prisoners from the London Tower. Therefore, anchors are placed all over the tower and its surroundings with associated media. At a prison cell, this media tells the player something about the prisoner. On the staircase, the media is related to a fled, that occurred. If the content does not fit to the respective location, players will soon quit the game.
 
-\citeauthor{reid2008design} classifies the way, anchors are placed, into three categories, that will be explained in the following.
+\citeauthor{reid2008design} classifies the way, anchors are placed, into three categories, that will be explained in the following \citep{reid2008design}:
 
 \paragraph{User-placed at Runtime}
 With this method, the user places his own anchors. For this, the game has to provide some kind of editor, with which the user creates the content he needs to play the game.
@@ -495,7 +495,7 @@ Experiments of \citep{siddiqui2015robust} showed that the SD, contrary to the ex
 \chapter{Concept}\label{ch:concept}
 %*****************************************************************************
 %*****************************************************************************
-This chapter is about a new way of automatic content generation for exergames. It presents an approach to use real-world vehicles as anchors. Using vehicles as anchors means recognizing their make and model and integrating its virtual counterpart via AR into the game play.
+This chapter is about a new way of automatic content generation for exergames. It presents an approach to use real-world vehicles as anchors. Using vehicles as anchors means recognizing their make and model and integrating their virtual counterpart via AR into the game play.
 
 In the first section, the basic concepts needed for a location-based exergame and what makes such a game popular are discussed. Later on, the design of \emph{RacecAR GO}, a location-based exergame that implements this concept, is presented. In the subsequent section, the prototype of RacecAR GO, that will be implemented along with this thesis, is described.
 
@@ -1028,7 +1028,7 @@ As distance measure $dist$, this thesis uses the Hamming distance. Figure \ref{f
 
 \begin{figure}[btph]
   \centering
-        \includegraphics[width=.45\linewidth]{gfx/histogram}
+        \includegraphics[width=.54\linewidth]{gfx/histogram}
         \caption{Generation of a global representation histogram: The upper cloud represents the dictionary space with six codewords. The cloud below contains the local descriptors found in a vehicle image. The bottommost figure shows how a histogram for this image would look like.}
         \label{fig:histogram}
 \end{figure}
@@ -1442,7 +1442,13 @@ The ability of the game to be integrated into the everyday life of its players w
 
 When using AR (or fancy technology in general), game designers can fall into the trap of concentrating too much on that technology and neglect the gameplay (as discussed on page \pageref{sec:usageOfARStateOfTheArt}). The testers, however, did not find, that the AR effects distracted them from the actual gameplay. While just one tester voted with a $2$ (when $1$ means, that AR absolutely distracted from the gameplay), the rest voted with $3$ (35.3\%), $4$ (17.6\%) and $5$ (41.2\%). Considering that the AR overlay does not have a direct purpose in the prototype, this is an acceptable result.  In contrast to that, no player was absolutely satisfied with the accuracy of the overlaying effect. Nevertheless, the majority (70.6\%) voted with $2$ and $3$. So on balance, this is an acceptable result for a rather simple implementation of the overlaying effect. In section \ref{sec:motivationToMove} it was supposed that the capturing process including the AR effects could help the players to build an emotional relation to the caught item and thus motivate them to keep playing. In fact, many testers (41\%) answered this question with \emph{not at all}, whereas one player was absolutely able to build an emotional relation and anyway 29.4\% felt \emph{rather able} to build an emotional relationship.
 
-If the app did actually motivate the testers to move has been evaluated in many ways. For one thing, the players have been asked beforehand, which distance they walk weekly and if they think, that the app will motivate them to walk even more. For another thing, the tracked location data and the answers of the questionnaire after the test phase help to comprehend, if the app was actually motivating people to move more than before. Sadly, no tester exceeded the weekly distance, he specified before the test phase (at least not with the running app). But there is one more tester absolutely considering himself as athletic in comparison to before the test phase. The drop of bitterness is, that the number of testers, that considered themselves as not at all athletic increased from one to three. The answers to the question, if a tester moves more than before, now, confirms this. Most of them voted with \emph{no} (70.6\%), whereas only 11.8\% voted with \emph{rather yes}. Conclusively it could be said, that the app has the potential to motivate some people to move. But as long as the players get frustrated because of the few supported make-models, this motivator is only short-lived. It has also been assumed, that hunting and collecting could be a motivator, which cannot be approved by the evaluation. Most testers (41.2\%) weren't sure for this question and only 5.9\% and 23.5\% voted with \emph{yes, absolutely} and \emph{rather yes}, respectively. However, the hunting for especially cars seems to be even more interesting for people. 17.6\% voted with \emph{yes, absolutely} and 29.4\% with \emph{rather yes}.
+If the app did actually motivate the testers to move has been evaluated in many ways. For one thing, the players have been asked beforehand, which distance they walk weekly and if they think, that the app will motivate them to walk even more. For another thing, the tracked location data and the answers of the questionnaire after the test phase help to comprehend, if the app was actually motivating people to move more than before. Sadly, no tester exceeded the weekly distance, he specified before the test phase (at least not with the running app). But there is one more tester absolutely considering himself as athletic in comparison to before the test phase. The drop of bitterness is, that the number of testers, that considered themselves as not at all athletic increased from one to three (cf. figure \ref{fig:athletic}). The answers to the question, if a tester moves more than before, now, confirms this. Most of them voted with \emph{no} (70.6\%), whereas only 11.8\% voted with \emph{rather yes}. Conclusively it could be said, that the app has the potential to motivate some people to move. But as long as the players get frustrated because of the few supported make-models, this motivator is only short-lived. It has also been assumed, that hunting and collecting could be a motivator, which cannot be approved by the evaluation. Most testers (41.2\%) weren't sure for this question and only 5.9\% and 23.5\% voted with \emph{yes, absolutely} and \emph{rather yes}, respectively. However, the hunting for especially cars seems to be even more interesting for people. 17.6\% voted with \emph{yes, absolutely} and 29.4\% with \emph{rather yes}.
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.95\linewidth]{gfx/consider_athletic}
+        \caption{Comparison of players considering themselves athletic directly before and after the testing phase}
+        \label{fig:athletic}
+\end{figure}
 
 The factor of embarrassment is not negligible for this game. Whereas the majority (52.9\%) voted with $3$ for the embarrassment of being watched by bystanders while playing the game, 64.7\% of testers voted with \emph{yes} for finding it embarrassing to photograph other people's cars. Especially, there was no tester finding this not at all embarrassing. There was even one case, in which a car owner was angry about his car being photographed.
 
@@ -1490,7 +1496,7 @@ Evaluated properties of vehicle anchors are, that many testers were fascinated b
  
 The accuracy of the vehicle recognition is crucial for the success and the UX of such an exergame. The developed VMMR system has been evaluated and reached the moderate accuracy of 72.5\% for ten different make-models. The recognizer has been optimized via parameter tuning. Hence the assumption is, that the collected training data wasn't large and accurate enough.
  
-For pervasive games to integrate in their players' everyday lives, the immersion-effect is important. The evaluation shows, that the immersion was benefited by using AR during the capturing process. But this effect was quashed because of too few supported vehicles. Additionally, a pervasive game can only be integrated into the player's daily routine, if the player allows this. \emph{"The player needs to accept the game world as an omnipresent, persistent and consistent universe of which everything can be part, otherwise the interface, the edge of the magic circle, will become damaged – obliterating the very existence of the pervasive game"} \citep{nieuwdorp2009pervasive}. Thinking back to the beginning of this thesis, playing \emph{The Running Dead} immediately took us into a world of play, which was easy to enter. If a player agrees to enter, every vehicle is a potential game-object to be captured. The embarrassment will fade into the background, because the surrounding environment is turned into a working game. But unless the the app does not support more than ten different make-models, this effect cannot be reached.
+For pervasive games to integrate in their players' everyday lives, the immersion-effect is important. The evaluation shows, that the immersion was benefited by using AR during the capturing process. But this effect was quashed because of too few supported vehicles. Additionally, a pervasive game can only be integrated into the player's daily routine, if the player allows this. \emph{"The player needs to accept the game world as an omnipresent, persistent and consistent universe of which everything can be part, otherwise the interface, the edge of the magic circle, will become damaged - obliterating the very existence of the pervasive game"} \citep{nieuwdorp2009pervasive}. Thinking back to the beginning of this thesis, playing \emph{The Running Dead} immediately took us into a world of play, which was easy to enter. If a player agrees to enter, every vehicle is a potential game-object to be captured. The embarrassment will fade into the background, because the surrounding environment is turned into a working game. But unless the the app does not support more than ten different make-models, this effect cannot be reached.
 
 \section{Outlook and Future Work}
 Many players remonstrated against the small number of recognizable vehicles. So one next step must be to elaborate the process of extending the dataset, such that most vehicles, occurring all over the world, can be recognized properly. A crowd-based approach as described in the section \emph{Vehicle Anchors} on page \pageref{par:vehicleAnchors} is conceivable.
@@ -1522,8 +1528,26 @@ The implementation of the AR during the capturing process has been accepted by t
 \section{Before Testing Phase}
 \begin{figure}[btph]
   \centering
-        \includegraphics[width=.76\linewidth]{gfx/Evaluation_pre}
+        \includegraphics[width=.99\linewidth]{gfx/Evaluation_pre}
+        \label{fig:evaluationPre}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.99\linewidth]{gfx/Evaluation_pre2}
         \caption{Questionnaire with answers before the testing phase (created with Google Forms)}
+        \label{fig:evaluationPre2}
+\end{figure}
+
+\clearpage
+
+\section{After Testing Phase}
+\begin{figure}[btph]
+  \centering
+        \includegraphics[width=.99\linewidth]{gfx/Evaluation_post}
+        %\caption{Questionnaire with answers after the testing phase (created with Google Forms)}
         \label{fig:evaluationPost}
 \end{figure}
 
@@ -1532,16 +1556,16 @@ The implementation of the AR during the capturing process has been accepted by t
 \section{After Testing Phase}
 \begin{figure}[btph]
   \centering
-        \includegraphics[width=.76\linewidth]{gfx/Evaluation_post}
+        \includegraphics[width=.99\linewidth]{gfx/Evaluation_post1_5}
         %\caption{Questionnaire with answers after the testing phase (created with Google Forms)}
-        \label{fig:evaluationPost}
+        \label{fig:evaluationPost1.5}
 \end{figure}
 
 \clearpage
 
 \begin{figure}[btph]
   \centering
-        \includegraphics[width=.4\linewidth]{gfx/Evaluation_post2}
+        \includegraphics[width=.99\linewidth]{gfx/Evaluation_post2}
         \caption{Questionnaire with answers after the testing phase (created with Google Forms)}
         \label{fig:evaluationPost2}
 \end{figure}
