@@ -581,4 +581,12 @@
   url    = {https://www.cgtrader.com/free-3d-models/car/sport/porsche-911-carrera-s4-police-concept},
 }
 
+@Article{wendel2010adaption,
+  author  = {Wendel, Viktor and G{\"o}bel, S},
+  title   = {Adaption und Personalisierung von Exergames},
+  journal = {J. Wiemeyer, D. Link, R. Angert, B. Holler, A. Kliem, N. Roznawski, D. Sch{\"o}berl, M. Stro{\ss}: Sportinformatik trifft Sporttechnologie: Abstractband zur Tagung der dvs-Sektion Sportinformatik und der deutschen interdisziplin{\"a}ren Vereinigung f{\"u}r Sporttechnologie},
+  year    = {2010},
+  pages   = {97--99},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
